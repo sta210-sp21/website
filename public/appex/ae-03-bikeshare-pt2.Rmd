@@ -52,7 +52,7 @@ tweet_embed("https://twitter.com/samuelmehr/status/1352348108013895693")
 
 ## Inference practice 
 
-[Click here](ae-03-questions.Rmd) to get today's questions. Paste the questions at the end of your **ae-02** Rmd file, and type your responses. 
+[Click here](ae-03-questions.txt) to get today's questions. Paste the questions at the end of your **ae-02** Rmd file, and type your responses. 
 
 As usual, be sure to push your work to GitHub. 
 
