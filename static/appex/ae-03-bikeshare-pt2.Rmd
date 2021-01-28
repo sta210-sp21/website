@@ -1,0 +1,58 @@
+---
+title: "AE 03: Bike rentals in DC Cont'd"
+subtitle: "Exploring multivariable relationships + inference"
+date: "`r Sys.Date()`"
+output: 
+  html_document: 
+    fig_height: 3
+    fig_width: 6
+    theme: readable
+---
+
+```{r setup, echo = F}
+knitr::opts_chunk$set(warning = FALSE, 
+                      message = FALSE, 
+                      fig.align = "center")
+```
+
+## Check in
+
+
+## Something fun 
+
+```{r echo = F}
+library(tweetrmd)
+tweet_embed("https://twitter.com/samuelmehr/status/1352348108013895693")
+```
+
+- Check out the ggbernie [GitHub repo](https://github.com/R-CoderDotCom/ggbernie) for more info. 
+
+
+## Class announcements
+
+- Office hours start this week
+- See this week's schedule: [Week 02](https://sta210-sp21.netlify.app/schedule/week-02/)
+  - [Lab 01](https://sta210-sp21.netlify.app/labs/lab-01-ikea.html) due Sun, Jan 31 at 11:59P
+  - Complete [All About You survey](https://duke.qualtrics.com/jfe/form/SV_czLvjD7M9XkcZKK) by Sun, Jan 31 at 11:59p
+- Check Sakai announcements + email for weekly updates
+
+## Computing questions 
+
+- Why we name code chunks
+- Be sure to open projects, not files
+- Other computing questions?
+
+## Continue bikeshare AE
+
+- Open AE 02 from Tuesday 
+- Zoom poll: Do you need more time to work on AE? 
+- Go over exercises 
+
+## Questions from inference review videos
+
+## Inference practice 
+
+[Click here](ae-03-questions.Rmd) to get today's questions. Paste the questions at the end of your **ae-02** Rmd file, and type your responses. 
+
+As usual, be sure to push your work to GitHub. 
+

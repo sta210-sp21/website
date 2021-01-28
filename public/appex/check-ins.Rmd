@@ -51,7 +51,6 @@ library(tidyverse)
 ```
 
 
-
 ### How are you feeling today?
 
 <br>
@@ -98,5 +97,66 @@ library(tidyverse)
 <font class = "large-emoji">
 6) `r emo::ji("sunglasses")`
 </font>
+]
+]
+
+---
+
+### If you could have these superpowers, which one would you choose?
+
+<!-- From https://slidelizard.com/en/blog/icebreaker-polls --> 
+
+<br>
+
+.center[
+.col-3[
+
+<font class = "large-emoji">
+1) `r emo::ji("eyes")` 
+</font>
+
+Be invisible anytime
+
+
+<br>
+<br>
+
+<font class = "large-emoji">
+4) `r emo::ji("flexed_biceps")`
+</font>
+
+Superhuman Strength
+]
+
+.col-3[
+
+<font class = "large-emoji">
+2) `r emo::ji("dog_face")`
+</font>
+
+Talk to animals
+
+<br>
+<br>
+
+<font class = "large-emoji">
+5) `r emo::ji("brain")`
+</font>
+
+Read minds
+
+
+]
+
+.col-3[
+<font class = "large-emoji">
+3) `r emo::ji("eagle")`
+</font>
+
+Be able to fly
+
+<br>
+<br>
+
 ]
 ]
