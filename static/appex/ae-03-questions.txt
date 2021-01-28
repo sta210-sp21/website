@@ -1,0 +1,23 @@
+## Exercise 8 
+
+1. Is there a difference in the mean number of bike rentals in the spring and summer? To answer this question, we'll use a two-sample t-test. 
+
+The hypotheses are 
+
+$$\begin{aligned}&H_0: \mu_{spring} = \mu_{summer}\\ &H_a: \mu_{spring} \neq \mu_{summer}\end{aligned}$$ Write the null and alternative hypotheses in words. 
+
+2. Create a subset of the bikeshare data that only includes observations from the spring and summer. 
+
+3. Fill in the code below to conduct a two-sample t-test and calculate the corresponding confidence interval for $\mu_{spring} - \mu_{summer}$. 
+
+```{r}
+library(infer)
+# t_test(x = _____, formula = count ~ season, 
+## order = c("2", "3"), 
+## alternative = "two-sided")
+```
+
+4. State the conclusion from the hypothesis test in the context of the data.
+
+5. Interpret the 95% confidence interval in the context of the data.
+
