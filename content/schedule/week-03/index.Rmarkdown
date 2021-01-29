@@ -1,6 +1,6 @@
 ---
-title: "Week 03: Feb 01 - 05"
-weight: 3
+title: 'Week 02: Feb 1 - 5'
+weight: 2
 ---
 
 <style>
@@ -9,6 +9,33 @@ font-size: 18px;
 }
 
 </style>
+
+## Lectures
+
+|           | Slides                   | Videos | Application Exercises (AE) |
+|-----------|--------------------------|--------|--------|
+| Tuesday  | [Simple linear regression: Introduction](https://sta210-sp21.netlify.app/slides/04-slr-intro.html) | Simple linear regression: Introduction | AE 04 |
+| Thursday   | [Simple Linear Regression: Inference | Simple Linear Regression: Inference  | AE 05|
+|    |  | Simple Linear Regression: Foundation | Simple Linear Regression: Foundation |
+
+## Readings
+
+|            | 
+|------------|
+| [Introduction to Modern Statistics (IMS) Section 7.1.2](https://openintro-ims.netlify.app/inference-num.html#one-mean-math)  |
+| [IMS Section 7.2 - 7.4](https://openintro-ims.netlify.app/inference-num.html#differenceOfTwoMeans) | 
+
+
+## Assignments
+
+|                        |   |
+|------------------------|---|
+| [Lab 01](https://sta210-sp21.netlify.app/labs/lab-01-ikea.html) | **due Sun, Jan 31 at 11:59p EST**
+| Complete [All About You survey](https://duke.qualtrics.com/jfe/form/SV_czLvjD7M9XkcZKK)   | **due Sun, Jan 31 at 11:59p EST** |
+
+
+
+
 
 
 

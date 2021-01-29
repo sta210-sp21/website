@@ -1,0 +1,410 @@
+---
+title: "Simple Linear Regression"
+subtitle: "Inference"
+author: "Prof. Maria Tackett"
+output:
+  xaringan::moon_reader:
+    mathjax: "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML"
+    css: "sta210-slides.css"
+    logo: img/sta199-sticker-icon.png
+    lib_dir: libs/font-awesome
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      slideNumberFormat: "%current%" 
+      ratio: "16:9"
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r child = "setup.Rmd"}
+```
+
+class: middle, center
+
+## [Click for PDF of slides](05-slr-coef-inf.pdf)
+
+
+---
+
+## Topics 
+
+--
+
+- Conduct a hypothesis test for $\beta_1$
+
+--
+
+<br> 
+
+- Calculate a confidence interval for $\beta_1$
+
+```{r packages, echo = F}
+library(tidyverse)
+library(broom)
+library(knitr)
+library(kableExtra)
+library(patchwork)
+library(fivethirtyeight)
+xaringanExtra::use_panelset()
+```
+
+```{r data}
+movie_scores <- fandango %>%
+  rename(critics = rottentomatoes, 
+         audience = rottentomatoes_user)
+```
+
+---
+
+## Movie ratings data 
+
+The data set contains the "Tomatometer" score (.term[critics]) and audience score (.term[audience]) for 146 movies rated on rottentomatoes.com. 
+
+```{r}
+ggplot(data = movie_scores, mapping = aes(x = critics, y = audience)) +
+  geom_point(alpha = 0.5) + 
+  labs(x = "Critics Score" , 
+       y = "Audience Score") +
+  theme_bw() +
+  theme(axis.title=element_text(size=14))
+```
+
+---
+
+## The model
+
+```{r echo = T}
+model <- lm(audience ~ critics, data = movie_scores)
+```
+
+```{r echo = T}
+model %>%
+  tidy() %>%
+  kable(format = "html", digits = 3)
+```
+
+---
+
+## The model
+
+$$\color{blue}{\hat{\text{audience}} = 32.316 + 0.519 \times \text{critics}}$$
+
+```{r}
+model <- lm(audience ~ critics, data = movie_scores)
+```
+
+```{r}
+model %>%
+  tidy() %>%
+  kable(format = "html", digits = 3)
+```
+
+```{r, out.width = "80%"}
+ggplot(data = movie_scores, mapping = aes(x = critics, y = audience)) +
+  geom_point(alpha = 0.5) + 
+  geom_smooth(method = "lm", color = "blue", se = FALSE) +
+  labs(x = "Critics Score" , 
+       y = "Audience Score") +
+  theme_bw() +
+  theme(axis.title=element_text(size=14))
+```
+
+---
+
+class: middle, center
+
+### Does the data provide sufficient evidence that $\beta_1$ is significantly different from 0? 
+
+---
+
+## Outline of a hypothesis test
+
+--
+
+`r emo::ji('one')` State the hypotheses.
+
+
+--
+
+`r emo::ji('two')` Calculate the test statistic. 
+
+
+--
+
+`r emo::ji('three')` Calculate the p-value.
+
+
+--
+
+`r emo::ji('four')` State the conclusion. 
+---
+
+## `r emo::ji('one')` State the hypotheses
+
+```{r}
+model %>%
+  tidy() %>%
+  kable(format = "html", digits = 3)
+```
+
+<br>
+
+.pull-left[
+.small-box[
+$$\large{\begin{aligned}& H_0: \beta_1 = 0\\& H_a: \beta_1 \neq 0\end{aligned}}$$
+]
+]
+
+---
+
+## `r emo::ji('one')` State the hypotheses
+
+```{r}
+model %>%
+  tidy() %>%
+  kable(format = "html", digits = 3)
+```
+
+<br>
+
+.pull-left[
+.small-box[
+$$\large{\begin{aligned}& H_0: \beta_1 = 0\\& H_a: \beta_1 \neq 0\end{aligned}}$$
+]
+]
+
+.pull-right[
+<font color = "white">place-holder</font>
+
+.big[.vocab[Null hypothesis]]
+
+
+]
+
+---
+
+## `r emo::ji('one')` State the hypotheses
+
+```{r}
+model %>%
+  tidy() %>%
+  kable(format = "html", digits = 3)
+```
+
+<br>
+
+.pull-left[
+.small-box[
+$$\large{\begin{aligned}& H_0: \beta_1 = 0\\& H_a: \beta_1 \neq 0\end{aligned}}$$
+]
+]
+
+.pull-right[
+<font color = "white">place-holder</font>
+ 
+.big[.vocab[Null hypothesis]]
+
+.big[.vocab[Alternative hypothesis]]
+
+]
+
+---
+
+## `r emo::ji('two')` Calculate the test statistic
+
+```{r}
+model %>%
+  tidy() %>%
+  kable(format = "html", digits = 3)
+```
+
+<br> 
+
+.eq[
+$$\text{test statistic} = \frac{\text{Estimate} - \text{Hypothesized}}{\text{Standard error}}$$
+]
+
+---
+
+## `r emo::ji('two')` Calculate the test statistic
+
+```{r}
+model %>%
+  tidy() %>%
+  kable(format = "html", digits = 3) %>%
+  row_spec(2, background = "#dce5b2")
+```
+
+<br> 
+
+
+.pull-left[
+.eq[
+$$t = \frac{\hat{\beta}_1 - 0}{SE_{\hat{\beta}_1}}$$
+]
+]
+
+--
+
+.pull-right[
+
+.small-box-work[
+$$\begin{aligned}t &= \frac{0.5187 - 0}{0.0345}\\
+&= \mathbf{15.03}\end{aligned}$$
+]
+]
+
+---
+
+## `r emo::ji('three')` Calculate the p-value
+
+```{r}
+model %>%
+  tidy() %>%
+  kable(format = "html", digits = 3) %>%
+  row_spec(2, background = "#dce5b2")
+```
+
+<br> 
+
+.eq[
+$$\text{p-value} = P(|t| \geq |\text{test statistic}|)$$
+]
+
+Calculated from a $t$ distribution with $n-2$ degrees of freedom
+
+---
+
+## `r emo::ji('three')` Calculate the p-value
+
+```{r echo = F, fig.height = 4}
+ggplot(data.frame(x = c(-4, 4)), aes(x)) +
+  stat_function(fun = dt, args =list(df =144)) +
+  stat_function(fun = dt,   args =list(df =144),
+                xlim = c(-4, -1.5),
+                geom = "area", fill = "steelblue") + 
+    stat_function(fun = dt,   args =list(df =144),
+                xlim = c(1.5, 4),
+                geom = "area", fill = "steelblue") +
+    geom_vline(xintercept = 1.5,linetype = "dashed") +
+    geom_vline(xintercept = -1.5,linetype = "dashed") +
+    labs(x = "t", 
+         y = "density") + 
+    annotate("text", x = 2.6, y = 0.3, label = "|test statistic|") +
+  annotate("text", x = -2.6, y = 0.3, label = "-|test statistic|") +
+    ylim(0, NA) +
+  theme_classic()
+```
+
+---
+
+## Understanding the p-value
+
+|  Magnitude of p-value |             Interpretation            |
+|:---------------------:|:-------------------------------------:|
+| p-value < 0.01        | strong evidence against $H_0$         |
+| 0.01 < p-value < 0.05 | moderate evidence against $H_0$       |
+| 0.05 < p-value < 0.1  | weak evidence against $H_0$           |
+| p-value > 0.1         | effectively no evidence against $H_0$ |
+
+<br> 
+<br>
+
+*These are general guidelines. The strength of evidence depends on the context of the problem.*
+
+---
+
+## `r emo::ji('four')` State the conclusion
+
+```{r}
+model %>%
+  tidy() %>%
+  kable(format = "html", digits = 3) %>%
+  row_spec(2, background = "#dce5b2")
+```
+
+<br> 
+
+--
+
+The data provide sufficient evidence that the population slope $\beta_1$ is different from 0. 
+
+.vocab[There is a linear relationship between the critics score and audience score for movies on rottentomatoes.com.]
+
+
+---
+
+class: middle, center
+
+### What is a plausible range of values for the population slope $\beta_1$?
+
+---
+
+## Confidence interval for $\beta_1$
+
+.eq[
+$$\text{ Estimate} \pm \text{ (critical value) } \times \text{SE}$$
+]
+
+--
+
+.middle[
+.eq[
+$$\hat{\beta}_1 \pm t^* \times SE_{\hat{\beta}_1}$$
+]
+]
+
+<br>
+
+$t^*$ is calculated from a $t$ distribution with $n-2$ degrees of freedom
+  
+---
+
+## Calculating the 95% CI for $\beta_1$
+
+```{r}
+model %>%
+  tidy() %>% 
+  kable(format = "html", digits = 3) %>%
+  row_spec(2, background = "#dce5b2")
+```
+
+$$\hat{\beta}_1 = 0.519 \hspace{15mm} t^* = 1.977 \hspace{15mm} SE_{\hat{\beta}_1} = 0.035$$
+--
+
+.eq[
+$$0.519 \pm 1.977 \times 0.035 \\[8pt]
+\mathbf{[0.450, 0.588]}$$
+]
+
+---
+
+## Interpretation 
+
+.eq[
+$$\mathbf{[0.450, 0.588]}$$
+]
+
+--
+
+<br>
+
+.vocab[We are 95% confident that for every one percent increase in the critics score, the audience score is predicted to increase between 0.450% and 0.588%.]
+
+---
+
+## Recap
+
+--
+
+- Conducted a hypothesis test for $\beta_1$
+
+--
+
+<br> 
+
+- Calculated a confidence interval for $\beta_1$
+
+
