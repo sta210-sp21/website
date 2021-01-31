@@ -31,7 +31,7 @@ library(patchwork)
 
 class: middle, center
 
-## [Click for PDF of slides](04-slr-foundation.pdf)
+## [Click for PDF of slides](05-slr-foundation.pdf)
 
 ---
 
