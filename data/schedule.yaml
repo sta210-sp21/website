@@ -32,7 +32,7 @@ lessons:
   - date: "Thu, Feb 04"
     title: "SLR: Inference"
     slides: "05-slr-coef-inf.html"
-    title: "SLR: Foundation"
+  - title: "SLR: Foundation"
     slides: "05-slr-foundation.html"
   - title: "HW 01 assigned"
     hw: "hw-01.html"
