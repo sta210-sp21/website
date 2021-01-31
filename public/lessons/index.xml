@@ -182,13 +182,79 @@ font-size: 18px;
       <pubDate>12 Mar 17 10:00 +0000</pubDate>
       
       <guid>/schedule/week-03/</guid>
-      <description> table { font-size: 18px; }  </description>
+      <description>table { font-size: 18px; }  Lectures     Slides Videos Application Exercises (AE)     Tuesday Simple linear regression: Introduction Simple linear regression: Introduction AE 04   Thursday Simple Linear Regression: Inference Simple Linear Regression: Inference AE 05    Simple Linear Regression: Foundation Simple Linear Regression: Foundation     Readings         IMS Section 3.</description>
       <content>&lt;style&gt;
 table {
 font-size: 18px;
 }
 
 &lt;/style&gt;
+&lt;h2 id=&#34;lectures&#34;&gt;Lectures&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;Slides&lt;/th&gt;
+&lt;th&gt;Videos&lt;/th&gt;
+&lt;th&gt;Application Exercises (AE)&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Tuesday&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/slides/04-slr-intro.html&#34;&gt;Simple linear regression: Introduction&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://warpwire.duke.edu/w/VykFAA/&#34;&gt;Simple linear regression: Introduction&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;AE 04&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Thursday&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/slides/05-slr-coef-inf.html&#34;&gt;Simple Linear Regression: Inference&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Simple Linear Regression: Inference&lt;/td&gt;
+&lt;td&gt;AE 05&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/slides/05-slr-foundation.html&#34;&gt;Simple Linear Regression: Foundation&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Simple Linear Regression: Foundation&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;readings&#34;&gt;Readings&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://openintro-ims.netlify.app/intro-linear-models.html&#34;&gt;IMS Section 3.1 - 3.4.1: Introduction to linear models&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://openintro-ims.netlify.app/inference-reg.html#mathslope&#34;&gt;IMS Section 8.1.3: Inference for linear models - mathematical model&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;assignments&#34;&gt;Assignments&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Lab 02&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;due Sun, Feb 07 at 11:59p EST&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;HW 01&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;due Wed, Feb 10 at 11:59p EST&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 </content>
     </item>
     
