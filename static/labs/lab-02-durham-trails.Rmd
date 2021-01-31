@@ -89,8 +89,6 @@ We will use the following packages in today's lab.
 
 ```{r load-packages}
 library(tidyverse)
-library(skimr)
-library(knitr)
 library(infer)
 ```
 
