@@ -1,0 +1,252 @@
+---
+title: "Lab 02: Trails in Durham, NC"
+subtitle: "due Sun, Feb 07 at 11:59p"
+output: 
+  tufte::tufte_html:
+    css: "./sta210-labs.css"
+    tufte_variant: "envisioned"
+    highlight: pygments
+    fig_height: 10
+    toc: true
+    toc_depth: 1
+link-citations: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      warning=FALSE, 
+                      message=FALSE)
+```
+
+The primary objectives for this lab are to continue practicing with the computing workflow and exploring relationships between multiple variables. You will also start drawing conclusions from data as you analyze data about trails in Durham, North Carolina.  
+
+# Learning goals
+
+By the end of the lab you will...
+
+- Gain experience writing a reproducible report using RMarkdown
+- Gain experience using GitHub to practic version control 
+- Be able to wrangle data and calculate summary statistics using dplyr
+- Be able to describe distributions and multivariable relationships using visualizations and summary statistics. 
+- Be able to draw conclusions from data using statistical inference
+
+# Getting Started
+
+Each of your assignments will begin with the steps outlined in this section. For more detailed instructions about getting started, see the [Lab 01 instructions](https://sta210-sp21.netlify.app/labs/lab-01-ikea.html).
+
+## Clone the repo & start new RStudio project
+
+- Go to the [sta210-sp21 organization](http://www.github.com/sta210-sp21) on GitHub . Click on the repo with the prefix **lab-02-**. It contains the starter documents you need to complete the lab.
+
+- Click on the green **Code** button, select **Use HTTPS**. Click on the clipboard icon to copy the repo URL.
+
+- Go to https://vm-manage.oit.duke.edu/containers and login with your Duke NetId and Password.
+
+- Click to log into the Docker container **STA 210 - Regression Analysis**. You should now see the RStudio environment. 
+
+
+- Go to *File* `r emo::ji("arrow_right")` *New Project* `r emo::ji("arrow_right")` *Version Control* `r emo::ji("arrow_right")` *Git*. 
+
+- Copy and paste the URL of your assignment repo into the dialog box *Repository URL*.
+
+- Click *Create Project*, and the files from your GitHub repo will be displayed the *Files* pane in RStudio. 
+
+## Configure git 
+
+One more thing before you get started. We need to configure your git so that RStudio can communicate with GitHub. This requires two pieces of information: your GitHub username and the email address associated with your GitHub account.
+
+Type the following lines of code in the **console** in RStudio filling in your name and email address.
+
+```{r eval=FALSE}
+library(usethis)
+use_git_config(user.name = "GitHub username", 
+               user.email="your email")
+```
+
+Now you're ready to start! Open the R Markdown file (the one with extension .Rmd) to begin the assignment. 
+
+## YAML 
+
+```{marginfigure}
+The top portion of your R Markdown file (between the three dashed lines) is called YAML. It stands for "YAML Ain't Markup Language". It is a human friendly data serialization standard for all programming languages. All you need to know is that this area is called the YAML (we will refer to it as such) and that it contains meta information about your document.
+```
+
+Before we introduce the data, let's update the name and date in the YAML. 
+
+Open the R Markdown (Rmd) file in your project, input your name for the author name and today's date for the date, and knit the document.
+
+## Committing and pushing changes:
+
+- Go to the **Git** pane in your RStudio.
+- Select all of the files that appear in the Git pane.
+- Click to commit. Add a short and informative commit message. - Click to **Push**. This will prompt a dialogue box where you first need to enter your user name, and then your password.
+
+Make sure you push all the files from the *Git* pane to your assignment repo on GitHub. The Git pane should be empty after you push. If it's not, click the box next to the remaining files, write an informative commit message, and push.
+
+# Packages
+
+We will use the following packages in today's lab. 
+
+```{r load-packages}
+library(tidyverse)
+library(skimr)
+library(knitr)
+library(infer)
+```
+
+# Data: Trails in Durham, NC
+
+Today's data comes from the [Durham Open Data](https://live-durhamnc.opendata.arcgis.com/) a program managed by the City of Durham's Technology Solutions Department and the County of Durham's Information Services & Technology Department to provide open data about our community. You can read more about their mission [here](https://live-durhamnc.opendata.arcgis.com/pages/about-us).
+
+In this lab, we will focus on data about the proposed and existing outdoor trails in Durham, NC. The data is located in the *durham_trails.csv* file located in the *data* folder. Use the code below to read in the .csv file and save it in the RStudio environment as a data frame called `trails`. Note: This dataset only includes trails with a reported value for length.
+
+```{r read-data, eval=FALSE}
+trails <- read_csv("data/durham_trails.csv")
+```
+
+A full list of the variables in the dataset is available  [here](https://live-durhamnc.opendata.arcgis.com/datasets/existing-and-proposed-trails?geometry=-80.283%2C35.650%2C-77.473%2C36.428). For today's analysis, we will primarily focus on the following variables: 
+
+|  |  |
+|----------|-------|
+| `status` |Whether the trail is proposed or existing|
+| `dogwalking` | Whether dogs are allowed on the trail |
+| `length` | Length of the trail in miles |
+| `trailtype` | Description of trail (crosswalk, sidewalk, walking path, etc.) |
+
+
+# Exercises 
+
+## Instructions 
+
+Write all code and narrative in your R Markdown file. Write all narrative in complete sentences. Throughout the assignment, you should periodically **knit** your R Markdown document to produce the updated PDF, **commit** the changes in the Git pane, and **push** the updated files to GitHub. 
+
+**As you complete the lab...**
+
+`r emo::ji("white_check_mark")` Write all narrative in complete sentences.
+`r emo::ji("white_check_mark")` Use an informative title and informative axis labels on all visualizations. 
+
+
+The dataset includes the characteristics of trails that existed and those that were proposed as of January 2020. In this lab, we want to explore whether there is a difference between the typical length of trails that allow dogwalking versus those that don't. To answer this question, we will use statistical inference to see if there is evidence that the mean length differs between the two types of trails.
+
+1. Let's begin by examining the distribution of the trail status with a data visualization and summary statistics. 
+
+    - Create a visualization for the distribution of `status`, and calculate the proportion of observations in each category of `status`. You can use the code belwo to help you calculate the proportions. 
+    - Use the plot and summary statistics to describe the distribution of `status`. 
+
+```{r eval = FALSE}
+_____ %>%
+  count(_____) %>%
+  mutate(proportion = n / sum(n))
+```
+
+
+2. Since the primary goal is to analyze the length of trails for trails in Durham, we will just use data for trails that existed as of November 18, 2019, the latest edit date in the data.  Create a subset that only includes existing trails.  **You will use the subset of existing trails for exercises 3 - 7.**
+
+3. Next let's examine the distribution of `length` for existing trails. Make a graph to visualize the distribution of `length`.
+
+```{marginfigure}
+See [Section 7.3.1 "Visualizing Distributions"](https://r4ds.had.co.nz/exploratory-data-analysis.html#introduction-3) or the [ggplot2 reference page](https://ggplot2.tidyverse.org/reference/index.html) for details and example code.
+```                                               
+
+<div class = "commit">
+This is a good place to knit, commit, and push changes to your remote lab-02 repo on GitHub. Be sure to write an informative commit message (e.g. "Completed exercises 1 - 3"), and push every file to GitHub by clicking the checkbox next to each file in the Git pane. After you push the changes, the Git pane in RStudio should be empty."
+</div>
+
+4. Though we can approximate the center and spread of a distribution from visualizations, it is useful to calculate summary statistics to more precisely describe distributions. Calculate the following summary statistics for `length`: 
+  - min 
+  - mean
+  - median
+  - Q1
+  - Q3
+  - max
+  - IQR
+  - standard deviation
+  
+  
+*Hint: You can use the [summarise reference page](https://dplyr.tidyverse.org/reference/summarise.html) for code and examples.*
+
+5. Which summary statistics are most to help us describe the distribution of `length`? In other words, which summary statistics most accurately reflect the center and spread of the distribution? Briefly explain.  
+
+6. Use the visualization and summary statistics to describe the distribution of `length`. Include a description of the shape, center, spread, and potential outliers in your description. 
+
+7. People are more likely to take their dogs on trails that can be completed in a day, so let's focus on trails could be feasibly completed as a day hike. Create a subset that only includes existing trails that are 10 miles long or less. **Be sure to save this updated subset, so you can use it for the remainder of the lab.** 
+    
+<div class = "commit">
+This is a good place to knit, commit, and push changes to your remote lab-02 repo on GitHub. Be sure to write informative commit message (e.g. "Completed exercises 4 - 7"), and push every file to GitHub by clicking the checkbox next to each file in the Git pane. After you push the changes, the Git pane in RStudio should be empty.
+</div>
+
+<!-- for future semesters: need to add something about listing the values and showing how many times each one occurs.--->
+8. Now that we've explored length, let's look at the distribution of `dogwalking`. 
+    - What are the values of `dogwalking` in the dataset? To answer this question, use code to list the values of `dogwalking` and how often each one occurs. *Note: We use code to help us answer this question, so we can produce the result in a reproducible way.* 
+    - What do you think a missing value of `dogwalking` most likely indicates? 
+
+9. Complete the code below to impute (i.e. fill in) the missing values of `dogwalking` with the appropriate value.  Then, display the distribution of `dogwalking` to check that the missing values were correctly imputed.
+
+```{r eval=FALSE}
+_____ <- _____ %>%
+  mutate(dogwalking = if_else(is.na(dogwalking), ______, dogwalking))
+```
+
+10. Now that we've completed the univariate EDA (i.e. examining one variable at a time), let's examine the relationship between the length of the trail and whether dog walking is allowed. Make a graph to visualize the relationship between `length` and `dogwalking` and calculate the appropriate summary statistics. Include informative axis labels and title on your graph.
+
+11. Describe the relationship between `length` and `dogwalking`. In other words, describe how the distribution of `length` compares between trails that allow dog walking versus those that don't. Include information from the graph and summary statistics from the previous exercise in your response.
+
+<div class = "commit"> 
+This is a good place to knit, commit, and push changes to your remote lab-01 repo on GitHub. Be sure to write informative commit message (e.g. "Completed exercises 8 - 11"), and push every file to GitHub by clicking the checkbox next to each file in the Git pane. After you push the changes, the Git pane in RStudio should be empty.
+</div>
+
+12. Let's use statistical inference to determine if the data provide sufficient evidence that there is a difference in the mean length between trails that allow dog-walking and those that don't. We'll begin with a hypothesis test. The null and alternative hypotheses are the following: 
+
+$$\begin{align} &H_0: \mu_{yes} = \mu_{no} \\ &H_a: \mu_{yes} \neq \mu_{no}\end{align}$$
+  - State the null and alternative in words in the context of the data. 
+  - Conduct the test in R. Show the code and resulting output. 
+  - What does the test statistic mean? Write your response in the context of the data. 
+  - State the conclusion of the test in the context of the data. 
+  
+13. Let's calculate a confidence interval to estimate the difference in the mean length between trails that allow dog-walking and those that don't. If it isn't displayed in Exercise 12, show the code and output to calculate the confidence interval. Then, interpret your interval in the context of the data. 
+
+<div class = "commit">
+
+**You're done and ready to submit your work! Knit, commit, and push all remaining changes. You can use the commit message "Done with Lab 2!", and make sure you have pushed all the files to GitHub (your Git pane in RStudio should be empty) and that<u>all</u> documents are updated in your repo on GitHub. Then submit the assignment on Gradescope following the instructions below.**
+
+</div>
+
+# Submission
+
+In this class, we'll be submitting PDF documents to Gradescope.
+
+**Before you wrap up the assignment, make sure all documents are updated on your GitHub repo. We will be checking these to make sure you have been practicing how to commit and push changes.**
+
+**Remember -- you must turn in a PDF file to the Gradescope page before the submission deadline for full credit.** 
+
+To submit your assignment: 
+
+- Go to http://www.gradescope.com and click *Log in* in the top right corner. 
+
+- Click *School Credentials* `r emo::ji("arrow_right")` *Duke NetID* and log in using your NetID credentials.
+
+- Click on your *STA 210* course. 
+
+- Click on the assignment, and you'll be prompted to submit it.
+
+- Mark the pages associated with each exercise. All of the pages of your lab should be associated with at least one question (i.e., should be "checked"). 
+
+- Select the first page of your .PDF submission to be associated with the *"Overall"* section.
+
+# Resources for additional practice (optional)
+
+- [Chapter 2: Get Started](https://socviz.co/gettingstarted.html#work-in-plain-text-using-rmarkdown) *Data Visualization by Kieran Healy* 
+
+- [Chapter 3: Data visualization](https://r4ds.had.co.nz/data-visualisation.html) in *R for Data Science* by Hadley Wickham
+
+- RStudio Cloud Primers
+  - Visualization Basics: https://rstudio.cloud/learn/primers/1.1
+  - Work with Data: https://rstudio.cloud/learn/primers/2
+  - Visualize Data: https://rstudio.cloud/learn/primers/3
+
+<br><br>
+<hr>
+
+<div class = "footer">
+This lab was adapted from [Data Science in a Box](https://rstudio-education.github.io/datascience-box/course-materials/lab-instructions/lab-02/lab-02-plastic-waste.html).
+</div>
