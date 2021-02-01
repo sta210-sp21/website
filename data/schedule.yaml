@@ -25,7 +25,8 @@ lessons:
   
   - week: "Week 03"
     date: "Mon, Feb 01"
-    title: "Lab 02"
+    title: "Lab 02: Trails in Durham, NC"
+    lab: "lab-02-durham-trails.html"
   - date: "Tue, Feb 02"
     title: "Simple linear regression (SLR)"
     slides: "04-slr-intro.html"

@@ -30,7 +30,7 @@ font-size: 18px;
 
 |                        |   |
 |------------------------|---|
-| Lab 02 | **due Sun, Feb 07 at 11:59p EST** |
+| [Lab 02](https://sta210-sp21.netlify.app/labs/lab-02-durham-trails.html) | **due Sun, Feb 07 at 11:59p EST** |
 | HW 01 | **due Wed, Feb 10 at 11:59p EST** |
 
 
