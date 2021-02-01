@@ -540,13 +540,13 @@ text-decoration: italic;
 </ul>
 </div>
 
-<p>The primary objectives for this lab are to continue practicing with the computing workflow and exploring relationships between multiple variables. You will also start drawing conclusions from data as you analyze data about trails in Durham, North Carolina.</p>
+<p>The primary objectives for this lab are to continue practicing with the computing workflow and exploring relationships between multiple variables. You will also use statistical inference to draw conclusions as you analyze data about trails in Durham, North Carolina.</p>
 <div id="learning-goals" class="section level1">
 <h1>Learning goals</h1>
 <p>By the end of the lab you will…</p>
 <ul>
 <li>Gain experience writing a reproducible report using RMarkdown</li>
-<li>Gain experience using GitHub to practic version control</li>
+<li>Gain experience using GitHub to practice version control</li>
 <li>Be able to wrangle data and calculate summary statistics using dplyr</li>
 <li>Be able to describe distributions and multivariable relationships using visualizations and summary statistics.</li>
 <li>Be able to draw conclusions from data using statistical inference</li>
@@ -601,7 +601,7 @@ text-decoration: italic;
 <div id="data-trails-in-durham-nc" class="section level1">
 <h1>Data: Trails in Durham, NC</h1>
 <p>Today’s data comes from the <a href="https://live-durhamnc.opendata.arcgis.com/">Durham Open Data</a> a program managed by the City of Durham’s Technology Solutions Department and the County of Durham’s Information Services &amp; Technology Department to provide open data about our community. You can read more about their mission <a href="https://live-durhamnc.opendata.arcgis.com/pages/about-us">here</a>.</p>
-<p>In this lab, we will focus on data about the proposed and existing outdoor trails in Durham, NC. The data is located in the <em>durham_trails.csv</em> file located in the <em>data</em> folder. Use the code below to read in the .csv file and save it in the RStudio environment as a data frame called <code>trails</code>. Note: This dataset only includes trails with a reported value for length.</p>
+<p>The data for this lab contains characteristics of proposed and existing outdoor trails in Durham, NC. The data is located in the <em>durham_trails.csv</em> file located in the <em>data</em> folder. Use the code below to load the data set. Note: This data set only includes trails with a reported value for length.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>trails &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/durham_trails.csv&quot;</span>)</span></code></pre></div>
 <p>A full list of the variables in the dataset is available <a href="https://live-durhamnc.opendata.arcgis.com/datasets/existing-and-proposed-trails?geometry=-80.283%2C35.650%2C-77.473%2C36.428">here</a>. For today’s analysis, we will primarily focus on the following variables:</p>
 <table>
@@ -629,10 +629,11 @@ text-decoration: italic;
 <h1>Exercises</h1>
 <div id="instructions" class="section level2">
 <h2>Instructions</h2>
-<p>Write all code and narrative in your R Markdown file. Write all narrative in complete sentences. Throughout the assignment, you should periodically <strong>knit</strong> your R Markdown document to produce the updated PDF, <strong>commit</strong> the changes in the Git pane, and <strong>push</strong> the updated files to GitHub.</p>
+<p>Write all code and narrative in your R Markdown file. Throughout the assignment, you should periodically <strong>knit</strong> your R Markdown document to produce the updated PDF, <strong>commit</strong> the changes in the Git pane, and <strong>push</strong> the updated files to GitHub.</p>
 <p><strong>As you complete the lab…</strong></p>
-<p>✅ Write all narrative in complete sentences. ✅ Use an informative title and informative axis labels on all visualizations.</p>
-<p>The dataset includes the characteristics of trails that existed and those that were proposed as of January 2020. In this lab, we want to explore whether there is a difference between the typical length of trails that allow dogwalking versus those that don’t. To answer this question, we will use statistical inference to see if there is evidence that the mean length differs between the two types of trails.</p>
+<p>✅ Write all narrative in complete sentences.</p>
+<p>✅ Use an informative title and informative axis labels on all visualizations.</p>
+<p>We want to explore whether there is a difference between the typical length of trails that allow dog walking versus those that don’t. To answer this question, we will use statistical inference to determine if the mean length differs between the two types of trails.</p>
 <ol style="list-style-type: decimal">
 <li><p>Let’s begin by examining the distribution of the trail status with a data visualization and summary statistics.</p>
 <ul>
@@ -652,35 +653,30 @@ text-decoration: italic;
 <p>This is a good place to knit, commit, and push changes to your remote lab-02 repo on GitHub. Be sure to write an informative commit message (e.g. “Completed exercises 1 - 3”), and push every file to GitHub by clicking the checkbox next to each file in the Git pane. After you push the changes, the Git pane in RStudio should be empty.&quot;</p>
 </div>
 <ol start="4" style="list-style-type: decimal">
-<li>Though we can approximate the center and spread of a distribution from visualizations, it is useful to calculate summary statistics to more precisely describe distributions. Calculate the following summary statistics for <code>length</code>:</li>
-</ol>
+<li><p>Though we can approximate the center and spread of a distribution from visualizations, it is useful to calculate summary statistics to more precisely describe distributions. Calculate the following summary statistics for <code>length</code>:</p>
 <ul>
-<li>min</li>
-<li>mean</li>
-<li>median</li>
-<li>Q1</li>
-<li>Q3</li>
-<li>max</li>
-<li>IQR</li>
-<li>standard deviation</li>
-</ul>
+<li>min, max</li>
+<li>mean, median</li>
+<li>Q1, Q3</li>
+<li>IQR, standard deviation</li>
+</ul></li>
+</ol>
 <p><em>Hint: You can use the <a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise reference page</a> for code and examples.</em></p>
 <ol start="5" style="list-style-type: decimal">
-<li><p>Which summary statistics are most to help us describe the distribution of <code>length</code>? In other words, which summary statistics most accurately reflect the center and spread of the distribution? Briefly explain.</p></li>
-<li><p>Use the visualization and summary statistics to describe the distribution of <code>length</code>. Include a description of the shape, center, spread, and potential outliers in your description.</p></li>
-<li><p>People are more likely to take their dogs on trails that can be completed in a day, so let’s focus on trails could be feasibly completed as a day hike. Create a subset that only includes existing trails that are 10 miles long or less. <strong>Be sure to save this updated subset, so you can use it for the remainder of the lab.</strong></p></li>
+<li><p>Which summary statistics are most useful for describing the distribution of <code>length</code>? In other words, which summary statistics most accurately reflect the center and spread of the distribution? Briefly explain.</p></li>
+<li><p>Use the visualization and summary statistics to describe the distribution of <code>length</code>. Include a description of the shape, center, spread, and potential outliers.</p></li>
+<li><p>People are more likely to take their dogs on trails that can be completed in a day, so let’s focus on trails could be feasibly completed as a day hike. Create a subset that only includes existing trails that are 10 miles or less. <strong>You will use this subset for the remainder of the lab.</strong></p></li>
 </ol>
 <div class="commit">
 <p>This is a good place to knit, commit, and push changes to your remote lab-02 repo on GitHub. Be sure to write informative commit message (e.g. “Completed exercises 4 - 7”), and push every file to GitHub by clicking the checkbox next to each file in the Git pane. After you push the changes, the Git pane in RStudio should be empty.</p>
 </div>
-<!-- for future semesters: need to add something about listing the values and showing how many times each one occurs.--->
 <ol start="8" style="list-style-type: decimal">
 <li>Now that we’ve explored length, let’s look at the distribution of <code>dogwalking</code>.
 <ul>
 <li>What are the values of <code>dogwalking</code> in the dataset? To answer this question, use code to list the values of <code>dogwalking</code> and how often each one occurs. <em>Note: We use code to help us answer this question, so we can produce the result in a reproducible way.</em></li>
-<li>What do you think a missing value of <code>dogwalking</code> most likely indicates?</li>
+<li>Consider the values of <code>dogwalking</code> currently in the data. What do you think a missing value of <code>dogwalking</code> most likely indicates?</li>
 </ul></li>
-<li>Complete the code below to impute (i.e. fill in) the missing values of <code>dogwalking</code> with the appropriate value. Then, display the distribution of <code>dogwalking</code> to check that the missing values were correctly imputed.</li>
+<li>Complete the code below to impute (i.e. fill in) the missing values of <code>dogwalking</code> with the most reasonable value. Then, display the distribution of <code>dogwalking</code> to check that the missing values were correctly imputed.</li>
 </ol>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>_____ &lt;-<span class="st"> </span>_____ <span class="op">%&gt;%</span></span>
 <span id="cb5-2"><a href="#cb5-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">dogwalking =</span> <span class="kw">if_else</span>(<span class="kw">is.na</span>(dogwalking), ______, dogwalking))</span></code></pre></div>
@@ -692,9 +688,15 @@ text-decoration: italic;
 <p>This is a good place to knit, commit, and push changes to your remote lab-01 repo on GitHub. Be sure to write informative commit message (e.g. “Completed exercises 8 - 11”), and push every file to GitHub by clicking the checkbox next to each file in the Git pane. After you push the changes, the Git pane in RStudio should be empty.</p>
 </div>
 <ol start="12" style="list-style-type: decimal">
-<li>Let’s use statistical inference to determine if the data provide sufficient evidence that there is a difference in the mean length between trails that allow dog-walking and those that don’t. We’ll begin with a hypothesis test. The null and alternative hypotheses are the following:</li>
+<li>Let’s use statistical inference to determine if the data provide sufficient evidence of a difference in the mean length between trails that allow dog walking and those that don’t. We’ll begin with a hypothesis test. The null and alternative hypotheses are the following:</li>
 </ol>
-<p><span class="math display">\[\begin{align} &amp;H_0: \mu_{yes} = \mu_{no} \\ &amp;H_a: \mu_{yes} \neq \mu_{no}\end{align}\]</span> - State the null and alternative in words in the context of the data. - Conduct the test in R. Show the code and resulting output. - What does the test statistic mean? Write your response in the context of the data. - State the conclusion of the test in the context of the data.</p>
+<p><span class="math display">\[\begin{align} &amp;H_0: \mu_{yes} = \mu_{no} \\ &amp;H_a: \mu_{yes} \neq \mu_{no}\end{align}\]</span></p>
+<ul>
+<li><p>State the null and alternative in words in the context of the data.</p></li>
+<li><p>Conduct the test in R. Show the code and resulting output.</p></li>
+<li><p>What does the test statistic mean? Write your response in the context of the data.</p></li>
+<li><p>State the conclusion of the test in the context of the data.</p></li>
+</ul>
 <ol start="13" style="list-style-type: decimal">
 <li>Let’s calculate a confidence interval to estimate the difference in the mean length between trails that allow dog-walking and those that don’t. If it isn’t displayed in Exercise 12, show the code and output to calculate the confidence interval. Then, interpret your interval in the context of the data.</li>
 </ol>
@@ -730,11 +732,6 @@ text-decoration: italic;
 <li>Visualize Data: <a href="https://rstudio.cloud/learn/primers/3" class="uri">https://rstudio.cloud/learn/primers/3</a></li>
 </ul></li>
 </ul>
-<br><br>
-<hr>
-<div class="footer">
-<p>This lab was adapted from <a href="https://rstudio-education.github.io/datascience-box/course-materials/lab-instructions/lab-02/lab-02-plastic-waste.html">Data Science in a Box</a>.</p>
-</div>
 </div>
 
 
