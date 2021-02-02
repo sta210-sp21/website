@@ -15,6 +15,7 @@ title: Resources
 - [R Markdown Reference](https://rmarkdown.rstudio.com/lesson-1.html)
 - [R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/)
 - [Quick Guide to LaTex](https://assets.ctfassets.net/nrgyaltdicpt/4e825etqMUW8vTF8drfRbw/d4f3d9adcb2980b80818f788e36316b2/A_quick_guide_to_LaTeX__Overleaf_version.pdf)
+- [Mathematics in R Markdown](https://rpruim.github.io/s341/S19/from-class/MathinRmd.html)
 
 **Data Visualization**
 

@@ -1,0 +1,67 @@
+---
+title: "Porche Price vs. Mileage"
+subtitle: "Simple linear regression"
+date: "`r Sys.Date()`"
+output: 
+  html_document: 
+    fig_height: 3
+    fig_width: 6
+    theme: readable
+---
+
+```{r setup, echo = F}
+knitr::opts_chunk$set(warning = FALSE, 
+                      message = FALSE, 
+                      fig.align = "center")
+```
+
+```{r load-packages, message=FALSE}
+library(tidyverse)
+library(broom)
+library(patchwork)
+```
+
+## Class announcements
+
+- See this week's schedule: [Week 03](https://sta210-sp21.netlify.app/schedule/week-03/)
+  - [Lab 02](https://sta210-sp21.netlify.app/labs/lab-02-durham-trails.html) due Sun, Jan 31 at 11:59p
+  - HW 01 assigned Thursday
+  
+## Questions about lab / logistics?
+
+## Data analysis life cycle
+
+```{r echo = F, fig.cap = "Data science life cycle from [*R for Data Science*](https://r4ds.had.co.nz/) with modifications from *The Art of Statistics: How to Learn from Data*", out.width = "70%", fig.align = "center"}
+knitr::include_graphics("img/data-analysis-life-cycle.png")
+```
+
+## Introducing LaTex
+
+To write mathematical notation, we will use LaTex, a documentation software specifically for technical writing. We can write equations in two ways:
+
+**Inline:**  Your mathematics will display within the line of text.
+
+- Use `$` to start and end your LaTex syntax.
+- Example: The R Markdown text `The null hypothesis is $H_0:\beta_1 = 0$` is rendered as "The null hypothesis is $H_0:\beta_1 = 0$
+
+**Displayed:** Your mathematics will display outside the line of text
+
+Use `$$` to start and end your LaTex syntax.
+Example: The R Markdown text `The null hypothesis is $$H_0:\beta_1 = 0$$` is rendered as "The null hypothesis is $$H_0: \beta_1 = 0$$
+
+One way we will use LaTex is to write model equations: 
+
+$$Y = \beta_0 + \beta_1 X + \epsilon$$
+
+Syntax: `$$Y = \beta_0 + \beta_1 X + \epsilon$$`
+
+**Note:** You **<u>cannot</u>** copy and paste mathematical symbols in LaTex. If you do so, you will get a "Unicode" error message when you try to knit the document. 
+
+See [Mathematics in R Markdown](https://rpruim.github.io/s341/S19/from-class/MathinRmd.html) for an overview of the syntax for commonly used equations and symbols.
+
+## Questions from Simple linear regression: Introduction video 
+
+##  AE 04: Price vs. Mileage
+
+Clone the **ae-04** repo and open a new project in RStudio. Be sure to push your work periodically as you complete the AE.
+

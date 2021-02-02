@@ -182,7 +182,7 @@ font-size: 18px;
       <pubDate>12 Mar 17 10:00 +0000</pubDate>
       
       <guid>/schedule/week-03/</guid>
-      <description>table { font-size: 18px; }  Lectures     Slides Videos Application Exercises (AE)     Tuesday Simple linear regression: Introduction Simple linear regression: Introduction AE 04   Thursday Simple Linear Regression: Inference Simple Linear Regression: Inference AE 05    Simple Linear Regression: Foundation Simple Linear Regression: Foundation     Readings         IMS Section 3.</description>
+      <description>table { font-size: 18px; }  Lectures     Slides Videos Application Exercises (AE)     Tuesday Simple linear regression: Introduction Simple linear regression: Introduction AE 04: Porsche Price vs. Mileage   Thursday Simple linear regression: Foundation Simple Linear Regression: Foundation AE 05    Simple linear regression: Inference Simple Linear Regression: Inference     Readings         IMS Section 3.</description>
       <content>&lt;style&gt;
 table {
 font-size: 18px;
@@ -204,18 +204,18 @@ font-size: 18px;
 &lt;td&gt;Tuesday&lt;/td&gt;
 &lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/slides/04-slr-intro.html&#34;&gt;Simple linear regression: Introduction&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;&lt;a href=&#34;https://warpwire.duke.edu/w/VykFAA/&#34;&gt;Simple linear regression: Introduction&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;AE 04&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/appex/ae-04-porsche.html&#34;&gt;AE 04: Porsche Price vs. Mileage&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;Thursday&lt;/td&gt;
-&lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/slides/05-slr-coef-inf.html&#34;&gt;Simple Linear Regression: Inference&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;Simple Linear Regression: Inference&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/slides/05-slr-foundation.html&#34;&gt;Simple linear regression: Foundation&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://warpwire.duke.edu/w/1ywFAA/&#34;&gt;Simple Linear Regression: Foundation&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;AE 05&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/slides/05-slr-foundation.html&#34;&gt;Simple Linear Regression: Foundation&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;Simple Linear Regression: Foundation&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/slides/05-slr-coef-inf.html&#34;&gt;Simple linear regression: Inference&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://warpwire.duke.edu/w/4SwFAA/&#34;&gt;Simple Linear Regression: Inference&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
@@ -502,10 +502,9 @@ font-size: 18px;
       <guid>/resources/</guid>
       <description>R resources Getting started
  RStudio IDE Cheatsheet Happy Git and GitHub for the useR R for Data Science  R Markdown &amp;amp; LaTex
- R Markdown Reference R Markdown: The Definitive Guide Quick Guide to LaTex  Data Visualization
+ R Markdown Reference R Markdown: The Definitive Guide Quick Guide to LaTex Mathematics in R Markdown  Data Visualization
  ggplot2 Cheatsheet ggplot2.tidyverse.org  Data Wrangling
- dplyr Cheatsheet dplyr.tidyverse.org  Statistics resources   Introduction to Modern Statistics by Mine Çetinkaya-Rundel and Jo Hardin (free online)
-  Statistical Inference via Data Science: A ModernDive into R and the Tidyverse by Chester Ismay and Albert Kim (free online)</description>
+ dplyr Cheatsheet dplyr.tidyverse.org  Statistics resources   Introduction to Modern Statistics by Mine Çetinkaya-Rundel and Jo Hardin (free online)</description>
       <content>&lt;h2 id=&#34;r-resources&#34;&gt;R resources&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;Getting started&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
@@ -518,6 +517,7 @@ font-size: 18px;
 &lt;li&gt;&lt;a href=&#34;https://rmarkdown.rstudio.com/lesson-1.html&#34;&gt;R Markdown Reference&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://bookdown.org/yihui/rmarkdown/&#34;&gt;R Markdown: The Definitive Guide&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://assets.ctfassets.net/nrgyaltdicpt/4e825etqMUW8vTF8drfRbw/d4f3d9adcb2980b80818f788e36316b2/A_quick_guide_to_LaTeX__Overleaf_version.pdf&#34;&gt;Quick Guide to LaTex&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://rpruim.github.io/s341/S19/from-class/MathinRmd.html&#34;&gt;Mathematics in R Markdown&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;Data Visualization&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;

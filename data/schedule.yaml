@@ -31,10 +31,10 @@ lessons:
     title: "Simple linear regression (SLR)"
     slides: "04-slr-intro.html"
   - date: "Thu, Feb 04"
-    title: "SLR: Inference"
-    slides: "05-slr-coef-inf.html"
-  - title: "SLR: Foundation"
+    title: "SLR: Foundation"
     slides: "05-slr-foundation.html"
+  - title: "SLR: Inference"
+    slides: "05-slr-coef-inf.html"
   - title: "HW 01 assigned"
     hw: "hw-01.html"
   

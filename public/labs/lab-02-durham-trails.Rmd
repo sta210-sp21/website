@@ -94,6 +94,8 @@ library(infer)
 
 # Data: Trails in Durham, NC
 
+<!-- NEED TO DEAL WITH DUPLICATE OBSERVATIONS IN THE DATA - TAKE THE MOST RECENT EDIT DATE-->
+
 Today's data comes from the [Durham Open Data](https://live-durhamnc.opendata.arcgis.com/) a program managed by the City of Durham's Technology Solutions Department and the County of Durham's Information Services & Technology Department to provide open data about our community. You can read more about their mission [here](https://live-durhamnc.opendata.arcgis.com/pages/about-us).
 
 The data for this lab contains characteristics of proposed and existing outdoor trails in Durham, NC. The data is located in the *durham_trails.csv* file located in the *data* folder. Use the code below to load the data set. Note: This data set only includes trails with a reported value for length.

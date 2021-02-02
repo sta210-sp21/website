@@ -14,9 +14,10 @@ font-size: 18px;
 
 |           | Slides                   | Videos | Application Exercises (AE) |
 |-----------|--------------------------|--------|--------|
-| Tuesday  | [Simple linear regression: Introduction](https://sta210-sp21.netlify.app/slides/04-slr-intro.html) | [Simple linear regression: Introduction](https://warpwire.duke.edu/w/VykFAA/) | AE 04 |
-| Thursday   | [Simple Linear Regression: Inference](https://sta210-sp21.netlify.app/slides/05-slr-coef-inf.html) | Simple Linear Regression: Inference  | AE 05|
-|    | [Simple Linear Regression: Foundation](https://sta210-sp21.netlify.app/slides/05-slr-foundation.html) | Simple Linear Regression: Foundation | |
+| Tuesday  | [Simple linear regression: Introduction](https://sta210-sp21.netlify.app/slides/04-slr-intro.html) | [Simple linear regression: Introduction](https://warpwire.duke.edu/w/VykFAA/) | [AE 04: Porsche Price vs. Mileage](https://sta210-sp21.netlify.app/appex/ae-04-porsche.html) |
+| Thursday   | [Simple linear regression: Foundation](https://sta210-sp21.netlify.app/slides/05-slr-foundation.html) | [Simple Linear Regression: Foundation](https://warpwire.duke.edu/w/1ywFAA/) | AE 05 |
+|  | [Simple linear regression: Inference](https://sta210-sp21.netlify.app/slides/05-slr-coef-inf.html) | [Simple Linear Regression: Inference](https://warpwire.duke.edu/w/4SwFAA/)  | |
+
 
 ## Readings
 
