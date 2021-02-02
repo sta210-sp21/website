@@ -25,7 +25,7 @@ font-size: 18px;
 |------------|
 | [IMS Section 3.1 - 3.4.1: Introduction to linear models](https://openintro-ims.netlify.app/intro-linear-models.html)  |
 | [IMS Section 8.1.3: Inference for linear models - mathematical model](https://openintro-ims.netlify.app/inference-reg.html#mathslope) | 
-
+| [Deriving the least squares estimates for simple linear regression](https://github.com/sta210-fa19/supplemental-notes/blob/master/slr-derivations.pdf) | 
 
 ## Assignments
 
