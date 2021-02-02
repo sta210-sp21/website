@@ -1,6 +1,6 @@
 ---
-title: "HW 01"
-subtitle: ""
+title: "HW 01: Inference "
+subtitle: "due Wed, Feb 10 at 11:59p EST"
 author: ""
 date: ""
 output: 
@@ -16,4 +16,102 @@ knitr::opts_chunk$set(echo = TRUE,
                       message=FALSE)
 ```
 
-Instructions will be posted when the homework is assigned. 
+# Getting Started
+
+A brief outline of getting started is shown below. See the [Lab 01 Instructions]() for more details about the steps. 
+
+- Go to the [sta210-sp21 organization]((https://github.com/sta210-sp2) on GitHub. Click on the repo with the prefix **hw-01**. It contains the starter documents you need to complete the lab.
+- Clone the repo in RStudio Cloud
+
+## Tips
+
+Here are some tips as you complete HW 01:
+
+- Periodically knit your document and commit changes (the more often the better, for example, once per each new task)
+- Push all your changes back to your GitHub repo. The Git pane in RStudio should be empty after you push. You can also check your assignment repo on github.com to make sure it has updated.
+- Once you have completed your work, you will submit your assignment in Gradescope. You are welcome to resubmit multiple times until the assignment deadline. We will grade the most recent version of the .pdf file in Gradescope.
+
+## Packages 
+
+We will use the following packages in this assignment: 
+
+```{r}
+library(tidyverse)
+library(broom)
+library(knitr)
+library(openintro)
+library(MASS)
+```
+
+If you need to install any of the packages, type `install.packages("package_name")` in the console, where `package_name` is the package you need to install. 
+
+# Data
+
+Return to the Ikea data from Lab 01. 
+
+<!--UPDATE THIS DATA DESCRIPTION-->
+
+```{r}
+ikea <- read_csv("data/ikea.csv")
+```
+
+
+# Questions
+
+## Part 1: Conceptual questions
+
+<!-- UPDATE INSRUCTIONS TO THIS PART-->
+
+The objective of this analysis is to analyze the relationshp between the width and height of bookcases and shelves at Ikea. More specifically, we'd like to use the width of bookcases and shelves to understand variabilty in the height of these pieces. 
+
+1. Create a visualization for the distribution of `height` and calculate corresponding summary statistics. Use the visualization and summary statistics to describe the distribution. 
+  
+2. Create a visualization displaying the relationship between the width and height. Use the visualization to describe the relationship between the two variables. 
+
+3. We'd like to use the width to predict the height of Ikea bookcases and shelves. Write the appropriate statistical model equation. 
+
+4. Fit the regression model. *(You can use the R functions to fit the model; you do <u>not</u> need to calculate the  slope and intercept by hand).*
+  - Display the model output, including the 95% confidence interval for the estimates of slope and intercept. 
+  - Write the regression equation in mathematical notation. 
+  
+5. Does it make sense to interpret the intercept? If so, write the interpretation in the context of the data. Otherwise, briefly explain why not.
+
+6. Next let's look at the slope. Interpret the slope in the context of the data.
+
+7. Interpret the 95% confidence interval for the slope in the context of the data. 
+
+## Part 2: Communicating results
+
+<!-- ADD INSTRUCTIONS FOR THIS SECTION-->
+
+1. Add one element to the plot from Question 2 to change the look of the plot without changing the underlying data.
+- change one aesthetic and apply it to all of the points.
+- Add a theme. 
+
+Show the code and resulting output.
+
+
+2. Use the `kable` or flextable to nealty format the table from Exericse #2. 
+
+- 3 decimal places
+- Add a caption describing what the table displays. 
+
+flextable documentation: https://ardata-fr.github.io/flextable-book/layout-1.html
+kable documentation: ADD
+
+
+# Grading
+
+| **Total** | **50** |
+|-------------------------------------------------------------|:--:|
+| Part 1: Conceptual Problems | 25 |
+| Part 2: Data Analysis | 20 |
+| Document has clear question headers and narrative written in complete sentences| 3 	|
+| At least 3 informative commit messages 	| 2 	|
+
+
+*Note there is a 10% penalty if the .pdf file is incomplete and the .Rmd file has to be knitted for grading.*
+
+# Notes
+
+*See [Getting Started with LaTex](https://artofproblemsolving.com/wiki/index.php/LaTeX:LaTeX_on_AoPS#Getting_Started_with_LaTeX) and [LaTex Symbols Guide](https://artofproblemsolving.com/wiki/index.php/LaTeX:Symbols#Greek_Letters) for more information about typing statistical notation using LaTex.
