@@ -65,3 +65,4 @@ See [Mathematics in R Markdown](https://rpruim.github.io/s341/S19/from-class/Mat
 
 Clone the **ae-04** repo and open a new project in RStudio. Be sure to push your work periodically as you complete the AE.
 
+One person from each breakout room, type your group's response on Google slides (link in chat). 
