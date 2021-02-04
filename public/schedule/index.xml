@@ -182,7 +182,7 @@ font-size: 18px;
       <pubDate>12 Mar 17 10:00 +0000</pubDate>
       
       <guid>/schedule/week-03/</guid>
-      <description>table { font-size: 18px; }  Lectures     Slides Videos Application Exercises (AE)     Tuesday Simple linear regression: Introduction Simple linear regression: Introduction AE 04: Porsche Price vs. Mileage   Thursday Simple linear regression: Foundation Simple Linear Regression: Foundation AE 05    Simple linear regression: Inference Simple Linear Regression: Inference     Readings         IMS Section 3.</description>
+      <description>table { font-size: 18px; }  Lectures     Slides Videos Application Exercises (AE)     Tuesday Simple linear regression: Introduction Simple linear regression: Introduction AE 04: Porsche Price vs. Mileage   Thursday Simple linear regression: Foundation Simple Linear Regression: Foundation AE 05: Porche Price vs. Age    Simple linear regression: Inference Simple Linear Regression: Inference     Readings         IMS Section 3.</description>
       <content>&lt;style&gt;
 table {
 font-size: 18px;
@@ -210,7 +210,7 @@ font-size: 18px;
 &lt;td&gt;Thursday&lt;/td&gt;
 &lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/slides/05-slr-foundation.html&#34;&gt;Simple linear regression: Foundation&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;&lt;a href=&#34;https://warpwire.duke.edu/w/1ywFAA/&#34;&gt;Simple Linear Regression: Foundation&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;AE 05&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/appex/ae-05-porsche-contd.html&#34;&gt;AE 05: Porche Price vs. Age&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;/td&gt;
@@ -253,7 +253,7 @@ font-size: 18px;
 &lt;td&gt;&lt;strong&gt;due Sun, Feb 07 at 11:59p EST&lt;/strong&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;HW 01&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/hw/hw-01.html&#34;&gt;HW 01&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;&lt;strong&gt;due Wed, Feb 10 at 11:59p EST&lt;/strong&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;

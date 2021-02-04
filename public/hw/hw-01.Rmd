@@ -1,6 +1,6 @@
 ---
-title: "HW 01"
-subtitle: ""
+title: "HW 01: Simple linear regression"
+subtitle: "due Wed, Feb 10 at 11:59p EST"
 author: ""
 date: ""
 output: 
@@ -16,4 +16,123 @@ knitr::opts_chunk$set(echo = TRUE,
                       message=FALSE)
 ```
 
-Instructions will be posted when the homework is assigned. 
+# Getting Started
+
+You can find the **hw-01** repo in the [sta210-sp21 organization](https://github.com/sta210-sp2) on GitHub. This repo contains the starter documents and dataset needed to complete the lab. 
+
+See the [Lab 01 instructions](https://sta210-sp21.netlify.app/labs/lab-01-ikea.html#getting-started) for more details about cloning the repo, starting a new RStudio project, and configuring git.
+
+## Tips
+
+Here are some tips as you complete HW 01:
+
+- Periodically knit your document and commit changes (the more often the better, for example, once per each new task). You should have at least 3 commit messages by the end of the assignment.
+- Push all your changes back to your GitHub repo. The Git pane in RStudio should be empty after you push. You can also check your assignment repo on github.com to make sure it has updated.
+- Once you have completed your work, you will submit your assignment in Gradescope. You are welcome to resubmit multiple times until the assignment deadline. We will grade the most recent version of the .pdf file in Gradescope.
+
+## Packages 
+
+We will use the following packages in this assignment: 
+
+```{r}
+library(tidyverse)
+library(broom)
+library(knitr)
+```
+
+# Data: Ikea furniture
+
+For this assignment, we will analyze characteristics of bookcases and shelves sold at [Ikea](https://www.ikea.com/) furniture. This data is a subset of the Ikea data obtained from [TidyTuesday](https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-11-03/readme.md), including only furniture pieces categorized as "Bookcases & shelving units" that have reported values for height and width.
+
+The data is in the file `ikea-bookcases-shelves.csv` in the `data` folder.
+
+The variable definitions are as follows: 
+
+|variable          |class     |description |
+|:-----------------|:---------|:-----------|
+|item_id           |double    | item id which can be used later to merge with other IKEA data frames |
+|name              |character | the commercial name of items |
+|category          |character | the furniture category that the item belongs to (Sofas, beds, chairs, Trolleys,…) |
+|sellable_online   |logical   | Sellable online TRUE or FALSE |
+|link              |character | the web link of the item |
+|other_colors      |character | if other colors are available for the item, or just one color as displayed in the website (Boolean) |
+|short_description |character | a brief description of the item |
+|designer          |character | The name of the designer who designed the item. this is extracted from the full_description column. |
+|depth             |double    | Depth of the item in Centimeter |
+|height            |double    | Height of the item in Centimeter|
+|width             |double    | Width of the item in Centimeter|
+|price_usd            |double    | the current price in US dollars as it is shown in the website by 4/20/2020|
+
+
+# Questions
+
+## Part 1: Conceptual questions
+
+### Instructions 
+
+**This section of homework contains short answer questions focused on the concepts discussed in class. Some of these questions may also include short computing tasks.**
+
+**All narrative should be written in complete sentences, and all visualizations should have informative titles and axis labels.**
+
+The objective of this analysis is to examine the relationship between the width and height of bookcases and shelves sold at Ikea. More specifically, we'd like to fit a model that could be used to predict the height of an Ikea bookcase or shelf given its width.  
+
+
+1. Create a visualization for the distribution of the response variable `height` and calculate the appropriate summary statistics. Use the visualization and summary statistics to describe the distribution. 
+  
+2. Create a visualization displaying the relationship between the height and width. Interpret the visualization in the context of the data.
+
+3. Write the equation of the statistical model using mathematical notation. 
+
+4. Fit the regression model. *(You can use the R functions to fit the model; you do <u>not</u> need to calculate the  slope and intercept by hand).*
+  
+      - Display the model output, including the 95% confidence interval for the slope and intercept.
+      - Write the regression equation using mathematical notation. 
+  
+5. Does it make sense to interpret the intercept? If so, write the interpretation in the context of the data. Otherwise, briefly explain why not.
+
+6. Interpret the slope in the context of the data.
+
+7. Interpret the 95% confidence interval for the slope in the context of the data. 
+
+8. We want to test the following hypotheses: $H_0: \beta_1 = 0 \text{ vs. } H_a: \beta_1 \neq 0$. 
+
+    - State the hypotheses in words in the context of the data.
+    - Write the conclusion of the test in the context of the data.
+    - Use the confidence interval to explain the reasoning for your conclusion.
+
+## Part 2: Communicating results
+ 
+### Instructions 
+
+**Part of a statistician's / data scientist's job is being able to communicate technical results to a general (often non-technical) audience. This section of the homework will focus specifically on communication and writing some of the results from Part 1 for a general audience.**
+
+We'll start by focusing on how to display visualizations and tables in a clear and  professional format suitable for a report or presentation.
+
+1. Sometimes you need to change the look of a plot to make it fit with the theme, color scheme, etc. of a report or presentation. Use the visualization from Question 2 and change it's look by doing the following: 
+ 
+    - Change the theme. You can see the [ggplot2 reference](https://ggplot2.tidyverse.org/reference/ggtheme.html) for more details on themes.
+    - Add one additional element to the plot to change the look of the plot without changing the underlying data. I encourage you to be creative!
+
+2. When we write results in a report or presentation, we want to display tables in a way that's easily readable. To do so, we can use the `kable` function from the knitr R package. Use the `kable` function to format the regression output from Question 4. In your output, include the following:
+
+    - Print numeric results using 3 digits.
+    - Add a short caption describing what is displayed in the table.
+
+See [Chapter 10.1: The function knitr::kable()](https://bookdown.org/yihui/rmarkdown-cookbook/kable.html#kable-caption) for more details about the `kable` function. 
+
+# Submission 
+
+Knit, commit, and push your final changes to your GitHub repo. Then, submit the PDF on [Gradescope](http://www.gradescope.com). See the [Lab 01](https://sta210-sp21.netlify.app/labs/lab-01-ikea.html#submission) for more detailed submission instructions. 
+
+
+# Grading
+
+| **Total** | **50** |
+|-------------------------------------------------------------|:--:|
+| Part 1: Conceptual questions | 35 |
+| Part 2: Communicating results | 10 |
+| Document neatly formatted with clear question headers| 3 	|
+| At least 3 informative commit messages 	| 2 	|
+
+
+*Note there is a 10% penalty if the .pdf file is incomplete and the .Rmd file has to be knitted for grading.*

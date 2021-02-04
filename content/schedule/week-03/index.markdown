@@ -15,7 +15,7 @@ font-size: 18px;
 |           | Slides                   | Videos | Application Exercises (AE) |
 |-----------|--------------------------|--------|--------|
 | Tuesday  | [Simple linear regression: Introduction](https://sta210-sp21.netlify.app/slides/04-slr-intro.html) | [Simple linear regression: Introduction](https://warpwire.duke.edu/w/VykFAA/) | [AE 04: Porsche Price vs. Mileage](https://sta210-sp21.netlify.app/appex/ae-04-porsche.html) |
-| Thursday   | [Simple linear regression: Foundation](https://sta210-sp21.netlify.app/slides/05-slr-foundation.html) | [Simple Linear Regression: Foundation](https://warpwire.duke.edu/w/1ywFAA/) | AE 05 |
+| Thursday   | [Simple linear regression: Foundation](https://sta210-sp21.netlify.app/slides/05-slr-foundation.html) | [Simple Linear Regression: Foundation](https://warpwire.duke.edu/w/1ywFAA/) | [AE 05: Porche Price vs. Age](https://sta210-sp21.netlify.app/appex/ae-05-porsche-contd.html) |
 |  | [Simple linear regression: Inference](https://sta210-sp21.netlify.app/slides/05-slr-coef-inf.html) | [Simple Linear Regression: Inference](https://warpwire.duke.edu/w/4SwFAA/)  | |
 
 
@@ -32,7 +32,7 @@ font-size: 18px;
 |                        |   |
 |------------------------|---|
 | [Lab 02](https://sta210-sp21.netlify.app/labs/lab-02-durham-trails.html) | **due Sun, Feb 07 at 11:59p EST** |
-| HW 01 | **due Wed, Feb 10 at 11:59p EST** |
+| [HW 01](https://sta210-sp21.netlify.app/hw/hw-01.html) | **due Wed, Feb 10 at 11:59p EST** |
 
 
 

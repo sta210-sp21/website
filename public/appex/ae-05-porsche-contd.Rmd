@@ -1,0 +1,30 @@
+---
+title: "AE 05: Porche Price vs. Age"
+subtitle: "Inference for simple linear regression"
+date: "`r Sys.Date()`"
+output: 
+  html_document: 
+    fig_height: 3
+    fig_width: 6
+    theme: readable
+---
+
+## Class announcements
+
+- See this week's schedule: [Week 03](https://sta210-sp21.netlify.app/schedule/week-03/)
+  - [Lab 02](https://sta210-sp21.netlify.app/labs/lab-02-durham-trails.html) due Sun, Feb 07 at 11:59p
+  - [HW 01](https://sta210-sp21.netlify.app/hw/hw-01.html) due Wed Feb 10 at 11:5p EST. GitHub repos available after class.
+- Start working with lab groups on Monday. If there is someone you'd like to work with, please email me by **Friday, Feb 05 at 11:59pEST**. Requests will only be considered if they meet the following criteria: 
+  - Can only request to work with one other student. 
+  - Both students must independently email me for the request to be considered. 
+  - Both students must be in same lab section.
+  
+## Statistical model vs. regression equation
+
+## Questions from video 
+
+##  AE 05: Price vs. Age - Inference
+
+Clone the **ae-05** repo and open a new project in RStudio. Be sure to push your work periodically as you complete the AE.
+
+

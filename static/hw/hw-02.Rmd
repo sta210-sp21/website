@@ -17,3 +17,6 @@ knitr::opts_chunk$set(echo = TRUE,
 ```
 
 Instructions will be posted when the homework is assigned. 
+
+<!-- Add survey about what you still have qustions about - R Markdown, inference, 
+syllabus-->
