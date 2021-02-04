@@ -25,7 +25,7 @@ title: Teaching team and office hours
 |        | [Betsy Bersson](mailto:elb75@duke.edu)      | Fri 8a - 10a |
 | | [Meredith Brown](mailto:meredith.brown@duke.edu)     | Tue 4:30p - 6:30p |
 |        | [Cody Coombs](mailto:cody.coombs@duke.edu)         | Wed 1p - 3p |
-|        | [Sophie Dalldorf](mailto:sophia.dalldorf@duke.edu)    | Thu 3p - 5p|
+|        | [Sophie Dalldorf](mailto:sophia.dalldorf@duke.edu)    | Thu 3:30p - 5:30p|
 | | [Joseph Lawson](mailto:joseph.lawson@duke.edu)    | Thu 6p - 8p |
 |         | [Ezinne Nwankwo](mailto:ezinne.nwankwo@duke.edu)    | Mon 10a - 12p |
 |        | [Sophie Riegel](mailto:sophie.riegel@duke.edu)    | Tue 8a - 10a |

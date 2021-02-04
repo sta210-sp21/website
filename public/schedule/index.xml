@@ -1394,7 +1394,7 @@ projects. Ignoring these requirements is a violation of the Duke Community Stand
       <pubDate>12 Mar 17 10:00 +0000</pubDate>
       
       <guid>/home/band_three/</guid>
-      <description> .column { width: 100%; } table { width: 500px; font-size: 17px; font-weight: 400; padding-top: 5px; padding-bottom: 5px; }            Instructor Prof. Maria Tackett Wed 10a - 12p   TAs Martha Aboagye Wed 6p - 8p    Betsy Bersson Fri 8a - 10a    Meredith Brown Tue 4:30p - 6:30p    Cody Coombs Wed 1p - 3p    Sophie Dalldorf Thu 3p - 5p    Joseph Lawson Thu 6p - 8p    Ezinne Nwankwo Mon 10a - 12p    Sophie Riegel Tue 8a - 10a    </description>
+      <description> .column { width: 100%; } table { width: 500px; font-size: 17px; font-weight: 400; padding-top: 5px; padding-bottom: 5px; }            Instructor Prof. Maria Tackett Wed 10a - 12p   TAs Martha Aboagye Wed 6p - 8p    Betsy Bersson Fri 8a - 10a    Meredith Brown Tue 4:30p - 6:30p    Cody Coombs Wed 1p - 3p    Sophie Dalldorf Thu 3:30p - 5:30p    Joseph Lawson Thu 6p - 8p    Ezinne Nwankwo Mon 10a - 12p    Sophie Riegel Tue 8a - 10a    </description>
       <content>&lt;style&gt;
   .column {
   width: 100%;
@@ -1447,7 +1447,7 @@ projects. Ignoring these requirements is a violation of the Duke Community Stand
 &lt;tr&gt;
 &lt;td&gt;&lt;/td&gt;
 &lt;td&gt;&lt;a href=&#34;mailto:sophia.dalldorf@duke.edu&#34;&gt;Sophie Dalldorf&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;Thu 3p - 5p&lt;/td&gt;
+&lt;td&gt;Thu 3:30p - 5:30p&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;/td&gt;
