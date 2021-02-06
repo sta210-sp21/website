@@ -1,0 +1,68 @@
+---
+title: "Lab 03"
+output:
+  xaringan::moon_reader:
+    mathjax: "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML"
+    css: "sta210-slides.css"
+    logo: img/sta199-sticker-icon.png
+    lib_dir: libs/font-awesome
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      slideNumberFormat: "%current%" 
+      ratio: "16:9"
+editor_options: 
+  chunk_output_type: console
+---
+
+## Meet your teammates!
+
+- Go to the breakout room for your team
+
+- One person is the recorder - the person whose birthday is closest February 8
+
+- Find 10 things everyone in the group has in common. 
+  - Can't be body parts or clothes
+  
+- .vocab[You have 5 minutes!]
+
+---
+
+## Working on a team 
+
+- You and your teammates are working from the same lab-03 GitHub repo. This means you are all contributing to the same R Markdown document!
+
+- For today's lab, only one person should be typing the code/narrative in the R Markdown document at at time.
+
+- When you're not typing, you should still be contributing to the discussion but do not actually touch the files on your computer.
+
+---
+
+## Workflow demonstration 
+
+- We will now demonstrate the steps for updating the lab documents and sharing the updated files with your teammates.
+
+- .vocab[Every team member:] Click the .vocab[Pull button] in the Git pane. This brings the most updated files from GitHub to your RStudio project.
+
+- .vocab[ONE] team member:
+
+  - Update the .Rmd file.
+  - Knit the .Rmd file.
+  - Click the box next to every file in the Git pane.
+  - Write a short and informative commit message.
+  - Push the changes to GitHub.
+
+.vocab[Every team member:] Click the Pull button in the Git pane. You should now see the changes reflected in the documents in your RStudio project.
+
+---
+
+## Lab tips
+
+- Be ready to troubleshoot your document, since it will likely fail to knit on multiple occasions throughout the process. Read the error message carefully and take note of which line is preventing a successful knit.
+
+- Remember that your R Markdown file is not aware of your project's global environment and can only make use of variables, functions, etc. that you have loaded or defined in the document.
+
+- If you're unsure how a function works or what its arguments are, type `?` in front of it and hit enter in the **console** (`?read_csv` for instance). The "Help" tab will open and provide a summary of the function as well as some examples.
+
+
