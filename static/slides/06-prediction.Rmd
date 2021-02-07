@@ -1,0 +1,342 @@
+---
+title: "Simple Linear Regression"
+subtitle: "Prediction"
+author: "Prof. Maria Tackett"
+output:
+  xaringan::moon_reader:
+    mathjax: "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML"
+    css: "sta210-slides.css"
+    logo: img/sta199-sticker-icon.png
+    lib_dir: libs/font-awesome
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      slideNumberFormat: "%current%" 
+      ratio: "16:9"
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r child = "setup.Rmd"}
+```
+
+class: middle, center
+
+## [Click here for PDF of slides](05-slr-prediction.pdf)
+
+---
+
+## Topics 
+
+--
+
+- Predict the response given a value of the predictor variable
+
+--
+
+- Use intervals to quantify the uncertainty in the predicted values 
+   
+--
+
+- Define *extrapolation* and why we should avoid it
+
+
+```{r packages}
+library(tidyverse)
+library(broom)
+library(knitr)
+library(kableExtra)
+library(patchwork)
+library(MASS)
+```
+
+---
+
+## Cats data
+
+The data set contains the **heart weight** (.term[Hwt]) and **body weight** (.term[Bwt]) for 144 domestic cats.
+
+```{r echo = F}
+ggplot(data = cats, aes(x = Bwt, y = Hwt)) +
+  geom_point(alpha = 0.7) + 
+  labs(x = "Body Weight (kg)",
+       y = "Heart Weight (g)") +
+  theme_bw() +
+  theme(axis.title=element_text(size=14))
+```
+
+---
+
+## Cats data
+
+We want to fit a model so we can use a cat's body weight to predict how much its heart weighs.
+
+
+```{r echo = F}
+ggplot(data = cats, aes(x = Bwt, y = Hwt)) +
+  geom_point(alpha = 0.7) + 
+  geom_smooth(method = "lm", color = "blue", se = FALSE) +
+  labs(x = "Body Weight (kg)",
+       y = "Heart Weight (g)") +
+  theme_bw() +
+  theme(axis.title=element_text(size=14))
+```
+
+
+---
+
+## The model
+
+.eq[
+$$\hat{\text{Hwt}} = -0.357 + 4.034 \times \text{Bwt}$$
+]
+
+<br>
+
+```{r echo = F}
+bwt_hwt_model <- lm(Hwt ~ Bwt, data = cats)
+bwt_hwt_model %>%
+  tidy() %>%
+  kable(format = "html", digits = 3)
+```
+
+---
+
+class: regular
+
+## Prediction
+
+We can use the regression model to
+
+--
+
+Estimate the .vocab[<u>mean</u>] response when the predictor variable is equal to a value $x_0$
+
+<br> 
+
+--
+
+Predict the response for an .vocab[<u>individual</u>] observation with a value of the predictor equal to $x_0$
+
+---
+
+## Calculating a predicted value
+
+.pull-left[
+My cat Mindy weighs about 3.18 kg (7 lbs). 
+
+Based on this model, about how much does her heart weigh?
+]
+
+.pull-right[
+```{r echo = F, out.height = '70%', out.width = '60%'}
+knitr::include_graphics("img/06/mindy.JPG")
+```
+]
+
+--
+
+.alert[
+$$
+\begin{align}
+\hat{\text{Hwt}} &= -0.357 + 4.034 \times \color{purple}{\mathbf{3.18}} \\
+&= \mathbf{12.471} \text{ g}
+\end{align}
+$$
+]
+
+---
+
+## Uncertainty in predictions
+
+--
+
+.eq[
+**Confidence interval for the mean response**
+$$\hat{y} \pm t_{n-2}^* \times \color{purple}{\mathbf{SE}_{\hat{\boldsymbol{\mu}}}}$$
+]
+
+--
+
+.eq[
+**Prediction interval for an individual observation**
+$$\hat{y} \pm t_{n-2}^* \times \color{purple}{\mathbf{SE_{\hat{y}}}}$$
+]
+
+---
+
+## Standard errors
+
+--
+
+.eq[
+$$SE_{\hat{\mu}} = \hat{\sigma}_\epsilon\sqrt{\frac{1}{n} + \frac{(x-\bar{x})^2}{\sum\limits_{i=1}^n(x_i - \bar{x})^2}}$$
+]
+
+--
+
+.eq[
+$$SE_{\hat{y}} = \hat{\sigma}_\epsilon\sqrt{1 + \frac{1}{n} + \frac{(x-\bar{x})^2}{\sum\limits_{i=1}^n(x_i - \bar{x})^2}}$$
+]
+
+---
+
+## Standard errors
+
+.eq[
+$$SE_{\hat{\mu}} = \hat{\sigma}_\epsilon\sqrt{\frac{1}{n} + \frac{(x-\bar{x})^2}{\sum\limits_{i=1}^n(x_i - \bar{x})^2}}$$
+]
+
+.eq[
+$$SE_{\hat{y}} = \hat{\sigma}_\epsilon\sqrt{\mathbf{\color{purple}{\Large{1}}} + \frac{1}{n} + \frac{(x-\bar{x})^2}{\sum\limits_{i=1}^n(x_i - \bar{x})^2}}$$
+]
+
+---
+
+## Confidence interval
+
+--
+
+The 95% .vocab[confidence interval] for the .vocab[*mean*] heart weight of cats that weigh 3.18 kg is
+
+--
+
+```{r}
+x0 <- data.frame(Bwt = c(3.18))
+predict(bwt_hwt_model, x0, interval = "confidence", #<<
+           conf.level = 0.95) %>% 
+  kable(format = "html", digits = 3)
+```
+<br> 
+
+--
+
+.alert[
+We are 95% confident that mean heart weight for the subset of cats that weigh 3.18 kg is between 12.143 g and 12.801 g.
+]
+---
+
+## Prediction interval
+
+--
+
+The 95% .vocab[prediction interval] for an .vocab[*individual*] cat (Mindy) that weighs 3.18 kg is
+
+--
+
+```{r}
+predict(bwt_hwt_model, x0, interval = "predict",
+           conf.level = 0.95) %>%
+  kable(format = "html", digits = 3)
+```
+<br> 
+
+--
+
+.alert[
+We can predict with 95% confidence that Mindy's heart weighs between 9.582 g and 15.362 g.
+]
+
+---
+
+## Comparing intervals
+
+```{r, out.width = "90%"}
+pred_int <- as_tibble(predict(bwt_hwt_model, newdata = data.frame(Bwt = cats$Bwt), interval = "predict")) %>%
+  rename(lower_pred = lwr, 
+         upper_pred = upr) %>%
+  dplyr::select(-fit)
+
+conf_int <- as_tibble(predict(bwt_hwt_model, interval = "confidence")) %>%
+  rename(lower_conf = lwr, 
+         upper_conf = upr) %>%
+  dplyr::select(-fit)
+  
+cats <- bind_cols(cats, pred_int)
+cats <- bind_cols(cats, conf_int)
+```
+
+```{r echo = F, fig.height = 4}
+colors <- c("conf" = "blue", "pred" = "red")
+ggplot(data = cats, aes(x = Bwt, y = Hwt)) +
+  geom_point(alpha = 0.5) + 
+  geom_smooth(method = "lm", color = "gray", se = FALSE) +
+  geom_line(aes(y = lower_pred, color = "pred"), linetype = "dashed") + 
+  geom_line(aes(y = upper_pred, color = "pred"), linetype = "dashed") + 
+  geom_line(aes(y = lower_conf, color = "conf")) + 
+  geom_line(aes(y = upper_conf, color = "conf")) +
+  labs(x = "Body Weight (kg)",
+       y = "Heart Weight (g)") +
+  theme_bw() +
+  scale_color_manual(values = colors, 
+                     labels = c("Confidence interval for mean", "Prediction interval for individual"), 
+                     name = "") +
+  theme(legend.position = "top", 
+        legend.text = element_text(size = 14), 
+        axis.title=element_text(size=14))
+```
+
+---
+
+## `r emo::ji("stop_sign")` Caution! Extrapolation 
+
+We should **<u>not</u>** use the model to predict for values of $X$ far outside the range of values used to fit the model. 
+
+<br>
+
+This is called .vocab[extrapolation]. 
+---
+
+## Predict Andy's heart weight?
+
+.pull-left[
+My cat Andy weighs about 5.44 kg (12 lbs).
+
+<br>
+
+Should we use this regression model to predict how much his heart weighs?
+]
+
+.pull-right[
+```{r echo = F, out.height = '85%', out.width = '75%'}
+knitr::include_graphics("img/06/andy.JPG")
+```
+]
+
+---
+
+## Predict Andy's heart weight?
+
+```{r out.width = "90%"}
+ggplot(data = cats, aes(x = Bwt, y = Hwt)) +
+  geom_point(alpha = 0.5) + 
+  geom_vline(xintercept = 5.4, color = "red") +
+  labs(x = "Body Weight (kg)",
+       y = "Heart Weight (g)") +
+  annotate("text", x = 5.2, y = 17, label = "Andy", color = "red") +
+  theme_bw() +
+  theme(axis.title=element_text(size=14))
+```
+
+--
+
+We should **<u>not</u>** use this model to predict Andy's heart weight, since that would be .vocab[extrapolation].
+
+---
+
+## Recap
+
+--
+
+- Predicted the response given a value of the predictor variable
+
+--
+
+- Used intervals to quantify the uncertainty in the predicted values 
+    - Confidence interval for the mean response
+    - Prediction interval for individual response
+
+--
+
+- Defined .vocab[extrapolation] and why we should avoid it
