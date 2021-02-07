@@ -28,7 +28,7 @@ The primary goal of today's lab is to practice with some of the primary data wra
 
 Meet your team!
 
-See [STA 210 Teams](https://prodduke-my.sharepoint.com/:x:/g/personal/mt324_duke_edu/ESO2OyIJnhlChxyH402fWN4BVyUqhhC463CDiEGv7uVuCQ?e=XXYBKW) to see your team assignment. This will be your team for labs and the final project.
+See STA 210 teams to see your team assignment. This will be your team for labs and the final project.
 
 Before you get started on the lab assignment, we will take a few minutes to help you develop a plan for working as a team.
 
