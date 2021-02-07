@@ -1,6 +1,6 @@
 ---
 title: "Simple Linear Regression"
-subtitle: "Partioning variability"
+subtitle: "Partitioning variability"
 author: "Prof. Maria Tackett"
 output:
   xaringan::moon_reader:

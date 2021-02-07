@@ -1,5 +1,5 @@
 ---
-title: "Week 04: Feb 08 - 12"
+title: 'Week 04: Feb 08 - 12'
 weight: 4
 ---
 
@@ -9,4 +9,38 @@ font-size: 18px;
 }
 
 </style>
+
+## Lectures
+
+|           | Slides                   | Videos | Application Exercises (AE) |
+|-----------|--------------------------|--------|--------|
+| Tuesday  | [SLR: Conditions](https://sta210-sp21.netlify.app/slides/06-slr-conditions.html) | [SLR: Conditions](https://warpwire.duke.edu/w/VykFAA/) | AE 06 |
+|   | [SLR: Prediction](https://sta210-sp21.netlify.app/slides/06-slr-prediction.html) | [SLR: Prediction](https://warpwire.duke.edu/w/VykFAA/) | |
+| Thursday   | [SLR: Partitioning variability](https://sta210-sp21.netlify.app/slides/07-partition-var.html) | [SLR: Partitioning variability](https://warpwire.duke.edu/w/1ywFAA/) | AE 07 |
+
+
+
+## Readings
+
+|            | 
+|------------|
+| [IMS Section 8.2: Checking model conditions](https://openintro-ims.netlify.app/inference-reg.html#tech-cond-linmod)  |
+| [IMS Section 3.2.5: Describing the strength of a fit](https://openintro-ims.netlify.app/intro-linear-models.html#r-squared)  |
+
+
+
+
+## Assignments
+
+|                        |   |
+|------------------------|---|
+| [Lab 03](https://sta210-sp21.netlify.app/labs/lab-03-alumni.html) | **due Sun, Feb 14 at 11:59p EST**|
+| [HW 02](https://sta210-sp21.netlify.app/hw/hw-02.html) | **due Wed, Feb 17 at 11:59p EST** |
+
+
+
+
+
+
+
 
