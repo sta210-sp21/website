@@ -1,0 +1,505 @@
+---
+title: "Simple Linear Regression"
+subtitle: "Partioning variability"
+author: "Prof. Maria Tackett"
+output:
+  xaringan::moon_reader:
+    mathjax: "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML"
+    css: "sta210-slides.css"
+    logo: img/sta199-sticker-icon.png
+    lib_dir: libs/font-awesome
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      slideNumberFormat: "%current%" 
+      ratio: "16:9"
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r child = "setup.Rmd"}
+```
+
+class: middle, center
+
+## [Click here for PDF of slides](06-slr-partition-var.pdf)
+
+---
+
+## Topics 
+
+--
+
+- Use analysis of variance to partition variability in the response variable 
+
+--
+
+- Define and calculate $R^2$
+
+--
+
+- Use ANOVA to test the hypothesis
+
+$$H_0: \beta_1 = 0 \text{ vs }H_a: \beta_1 \neq 0$$
+
+--
+
+
+```{r packages}
+library(tidyverse)
+library(broom)
+library(knitr)
+library(kableExtra)
+library(patchwork)
+library(MASS)
+```
+
+---
+
+## Cats data
+
+The data set contains the **heart weight** (.term[Hwt]) and **body weight** (.term[Bwt]) for 144 domestic cats.
+
+```{r echo = F}
+ggplot(data = cats, aes(x = Bwt, y = Hwt)) +
+  geom_point(alpha = 0.7) + 
+  geom_smooth(method = "lm", color = "red", se = FALSE) +
+  labs(x = "Body Weight (kg)",
+       y = "Heart Weight (g)") +
+  theme_bw() +
+  theme(axis.title=element_text(size=14))
+```
+
+---
+
+## Distribution of response
+
+```{r fig.height = 3}
+ggplot(data = cats, aes(x = Hwt)) +
+  geom_histogram(fill = "steelblue", color = "grey") +
+  labs(x = "Heart Weight (g)") + 
+  theme_bw() + 
+  theme(axis.title=element_text(size=14))
+```
+
+
+```{r}
+cats %>%
+  summarise(Mean = mean(Hwt), `Std. Dev.` = sd(Hwt), 
+           `IQR` = IQR(Hwt)) %>%
+  kable(format = "html", digits = 3)
+```
+
+---
+
+## The model
+
+```{r}
+bwt_hwt_model <- lm(Hwt ~ Bwt, data = cats)
+```
+
+.eq[
+$$\hat{\text{Hwt}} = -0.357 + 4.034 \times \text{Bwt}$$
+]
+
+
+```{r echo = F}
+ggplot(data = cats, aes(x = Bwt, y = Hwt)) +
+  geom_point(alpha = 0.7) + 
+  geom_smooth(method = "lm", color = "red", se = FALSE) +
+  labs(x = "Body Weight (kg)",
+       y = "Heart Weight (g)") +
+  theme_bw() +
+  theme(axis.title=element_text(size=14))
+```
+---
+
+class: middle, center
+
+.alert[
+How much of the variation in cats' heart weights can be explained by knowing their body weights?
+]
+
+---
+
+## ANOVA
+
+We will use .vocab[Analysis of Variance (ANOVA)] to partition the variation in the response variable $Y$.
+
+
+<br>
+
+```{r fig.align = "center", out.width = '300%'}
+include_graphics("img/07/model-anova.png")
+```
+
+---
+
+## Response variable, $Y$
+
+```{r out.width = "90%"}
+mean_y <- mean(cats$Hwt)
+
+ggplot(data = cats, aes(x = Bwt, y = Hwt)) +
+  geom_point(alpha = 0.5) + 
+  geom_hline(yintercept = mean_y, color = "blue") +
+  labs(x = "Body Weight (kg)",
+       y = "Heart Weight (g)") +
+  theme_light() +
+  annotate("text", x = 4, y = 9.7, label = latex2exp::TeX("$\\bar{y}$"), color = "blue", size = 6) + 
+  theme(axis.title=element_text(size=14))
+```
+
+---
+
+## Total variation 
+
+```{r out.width = "90%"}
+mean_y <- mean(cats$Hwt)
+
+ggplot(data = cats, aes(x = Bwt, y = Hwt)) +
+  geom_point(alpha = 0.5) + 
+  geom_hline(yintercept = mean_y, color = "blue") +
+  geom_segment(aes(x=Bwt, xend=Bwt, y=Hwt, yend=mean_y), color = "black", size = 1) +
+  labs(x = "Body Weight (kg)",
+       y = "Heart Weight (g)") +
+  annotate("text", x = 4, y = 9.7, label = latex2exp::TeX("$\\bar{y}$"), color = "blue", size = 6) +
+  theme_light() +
+  theme(axis.title=element_text(size=14))
+```
+
+
+$$\large{SS_{Total} = \sum_{i=1}^n(y_i - \bar{y})^2 = (n-1)s_y^2}$$
+
+---
+
+## Explained variation (Model)
+
+```{r out.width = "90%"}
+ggplot(data = cats, aes(x = Bwt, y = Hwt)) +
+  geom_point(alpha = 0.4) + 
+  geom_smooth(method = "lm", se = FALSE, color = "red") +
+  geom_hline(yintercept = mean_y, color = "blue") +
+  geom_segment(aes(x=Bwt, xend=Bwt, y = mean_y, yend=predict(bwt_hwt_model)), color = "black", size = 1) +
+  labs(x = "Body Weight (kg)",
+       y = "Heart Weight (g)")  +
+  annotate("text", x = 4, y = 9.7, label = latex2exp::TeX("$\\bar{y}$"), color = "blue", size = 6) +
+  annotate("text", x = 4, y = 16, label = latex2exp::TeX("$\\hat{\\mu}_y$"), color = "red", size = 6) +
+  theme_light() +
+  theme(axis.title=element_text(size=14))
+```
+
+$$\large{SS_{Model} = \sum_{i = 1}^{n}(\hat{y}_i - \bar{y})^2}$$
+
+---
+
+## Unexplained variation (Residuals)
+
+```{r out.width = "90%"}
+ggplot(data = cats, aes(x = Bwt, y = Hwt)) +
+  geom_point(alpha = 0.5) + 
+  geom_smooth(method = "lm", se = FALSE, color = "red") +
+  geom_hline(yintercept = mean_y, color = "blue") +
+  geom_segment(aes(x=Bwt, xend=Bwt, y = Hwt, yend=predict(bwt_hwt_model)), color = "black") +
+  labs(x = "Body Weight (kg)",
+       y = "Heart Weight (g)") +
+  annotate("text", x = 4, y = 9.7, label = latex2exp::TeX("$\\bar{y}$"), color = "blue", size = 6) +
+annotate("text", x = 4, y = 16, label = latex2exp::TeX("$\\hat{\\mu}_y$"), color = "red", size = 6)   +
+  theme_light() +
+  theme(axis.title=element_text(size=14))
+```
+
+
+$$\large{SS_{Error} = \sum_{i = 1}^{n}(y_i - \hat{y}_i)^2}$$
+
+
+---
+
+class: middle 
+
+$$\sum_{i=1}^n(y_i - \bar{y})^2 = \sum_{i = 1}^{n}(\hat{y}_i - \bar{y})^2 + \sum_{i = 1}^{n}(y_i - \hat{y}_i)^2$$
+---
+
+class: middle 
+
+$$\mathbf{\color{blue}{\sum_{i=1}^n(y_i - \bar{y})^2}} = \sum_{i = 1}^{n}(\hat{y}_i - \bar{y})^2 + \sum_{i = 1}^{n}(y_i - \hat{y}_i)^2$$
+
+---
+
+class: middle 
+
+$$\sum_{i=1}^n(y_i - \bar{y})^2 = \mathbf{\color{blue}{\sum_{i = 1}^{n}(\hat{y}_i - \bar{y})^2}} + \sum_{i = 1}^{n}(y_i - \hat{y}_i)^2$$
+
+---
+
+class: middle 
+
+$$\sum_{i=1}^n(y_i - \bar{y})^2 = \sum_{i = 1}^{n}(\hat{y}_i - \bar{y})^2 + \mathbf{\color{blue}{\sum_{i = 1}^{n}(y_i - \hat{y}_i)^2}}$$
+---
+
+## $R^2$
+
+
+The .vocab[coefficient of determination], <font class = "vocab">R<sup>2</sup></font>, is the proportion of variation in the response, $Y$, that is explained by the regression model 
+
+<br> 
+
+--
+
+.eq[
+$$\large{R^2 = \frac{SS_{Model}}{SS_{Total}} = 1 - \frac{SS_{Error}}{SS_{Total}}}$$
+]
+
+---
+
+## $R^2$ for our model
+
+```{r eval = F}
+cats_anova <- anova(bwt_hwt_model) %>% 
+  tidy()
+
+ssm <- round(cats_anova$sumsq[1], 3)
+sse <- round(cats_anova$sumsq[2], 3)
+sst <- ssm + sse
+```
+
+.pull-left[
+.small-box-work[
+$$SS_{Model} = 548.092$$ 
+
+$$SS_{Error} = 299.533$$ 
+
+$$SS_{Total} = 847.625$$ 
+]
+]
+
+--
+
+.pull-right[
+.small-box-work[
+$$\begin{aligned}R^2 &= \frac{548.092}{847.625} \\[10pt]
+&= \mathbf{0.647}\end{aligned}$$
+]
+]
+
+--
+
+<br> 
+
+.vocab[About 64.7% of the variation in the heart weight of cats can be explained by variation in body weight.]
+
+---
+
+## ANOVA table
+
+```{r}
+cats_anova <- anova(bwt_hwt_model) %>%
+  tidy() %>%
+  mutate(term = if_else(term == "Bwt", "Model", term))
+
+ssm <- round(cats_anova$sumsq[1], 3)
+sse <- round(cats_anova$sumsq[2], 3)
+sst <- ssm + sse
+
+cats_anova <- cats_anova %>%
+  add_row(term = "Total", df = 143, sumsq = sst, meansq = NA, statistic = NA, p.value = NA)
+
+cats_anova <- cats_anova %>%
+  rename("Source" = term, 
+         "Df" = df,
+         "Sum Sq" = sumsq, 
+         "Mean Sq" = meansq, 
+         "F Stat" = statistic, 
+         "Pr(> F)" = p.value) 
+
+cats_anova %>%
+  kable(format = "html", digits = 3)
+```
+
+---
+
+## ANOVA table
+
+```{r}
+cats_anova %>%
+  kable(format = "html", digits = 3) %>%
+  column_spec(3, background = "#dce5b2")
+```
+
+--
+
+.vocab[Sum of squares]
+
+$SS_{Total} = 847.625 = 548.092 + 299.533$
+
+$SS_{Model} = 548.092$
+
+$SS_{Error} = 299.533$
+
+---
+
+## ANOVA Test
+
+```{r}
+cats_anova %>%
+  kable(format = "html", digits = 3) 
+```
+
+--
+
+<br>
+
+.eq[
+$$\large{\begin{align}&H_0: \beta_1 = 0 \\
+&H_a: \beta_1 \neq 0\\ \end{align}}$$
+]
+
+---
+
+## ANOVA Test
+
+```{r}
+cats_anova %>%
+  kable(format = "html", digits = 3) %>%
+  column_spec(2, background = "#dce5b2")
+```
+
+--
+
+.vocab[Degrees of freedom]
+
+$df_{Total} = 144 - 1 = 143$
+
+$df_{Model} = 1$
+
+$df_{Error} = 143 - 1 = 142$
+
+---
+
+## ANOVA Test
+
+```{r}
+cats_anova %>%
+  kable(format = "html", digits = 3) %>%
+  column_spec(4, background = "#dce5b2")
+```
+
+--
+
+.vocab[Mean squares]
+
+$MS_{Model} = \frac{548.092}{1} = 548.092$
+
+$MS_{Error} = \frac{299.533}{142} = 2.109$
+
+---
+
+## ANOVA Test
+
+```{r}
+cats_anova %>%
+  kable(format = "html", digits = 3) %>%
+  column_spec(5, background = "#dce5b2")
+```
+
+--
+
+.vocab[F test statistic]: ratio of explained to unexplained variability
+
+$F = \frac{MS_{Model}}{MS_{Error}}= \frac{548.092}{2.109} = 259.835$
+
+---
+
+## F distribution 
+
+```{r fig.height = 4}
+ggplot() +
+  stat_function(fun = "df", 
+                geom = "line", 
+                args = list(df1 = 10, df2 = 10), 
+                color = "steelblue2", lwd = 2, 
+                xlim = c(0, 6)) +
+  labs(x = "F", 
+       y = "density") + 
+  theme_classic()
+  
+```
+
+---
+
+## ANOVA test
+
+```{r}
+cats_anova %>%
+  kable(format = "html", digits = 3) %>%
+  column_spec(6, background = "#dce5b2")
+```
+
+--
+
+.vocab[P-value]: Probability of observing a test statistic at least as extreme as *F Stat* given the population slope $\beta_1$ is 0
+
+--
+
+The p-value is calculated using an $F$ distribution with 1 and $n-2$ degrees of freedom
+
+---
+
+## Calculating p-value
+
+```{r fig.height = 4}
+ggplot() +
+  stat_function(fun = "df", 
+                geom = "line", 
+                args = list(df1 = 10, df2 = 10), 
+                color = "steelblue2", lwd = 2, 
+                xlim = c(0, 6)) +
+  stat_function(fun = "df", 
+                geom = "area", 
+                args = list(df1 = 10, df2 = 10), fill = "red",
+                xlim = c(2.5, 6)) +
+  labs(x = "F", 
+       y = "density") + 
+  theme_classic()
+  
+```
+
+
+---
+
+## ANOVA 
+
+```{r}
+cats_anova %>%
+  kable(format = "html", digits = 3) %>%
+  column_spec(6, background = "#dce5b2")
+```
+
+The p-value is very small $(\approx 0)$, so we reject $H_0$. 
+
+--
+
+The data provide strong evidence that population slope, $\beta_1$, is different from 0. 
+
+--
+
+.vocab[The data provide sufficient evidence that there is a linear relationship between a cat's heart weight and body weight.]
+
+---
+
+## Recap
+
+--
+
+- Used analysis of variance to partition variability in the response variable 
+
+--
+
+- Defined and calculated $R^2$
+
+--
+
+- Used ANOVA to test the hypothesis 
+$$H_0: \beta_1 = 0 \text{ vs }H_a: \beta_1 \neq 0$$
+
