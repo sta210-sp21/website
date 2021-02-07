@@ -23,7 +23,7 @@ editor_options:
 
 class: middle, center
 
-## [Click here for PDF of slides](05-slr-prediction.pdf)
+## [Click here for PDF of slides](06-slr-prediction.pdf)
 
 ---
 

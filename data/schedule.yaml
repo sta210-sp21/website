@@ -40,12 +40,16 @@ lessons:
   
   - week: "Week 04"
     date: "Mon, Feb 08"
-    title: "Lab 03"
+    title: "Lab 03: Alumni jobs + salaries"
+    lab: "lab-03-alumni.html"
   - date: "Tue, Feb 09"
     title: "SLR: Conditions"
+    slides: "06-slr-conditions.html"
   - title: "SLR: Prediction"
+    slides: "06-slr-prediction.html"
   - date: "Thu, Feb 11"
     title: "SLR: Partitioning variability"
+    slides: "07-partition-var.html"
   - title: "HW 02 assigned"
     hw: "hw-02.html"
   

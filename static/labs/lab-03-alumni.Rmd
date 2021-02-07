@@ -1,5 +1,5 @@
 ---
-title: "Lab 03: Simple linear regression"
+title: "Lab 03: Alumni Jobs + Salaries"
 subtitle: "due Sun, Feb 14 at 11:59p EST"
 output: 
   tufte::tufte_html:

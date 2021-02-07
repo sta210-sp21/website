@@ -12,7 +12,7 @@
 class: center, middle, inverse, title-slide
 
 # Simple Linear Regression
-## Conditions
+## Prediction
 ### Prof. Maria Tackett
 
 ---
@@ -23,39 +23,54 @@ class: center, middle, inverse, title-slide
 
 class: middle, center
 
-## [Click here for PDF of slides](05-slr-conditions.pdf)
+## [Click here for PDF of slides](05-slr-prediction.pdf)
+
 ---
 
 ## Topics 
 
 --
 
-- List the conditions for simple linear regression
-  
+- Predict the response given a value of the predictor variable
+
 --
 
-- Use plots of the residuals to check the conditions 
+- Use intervals to quantify the uncertainty in the predicted values 
+   
+--
 
+- Define *extrapolation* and why we should avoid it
 
 
 
 
 ---
 
-## Movie ratings data 
+## Cats data
 
-The data set contains the "Tomatometer" score (.term[critics]) and audience score (.term[audience]) for 146 movies rated on rottentomatoes.com. 
+The data set contains the **heart weight** (.term[Hwt]) and **body weight** (.term[Bwt]) for 144 domestic cats.
 
-&lt;img src="06-conditions_files/figure-html/unnamed-chunk-2-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="06-slr-prediction_files/figure-html/unnamed-chunk-2-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Cats data
+
+We want to fit a model so we can use a cat's body weight to predict how much its heart weighs.
+
+
+&lt;img src="06-slr-prediction_files/figure-html/unnamed-chunk-3-1.png" style="display: block; margin: auto;" /&gt;
 
 
 ---
 
 ## The model
 
-`$$\color{red}{\hat{\text{audience}} = 32.316 + 0.519 \times \text{critics}}$$`
+.eq[
+`$$\hat{\text{Hwt}} = -0.357 + 4.034 \times \text{Bwt}$$`
+]
 
-
+&lt;br&gt;
 
 &lt;table&gt;
  &lt;thead&gt;
@@ -70,158 +85,219 @@ The data set contains the "Tomatometer" score (.term[critics]) and audience scor
 &lt;tbody&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; (Intercept) &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 32.316 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 2.343 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 13.795 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.357 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.692 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.515 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.607 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; critics &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.519 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.035 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 15.028 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Bwt &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4.034 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.250 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 16.119 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.000 &lt;/td&gt;
   &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 
+---
 
-&lt;img src="06-conditions_files/figure-html/unnamed-chunk-5-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+class: regular
+
+## Prediction
+
+We can use the regression model to
+
+--
+
+Estimate the .vocab[&lt;u&gt;mean&lt;/u&gt;] response when the predictor variable is equal to a value `\(x_0\)`
+
+&lt;br&gt; 
+
+--
+
+Predict the response for an .vocab[&lt;u&gt;individual&lt;/u&gt;] observation with a value of the predictor equal to `\(x_0\)`
 
 ---
-class: middle
 
-.eq[
-`$$Y|X \sim N(\beta_0 + \beta_1 X, \sigma_\epsilon^2)$$`
+## Calculating a predicted value
+
+.pull-left[
+My cat Mindy weighs about 3.18 kg (7 lbs). 
+
+Based on this model, about how much does her heart weigh?
 ]
 
-
-&lt;img src="06-conditions_files/figure-html/unnamed-chunk-6-1.png" style="display: block; margin: auto;" /&gt;
-
----
-
-## Model conditions
+.pull-right[
+&lt;img src="img/06/mindy.JPG" width="60%" height="70%" style="display: block; margin: auto;" /&gt;
+]
 
 --
 
-1. .vocab[Linearity: ]There is a linear relationship between the response and predictor variable.
-
---
-
-2. .vocab[Constant Variance: ]The variability of the errors is equal for all values of the predictor variable.
-
---
-
-3. .vocab[Normality: ]The errors follow a normal distribution.
-
---
-
-4. .vocab[Independence: ]The errors are independent from each other.
----
-
-class: middle, center
-
-.eq[
-`$$\Large{\text{residual}_i = e_i = y_i - \hat{y}_i}$$` 
+.alert[
+$$
+`\begin{align}
+\hat{\text{Hwt}} &amp;= -0.357 + 4.034 \times \color{purple}{\mathbf{3.18}} \\
+&amp;= \mathbf{12.471} \text{ g}
+\end{align}`
+$$
 ]
 
 ---
 
-## Residuals vs. fitted values
+## Uncertainty in predictions
 
+--
 
+.eq[
+**Confidence interval for the mean response**
+`$$\hat{y} \pm t_{n-2}^* \times \color{purple}{\mathbf{SE}_{\hat{\boldsymbol{\mu}}}}$$`
+]
 
-&lt;img src="06-conditions_files/figure-html/unnamed-chunk-8-1.png" style="display: block; margin: auto;" /&gt;
+--
+
+.eq[
+**Prediction interval for an individual observation**
+`$$\hat{y} \pm t_{n-2}^* \times \color{purple}{\mathbf{SE_{\hat{y}}}}$$`
+]
 
 ---
 
-## Checking linearity
+## Standard errors
 
 --
 
-&lt;img src="06-conditions_files/figure-html/unnamed-chunk-9-1.png" style="display: block; margin: auto;" /&gt;
+.eq[
+`$$SE_{\hat{\mu}} = \hat{\sigma}_\epsilon\sqrt{\frac{1}{n} + \frac{(x-\bar{x})^2}{\sum\limits_{i=1}^n(x_i - \bar{x})^2}}$$`
+]
 
 --
 
-✅ There is no distinguishable pattern or structure. The residuals are randomly scattered. 
+.eq[
+`$$SE_{\hat{y}} = \hat{\sigma}_\epsilon\sqrt{1 + \frac{1}{n} + \frac{(x-\bar{x})^2}{\sum\limits_{i=1}^n(x_i - \bar{x})^2}}$$`
+]
 
 ---
 
-## ❌ Violation: distinguishable pattern
+## Standard errors
 
-&lt;img src="06-conditions_files/figure-html/unnamed-chunk-10-1.png" style="display: block; margin: auto;" /&gt;
+.eq[
+`$$SE_{\hat{\mu}} = \hat{\sigma}_\epsilon\sqrt{\frac{1}{n} + \frac{(x-\bar{x})^2}{\sum\limits_{i=1}^n(x_i - \bar{x})^2}}$$`
+]
 
-
----
-
-## Checking constant variance
-
---
-
-&lt;img src="06-conditions_files/figure-html/unnamed-chunk-11-1.png" style="display: block; margin: auto;" /&gt;
-
---
-
-✅ The vertical spread of the residuals is relatively constant across the plot.
+.eq[
+`$$SE_{\hat{y}} = \hat{\sigma}_\epsilon\sqrt{\mathbf{\color{purple}{\Large{1}}} + \frac{1}{n} + \frac{(x-\bar{x})^2}{\sum\limits_{i=1}^n(x_i - \bar{x})^2}}$$`
+]
 
 ---
 
-## ❌ Violation: non-constant variance
+## Confidence interval
 
-&lt;img src="06-conditions_files/figure-html/unnamed-chunk-12-1.png" style="display: block; margin: auto;" /&gt;
+--
+
+The 95% .vocab[confidence interval] for the .vocab[*mean*] heart weight of cats that weigh 3.18 kg is
+
+--
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:right;"&gt; fit &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; lwr &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; upr &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 12.472 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 12.143 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 12.801 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;br&gt; 
+
+--
+
+.alert[
+We are 95% confident that mean heart weight for the subset of cats that weigh 3.18 kg is between 12.143 g and 12.801 g.
+]
+---
+
+## Prediction interval
+
+--
+
+The 95% .vocab[prediction interval] for an .vocab[*individual*] cat (Mindy) that weighs 3.18 kg is
+
+--
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:right;"&gt; fit &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; lwr &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; upr &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 12.472 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 9.582 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 15.362 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;br&gt; 
+
+--
+
+.alert[
+We can predict with 95% confidence that Mindy's heart weighs between 9.582 g and 15.362 g.
+]
 
 ---
 
-## Normal quantile plot
+## Comparing intervals
 
-&lt;img src="06-conditions_files/figure-html/unnamed-chunk-13-1.png" style="display: block; margin: auto;" /&gt;
 
----
 
-## Checking normality
-
---
-
-&lt;img src="06-conditions_files/figure-html/unnamed-chunk-14-1.png" style="display: block; margin: auto;" /&gt;
-
---
-
-✅ Points fall along a straight diagonal line on the normal quantile plot.
+&lt;img src="06-slr-prediction_files/figure-html/unnamed-chunk-9-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
-## Checking independence
+## 🛑 Caution! Extrapolation 
 
---
+We should **&lt;u&gt;not&lt;/u&gt;** use the model to predict for values of `\(X\)` far outside the range of values used to fit the model. 
 
-- We can often check the independence assumption based on the context of the data and how the observations were collected.
-
---
-
-- If the data were collected in a particular order, examine a scatterplot of the residuals versus order in which the data were collected. 
 &lt;br&gt;
 
---
+This is called .vocab[extrapolation]. 
+---
 
-✅ Based on available information, the error for one movie does not tell us anything about the error for another movie.
+## Predict Andy's heart weight?
+
+.pull-left[
+My cat Andy weighs about 5.44 kg (12 lbs).
+
+&lt;br&gt;
+
+Should we use this regression model to predict how much his heart weighs?
+]
+
+.pull-right[
+&lt;img src="img/06/andy.JPG" width="75%" height="85%" style="display: block; margin: auto;" /&gt;
+]
 
 ---
 
-## In practice 
+## Predict Andy's heart weight?
 
-As you check the model conditions, ask if any observed deviation from the model conditions are so great that
-
---
-
-1️⃣ a different model should be proposed. 
+&lt;img src="06-slr-prediction_files/figure-html/unnamed-chunk-11-1.png" width="90%" style="display: block; margin: auto;" /&gt;
 
 --
 
-2️⃣ conclusions drawn from the model should be used with caution.
-
---
-
-✅ If not, the conditions are sufficiently met and we can proceed with the current model.
+We should **&lt;u&gt;not&lt;/u&gt;** use this model to predict Andy's heart weight, since that would be .vocab[extrapolation].
 
 ---
 
@@ -229,11 +305,17 @@ As you check the model conditions, ask if any observed deviation from the model 
 
 --
 
-- Used plots of the residuals to check conditions for simple linear regression: 
-  - .vocab[Linearity]
-  - .vocab[Constant Variance]
-  - .vocab[Normality]
-  - .vocab[Independence]
+- Predicted the response given a value of the predictor variable
+
+--
+
+- Used intervals to quantify the uncertainty in the predicted values 
+    - Confidence interval for the mean response
+    - Prediction interval for individual response
+
+--
+
+- Defined .vocab[extrapolation] and why we should avoid it
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
