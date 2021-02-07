@@ -1,0 +1,383 @@
+---
+title: "Simple Linear Regression"
+subtitle: "Conditions"
+author: "Prof. Maria Tackett"
+output:
+  xaringan::moon_reader:
+    mathjax: "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML"
+    css: "sta210-slides.css"
+    logo: img/sta199-sticker-icon.png
+    lib_dir: libs/font-awesome
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      slideNumberFormat: "%current%" 
+      ratio: "16:9"
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r child = "setup.Rmd"}
+```
+
+class: middle, center
+
+## [Click here for PDF of slides](05-slr-conditions.pdf)
+---
+
+## Topics 
+
+--
+
+- List the conditions for simple linear regression
+  
+--
+
+- Use plots of the residuals to check the conditions 
+
+```{r packages, echo = F}
+library(tidyverse)
+library(broom)
+library(knitr)
+library(kableExtra)
+library(patchwork)
+library(fivethirtyeight) #fandango dataset
+```
+
+```{r data}
+movie_scores <- fandango %>%
+  rename(critics = rottentomatoes, 
+         audience = rottentomatoes_user)
+```
+
+---
+
+## Movie ratings data 
+
+The data set contains the "Tomatometer" score (.term[critics]) and audience score (.term[audience]) for 146 movies rated on rottentomatoes.com. 
+
+```{r}
+ggplot(data = movie_scores, mapping = aes(x = critics, y = audience)) +
+  geom_point(alpha = 0.5) + 
+  labs(x = "Critics Score" , 
+       y = "Audience Score") +
+  theme_bw() +
+  theme(axis.title=element_text(size=14))
+```
+
+
+---
+
+## The model
+
+$$\color{red}{\hat{\text{audience}} = 32.316 + 0.519 \times \text{critics}}$$
+
+```{r}
+model <- lm(audience ~ critics, data = movie_scores)
+```
+
+```{r}
+model %>%
+  tidy() %>%
+  kable(format = "html", digits = 3)
+```
+
+
+```{r, out.width = "80%"}
+ggplot(data = movie_scores, mapping = aes(x = critics, y = audience)) +
+  geom_point(alpha = 0.5) + 
+  geom_smooth(method = "lm", color = "red", se = FALSE) +
+  labs(x = "Critics Score" , 
+       y = "Audience Score") +
+  theme_bw() +
+  theme(axis.title=element_text(size=14))
+```
+
+---
+class: middle
+
+.eq[
+$$Y|X \sim N(\beta_0 + \beta_1 X, \sigma_\epsilon^2)$$
+]
+
+
+```{r fig.height = 3.5}
+##   Code modified from https://stackoverflow.com/questions/31794876/ggplot2-how-to-curve-small-gaussian-densities-on-a-regression-line?rq=1
+
+## Modified based on BYSH: https://bookdown.org/roback/bookdown-bysh/ch-MLRreview.html#ordinary-least-squares-ols-assumptions
+
+set.seed(0)
+dat <- data.frame(x=(x=runif(10000, 0, 50)),
+                  y=rnorm(10000, 10*x, 100))
+
+## breaks: where you want to compute densities
+breaks <- seq(0, max(dat$x), len=5)
+dat$section <- cut(dat$x, breaks)
+
+## Get the residuals
+dat$res <- residuals(lm(y ~ x, data=dat))
+
+## Compute densities for each section, and flip the axes, and add means of sections
+## Note: the densities need to be scaled in relation to the section size (2000 here)
+dens <- do.call(rbind, lapply(split(dat, dat$section), function(x) {
+    d <- density(x$res, n=50)
+    res <- data.frame(x=max(x$x)- d$y*2000, y=d$x+mean(x$y))
+    res <- res[order(res$y), ]
+    ## Get some data for normal lines as well
+    xs <- seq(min(x$res), max(x$res), len=50)
+    res <- rbind(res, data.frame(y=xs + mean(x$y),
+                                 x=max(x$x) - 2000*dnorm(xs, 0, sd(x$res))))
+    res$type <- rep(c("empirical", "normal"), each=50)
+    res
+}))
+dens$section <- rep(levels(dat$section), each=100)
+
+dens <- dens %>%
+  filter(type == "normal")
+
+## Plot both empirical and theoretical
+ggplot(dat, aes(x, y)) +
+  geom_point(alpha = 0.05, size = 0.2) +
+  geom_smooth(method="lm", fill=NA, se = FALSE, color = "steelblue") +
+  geom_path(data=dens, aes(x, y, group=interaction(section)), color = "red", lwd=1.1) +
+geom_vline(xintercept=breaks, lty=2, color = "grey") +
+  labs(x = "x", 
+       y = "y") +
+  theme_classic() + 
+  annotate("text", x = 10, y = 600, label = latex2exp::TeX("$\\mu_{Y|X} = \\beta_0 + \\beta_1X$"), color = "steelblue", size = 8) +
+  annotate("text", x = 20, y = 400, label = latex2exp::TeX("$\\sigma^2_\\epsilon$"), color = "red", size = 8) +
+  theme(axis.title = element_text(size = 16),
+        axis.ticks = element_blank(), 
+        axis.text.x = element_blank(), 
+       axis.text.y = element_blank()
+      )
+  
+```
+
+---
+
+## Model conditions
+
+--
+
+1. .vocab[Linearity: ]There is a linear relationship between the response and predictor variable.
+
+--
+
+2. .vocab[Constant Variance: ]The variability of the errors is equal for all values of the predictor variable.
+
+--
+
+3. .vocab[Normality: ]The errors follow a normal distribution.
+
+--
+
+4. .vocab[Independence: ]The errors are independent from each other.
+---
+
+class: middle, center
+
+.eq[
+$$\Large{\text{residual}_i = e_i = y_i - \hat{y}_i}$$ 
+]
+
+---
+
+## Residuals vs. fitted values
+
+```{r}
+movie_aug <- augment(model)
+```
+
+```{r, fig.height = 3.5}
+ggplot(data = movie_aug, aes(x = .fitted, y = .resid)) + 
+  geom_point(alpha = 0.7) + 
+  geom_hline(yintercept = 0, color = "red") +
+  labs(x = "Fitted values", 
+       y = "Residuals") +
+  theme_bw() +
+  theme(axis.title=element_text(size=14))
+```
+
+---
+
+## Checking linearity
+
+--
+
+```{r, fig.height = 3}
+ggplot(data = movie_aug, aes(x = .fitted, y = .resid)) + 
+  geom_point(alpha = 0.7) + 
+  geom_hline(yintercept = 0, color = "red") +
+  labs(x = "Fitted value", 
+       y = "Residual") +
+  theme_bw() +
+  theme(axis.title=element_text(size=14))
+```
+
+--
+
+`r emo::ji("white_check_mark")` There is no distinguishable pattern or structure. The residuals are randomly scattered. 
+
+---
+
+## `r emo::ji("x")` Violation: distinguishable pattern
+
+```{r fig.height = 4}
+set.seed(1234)
+n <- 250
+x.fan <- seq(0,3.99,4/n)
+y.fan <- c(rnorm(n/8,3,1),rnorm(n/8,3.5,2),rnorm(n/8,4,2.5),rnorm(n/8,4.5,3),rnorm(n/4,5,4),rnorm((n/4)+2,6,5))
+
+x.curve <- c(runif(n-2, 0, 4), 2, 2.1)
+y.curve <- -2*x.curve^3 + rnorm(n, sd=9)
+
+df <- tibble(x.fan, y.fan, x.curve, y.curve)
+
+lm.fan <- lm(y.fan ~ x.fan, data = df)
+fan.aug <- augment(lm.fan)
+
+lm.curve <- lm(y.curve ~ x.curve, data = df)
+curve.aug <- augment(lm.curve)
+
+ggplot(data = curve.aug, aes(x = .fitted, y = .resid)) +
+  geom_point(alpha = 0.9) +
+  geom_hline(yintercept = 0, color = "red") +
+  labs(x = "Fitted value", 
+       y = "Residual") +
+  theme(axis.title=element_text(size=14))
+```
+
+
+---
+
+## Checking constant variance
+
+--
+
+```{r, fig.height = 3}
+ggplot(data = movie_aug, aes(x = .fitted, y = .resid)) + 
+  geom_point(alpha = 0.7) + 
+  geom_hline(yintercept = 0, color = "red") +
+  labs(x = "Fitted value", 
+       y = "Residual") +
+  theme_bw() +
+  theme(axis.title=element_text(size=14))
+```
+
+--
+
+`r emo::ji("white_check_mark")` The vertical spread of the residuals is relatively constant across the plot.
+
+---
+
+## `r emo::ji("x")` Violation: non-constant variance
+
+```{r fig.height = 4}
+ggplot(data = fan.aug, aes(x = .fitted, y = .resid)) +
+  geom_point(alpha= 0.9) +
+  geom_hline(yintercept = 0, color = "red") +
+  labs(x = "Fitted value", 
+       y = "Residual") +
+  theme(axis.title=element_text(size=14))
+```
+
+---
+
+## Normal quantile plot
+
+```{r, fig.height = 4}
+set.seed(1234)
+norm_data <- tibble(x = rnorm(1000,0,1))
+
+p1 <- ggplot(norm_data, aes(x = x)) +
+  geom_histogram() +
+  labs(title = "Histogram") +
+  theme(axis.title=element_text(size=14))
+
+p2 <- ggplot(norm_data, aes(sample = x)) +
+  stat_qq() + 
+  stat_qq_line() +
+  labs(title = "Normal Quantile Plot", 
+       x = "Theoretical quantile", 
+       y = "Observed quantile") +
+  theme(axis.title=element_text(size=14))
+
+p1 + p2
+```
+
+---
+
+## Checking normality
+
+--
+
+```{r, fig.height = 3}
+resid_hist <- ggplot(data = movie_aug, aes(x = .resid)) + 
+  geom_histogram() + 
+  labs(x = "Residual value") +
+  theme_bw() +
+  theme(axis.title=element_text(size=14))
+
+resid_qq <- ggplot(data = movie_aug, aes(sample = .resid)) + 
+  stat_qq() + 
+  stat_qq_line() +
+  labs(x = "Theoretical quantile", 
+       y= "Observed quantile") +
+  theme_bw() +
+  theme(axis.title=element_text(size=14))
+
+resid_hist + resid_qq
+```
+
+--
+
+`r emo::ji("white_check_mark")` Points fall along a straight diagonal line on the normal quantile plot.
+
+---
+
+## Checking independence
+
+--
+
+- We can often check the independence assumption based on the context of the data and how the observations were collected.
+
+--
+
+- If the data were collected in a particular order, examine a scatterplot of the residuals versus order in which the data were collected. 
+<br>
+
+--
+
+`r emo::ji("white_check_mark")` Based on available information, the error for one movie does not tell us anything about the error for another movie.
+
+---
+
+## In practice 
+
+As you check the model conditions, ask if any observed deviation from the model conditions are so great that
+
+--
+
+`r emo::ji("one")` a different model should be proposed. 
+
+--
+
+`r emo::ji("two")` conclusions drawn from the model should be used with caution.
+
+--
+
+`r emo::ji("white_check_mark")` If not, the conditions are sufficiently met and we can proceed with the current model.
+
+---
+
+## Recap
+
+--
+
+- Used plots of the residuals to check conditions for simple linear regression: 
+  - .vocab[Linearity]
+  - .vocab[Constant Variance]
+  - .vocab[Normality]
+  - .vocab[Independence]
