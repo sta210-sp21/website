@@ -1,5 +1,5 @@
 ---
-title: "Lab 03: Alumni Jobs + Salaries"
+title: "Lab 03: Alumni jobs"
 subtitle: "due Sun, Feb 14 at 11:59p EST"
 output: 
   tufte::tufte_html:
@@ -32,7 +32,7 @@ By the end of the lab you will...
 
 # Meet your team!
 
-See [STA 210 teams document](https://prodduke-my.sharepoint.com/:x:/g/personal/mt324_duke_edu/EWg7OIgezXZDp0JKm6bczCMBlgrGCunFKz12Ru0Zoa0IeA?e=g0DEDw) to see your team assignment. This will be your team for labs and the final project.
+See the [STA 210 teams document](https://prodduke-my.sharepoint.com/:x:/g/personal/mt324_duke_edu/EWg7OIgezXZDp0JKm6bczCMBlgrGCunFKz12Ru0Zoa0IeA?e=g0DEDw) to see your team assignment. This will be your team for labs and the final project.
 
 Before you get started on the lab assignment, your TA will walk you through 
 
