@@ -164,6 +164,8 @@ Is there a relationship between someone's early career salary and whether they p
 <b>Team Member 1</b>: Type the team's responses to exercises 1 - 4.
 :::
 
+**Some observations have missing values for `make_world_better_percent`. Before you get started, filter the `alumni` data frame so you only have observations that have data for both `make_world_better_percent` and `early_career_pay`.**
+
 1.  Plot the distribution of the response variable and calculate the appropriate summary statistics. Describe the distribution including the shape, center, spread, and any outliers.
 
 2.  Plot the distribution of explanatory variable and calculate the appropriate summary statistics. Describe the distribution including the shape, center, spread, and any outliers.
@@ -219,13 +221,13 @@ See [Section 13.4 Mutating joins](https://r4ds.had.co.nz/relational-data.html#mu
 
 1.  Fit a model for the relationship between `early_career_pay` and `make_world_better_percent` for **Private** institutions. Use the `kable` function to neatly display the model output with 3 digits and confidence intervals for the slope and intercept.
 
-    -   Interpret the interval in the context of the data.
+    -   Interpret the interval for the slope in the context of the data.
 
-2.  Fit a model for the relationship between `early_career_pay` and `make_world_better_percent` for **Public** institutions. Use the `kable` function to neatly display the model output with 3 digits and confidence intervals for the slope and intercept.
+1.  Fit a model for the relationship between `early_career_pay` and `make_world_better_percent` for **Public** institutions. Use the `kable` function to neatly display the model output with 3 digits and confidence intervals for the slope and intercept.
 
-    -   Interpret the interval in the context of the data.
+    -   Interpret the interval for the slope in the context of the data.
 
-3.  Based on the previous exercises, is there evidence that does the relationship between `early_career_pay` and `make_world_better_percent` differs significantly by institution type? Briefly explain your reasoning.
+1.  Based on the previous exercises, is there evidence that does the relationship between `early_career_pay` and `make_world_better_percent` differs significantly by institution type? Briefly explain your reasoning.
 
 <div class = "commit">
 
