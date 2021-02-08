@@ -18,28 +18,28 @@ knitr::opts_chunk$set(echo = TRUE,
                       message=FALSE)
 ```
 
-The primary goal of today's lab is to practice with some of the primary data wrangling, data visualization, and modeling functions we will use for regression analysis. It is also another opportunity to continue practicing using RStudio and GitHub before you start collaborating with others.
+In today's lab, you'll use simple linear regression to analyze the relationship between the median early career salary and percent of alumni who perceive their job as making the world a better place for colleges and universities in the United States. You will also start working with your lab teams and be introduced to using GitHub for collaboration. 
 
-# Learning objectives
+# Learning goals
 
--   Fitting a simple linear regression model using the `lm` function
--   Interpreting the slope and intercept
--   Using statistical inference to draw conclusions about the slope
+By the end of the lab you will...
 
-Meet your team!
+- Be able to fit a simple linear regression model using R. 
+- Be able to interpret the slope and intercept for the model. 
+- Be able to use statistical inference to draw conclusions about the slope 
+- Gain experience using GitHub for collaboration. 
 
-See STA 210 teams to see your team assignment. This will be your team for labs and the final project.
 
-Before you get started on the lab assignment, we will take a few minutes to help you develop a plan for working as a team.
+# Meet your team!
 
-`r emo::ji("white_check_mark")` Come up with a team name. I encourage you to be creative! Your TA will get your team name by the end of lab.
+See [STA 210 teams document](https://prodduke-my.sharepoint.com/:x:/g/personal/mt324_duke_edu/EWg7OIgezXZDp0JKm6bczCMBlgrGCunFKz12Ru0Zoa0IeA?e=g0DEDw) to see your team assignment. This will be your team for labs and the final project.
 
-`r emo::ji("white_check_mark")` Identify something everyone on the team has in common that's not necessarily in common with everyone else in the class.
+Before you get started on the lab assignment, your TA will walk you through 
 
-`r emo::ji("white_check_mark")` Fill out the team agreement. This will help you figure out a plan for working together during labs and outside of lab times. You can find the team agreement in the GitHub repo **team-agreement-[github_team_name]**.
+- An icebreaker activity to get to know your teammates
+- The workflow when using GitHub as a team. 
 
--   Have **one person** from the team clone the repo and start a new RStudio project. This person will type the team's responses as you discuss the sections of the agreement. Share your screen, if possible, so the rest of the team can see the updates. No one else in the team should type at this point but should be contributing to the discussion.
--   Be sure to push the completed agreement to GitHub. Each team member can refer to the document in this repo or download the PDF of the agreement for future reference.
+By the end of the lab session, you should come up with a new team name. You can't use the same team name as another team, so be creative! Your TA will come around to record your team name by the end of lab.
 
 # Getting Started
 
@@ -61,7 +61,7 @@ The following exercises must be done in order. **Only one person should type in 
 
 **Team Member 1: Change the author to your team name and include each team member's name in the `author` field of the YAML in the following format. `Team Name: Member 1, Member 2, Member 3, Member 4`.**
 
-# Packages
+## Packages
 
 We will use the following packages in today's lab.
 
@@ -69,6 +69,7 @@ We will use the following packages in today's lab.
 library(tidyverse)
 library(knitr)
 library(broom)
+# add additional packages as needed
 ```
 
 # Data: Recent college graduates
@@ -232,7 +233,7 @@ See [Section 13.4 Mutating joins](https://r4ds.had.co.nz/relational-data.html#mu
 
 <b>All other team members</b>: <b>Pull</b> to get the updated documents from GitHub. Click on the .Rmd file, and you should see the team's completed lab! </b>
 
-# Wrapping up
+## Wrapping up
 
 Go back through your write up to make sure you followed the coding style guidelines we discussed in class (e.g. no long lines of code)
 
