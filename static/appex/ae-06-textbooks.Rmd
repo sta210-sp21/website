@@ -34,7 +34,7 @@ You may have a series of plots you want to share as part of your analysis (e.g. 
 
 ```{r}
 # if you need to install the package
-#install.packages("patchwork) 
+#install.packages("patchwork") 
 library(tidyverse)
 library(patchwork)
 ```
