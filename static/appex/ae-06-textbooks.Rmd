@@ -1,0 +1,86 @@
+---
+title: "AE 06: Price of Textbooks"
+subtitle: "SLR: Conditions + Prediction"
+date: "`r Sys.Date()`"
+output: 
+  html_document: 
+    fig_height: 3
+    fig_width: 6
+    theme: readable
+---
+
+```{r include = F}
+knitr::opts_chunk$set(warning = F, 
+                      message = F)
+```
+
+## Check in 
+
+## Class announcements
+
+- See this week's schedule: [Week 04](https://sta210-sp21.netlify.app/schedule/week-04/)
+  - [Lab 03](https://sta210-sp21.netlify.app/labs/lab-02-durham-trails.html) due Sun, Feb 14 at 11:59p
+  - [HW 01](https://sta210-sp21.netlify.app/hw/hw-01.html) due Wed Feb 10 at 11:5p EST. 
+
+## Lab 01 returned
+
+- Solutions available under the Resources tab in Sakai. 
+
+## Questions about Lab 03 or HW 01?
+
+## Arranging plots using patchwork
+
+You may have a series of plots you want to share as part of your analysis (e.g. plots in exploratory data analysis, plots to check model conditions), but you don't want the reader to need to scroll through pages of plots. The [patchwork package in R](https://patchwork.data-imaginist.com/) makes it easy to combine multiple plots and neatly organize them in a grid. 
+
+```{r}
+# if you need to install the package
+#install.packages("patchwork) 
+library(tidyverse)
+library(patchwork)
+```
+
+```{r}
+mtcars <- mtcars %>%
+  mutate(am = factor(am))
+```
+
+```{r}
+p1 <- ggplot(data = mtcars, aes(x = mpg)) +
+  geom_histogram(fill = "steelblue") + 
+  labs(x = "Miles per gallon", 
+       title = "Distribution of car mileage")
+
+p2 <- ggplot(data = mtcars, aes(x = am)) +
+  geom_bar(fill = "steelblue") + 
+  labs(x = "Transmission type", 
+       title = "Car transmissions", 
+       subtitle = "0: automatic, 1: manual")
+
+p3 <- ggplot(data = mtcars, aes(x = am, y = mpg)) + 
+  geom_boxplot(fill = "steelblue") + 
+  labs(x = "Transmission type", 
+       y = "Miles per gallon", 
+       title = "Mileage vs. Transmission")
+```
+
+
+```{r}
+p1 + p2
+```
+
+```{r}
+p1 / p2
+```
+
+
+```{r}
+p3 + (p1 / p2)
+```
+
+## Questions from videos about conditions or prediction
+
+##  AE 06: Price of textbooks
+
+Clone the **ae-06** repo and open a new project in RStudio. Be sure to push your work periodically as you complete the AE.
+
+

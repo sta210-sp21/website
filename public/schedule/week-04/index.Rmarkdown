@@ -14,10 +14,9 @@ font-size: 18px;
 
 |           | Slides                   | Videos | Application Exercises (AE) |
 |-----------|--------------------------|--------|--------|
-| Tuesday  | [SLR: Conditions](https://sta210-sp21.netlify.app/slides/06-slr-conditions.html) | [SLR: Conditions](https://warpwire.duke.edu/w/WTYFAA/) | AE 06 |
+| Tuesday  | [SLR: Conditions](https://sta210-sp21.netlify.app/slides/06-slr-conditions.html) | [SLR: Conditions](https://warpwire.duke.edu/w/WTYFAA/) | [AE 06: Price of textbooks](https://sta210-sp21.netlify.app/appex/ae-06-textbooks.html) |
 |   | [SLR: Prediction](https://sta210-sp21.netlify.app/slides/06-slr-prediction.html) | [SLR: Prediction](https://warpwire.duke.edu/w/XzYFAA/) | |
 | Thursday   | [SLR: Partitioning variability](https://sta210-sp21.netlify.app/slides/07-partition-var.html) | [SLR: Partitioning variability](https://warpwire.duke.edu/w/bTYFAA/) | AE 07 |
-
 
 
 ## Readings
