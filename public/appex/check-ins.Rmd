@@ -160,3 +160,11 @@ Be able to fly
 
 ]
 ]
+
+---
+
+<!--https://me.me/i/on-a-scale-of-cat-how-are-you-feeling-today-b4227c3b307742b2bac06579ecc1a253-->
+
+```{r echo = F}
+knitr::include_graphics("img/cat-checkin.png")
+```
