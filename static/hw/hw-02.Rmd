@@ -112,7 +112,7 @@ Are high energy songs more positive? To answer this question, we'll analyze data
 
     - Obtain the predicted value and appropriate 90% interval for the mean valence of the subset of songs with energy of 0.8. Interpret the interval in the context of the data.
 
-    - Obtain the predicted value and appropriate 90% interval for the valence of the song "Put Your Records On" by Corinne Bailey Rae. Interpret the interval in the contextt of the data.
+    - Obtain the predicted value and appropriate 90% interval for the valence of the song "Put Your Records On" by Corinne Bailey Rae, which has an energy of 0.55. Interpret the interval in the contextt of the data.
 
 
 ## Part 2: Communicating results 
