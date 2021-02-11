@@ -20,7 +20,7 @@ knitr::opts_chunk$set(warning = F,
 
 - See this week's schedule: [Week 04](https://sta210-sp21.netlify.app/schedule/week-04/)
   - [Lab 03](https://sta210-sp21.netlify.app/labs/lab-02-durham-trails.html) due Sun, Feb 14 at 11:59p
-  - [HW 02](https://sta210-sp21.netlify.app/hw/hw-01.html) due Wed Feb 17 at 11:59p. Repos available after class
+  - [HW 02](https://sta210-sp21.netlify.app/hw/hw-02.html) due Wed Feb 17 at 11:59p. Repos available after class
 
 ## Normal QQ plots
 
@@ -52,8 +52,6 @@ left_qq <- ggplot(data = left_data, aes(sample = x)) +
 (norm_hist + norm_qq) / (right_hist + right_qq) / (left_hist + left_qq)
 ```
 
-
-    
 ## Questions from video
 
 ##  AE 07: Price of textbooks
