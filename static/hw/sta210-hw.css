@@ -7,7 +7,7 @@
 /* Tufte CSS styles */
 
 html {
-	font-size: 17px;
+	font-size: 20px;
 }
 
 body {
@@ -16,11 +16,11 @@ body {
 	background-color: #fefefe;
 	color: #222;
 	counter-reset: li;
-	font-size: 17px;
+	font-size: 20px;
 }
 
 p {
-  font-size: 17px;
+  font-size: 20px;
 }
 
 h1.title {
@@ -93,7 +93,7 @@ strong {
 
 code {
 	font-family: 'Source Code Pro', Consolas, "Liberation Mono", Menlo, Courier, monospace;
-	font-size: 17px;
+	font-size: 19px;
 	line-height: 1.6;
 }
 
@@ -166,7 +166,7 @@ ol ol {
 }
 
 td {
-  font-size: 15px;
+  font-size: 20px;
 }
 
 /*Style for the Footer*/
@@ -176,13 +176,13 @@ td {
   bottom: 0;
   width: 100%;
   color: #7C878E;
-  font-size: 14px;
+  font-size: 17px;
 }
 
 /*Commit message*/
 
 div .commit {
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 400;
   color: #aa008e;
   text-decoration: italic;

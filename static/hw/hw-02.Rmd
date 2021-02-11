@@ -1,6 +1,6 @@
 ---
-title: "HW 02"
-subtitle: ""
+title: "HW 02: Popular Songs on Spotify"
+subtitle: "due Wed, Feb 17 at 11:59p EST"
 author: ""
 date: ""
 output: 
@@ -16,7 +16,140 @@ knitr::opts_chunk$set(echo = TRUE,
                       message=FALSE)
 ```
 
-Instructions will be posted when the homework is assigned. 
+# Getting Started
 
-<!-- Add survey about what you still have qustions about - R Markdown, inference, 
-syllabus-->
+You can find the **hw-02** repo in the [sta210-sp21 organization](https://github.com/sta210-sp2) on GitHub. This repo contains the starter documents and data set needed to complete the lab. 
+
+See the [Lab 01 instructions](https://sta210-sp21.netlify.app/labs/lab-01-ikea.html#getting-started) for more details about cloning the repo, starting a new RStudio project, and configuring git.
+
+## Tips
+
+Here are some tips as you complete HW 01:
+
+- Periodically knit your document and commit changes (the more often the better, for example, once per each new task). You should have at least 3 commit messages by the end of the assignment.
+- Push all your changes back to your GitHub repo. The Git pane in RStudio should be empty after you push. You can also check your assignment repo on github.com to make sure it has updated.
+- Once you have completed your work, you will submit your assignment in Gradescope. You are welcome to resubmit multiple times until the assignment deadline. We will grade the most recent version of the .pdf file in Gradescope.
+
+## Packages 
+
+We will use the following packages in this assignment: 
+
+```{r}
+library(tidyverse)
+library(broom)
+library(knitr)
+#add other packages as needed
+```
+
+# Data: Popular songs on Spotify
+
+The data set for this assignment is a subset from the [Spotify Songs](https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-01-21/readme.md) Tidy Tuesday data set. The data were originally obtained from Spotify using the spotifyr R package. 
+ 
+The data set contains numerous characteristics for each song. You can see the full list of variables and definitions [here](https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-01-21/readme.md). This analysis will focus specifically on the following variables: 
+
+|variable                 |class     |description |
+|:---|:---|:-----------|
+|track_id                 |character | Song unique ID|
+|track_name               |character | Song Name|
+|track_artist             |character | Song Artist|
+|track_popularity         |double    | Song Popularity (0-100) where higher is better |
+|energy                   |double    | Energy is a measure from 0.0 to 1.0 and represents a perceptual measure of intensity and activity. Typically, energetic tracks feel fast, loud, and noisy. For example, death metal has high energy, while a Bach prelude scores low on the scale. Perceptual features contributing to this attribute include dynamic range, perceived loudness, timbre, onset rate, and general entropy. |
+|valence                  |double    | A measure from 0.0 to 1.0 describing the musical positiveness conveyed by a track. Tracks with high valence sound more positive (e.g. happy, cheerful, euphoric), while tracks with low valence sound more negative (e.g. sad, depressed, angry). |
+
+
+*You can find more information about these music characteristics in the [Spotify documentation page](https://developer.spotify.com/documentation/web-api/reference/tracks/get-audio-features/).*
+
+The data set is located in `spotify-popular.csv` in the `data` folder. 
+
+```{r echo = F, eval = F}
+# data cleaning + remove duplicates
+spotify <- read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-01-21/spotify_songs.csv') %>%
+  filter(track_popularity >= 80)
+
+# take the most popular ranking for each song
+spotify <- spotify %>%
+  group_by(track_id, track_name, track_artist) %>%
+  arrange(desc(track_popularity)) %>%
+  slice(1)
+
+# make spotify-popular.csv file 
+spotify %>% write_csv("static/hw/data/spotify-popular.csv")
+```
+
+# Questions
+
+## Part 1: Conceptual questions
+
+### Instructions 
+
+**This section of homework contains short answer questions focused on the concepts discussed in class. Some of these questions may also include short computing tasks.**
+
+**All narrative should be written in complete sentences, and all visualizations should have informative titles and axis labels.**
+
+
+Are high energy songs more positive? To answer this question, we'll analyze data on some of the most popular songs on Spotify, i.e. those with `track_popularity >= 80`. We'll use linear regression to fit a model to predict a song's positiveness  (`valence`) based on its energy level (`energy`).
+
+1. Create a plot to visualize the relationship between a song's positiveness and energy level. Interpret the plot in the context of the data. 
+
+1. Write the equation of the statistical model using mathematical notation.
+
+1. Fit the regression model.  Display the output using 3 digits and include a short and informative caption. 
+  
+    - Interpret the intercept in the context of the data. 
+    - Interpret the slope in the context of the data.
+  
+1. What percent of the variation in valence is explained by a song's energy? Calculate this value using the ANOVA table. Show how you calculated this answer.
+
+1. Next, let's check the model conditions. First, let's start with the linearity condition. Is this condition satisfied? Briefly explain your reasoning showing any output and/or plots used to check this condition. 
+
+1. Is the constant variance condition satisfied? Briefly explain your reasoning showing any output and/or plots used to check this condition. 
+
+1. Is the Normality condition satisfied? Briefly explain your reasoning showing any output and/or plots used to check this condition. 
+
+1. Is the independence condition satisfied? Briefly explain your reasoning showing any output and/or plots used to check this condition.
+
+1. Let's finish by using the model to make predictions: 
+
+    - Obtain the predicted value and appropriate 90% interval for the mean valence of the subset of songs with energy of 0.8. Interpret the interval in the context of the data.
+
+    - Obtain the predicted value and appropriate 90% interval for the valence of the song "Put Your Records On" by Corinne Bailey Rae. Interpret the interval in the contextt of the data.
+
+
+## Part 2: Communicating results 
+
+### Instructions 
+
+**Part of a statistician's / data scientist's job is being able to communicate technical results to a general (often non-technical) audience. This section of the homework will focus specifically on communication and writing some of the results from Part 1 for a general audience.**
+
+1. Suppose a radio station wants to use your model to help them determine which songs to play based on a song's predicted positiveness. What are some potential limitations to your model and analysis that the radio station should consider before using your model? Limitations may be related to the data itself, the statistical methods, conditions, etc. 
+
+    Write a short paragraph for the radio station manager (about 3 - 5 sentences) describing some potential limitations. You can assume the manager has taken STA 210 and understands basic statistical terms. You may include any plots or tables as needed.
+
+# Questions about R + simple linear regression (Optional)
+
+Do you have any questions about anything covered in the class thus far? This includes 
+
+- Using RStudio
+- Writing reproducible reports using R Markdown
+- Version control and GitHub
+- Exploratory data analysis
+- Simple linear regression 
+
+If so, please [click here](https://forms.gle/c6v5LpxaVMmC9F7a9) to submit your question(s). Frequently asked questions will be discussed in an upcoming lecture session. 
+
+
+# Submission
+
+
+Knit, commit, and push your final changes to your GitHub repo. Then, submit the PDF on [Gradescope](http://www.gradescope.com). See the [Lab 01](https://sta210-sp21.netlify.app/labs/lab-01-ikea.html#submission) for more detailed submission instructions. 
+
+
+# Grading
+
+| **Total** | **50** |
+|-------------------------------------------------------------|:--:|
+| Part 1: Conceptual questions | 40 |
+| Part 2: Communicating results | 5 |
+| Document neatly formatted with clear question headers| 3 	|
+| At least 3 informative commit messages 	| 2 	|
+
