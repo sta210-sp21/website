@@ -57,7 +57,8 @@ lessons:
     date: "Mon, Feb 15"
     title: "Lab 04"
   - date: "Tue, Feb 16"
-    title: "Analysis of Variance (ANOVA)"
+    title: "Comparing means with ANOVA"
+    slides: "08-anova.html"
   - date: "Thu, Feb 18"
     title: "Multiple comparisons"
     
