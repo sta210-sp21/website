@@ -1,5 +1,5 @@
 ---
-title: "Week 05: Feb 15 - 19"
+title: 'Week 05: Feb 15 - 19'
 weight: 5
 ---
 
@@ -9,4 +9,35 @@ font-size: 18px;
 }
 
 </style>
+
+## Lectures
+
+|           | Slides                   | Videos | Application Exercises (AE) |
+|-----------|--------------------------|--------|--------|
+| Tuesday  | Comparing means with ANOVA | Comparing means with ANOVA | AE 08 |
+| Thursday   | Multiple comparisons | Multiple comparisons | AE 09|
+
+
+## Readings
+
+|            | 
+|------------|
+| [IMS Section 8.2: Checking model conditions](https://openintro-ims.netlify.app/inference-reg.html#tech-cond-linmod)  |
+| [IMS Section 3.2.5: Describing the strength of a fit](https://openintro-ims.netlify.app/intro-linear-models.html#r-squared)  |
+
+
+
+
+## Assignments
+
+|                        |   |
+|------------------------|---|
+| [Lab 04] | **due Sun, Feb 21 at 11:59p EST**| 
+
+
+
+
+
+
+
 

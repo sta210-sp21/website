@@ -1,0 +1,490 @@
+---
+title: "Comparing means with ANOVA"
+subtitle: ""
+author: "Prof.  Maria Tackett"
+output:
+  xaringan::moon_reader:
+    mathjax: "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML"
+    css: "sta210-slides.css"
+    logo: img/sta199-sticker-icon.png
+    lib_dir: libs/font-awesome
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      slideNumberFormat: "%current%" 
+      ratio: "16:9"
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r child = "setup.Rmd"}
+```
+
+class: middle, center
+
+## [Click here for PDF of slides](07-anova.pdf)
+
+---
+
+## Topics 
+
+--
+
+- Compare groups using analysis of variance
+
+--
+
+```{r packages, echo = F}
+library(tidyverse)
+library(broom)
+library(knitr)
+library(kableExtra)
+library(patchwork)
+library(fivethirtyeight)
+library(modelr)
+```
+
+```{r}
+aldrin <- read_csv("data/aldrin.csv")
+```
+
+---
+
+## Aldrin in the Wolf River
+
+```{r echo = F, fig.align = "center", out.width = "40%"}
+knitr::include_graphics("img/07/wolf.png")
+```
+
+- The Wolf River in Tennessee flows past an abandoned site once used by the pesticide industry for dumping wastes, including chlordane (pesticide), aldrin, and dieldrin (both insecticides).
+
+- These highly toxic organic compounds can cause various cancers and birth defects.
+
+---
+
+## Aldrin in the Wolf River
+
+.pull-left[
+```{r}
+aldrin 
+```
+]
+
+.pull-right[
+```{r, fig.height = 6}
+ggplot(data = aldrin, aes(x  = aldrin)) + 
+  geom_histogram() + 
+  labs(title = "Aldrin concentration")
+```
+]
+
+---
+
+
+## Aldrin in the Wolf River
+
+- The standard methods to test whether these substances are present in a river is to take samples at six-tenths depth. 
+
+<br>
+
+
+- These compounds are denser than water and their molecules tend to stick to particles of sediment, they are more likely to be found in higher concentrations near the bottom than near mid-depth.
+
+
+---
+
+class: middle
+
+## Is there a difference between the mean aldrin concentrations among the three depth levels?
+
+
+---
+
+## Aldrin by depth 
+
+```{r fig.width = 10}
+p1 <- ggplot(data = aldrin, aes(x = depth, y = aldrin)) +
+  geom_boxplot() +
+  labs(x = "Depth", 
+       y = "Aldrin") + 
+  coord_flip()
+
+p2 <- ggplot(data = aldrin, aes(x = aldrin, fill = depth)) +
+  geom_density(alpha = 0.5) + 
+  labs(x = "Aldrin", 
+       fill = "Depth")
+
+p1 + p2
+```
+
+```{r}
+aldrin %>%
+  group_by(depth) %>%
+  summarise(n = n(), mean = mean(aldrin), sd = sd(aldrin)) %>%
+  kable(digits = 3)
+```
+
+---
+
+class: middle
+
+So far, we have used a .vocab[quantitative] predictor variable to understand the variation in a quantitative response variable.
+<br>
+
+
+Now, we will use a .vocab[categorical (qualitative)] predictor variable to understand the variation in a quantitative response variable.
+
+---
+
+## Notation
+
+- $K$ is number of mutually exclusive groups. We index the groups as $i = 1,\dots, K$.
+<br>
+
+--
+
+- $n_i$ is number of observations in group $i$
+<br>
+
+--
+
+- $n = n_1 + n_2 + \dots + n_K$ is the total number of observations in the data
+<br>
+
+--
+  
+- $y_{ij}$ is the $j^{th}$ observation in group $i$, for all $i,j$
+<br>
+
+--
+
+- $\mu_i$ is the population mean for group $i$, for $i = 1,\dots, K$
+
+---
+
+## Using ANOVA to compare means
+
+- .vocab[Question of interest] Is the mean value of the response $y$ the same for all groups, or is there at least one group with a significantly different mean value?
+
+- To answer this question, we will test the following hypotheses:
+
+.alert[
+$$
+\begin{aligned}
+&H_0: \mu_1 = \mu_2 = \dots =  \mu_K\\
+&H_a: \text{At least one }\mu_i \text{ is not equal to the others}
+\end{aligned}
+$$
+]
+
+---
+
+## What's happening...
+
+.alert[
+$$
+\begin{aligned}
+&H_0: \mu_1 = \mu_2 = \dots =  \mu_K\\
+&H_a: \text{At least one }\mu_i \text{ is not equal to the others}
+\end{aligned}
+$$
+]
+
+- If the sample means are "far apart", " there is evidence against $H_0$
+
+
+- We will calculate a test statistic to quantify "far apart" in the context of the data
+
+---
+
+## Analysis of Variance (ANOVA)
+
+**Main Idea: ** Decompose the <font color="green">total variation</font> in the data into the variation <font color="blue">between groups (model)</font> and the variation <font color="red">within each group (residuals)</font>
+
+$$\color{green}{\sum_{i=1}^{K}\sum_{j=1}^{n_i}(y_{ij}- \bar{y})^2}=\color{blue}{\sum_{i=1}^{K}n_i(\bar{y}_i-\bar{y})^2} + \color{red}{\sum_{i=1}^{K}\sum_{j=1}^{n_i}(y_{ij}-\bar{y}_i)^2}$$
+<br>
+
+--
+
+- If the variation <font color="blue">between groups</font> is significantly greater than the variation <font color="red">within each group</font>, then there is evidence against the null hypothesis.
+
+
+---
+
+## ANOVA table
+
+```{r}
+aldrin_model <- lm(aldrin ~ depth, data = aldrin)
+aldrin_anova <- aov(aldrin_model)
+```
+
+```{r}
+aldrin_anova %>%
+  tidy() %>%
+  kable(format = "html", digits = 3)
+```
+
+---
+
+## Total variation 
+
+```{r}
+aldrin_anova %>%
+  tidy() %>%
+  kable(format = "html", digits = 3)  %>%
+  row_spec(1, background = "#dce5b2") %>%
+  row_spec(2, background = "#dce5b2")
+```
+
+--
+
+.vocab[Total variation:] variation between and within groups
+
+$SS_{Total}= 16.961 + 37.329 = 54.290$
+
+$DF_{Total} = 2 + 37 = 29$
+
+$s^2_y = \frac{SS_{Total}}{DF_{Total}} = \frac{54.290}{29} = 1.872$
+
+---
+
+## Between variation 
+
+```{r}
+aldrin_anova %>%
+  tidy() %>%
+  kable(format = "html", digits = 3) %>%
+  row_spec(1, background = "#dce5b2")
+```
+
+--
+
+.vocab[Between variation:]  variation in the group means
+
+$SS_{Between}= 16.961$
+
+$DF_{Between} = 2$
+
+$MS_{Between} = \frac{SS_{Between}}{DF_{Between}} = \frac{15.961}{2} = 8.480$
+
+
+
+---
+
+## Within variation
+
+```{r}
+aldrin_anova %>%
+  tidy() %>%
+  kable(format = "html", digits = 3) %>%
+  row_spec(2, background = "#dce5b2")
+```
+
+--
+
+.vocab[Within variation:]  variation within each group
+
+$SS_{Within}= 37.329$
+
+$DF_{Within} = 27$
+
+$MS_{Within} = \frac{SS_{Within}}{DF_{Within}} = \frac{37.329}{27} = 1.383$
+
+
+---
+
+## Using ANOVA table to test difference in means
+
+```{r}
+aldrin_anova %>%
+  tidy() %>%
+  kable(format = "html", digits = 3)
+```
+
+<br> 
+
+.eq[
+$$
+\begin{aligned}
+&H_0: \mu_1 = \mu_2 = \mu_3\\
+&H_a: \text{At least one depth level has }\mu_i \text{ that is not equal to the others}
+\end{aligned}
+$$
+]
+
+---
+
+## Using ANOVA table to test difference in means
+
+```{r}
+aldrin_anova %>%
+  tidy() %>%
+  kable(format = "html", digits = 3) %>%
+  column_spec(4, background = "#dce5b2") %>%
+  column_spec(5, background = "#dce5b2") 
+```
+
+.vocab[Test statistic]: Ratio of between group and within group variation 
+
+$$F = \frac{MS_{Between}}{MS_{Within}} = \frac{8.480}{1.383} = 6.134$$
+
+---
+
+## Calculate p-value
+
+Calculate the p-value using an F distribution with $K-1$ and $n-K$ degrees of freedom
+
+```{r fig.height = 3}
+ggplot() +
+  stat_function(fun = "df", 
+                geom = "line", 
+                args = list(df1 = 10, df2 = 10), 
+                color = "steelblue2", lwd = 2, 
+                xlim = c(0, 6)) +
+  labs(x = "F", 
+       y = "density") + 
+  theme_classic()
+  
+```
+
+---
+
+## Using ANOVA table to test difference in means
+
+```{r}
+aldrin_anova %>%
+  tidy() %>%
+  kable(format = "html", digits = 3) %>%
+  column_spec(6, background = "#dce5b2")
+```
+
+.vocab[P-value]: Probability of observing a test statistic at least as extreme as *F Stat* given the group means are equal
+
+--
+
+The p-value is very small $(\approx 0)$, so we reject $H_0$. The data provide sufficient evidence that at least one depth level has a mean aldrin concentration that differs from the others.
+
+
+---
+
+class: middle, center
+
+## Assumptions for ANOVA
+
+---
+
+## Assumptions for ANOVA
+
+--
+
+`r emo::ji("one")` .vocab[Normality:] $y_{ij} \sim N(\mu_i, \sigma^2)$
+
+--
+
+`r emo::ji("two")` .vocab[Constant variance:] The population distribution for each group has a common variance, $\sigma^2$
+
+--
+
+`r emo::ji("three")` .vocab[Independence:] The observations are independent from each other
+- This applies to observations within and between groups
+
+--
+
+.alert[
+For ANOVA, we can typically check these assumptions in the exploratory data analysis
+]
+
+---
+
+## Checking Normality
+
+```{r fig.height = 3}
+ggplot(data = aldrin, aes(x = aldrin)) +
+  geom_histogram() + 
+  facet_wrap(~ depth)
+```
+
+`r emo::ji("white_check_mark")` No major skewness or outliers.
+
+---
+
+## Checking Normality
+
+```{r fig.height = 3}
+ggplot(data = aldrin, aes(sample = aldrin)) +
+  stat_qq() + 
+  stat_qq_line()+ 
+  facet_wrap(~ depth)
+```
+
+
+`r emo::ji("white_check_mark")` Points fall relatively along the diagonal line.
+
+---
+
+## Checking constant variance
+
+```{r, fig.height = 2.25}
+ggplot(data = aldrin, aes(x = depth, y = aldrin)) +
+  geom_boxplot() +
+  labs(x = "Depth", 
+       y = "Aldrin") + 
+  coord_flip()
+```
+
+.pull-left[
+```{r}
+aldrin %>%
+  group_by(depth) %>%
+  summarise(n = n(), mean = mean(aldrin), sd = sd(aldrin))
+```
+]
+
+.pull-right[
+`r emo::ji("white_check_mark")` The maximum standard deviation is about 2.4 times the smallest one. This is OK given the small sample size.  
+]
+
+---
+
+## Checking independence 
+
+`r emo::ji("white_check_mark")` Based on what we know about the study, we have no reason to believe that the aldrin concentrations are not independent of each other.
+
+---
+
+## Robustness to Assumptions
+
+--
+
+- .vocab[Normality:] $y_{ij} \sim N(\mu_i, \sigma^2)$
+  + ANOVA relatively robust to departures from Normality. 
+  + Concern when there are strongly skewed distributions with different sample sizes (especially if sample sizes are small, < 10 in each group)
+  
+--
+
+- .vocab[Independence: ]There is independence within and across groups
+  + If this doesn't hold, should use methods that account for correlated errors
+
+---
+
+## Robustness to Assumptions
+
+- .vocab[Constant variance: ]The population distribution for each group has a common variance, $\sigma^2$
+  + Critical assumption, since the pooled (combined) variance is important for ANOVA
+  + **General rule:** Satisfied if $SD_{max}/SD_{min} \leq 2$. OK if this is somewhat $> 2$ when sample sizes are small.
+
+---
+
+## Recap
+
+--
+
+- Used ANOVA to compare means across groups
+
+---
+
+## Acknowledgements
+
+- Analysis example and map image from [OpenIntro Statistics](https://www.openintro.org/)
+

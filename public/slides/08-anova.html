@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Comparing means with ANOVA</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Prof. Maria Tackett" />
+    <script src="libs/font-awesome/header-attrs/header-attrs.js"></script>
+    <script src="libs/font-awesome/kePrint/kePrint.js"></script>
+    <link href="libs/font-awesome/lightable/lightable.css" rel="stylesheet" />
+    <link rel="stylesheet" href="sta210-slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Comparing means with ANOVA
+### Prof. Maria Tackett
+
+---
+
+
+
+
+
+class: middle, center
+
+## [Click here for PDF of slides](07-anova.pdf)
+
+---
+
+## Topics 
+
+--
+
+- Compare groups using analysis of variance
+
+--
+
+
+
+
+
+---
+
+## Aldrin in the Wolf River
+
+&lt;img src="img/07/wolf.png" width="40%" style="display: block; margin: auto;" /&gt;
+
+- The Wolf River in Tennessee flows past an abandoned site once used by the pesticide industry for dumping wastes, including chlordane (pesticide), aldrin, and dieldrin (both insecticides).
+
+- These highly toxic organic compounds can cause various cancers and birth defects.
+
+---
+
+## Aldrin in the Wolf River
+
+.pull-left[
+
+```
+## # A tibble: 30 x 2
+##    aldrin depth 
+##     &lt;dbl&gt; &lt;chr&gt; 
+##  1    3.8 bottom
+##  2    4.8 bottom
+##  3    4.9 bottom
+##  4    5.3 bottom
+##  5    5.4 bottom
+##  6    5.7 bottom
+##  7    6.3 bottom
+##  8    7.3 bottom
+##  9    8.1 bottom
+## 10    8.8 bottom
+## # … with 20 more rows
+```
+]
+
+.pull-right[
+&lt;img src="08-anova_files/figure-html/unnamed-chunk-5-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+
+## Aldrin in the Wolf River
+
+- The standard methods to test whether these substances are present in a river is to take samples at six-tenths depth. 
+
+&lt;br&gt;
+
+
+- These compounds are denser than water and their molecules tend to stick to particles of sediment, they are more likely to be found in higher concentrations near the bottom than near mid-depth.
+
+
+---
+
+class: middle
+
+## Is there a difference between the mean aldrin concentrations among the three depth levels?
+
+
+---
+
+## Aldrin by depth 
+
+&lt;img src="08-anova_files/figure-html/unnamed-chunk-6-1.png" style="display: block; margin: auto;" /&gt;
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; depth &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; n &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; mean &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; sd &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; bottom &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 10 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6.04 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.579 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; middepth &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 10 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5.05 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.104 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; surface &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 10 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4.20 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.660 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+
+class: middle
+
+So far, we have used a .vocab[quantitative] predictor variable to understand the variation in a quantitative response variable.
+&lt;br&gt;
+
+
+Now, we will use a .vocab[categorical (qualitative)] predictor variable to understand the variation in a quantitative response variable.
+
+---
+
+## Notation
+
+- `\(K\)` is number of mutually exclusive groups. We index the groups as `\(i = 1,\dots, K\)`.
+&lt;br&gt;
+
+--
+
+- `\(n_i\)` is number of observations in group `\(i\)`
+&lt;br&gt;
+
+--
+
+- `\(n = n_1 + n_2 + \dots + n_K\)` is the total number of observations in the data
+&lt;br&gt;
+
+--
+  
+- `\(y_{ij}\)` is the `\(j^{th}\)` observation in group `\(i\)`, for all `\(i,j\)`
+&lt;br&gt;
+
+--
+
+- `\(\mu_i\)` is the population mean for group `\(i\)`, for `\(i = 1,\dots, K\)`
+
+---
+
+## Using ANOVA to compare means
+
+- .vocab[Question of interest] Is the mean value of the response `\(y\)` the same for all groups, or is there at least one group with a significantly different mean value?
+
+- To answer this question, we will test the following hypotheses:
+
+.alert[
+$$
+`\begin{aligned}
+&amp;H_0: \mu_1 = \mu_2 = \dots =  \mu_K\\
+&amp;H_a: \text{At least one }\mu_i \text{ is not equal to the others}
+\end{aligned}`
+$$
+]
+
+---
+
+## What's happening...
+
+.alert[
+$$
+`\begin{aligned}
+&amp;H_0: \mu_1 = \mu_2 = \dots =  \mu_K\\
+&amp;H_a: \text{At least one }\mu_i \text{ is not equal to the others}
+\end{aligned}`
+$$
+]
+
+- If the sample means are "far apart", " there is evidence against `\(H_0\)`
+
+
+- We will calculate a test statistic to quantify "far apart" in the context of the data
+
+---
+
+## Analysis of Variance (ANOVA)
+
+**Main Idea: ** Decompose the &lt;font color="green"&gt;total variation&lt;/font&gt; in the data into the variation &lt;font color="blue"&gt;between groups (model)&lt;/font&gt; and the variation &lt;font color="red"&gt;within each group (residuals)&lt;/font&gt;
+
+`$$\color{green}{\sum_{i=1}^{K}\sum_{j=1}^{n_i}(y_{ij}- \bar{y})^2}=\color{blue}{\sum_{i=1}^{K}n_i(\bar{y}_i-\bar{y})^2} + \color{red}{\sum_{i=1}^{K}\sum_{j=1}^{n_i}(y_{ij}-\bar{y}_i)^2}$$`
+&lt;br&gt;
+
+--
+
+- If the variation &lt;font color="blue"&gt;between groups&lt;/font&gt; is significantly greater than the variation &lt;font color="red"&gt;within each group&lt;/font&gt;, then there is evidence against the null hypothesis.
+
+
+---
+
+## ANOVA table
+
+
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; df &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; sumsq &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; meansq &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p.value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; depth &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 16.961 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 8.480 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6.134 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.006 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Residuals &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 27 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 37.329 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.383 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+
+## Total variation 
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; df &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; sumsq &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; meansq &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p.value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;background-color: #dce5b2 !important;"&gt; depth &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 16.961 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 8.480 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 6.134 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 0.006 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;background-color: #dce5b2 !important;"&gt; Residuals &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 27 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 37.329 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 1.383 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+--
+
+.vocab[Total variation:] variation between and within groups
+
+`\(SS_{Total}= 16.961 + 37.329 = 54.290\)`
+
+`\(DF_{Total} = 2 + 37 = 29\)`
+
+`\(s^2_y = \frac{SS_{Total}}{DF_{Total}} = \frac{54.290}{29} = 1.872\)`
+
+---
+
+## Between variation 
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; df &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; sumsq &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; meansq &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p.value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;background-color: #dce5b2 !important;"&gt; depth &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 16.961 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 8.480 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 6.134 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 0.006 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Residuals &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 27 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 37.329 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.383 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+--
+
+.vocab[Between variation:]  variation in the group means
+
+`\(SS_{Between}= 16.961\)`
+
+`\(DF_{Between} = 2\)`
+
+`\(MS_{Between} = \frac{SS_{Between}}{DF_{Between}} = \frac{15.961}{2} = 8.480\)`
+
+
+
+---
+
+## Within variation
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; df &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; sumsq &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; meansq &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p.value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; depth &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 16.961 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 8.480 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6.134 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.006 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;background-color: #dce5b2 !important;"&gt; Residuals &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 27 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 37.329 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 1.383 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+--
+
+.vocab[Within variation:]  variation within each group
+
+`\(SS_{Within}= 37.329\)`
+
+`\(DF_{Within} = 27\)`
+
+`\(MS_{Within} = \frac{SS_{Within}}{DF_{Within}} = \frac{37.329}{27} = 1.383\)`
+
+
+---
+
+## Using ANOVA table to test difference in means
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; df &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; sumsq &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; meansq &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p.value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; depth &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 16.961 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 8.480 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6.134 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.006 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Residuals &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 27 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 37.329 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.383 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;br&gt; 
+
+.eq[
+$$
+`\begin{aligned}
+&amp;H_0: \mu_1 = \mu_2 = \mu_3\\
+&amp;H_a: \text{At least one depth level has }\mu_i \text{ that is not equal to the others}
+\end{aligned}`
+$$
+]
+
+---
+
+## Using ANOVA table to test difference in means
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; df &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; sumsq &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; meansq &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p.value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; depth &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 16.961 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 8.480 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 6.134 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.006 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Residuals &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 27 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 37.329 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 1.383 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+.vocab[Test statistic]: Ratio of between group and within group variation 
+
+`$$F = \frac{MS_{Between}}{MS_{Within}} = \frac{8.480}{1.383} = 6.134$$`
+
+---
+
+## Calculate p-value
+
+Calculate the p-value using an F distribution with `\(K-1\)` and `\(n-K\)` degrees of freedom
+
+&lt;img src="08-anova_files/figure-html/unnamed-chunk-15-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Using ANOVA table to test difference in means
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; df &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; sumsq &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; meansq &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p.value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; depth &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 16.961 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 8.480 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6.134 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 0.006 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Residuals &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 27 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 37.329 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.383 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+.vocab[P-value]: Probability of observing a test statistic at least as extreme as *F Stat* given the group means are equal
+
+--
+
+The p-value is very small `\((\approx 0)\)`, so we reject `\(H_0\)`. The data provide sufficient evidence that at least one depth level has a mean aldrin concentration that differs from the others.
+
+
+---
+
+class: middle, center
+
+## Assumptions for ANOVA
+
+---
+
+## Assumptions for ANOVA
+
+--
+
+1️⃣ .vocab[Normality:] `\(y_{ij} \sim N(\mu_i, \sigma^2)\)`
+
+--
+
+2️⃣ .vocab[Constant variance:] The population distribution for each group has a common variance, `\(\sigma^2\)`
+
+--
+
+3️⃣ .vocab[Independence:] The observations are independent from each other
+- This applies to observations within and between groups
+
+--
+
+.alert[
+For ANOVA, we can typically check these assumptions in the exploratory data analysis
+]
+
+---
+
+## Checking Normality
+
+&lt;img src="08-anova_files/figure-html/unnamed-chunk-17-1.png" style="display: block; margin: auto;" /&gt;
+
+✅ No major skewness or outliers.
+
+---
+
+## Checking Normality
+
+&lt;img src="08-anova_files/figure-html/unnamed-chunk-18-1.png" style="display: block; margin: auto;" /&gt;
+
+
+✅ Points fall relatively along the diagonal line.
+
+---
+
+## Checking constant variance
+
+&lt;img src="08-anova_files/figure-html/unnamed-chunk-19-1.png" style="display: block; margin: auto;" /&gt;
+
+.pull-left[
+
+```
+## # A tibble: 3 x 4
+##   depth        n  mean    sd
+## * &lt;chr&gt;    &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 bottom      10  6.04 1.58 
+## 2 middepth    10  5.05 1.10 
+## 3 surface     10  4.2  0.660
+```
+]
+
+.pull-right[
+✅ The maximum standard deviation is about 2.4 times the smallest one. This is OK given the small sample size.  
+]
+
+---
+
+## Checking independence 
+
+✅ Based on what we know about the study, we have no reason to believe that the aldrin concentrations are not independent of each other.
+
+---
+
+## Robustness to Assumptions
+
+--
+
+- .vocab[Normality:] `\(y_{ij} \sim N(\mu_i, \sigma^2)\)`
+  + ANOVA relatively robust to departures from Normality. 
+  + Concern when there are strongly skewed distributions with different sample sizes (especially if sample sizes are small, &lt; 10 in each group)
+  
+--
+
+- .vocab[Independence: ]There is independence within and across groups
+  + If this doesn't hold, should use methods that account for correlated errors
+
+---
+
+## Robustness to Assumptions
+
+- .vocab[Constant variance: ]The population distribution for each group has a common variance, `\(\sigma^2\)`
+  + Critical assumption, since the pooled (combined) variance is important for ANOVA
+  + **General rule:** Satisfied if `\(SD_{max}/SD_{min} \leq 2\)`. OK if this is somewhat `\(&gt; 2\)` when sample sizes are small.
+
+---
+
+## Recap
+
+--
+
+- Used ANOVA to compare means across groups
+
+---
+
+## Acknowledgements
+
+- Analysis example and map image from [OpenIntro Statistics](https://www.openintro.org/)
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"slideNumberFormat": "%current%",
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
