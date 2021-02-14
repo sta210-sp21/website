@@ -349,13 +349,66 @@ font-size: 18px;
       <pubDate>12 Mar 17 10:00 +0000</pubDate>
       
       <guid>/schedule/week-05/</guid>
-      <description> table { font-size: 18px; }  </description>
+      <description> table { font-size: 18px; }  Lectures     Slides Videos Application Exercises (AE)     Tuesday Comparing means with ANOVA Comparing means with ANOVA AE 08   Thursday Multiple comparisons Multiple comparisons AE 09    Readings         IMS Section 7.5: Comparing many means with ANOVA  (skip 7.5.1)    Assignments          [Lab 04] due Sun, Feb 21 at 11:59p EST    </description>
       <content>&lt;style&gt;
 table {
 font-size: 18px;
 }
 
 &lt;/style&gt;
+&lt;h2 id=&#34;lectures&#34;&gt;Lectures&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;Slides&lt;/th&gt;
+&lt;th&gt;Videos&lt;/th&gt;
+&lt;th&gt;Application Exercises (AE)&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Tuesday&lt;/td&gt;
+&lt;td&gt;Comparing means with ANOVA&lt;/td&gt;
+&lt;td&gt;Comparing means with ANOVA&lt;/td&gt;
+&lt;td&gt;AE 08&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Thursday&lt;/td&gt;
+&lt;td&gt;Multiple comparisons&lt;/td&gt;
+&lt;td&gt;Multiple comparisons&lt;/td&gt;
+&lt;td&gt;AE 09&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;readings&#34;&gt;Readings&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://openintro-ims.netlify.app/inference-num.html?q=analy#anovaAndRegrWithCategoricalVariables&#34;&gt;IMS Section 7.5: Comparing many means with ANOVA &lt;/a&gt; (skip 7.5.1)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;assignments&#34;&gt;Assignments&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;[Lab 04]&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;due Sun, Feb 21 at 11:59p EST&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 </content>
     </item>
     
