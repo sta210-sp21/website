@@ -55,7 +55,8 @@ lessons:
   
   - week: "Week 05"
     date: "Mon, Feb 15"
-    title: "Lab 04"
+    title: "Lab 04: Back to alumni jobs"
+    lab: "lab-04-alumni-merge.html"
   - date: "Tue, Feb 16"
     title: "Comparing means with ANOVA"
     slides: "08-anova.html"

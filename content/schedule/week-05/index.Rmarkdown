@@ -30,7 +30,7 @@ font-size: 18px;
 
 |                        |   |
 |------------------------|---|
-| Lab 04 | **due Sun, Feb 21 at 11:59p EST**| 
+| [Lab 04: Back to alumni jobs!](https://sta210-sp21.netlify.app/labs/lab-04-alumni-merge.html) | **due Sun, Feb 21 at 11:59p EST**| 
 
 
 
