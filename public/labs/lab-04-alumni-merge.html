@@ -137,7 +137,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <div id="TOC">
 <ul>
-<li><a href="#introduction">Introduction</a></li>
+<li><a href="#learning-goals">Learning goals</a></li>
+<li><a href="#getting-started">Getting started</a></li>
 <li><a href="#merge-conflicts-uh-oh">Merge Conflicts (uh oh)</a></li>
 <li><a href="#team-agreement">Team agreement</a></li>
 <li><a href="#packages-data">Packages + data</a></li>
@@ -145,8 +146,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 </div>
 
-<div id="introduction" class="section level1">
-<h1>Introduction</h1>
+<p>In this lab, you’ll build upon last week’s analysis about relationship between the median early career salary and percent of alumni who perceive their job as making the world a better place for colleges and universities in the United States. You will also do a short exercise about resolving merge conflicts and fill out a team agreement.</p>
+<div id="learning-goals" class="section level1">
+<h1>Learning goals</h1>
+<p>By the end of the lab you will be able to…</p>
+<ul>
+<li>Assess model conditions for simple linear regression.</li>
+<li>Calculate and interpreted predicted values from the model.</li>
+<li>Assess model fit using <span class="math inline">\(R^2\)</span>.<br />
+</li>
+<li>Resolve a merge conflict with your team.</li>
+</ul>
+</div>
+<div id="getting-started" class="section level1">
+<h1>Getting started</h1>
 <div id="clone-assignment-repo-start-new-project" class="section level2">
 <h2>Clone assignment repo + start new project</h2>
 <p>A repository has already been created for you and your teammates. Everyone in your team has access to the same repo.</p>
@@ -218,8 +231,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="data-alumni-jobs" class="section level2">
 <h2>Data: Alumni jobs</h2>
-<p>Today’s data are two data sets that were part of <a href="https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-03-10/readme.md">TidyTuesday College tuition, diversity, and pay</a>. All of the information is originally from the Department of Education but was collected from various websites.</p>
-<p>We will use the following two data sets in this lab:</p>
+<p>Today’s data set is part of the <a href="https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-03-10/readme.md">TidyTuesday College tuition, diversity, and pay</a>.</p>
 <p>The information in this data set was collected from the <a href="https://www.payscale.com/college-salary-report/bachelors">PayScale College Salary Report</a>.</p>
 <table>
 <colgroup>
@@ -277,14 +289,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="exercises" class="section level1">
 <h1>Exercises</h1>
-<p>Is there a relationship between someone’s early career salary and whether they perceive their job as making the world a better place? To answer this question, we will build upon the analysis from last week’s lab and as we use regression to predict the median early career salary for colleges using the percent of alumni who perceive their job is making the world a better place.</p>
+<p>Is there a relationship the typical early career pay for alumni and the percent of alumni who perceive their job as making the world a better place? To answer this question, we will build upon the analysis from last week’s lab and as we use regression to predict the early career pay using the percent of alumni who perceive their job is making the world a better place.</p>
 <p><strong>Some observations have missing values for <code>make_world_better_percent</code>. Before you get started, filter the <code>alumni</code> data frame so you only have observations that have data for both <code>make_world_better_percent</code> and <code>early_career_pay</code>.</strong></p>
 <div class="commit">
 <p><b>Team Member 1</b>: Type the team’s responses to exercises 1 - 2.</p>
 </div>
 <ol style="list-style-type: decimal">
-<li><p>Fit a linear model that can be used to predict the median early career pay for alumni based on the percent who perceive their job as making the world a better place. Display the code and output, include a confidence interval for the coefficient, and use the <code>kable</code> function to neatly display the model output with 3 digits.</p></li>
-<li><p>Calculate the predicted values and residuals from your model and save these results in a data frame.</p></li>
+<li><p>Fit a linear model that can be used to predict the median early career pay based on the percent who perceive their job as making the world a better place. Display the model output using 3 digits for numerical values.</p></li>
+<li><p>Calculate the predicted values and residuals from your model and save these results in a data frame. Print the first five rows of the new data frame.</p></li>
 </ol>
 <div class="commit">
 <p>✅ ⬆️ <b>Team Member 1</b>: Knit, commit and push your changes to GitHub with an appropriate commit message again. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.</p>
@@ -297,27 +309,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="commit">
 <p>✅ ⬆️ <b>Team Member 2</b>: Knit, commit and push your changes to GitHub with an appropriate commit message again. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.</p>
 <p></b>All other team members</b>: <b>Pull</b> to get the updated documents from GitHub. Click on the .Rmd file, and you should see the responses to exercise 3.</p>
-<p><b>Team Member 3</b>: It’s your turn! Type the team’s response to exercise 4.</p>
+<p><b>Team Member 3</b>: It’s your turn! Type the team’s response to exercises 4 - 5.</p>
 </div>
 <ol start="4" style="list-style-type: decimal">
-<li>At the Colorado School of Mines, 60% of its alumni said their job makes the world a better place.</li>
+<li>Sixty percent of the alumni at the Colorado School of Mines said their job makes the world a better place.</li>
 </ol>
 <ul>
-<li>Calculate the predicted typical early career pay for this university and the appropriate 95% interval.</li>
-<li>The actual early career pay at the Colorado School of Mines is $75,600. Based on your analysis, do you find this value surprising? Briefly explain your reasoning.</li>
+<li>Calculate the predicted early career pay at this university and the appropriate 95% interval. Interpret the interval in the context of the data.</li>
+<li>The actual early career pay at the Colorado School of Mines is $75,600. Is this what you expected based on your analysis? Briefly explain your reasoning.</li>
 </ul>
+<ol start="5" style="list-style-type: decimal">
+<li>Next, let’s consider how well the model fits the relationship between the early career pay and percent who perceive their job as making the world a better. Calculate <span class="math inline">\(R^2\)</span> and interpret it in the context of the data.</li>
+</ol>
 <div class="commit">
 <p>✅ ⬆️ <b>Team Member 3</b>: Knit, commit and push your changes to GitHub with an appropriate commit message again. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.</p>
-<p></b>All other team members</b>: <b>Pull</b> to get the updated documents from GitHub. Click on the .Rmd file, and you should see the responses to exercise 4.</p>
-<p><b>Team Member 4</b>: It’s your turn! Type the team’s response to exercise 5.</p>
+<p></b>All other team members</b>: <b>Pull</b> to get the updated documents from GitHub. Click on the .Rmd file, and you should see the responses to exercise 4 - 5.</p>
+<p><b>Team Member 4</b>: It’s your turn! Type the team’s response to exercise 6.</p>
 </div>
-<ol start="5" style="list-style-type: decimal">
-<li>Next, let’s consider how well the model fits the relationship between the median early career pay and percent who perceive their job as making the world a better.</li>
+<ol start="6" style="list-style-type: decimal">
+<li>Do you think the model is useful for understanding and predicting the typical early career pay for alumni at a university? Briefly explain your reasoning.</li>
 </ol>
-<ul>
-<li>Calculate <span class="math inline">\(R^2\)</span> and interpret it in the context of the data.</li>
-<li>Do you think the model is useful for understanding the variability in early career pay? Briefly explain your reasoning.</li>
-</ul>
 <div class="commit">
 <p>✅ ⬆️ <b>Team Member 4</b>: Knit, commit and push your changes to GitHub with an appropriate commit message again. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.</p>
 <p><b>All other team members</b>: <b>Pull</b> to get the updated documents from GitHub. Click on the .Rmd file, and you should see the team’s completed lab! </b></p>

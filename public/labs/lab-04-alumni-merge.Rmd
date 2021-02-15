@@ -16,7 +16,18 @@ link-citations: yes
 knitr::opts_chunk$set(eval = FALSE)
 ```
 
-# Introduction 
+In this lab, you'll build upon last week's analysis about relationship between the median early career salary and percent of alumni who perceive their job as making the world a better place for colleges and universities in the United States. You will also do a short exercise about resolving merge conflicts and fill out a team agreement.
+
+# Learning goals
+
+By the end of the lab you will be able to...
+
+- Assess model conditions for simple linear regression. 
+- Calculate and interpreted predicted values from the model. 
+- Assess model fit using $R^2$.  
+- Resolve a merge conflict with your team.
+
+# Getting started
 
 ## Clone assignment repo + start new project
 
@@ -36,7 +47,6 @@ The following exercises must be done in order. **Only one person should type in 
 
 # Merge Conflicts (uh oh)
 
-
 ```{r fig.margin=TRUE, eval=TRUE, echo=FALSE}
 knitr::include_graphics("img/04-candy/merge-no-conflict.png")
 ```
@@ -49,8 +59,7 @@ knitr::include_graphics("img/04-candy/merge-conflict.png")
 ```
 
 
-If these two files have conflicting content on the same line, git will produce a
-**merge conflict**. Merge conflicts need to be resolved manually, as they require a human 
+If these two files have conflicting content on the same line, git will produce a **merge conflict**. Merge conflicts need to be resolved manually, as they require a human 
 intervention:
 
 ```{r fig.margin=FALSE, eval=TRUE, echo=FALSE}
@@ -126,9 +135,7 @@ library(patchwork)
 
 ## Data: Alumni jobs 
 
-Today's data are two data sets that were part of [TidyTuesday College tuition, diversity, and pay](https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-03-10/readme.md). All of the information is originally from the Department of Education but was collected from various websites.
-
-We will use the following two data sets in this lab:
+Today's data set is part of the [TidyTuesday College tuition, diversity, and pay](https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-03-10/readme.md). 
 
 The information in this data set was collected from the [PayScale College Salary Report](https://www.payscale.com/college-salary-report/bachelors).
 
@@ -157,7 +164,7 @@ alumni <- read_csv("data/alumni-salaries.csv")
 
 # Exercises
 
-Is there a relationship between someone's early career salary and whether they perceive their job as making the world a better place? To answer this question, we will build upon the analysis from last week's lab and as we use regression to predict the median early career salary for colleges using the percent of  alumni who perceive their job is making the world a better place. 
+Is there a relationship the typical early career pay for alumni and the percent of alumni who perceive their job as making the world a better place? To answer this question, we will build upon the analysis from last week's lab and as we use regression to predict the early career pay using the percent of alumni who perceive their job is making the world a better place. 
 
 **Some observations have missing values for `make_world_better_percent`. Before you get started, filter the `alumni` data frame so you only have observations that have data for both `make_world_better_percent` and `early_career_pay`.**
 
@@ -165,10 +172,9 @@ Is there a relationship between someone's early career salary and whether they p
 <b>Team Member 1</b>: Type the team's responses to exercises 1 - 2.
 :::
 
-1. Fit a linear model that can be used to predict the median early career pay for alumni based on the percent who perceive their job as making the world a better place. Display the code and output, include a confidence interval for the coefficient, and use the `kable` function to neatly display the model output with 3 digits.
+1. Fit a linear model that can be used to predict the median early career pay based on the percent who perceive their job as making the world a better place. Display the model output using 3 digits for numerical values. 
 
-
-2. Calculate the predicted values and residuals from your model and save these results in a data frame. 
+2. Calculate the predicted values and residuals from your model and save these results in a data frame. Print the first five rows of the new data frame.
 
 ::: {.commit}
 `r emo::ji("white_check_mark")` `r emo::ji("arrow_up")` <b>Team Member 1</b>: Knit, commit and push your changes to GitHub with an appropriate commit message again. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.
@@ -186,26 +192,26 @@ Is there a relationship between someone's early career salary and whether they p
 
 </b>All other team members</b>: <b>Pull</b> to get the updated documents from GitHub. Click on the .Rmd file, and you should see the responses to exercise 3.
 
-<b>Team Member 3</b>: It's your turn! Type the team's response to exercise 4.
+<b>Team Member 3</b>: It's your turn! Type the team's response to exercises 4 - 5.
 :::
 
-4. At the Colorado School of Mines,  60% of its alumni said their job makes the world a better place. 
+4. Sixty percent of the alumni at the Colorado School of Mines said their job makes the world a better place. 
 
-  - Calculate the predicted typical early career pay for this university and the appropriate 95% interval. 
-  - The actual early career pay at the Colorado School of Mines is $75,600. Based on your analysis, do you find this value surprising? Briefly explain your reasoning. 
+  - Calculate the predicted early career pay at this university and the appropriate 95% interval. Interpret the interval in the context of the data.
+  - The actual early career pay at the Colorado School of Mines is $75,600. Is this what you expected based on your analysis? Briefly explain your reasoning. 
   
+
+5. Next, let's consider how well the model fits the relationship between the early career pay and percent who perceive their job as making the world a better. Calculate $R^2$ and interpret it in the context of the data.
+
 ::: {.commit}
 `r emo::ji("white_check_mark")` `r emo::ji("arrow_up")` <b>Team Member 3</b>: Knit, commit and push your changes to GitHub with an appropriate commit message again. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.
 
-</b>All other team members</b>: <b>Pull</b> to get the updated documents from GitHub. Click on the .Rmd file, and you should see the responses to exercise 4.
+</b>All other team members</b>: <b>Pull</b> to get the updated documents from GitHub. Click on the .Rmd file, and you should see the responses to exercise 4 - 5.
 
-<b>Team Member 4</b>: It's your turn! Type the team's response to exercise 5.
+<b>Team Member 4</b>: It's your turn! Type the team's response to exercise 6.
 :::
 
-5. Next, let's consider how well the model fits the relationship between the median early career pay and percent who perceive their job as making the world a better. 
-
-  - Calculate $R^2$ and interpret it in the context of the data.
-  - Do you think the model is useful for understanding the variability in early career pay? Briefly explain your reasoning.
+6. Do you think the model is useful for understanding and predicting the typical early career pay for alumni at a university? Briefly explain your reasoning.
  
 ::: {.commit}
 

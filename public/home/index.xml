@@ -349,7 +349,7 @@ font-size: 18px;
       <pubDate>12 Mar 17 10:00 +0000</pubDate>
       
       <guid>/schedule/week-05/</guid>
-      <description> table { font-size: 18px; }  Lectures     Slides Videos Application Exercises (AE)     Tuesday Comparing means with ANOVA Comparing means with ANOVA AE 08   Thursday Multiple comparisons Multiple comparisons AE 09    Readings         IMS Section 7.5: Comparing many means with ANOVA  (skip 7.5.1)    Assignments          Lab 04 due Sun, Feb 21 at 11:59p EST    </description>
+      <description>table { font-size: 18px; }  Lectures     Slides Videos Application Exercises (AE)     Tuesday Comparing means with ANOVA Comparing means with ANOVA AE 08   Thursday Multiple comparisons Multiple comparisons AE 09    Readings         IMS Section 7.5: Comparing many means with ANOVA  (skip 7.5.1)    Assignments          Lab 04: Back to alumni jobs!</description>
       <content>&lt;style&gt;
 table {
 font-size: 18px;
@@ -404,7 +404,7 @@ font-size: 18px;
 &lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
-&lt;td&gt;Lab 04&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/labs/lab-04-alumni-merge.html&#34;&gt;Lab 04: Back to alumni jobs!&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;&lt;strong&gt;due Sun, Feb 21 at 11:59p EST&lt;/strong&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
