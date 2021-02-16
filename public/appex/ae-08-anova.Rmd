@@ -27,7 +27,7 @@ knitr::opts_chunk$set(warning = F,
 
 Suppose we fit a model to predict a song's popularity based on its duration (in milliseconds). 
 
-$$\hat{popularity} = 86.65 - 0.00001 \times duration\_ms$$
+$$\hat{popularity} = 86.65 - 0.00001207 \times duration\_ms$$
 
 - Write the interpretation of the slope. Is this interpretation useful? Why or why not? 
 - If not, how can we improve it? 
