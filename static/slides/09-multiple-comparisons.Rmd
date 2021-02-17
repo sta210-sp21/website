@@ -130,7 +130,7 @@ The next question we want to answer in our analysis is .vocab[*which one*]?
 We can use confident intervals to estimate the difference between the means, $\mu_i-\mu_j$ for each pair of groups
 
 .alert[
-$$(\bar{y}_i-\bar{y}_j) \pm t^* \times MS_{Within}\sqrt{\frac{1}{n_i}+\frac{1}{n_j}}$$
+$$(\bar{y}_i-\bar{y}_j) \pm t^* \times \sqrt{MS_{Within} \Big(\frac{1}{n_i}+\frac{1}{n_j}\Big)}$$
 
 where the critical value $t^*$ is calculated from a $t$ distribution with $n-K$ degrees of freedom. 
 ]
@@ -149,10 +149,10 @@ There are 3 depth levels in our data, so we can make ${3 \choose 2} = 3(3-1)/2 =
 
 --
 
-$$\small{(\bar{y}_{middepth}-\bar{y}_{bottom}) \pm t^* \times MS_{Within}\sqrt{\frac{1}{n_{middepth}}+\frac{1}{n_{bottom}}}}$$
+$$\small{(\bar{y}_{middepth}-\bar{y}_{bottom}) \pm t^* \times \sqrt{MS_{Within}\Big(\frac{1}{n_{middepth}}+\frac{1}{n_{bottom}}\Big)}}$$
 
-$$\small{(\bar{y}_{surface}-\bar{y}_{bottom}) \pm t^* \times MS_{Within}\sqrt{\frac{1}{n_{surface}}+\frac{1}{n_{bottom}}}}$$
-$$\small{(\bar{y}_{surface}-\bar{y}_{middepth}) \pm t^* \times MS_{Within}\sqrt{\frac{1}{n_{surface}}+\frac{1}{n_{middepth}}}}$$
+$$\small{(\bar{y}_{surface}-\bar{y}_{bottom}) \pm t^* \times \sqrt{MS_{Within}\Big(\frac{1}{n_{surface}}+\frac{1}{n_{bottom}}\Big)}}$$
+$$\small{(\bar{y}_{surface}-\bar{y}_{middepth}) \pm t^* \times \sqrt{MS_{Within}\Big(\frac{1}{n_{surface}}+\frac{1}{n_{middepth}}\Big)}}$$
 ---
 
 ## Individual vs. Family-wise Type I Error
@@ -204,7 +204,7 @@ knitr::include_graphics("img/09/xkcd-significant-2.png")
 ## Correcting for multiple comparisons 
 
 .alert[
-$$(\bar{y}_i-\bar{y}_j) \pm t^* \times MS_{Within}\sqrt{\frac{1}{n_i}+\frac{1}{n_j}}$$
+$$(\bar{y}_i-\bar{y}_j) \pm t^* \sqrt{MS_{Within}\Big(\frac{1}{n_i}+\frac{1}{n_j}\Big)}$$
 
 where the critical value $t^*$ is calculated from a $t$ distribution with $n-K$ degrees of freedom. 
 ]
