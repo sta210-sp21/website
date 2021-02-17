@@ -65,8 +65,6 @@ knitr::include_graphics("img/07/wolf.png")
 
 - The standard methods to test whether these substances are present in a river is to take samples at six-tenths depth. 
 
-<br>
-
 
 - These compounds are denser than water and their molecules tend to stick to particles of sediment, they are more likely to be found in higher concentrations near the bottom than near mid-depth.
 
@@ -152,8 +150,6 @@ There are 3 depth levels in our data, so we can make ${3 \choose 2} = 3(3-1)/2 =
 --
 
 $$\small{(\bar{y}_{middepth}-\bar{y}_{bottom}) \pm t^* \times MS_{Within}\sqrt{\frac{1}{n_{middepth}}+\frac{1}{n_{bottom}}}}$$
-
---
 
 $$\small{(\bar{y}_{surface}-\bar{y}_{bottom}) \pm t^* \times MS_{Within}\sqrt{\frac{1}{n_{surface}}+\frac{1}{n_{bottom}}}}$$
 $$\small{(\bar{y}_{surface}-\bar{y}_{middepth}) \pm t^* \times MS_{Within}\sqrt{\frac{1}{n_{surface}}+\frac{1}{n_{middepth}}}}$$
