@@ -38,6 +38,15 @@ aldrin <- read_csv("data/aldrin.csv")
 
 ---
 
+## Topics 
+
+- Next steps after ANOVA
+
+- Individual vs. family-wise Type I error
+
+- Multiple comparisons using Bonferroni correction 
+---
+
 ## Aldrin in the Wolf River
 
 ```{r echo = F, fig.align = "center", out.width = "40%"}
@@ -126,25 +135,19 @@ $$(\bar{y}_i-\bar{y}_j) \pm t^* \times MS_{Within}\sqrt{\frac{1}{n_i}+\frac{1}{n
 where the critical value $t^*$ is calculated from a $t$ distribution with $n-K$ degrees of freedom. 
 ]
 
-- If we have $K$ groups, we will make ${K \choose 2} = K(K-1)/2$ such comparisons
+If we have $K$ groups, we will make ${K \choose 2} = K(K-1)/2$ such comparisons
 
-- Ex: There are 3 depth levels in our data, so we can make ${3 \choose 2} = 3(3-1)/2 = 3$ comparisons
+
 
 ---
 
-## Comparisons for the aldrin data
+## Comparisions for Aldrin data set
 
-.eq[
+There are 3 depth levels in our data, so we can make ${3 \choose 2} = 3(3-1)/2 = 3$ comparisons
+
 $$\small{(\bar{y}_{middepth}-\bar{y}_{bottom}) \pm t^* \times MS_{Within}\sqrt{\frac{1}{n_{middepth}}+\frac{1}{n_{bottom}}}}$$
-]
-
-.eq[
 $$\small{(\bar{y}_{surface}-\bar{y}_{bottom}) \pm t^* \times MS_{Within}\sqrt{\frac{1}{n_{surface}}+\frac{1}{n_{bottom}}}}$$
-]
-
-.eq[
 $$\small{(\bar{y}_{surface}-\bar{y}_{middepth}) \pm t^* \times MS_{Within}\sqrt{\frac{1}{n_{surface}}+\frac{1}{n_{middepth}}}}$$
-]
 ---
 
 ## Individual vs. Family-wise Type I Error
@@ -166,7 +169,7 @@ $$\small{(\bar{y}_{surface}-\bar{y}_{middepth}) \pm t^* \times MS_{Within}\sqrt{
 
 ##  Multiple Comparisons
 
-- The probability of making an individual Type I error is $\alpha = 1 - C$, where $C$ is the confidence level 
+- The probability of making an individual Type I error is $\color{#87037B}{\alpha = 1 - C}$, where $C$ is the confidence level 
 
 - Even if the probability of making an individual Type I error is low, the probability of making a family-wise Type I error becomes much larger when we make multiple comparisons
 
@@ -201,29 +204,32 @@ $$(\bar{y}_i-\bar{y}_j) \pm t^* \times MS_{Within}\sqrt{\frac{1}{n_i}+\frac{1}{n
 where the critical value $t^*$ is calculated from a $t$ distribution with $n-K$ degrees of freedom. 
 ]
 
-- When we make mutliple comparisons, we will select the critical value $t^*$ to control for the probability of making a  **family-wise Type I error**
+- When we make multiple comparisons, we will select the critical value $t^*$ to control for the probability of making a  **family-wise Type I error**
 
 
 ---
 
 ##  Bonferroni correction
 
-.vocab[Goal: ] Choose the critical value $t^*$ such that the probability of making a family-wise Type I error is $\alpha$.
+.vocab[Goal: ] Choose the critical value $t^*$ such that the probability of making a .vocab[family-wise Type I error is ] $\color{#87037B}{\alpha}$.
 
-To do so, we will choose $t^*$ such that the probability of making an indiviudal Type I error is $\alpha/m$, where $m$ is the number of comparisons 
+To do so, we will choose $t^*$ such that the probability of making an .vocab[individual Type I error is ] $\color{#87037B}{\frac{\alpha}{m}}$, where $m$ is the number of comparisons 
 
-In other words, we will find $t^*$ that corresponds to a confidence level of $1 - \alpha/m$. 
+In other words, we will find $t^*$ that corresponds to a .vocab[confidence level of ] $\color{#87037B}{1 - \alpha/m}$. 
 
 
 ---
 
-## Aldrin concentration 
+## Comparisons for the Aldrin data set
 
 We want the probability of making a family-wise Type I error to be $\alpha = 0.05$. 
 
-We are making 3 comparisons. 
+--
 
-Therefore, we want probability of making an individual Type I error to be $\alpha / m = 0.05 / 3$. 
+
+We are making 3 comparisons. Therefore, we want probability of making an individual Type I error to be $\alpha / m = 0.05 / 3$. 
+
+--
 
 .alert[
 We calculate each confidence interval using the critical value $t*$ that corresponds to a confidence level of $C = 1 - 0.05/3 \approx 0.9833$ in the $t$ distribution with $30 - 3 = 27$ degrees of freedom. 
@@ -232,7 +238,7 @@ We calculate each confidence interval using the critical value $t*$ that corresp
 
 ---
 
-## Making pairwise comparisions in R
+## Pairwise comparisions in R
 
 ```{r echo = T}
 library(pairwiseCI)
@@ -242,6 +248,8 @@ pairwiseCI(aldrin ~ depth, data = aldrin,
 ```
 
 ---
+
+## Comparing Aldrin concentrations
 
 ```{r}
 pairwiseCI(aldrin ~ depth, data = aldrin, 
@@ -254,39 +262,10 @@ Based on this, we see there is a statistically significant difference between th
 ---
 
 
+## Recap 
 
----
+- Next steps after ANOVA
 
-##  Population Density in the Midwest
+- Individual vs. family-wise Type I error
 
-- There are 5 groups (states) in the `midwest` data, so we will do ${5 \choose 2} = 10$ comparisons. 
-
-- If we want a familywise confidence level of 95%, then we should use a $(1 - 0.05/10)\times 100 = 99.5$% confidence level for each pairwise comparison
-
----
-
-##  Pairwise CI
-
-```{r eval = F}
-midwest <- midwest %>% mutate(log_popdensity = log(popdensity))
-```
-
-.small[
-```{r eval = F}
-library(pairwiseCI)
-pairwiseCI(log_popdensity ~ state, data = midwest, 
-           method = "Param.diff", conf.level = 0.995, var.equal = TRUE)
-```
-]
-
----
-
-##  Pairwise CI 
-
-
-```{r echo = F, eval = F}
-library(pairwiseCI)
-pairwiseCI(log_popdensity ~ state, data = midwest, 
-           method = "Param.diff", conf.level = 0.995, var.equal = TRUE) %>%
-  kable(format = "markdown", digits = 3)
-```
+- Multiple comparisons using Bonferroni correction 
