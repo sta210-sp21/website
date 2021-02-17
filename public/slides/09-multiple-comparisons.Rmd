@@ -70,6 +70,8 @@ knitr::include_graphics("img/07/wolf.png")
 
 - These compounds are denser than water and their molecules tend to stick to particles of sediment, they are more likely to be found in higher concentrations near the bottom than near mid-depth.
 
+- We will compare mean concentration levels (in nanograms per liter) for three depths.
+
 ---
 
 class: middle
@@ -135,6 +137,8 @@ $$(\bar{y}_i-\bar{y}_j) \pm t^* \times MS_{Within}\sqrt{\frac{1}{n_i}+\frac{1}{n
 where the critical value $t^*$ is calculated from a $t$ distribution with $n-K$ degrees of freedom. 
 ]
 
+--
+
 If we have $K$ groups, we will make ${K \choose 2} = K(K-1)/2$ such comparisons
 
 
@@ -145,7 +149,12 @@ If we have $K$ groups, we will make ${K \choose 2} = K(K-1)/2$ such comparisons
 
 There are 3 depth levels in our data, so we can make ${3 \choose 2} = 3(3-1)/2 = 3$ comparisons
 
+--
+
 $$\small{(\bar{y}_{middepth}-\bar{y}_{bottom}) \pm t^* \times MS_{Within}\sqrt{\frac{1}{n_{middepth}}+\frac{1}{n_{bottom}}}}$$
+
+--
+
 $$\small{(\bar{y}_{surface}-\bar{y}_{bottom}) \pm t^* \times MS_{Within}\sqrt{\frac{1}{n_{surface}}+\frac{1}{n_{bottom}}}}$$
 $$\small{(\bar{y}_{surface}-\bar{y}_{middepth}) \pm t^* \times MS_{Within}\sqrt{\frac{1}{n_{surface}}+\frac{1}{n_{middepth}}}}$$
 ---
@@ -196,7 +205,7 @@ knitr::include_graphics("img/09/xkcd-significant-2.png")
 
 ---
 
-## Adjusting for multiple comparisons 
+## Correcting for multiple comparisons 
 
 .alert[
 $$(\bar{y}_i-\bar{y}_j) \pm t^* \times MS_{Within}\sqrt{\frac{1}{n_i}+\frac{1}{n_j}}$$
@@ -204,7 +213,7 @@ $$(\bar{y}_i-\bar{y}_j) \pm t^* \times MS_{Within}\sqrt{\frac{1}{n_i}+\frac{1}{n
 where the critical value $t^*$ is calculated from a $t$ distribution with $n-K$ degrees of freedom. 
 ]
 
-- When we make multiple comparisons, we will select the critical value $t^*$ to control for the probability of making a  **family-wise Type I error**
+When we make multiple comparisons, we will select the critical value $t^*$ to control for the probability of making a  **family-wise Type I error**
 
 
 ---
@@ -232,7 +241,7 @@ We are making 3 comparisons. Therefore, we want probability of making an individ
 --
 
 .alert[
-We calculate each confidence interval using the critical value $t*$ that corresponds to a confidence level of $C = 1 - 0.05/3 \approx 0.9833$ in the $t$ distribution with $30 - 3 = 27$ degrees of freedom. 
+We calculate each confidence interval using the critical value $t^*$ that corresponds to a confidence level of $C = 1 - 0.05/3 \approx 0.9833$ in the $t$ distribution with $30 - 3 = 27$ degrees of freedom. 
 ]
 
 
@@ -259,6 +268,10 @@ pairwiseCI(aldrin ~ depth, data = aldrin,
 
 
 Based on this, we see there is a statistically significant difference between the mean aldrin concentration at the surface and at the bottom. 
+--
+
+More specifically, we are 98.3% confident that the mean aldrin level is about 0.412 to 3.268 nanograms per liter lower at the surface than at the bottom.
+
 ---
 
 
