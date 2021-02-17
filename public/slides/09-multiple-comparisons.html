@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Multiple comparisons</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Prof. Maria Tackett" />
+    <script src="libs/font-awesome/header-attrs/header-attrs.js"></script>
+    <script src="libs/font-awesome/kePrint/kePrint.js"></script>
+    <link href="libs/font-awesome/lightable/lightable.css" rel="stylesheet" />
+    <link rel="stylesheet" href="sta210-slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Multiple comparisons
+### Prof. Maria Tackett
+
+---
+
+
+
+
+
+class: middle, center
+
+## [Click here for PDF of slides](09-multiple-comparisons.pdf)
+
+
+
+
+
+---
+
+## Aldrin in the Wolf River
+
+&lt;img src="img/07/wolf.png" width="40%" style="display: block; margin: auto;" /&gt;
+
+- The Wolf River in Tennessee flows past an abandoned site once used by the pesticide industry for dumping wastes, including chlordane (pesticide), aldrin, and dieldrin (both insecticides).
+
+- These highly toxic organic compounds can cause various cancers and birth defects.
+
+
+---
+
+
+## Aldrin in the Wolf River
+
+- The standard methods to test whether these substances are present in a river is to take samples at six-tenths depth. 
+
+&lt;br&gt;
+
+
+- These compounds are denser than water and their molecules tend to stick to particles of sediment, they are more likely to be found in higher concentrations near the bottom than near mid-depth.
+
+---
+
+class: middle
+
+## Is there a difference between the mean aldrin concentrations among the three depth levels?
+
+
+---
+
+## ANOVA
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; df &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; sumsq &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; meansq &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p.value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; depth &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 16.961 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 8.480 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6.134 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.006 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Residuals &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 27 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 37.329 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.383 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;br&gt; 
+
+.eq[
+$$
+`\begin{aligned}
+&amp;H_0: \mu_1 = \mu_2 = \mu_3\\
+&amp;H_a: \text{At least one depth level has }\mu_i \text{ that is not equal to the others}
+\end{aligned}`
+$$
+]
+
+---
+
+## ANOVA
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; df &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; sumsq &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; meansq &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p.value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; depth &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 16.961 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 8.480 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6.134 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 0.006 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Residuals &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 27 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 37.329 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.383 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+The p-value is very small `\((\approx 0)\)`, so we reject `\(H_0\)`. The data provide sufficient evidence that at least one depth level has a mean aldrin concentration that differs from the others.
+
+---
+
+class: middle
+
+We know at least one depth level has a mean aldrin concentration that differs from the others. 
+
+The next question we want to answer in our analysis is .vocab[*which one*]?
+
+---
+
+ 
+##  Difference in means
+
+We can use confident intervals to estimate the difference between the means, `\(\mu_i-\mu_j\)` for each pair of groups
+
+.alert[
+`$$(\bar{y}_i-\bar{y}_j) \pm t^* \times MS_{Within}\sqrt{\frac{1}{n_i}+\frac{1}{n_j}}$$`
+
+where the critical value `\(t^*\)` is calculated from a `\(t\)` distribution with `\(n-K\)` degrees of freedom. 
+]
+
+- If we have `\(K\)` groups, we will make `\({K \choose 2} = K(K-1)/2\)` such comparisons
+
+- Ex: There are 3 depth levels in our data, so we can make `\({3 \choose 2} = 3(3-1)/2 = 3\)` comparisons
+
+---
+
+## Comparisons for the aldrin data
+
+.eq[
+`$$\small{(\bar{y}_{middepth}-\bar{y}_{bottom}) \pm t^* \times MS_{Within}\sqrt{\frac{1}{n_{middepth}}+\frac{1}{n_{bottom}}}}$$`
+]
+
+.eq[
+`$$\small{(\bar{y}_{surface}-\bar{y}_{bottom}) \pm t^* \times MS_{Within}\sqrt{\frac{1}{n_{surface}}+\frac{1}{n_{bottom}}}}$$`
+]
+
+.eq[
+`$$\small{(\bar{y}_{surface}-\bar{y}_{middepth}) \pm t^* \times MS_{Within}\sqrt{\frac{1}{n_{surface}}+\frac{1}{n_{middepth}}}}$$`
+]
+---
+
+## Individual vs. Family-wise Type I Error
+
+.vocab[Type I error]: Incorrectly reject `\(H_0\)`. 
+
+- In our example, incorrectly reject the null hypothesis that mean aldrin concentration levels are equal
+- Based on our confidence interval, we incorrectly conclude there is a difference in the mean aldrin concentration for the two groups
+
+--
+
+.vocab[Individual Type I error]: incorrectly reject `\(H_0\)` for **one specific** comparison of group means
+
+--
+
+.vocab[Family-wise Type I error]: Incorrectly reject `\(H_0\)` for **at least one** comparison of group means
+
+---
+
+##  Multiple Comparisons
+
+- The probability of making an individual Type I error is `\(\alpha = 1 - C\)`, where `\(C\)` is the confidence level 
+
+- Even if the probability of making an individual Type I error is low, the probability of making a family-wise Type I error becomes much larger when we make multiple comparisons
+
+---
+
+## xkcd "Significant" 
+
+.pull-left[
+&lt;img src="img/09/xkcd-significant-1.png" width="75%" style="display: block; margin: auto;" /&gt;
+
+]
+
+--
+
+.pull-right[
+&lt;img src="img/09/xkcd-significant-2.png" width="75%" style="display: block; margin: auto;" /&gt;
+
+]
+.midi[source:https://xkcd.com/882/]
+
+---
+
+## Adjusting for multiple comparisons 
+
+.alert[
+`$$(\bar{y}_i-\bar{y}_j) \pm t^* \times MS_{Within}\sqrt{\frac{1}{n_i}+\frac{1}{n_j}}$$`
+
+where the critical value `\(t^*\)` is calculated from a `\(t\)` distribution with `\(n-K\)` degrees of freedom. 
+]
+
+- When we make mutliple comparisons, we will select the critical value `\(t^*\)` to control for the probability of making a  **family-wise Type I error**
+
+
+---
+
+##  Bonferroni correction
+
+.vocab[Goal: ] Choose the critical value `\(t^*\)` such that the probability of making a family-wise Type I error is `\(\alpha\)`.
+
+To do so, we will choose `\(t^*\)` such that the probability of making an indiviudal Type I error is `\(\alpha/m\)`, where `\(m\)` is the number of comparisons 
+
+In other words, we will find `\(t^*\)` that corresponds to a confidence level of `\(1 - \alpha/m\)`. 
+
+
+---
+
+## Aldrin concentration 
+
+We want the probability of making a family-wise Type I error to be `\(\alpha = 0.05\)`. 
+
+We are making 3 comparisons. 
+
+Therefore, we want probability of making an individual Type I error to be `\(\alpha / m = 0.05 / 3\)`. 
+
+.alert[
+We calculate each confidence interval using the critical value `\(t*\)` that corresponds to a confidence level of `\(C = 1 - 0.05/3 \approx 0.9833\)` in the `\(t\)` distribution with `\(30 - 3 = 27\)` degrees of freedom. 
+]
+
+
+---
+
+## Making pairwise comparisions in R
+
+
+```r
+library(pairwiseCI)
+pairwiseCI(aldrin ~ depth, data = aldrin, 
+           conf.level = 1- 0.05/3, var.equal = TRUE) %&gt;%
+  kable(digits = 3)
+```
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:right;"&gt; estimate &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; lower &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; upper &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; comparison &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; -0.99 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -2.598 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.618 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; middepth-bottom &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; -1.84 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -3.268 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.412 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; surface-bottom &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; -0.85 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -1.923 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.223 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; surface-middepth &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:right;"&gt; estimate &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; lower &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; upper &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; comparison &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; -0.99 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -2.598 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.618 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; middepth-bottom &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; -1.84 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -3.268 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.412 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; surface-bottom &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; -0.85 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -1.923 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.223 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; surface-middepth &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+Based on this, we see there is a statistically significant difference between the mean aldrin concentration at the surface and at the bottom. 
+---
+
+
+
+---
+
+##  Population Density in the Midwest
+
+- There are 5 groups (states) in the `midwest` data, so we will do `\({5 \choose 2} = 10\)` comparisons. 
+
+- If we want a familywise confidence level of 95%, then we should use a `\((1 - 0.05/10)\times 100 = 99.5\)`% confidence level for each pairwise comparison
+
+---
+
+##  Pairwise CI
+
+
+
+.small[
+
+]
+
+---
+
+##  Pairwise CI 
+
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"slideNumberFormat": "%current%",
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
