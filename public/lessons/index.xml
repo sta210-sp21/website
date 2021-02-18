@@ -349,7 +349,7 @@ font-size: 18px;
       <pubDate>12 Mar 17 10:00 +0000</pubDate>
       
       <guid>/schedule/week-05/</guid>
-      <description>table { font-size: 18px; }  Lectures     Slides Videos Application Exercises (AE)     Tuesday Comparing means with ANOVA Comparing means with ANOVA AE 08: Comparing means with ANOVA   Thursday Multiple comparisons Multiple comparisons AE 09    Readings         IMS Section 7.5: Comparing many means with ANOVA  (skip 7.5.1)    Assignments          Lab 04: Back to alumni jobs!</description>
+      <description>table { font-size: 18px; }  Lectures     Slides Videos Application Exercises (AE)     Tuesday Comparing means with ANOVA Comparing means with ANOVA AE 08: Comparing means with ANOVA   Thursday Multiple comparisons Multiple comparisons AE 09: Multiple comparisons    Readings         IMS Section 7.5: Comparing many means with ANOVA  (skip 7.5.1)    Assignments          Lab 04: Back to alumni jobs!</description>
       <content>&lt;style&gt;
 table {
 font-size: 18px;
@@ -376,8 +376,8 @@ font-size: 18px;
 &lt;tr&gt;
 &lt;td&gt;Thursday&lt;/td&gt;
 &lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/slides/09-multiple-comparisons.html#1&#34;&gt;Multiple comparisons&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;&lt;a href=&#34;https://warpwire.duke.edu/w/u0cFAA/&#34;&gt;Multiple comparisons&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;AE 09&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://warpwire.duke.edu/w/FUkFAA/&#34;&gt;Multiple comparisons&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/appex/ae-09-multiple-comparisons.html&#34;&gt;AE 09: Multiple comparisons&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
