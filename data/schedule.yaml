@@ -66,12 +66,15 @@ lessons:
     
   - week: "Week 06"
     date: "Mon, Feb 22"
-    title: "Lab 05"
+    title: "Lab 05: ANOVA"
   - date: "Tue, Feb 23"
     title: "Multiple linear regression (MLR)"
+    slides: "10-mlr-intro.html"
   - date: "Thu, Feb 25"
     title: "MLR: Inference"
+    slides: "11-mlr-inference.html"
   - title: "MLR: Conditions"
+    slides: "11-mlr-inference.html"
   - title: "Quiz 01 assigned"
     quiz: "quiz-01.html"
   
