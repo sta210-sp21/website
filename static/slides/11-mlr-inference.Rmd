@@ -1,0 +1,381 @@
+---
+title: "Multiple linear regression"
+subtitle: "Inference"
+author: "Prof.  Maria Tackett"
+output:
+  xaringan::moon_reader:
+    mathjax: "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML"
+    css: "sta210-slides.css"
+    logo: img/sta199-sticker-icon.png
+    lib_dir: libs/font-awesome
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      slideNumberFormat: "%current%" 
+      ratio: "16:9"
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r child = "setup.Rmd"}
+```
+
+class: middle, center
+
+## [Click here for PDF of slides](09-mlr-inference.pdf)
+
+---
+
+## Topics
+
+- Conduct a hypothesis test for $\beta_j$
+
+- Calculate a confidence interval for $\beta_j$
+
+- Quick overview of math details for MLR
+
+
+```{r echo = F}
+library(tidyverse)
+library(knitr)
+library(broom)
+library(patchwork) 
+library(kableExtra)
+```
+
+```{r,echo=F}
+homes <- read_csv("data/homeprices.csv")
+```
+---
+
+## House prices in Levittown 
+
+The data set contains the sales price and characteristics of  85 homes in Levittown, NY that sold between June 2010 and May 2011. 
+
+We would like to use the characteristics of a house to understand variability in the sales price.
+
+---
+
+## Variables
+
+**Predictors**
+- .vocab[`bedrooms`]: Number of bedrooms
+- .vocab[`bathrooms`]: Number of bathrooms
+- .vocab[`living_area`]: Total living area of the house (in square feet)
+- .vocab[`lot_size`]: Total area of the lot (in square feet)
+- .vocab[`year_built`]: Year the house was built
+- .vocab[`property_tax`]: Annual property taxes (in U.S. dollars)
+
+**Response**
+- .vocab[`sale_price`]: Sales price (in U.S. dollars)
+
+---
+
+## EDA: Response variable
+
+```{r echo = F, fig.height = 3}
+ggplot(data = homes, aes(x = sale_price)) +
+  geom_histogram() + 
+  labs(title = "Distribution of Sale Price", 
+       x = "Sale Price (in US Dollars)")
+```
+
+---
+
+## EDA: Response vs. Predictors
+
+```{r echo = F, fig.height = 3}
+p1 <- ggplot(data = homes, aes(x = bedrooms, y = sale_price)) +
+  geom_point()
+
+p2 <- ggplot(data = homes, aes(x = bathrooms, y = sale_price)) +
+  geom_point()
+
+p3 <- ggplot(data = homes, aes(x = living_area, y = sale_price)) +
+  geom_point()
+
+p4 <- ggplot(data = homes, aes(x = lot_size, y = sale_price)) +
+  geom_point()
+
+p5 <- ggplot(data = homes, aes(x = year_built, y = sale_price)) +
+  geom_point()
+
+p6 <- ggplot(data = homes, aes(x = property_tax, y = sale_price)) +
+  geom_point()
+
+(p1 + p2 + p3) / (p4 + p5 + p6)
+```
+
+---
+
+## Home price model
+
+.small[
+```{r}
+price_model <- lm(sale_price ~ bedrooms + bathrooms + living_area + lot_size + year_built + property_tax, 
+                  data = homes)
+
+tidy(price_model) %>%
+  kable(format = "markdown", digits = 3)
+```
+]
+
+---
+
+class: middle, center
+
+## Hypothesis test for $\beta_j$
+
+---
+
+## Outline of a hypothesis test
+
+--
+
+`r emo::ji('one')` State the hypotheses.
+
+--
+
+<br> 
+
+`r emo::ji('two')` Calculate the test statistic. 
+
+
+--
+
+<br> 
+
+`r emo::ji('three')` Calculate the p-value.
+
+
+--
+
+<br> 
+
+
+`r emo::ji('four')` State the conclusion. 
+
+---
+
+## `r emo::ji("one")` State the hypotheses
+
+.tiny[
+```{r}
+price_model <- lm(sale_price ~ bedrooms + bathrooms + living_area + lot_size + year_built + property_tax, 
+                  data = homes)
+
+tidy(price_model) %>%
+  kable(format = "markdown", digits = 3)
+```
+]
+
+.eq[
+$$\begin{align}
+&H_0: \beta_{living\_area} = 0 \\
+&H_a: \beta_{living\_area} \neq 0\end{align}$$
+]
+
+---
+
+## `r emo::ji('two')` Calculate the test statistic
+
+.tiny[
+```{r}
+price_model <- lm(sale_price ~ bedrooms + bathrooms + living_area + lot_size + year_built + property_tax, 
+                  data = homes)
+
+tidy(price_model) %>%
+  kable(format = "html", digits = 3) %>%
+  row_spec(4, background = "#dce5b2")
+```
+]
+
+.eq[
+$$t = \frac{65.903 - 0}{15.979} = 4.124$$
+]
+
+---
+
+## `r emo::ji('two')` Calculate the test statistic
+
+The estimated slope, 65.903, is 4.124 standard errors above the hypothesized mean, 0.
+
+---
+
+## `r emo::ji('three')` Calculate the p-value
+
+.tiny[
+```{r}
+price_model <- lm(sale_price ~ bedrooms + bathrooms + living_area + lot_size + year_built + property_tax, 
+                  data = homes)
+
+tidy(price_model) %>%
+  kable(format = "html", digits = 3) %>%
+  row_spec(4, background = "#dce5b2")
+```
+]
+
+.eq[
+$$\text{P-value} = P(|t| \geq |4.124|) = 0.00009$$
+]
+
+
+
+---
+
+## `r emo::ji('three')` Calculate the p-value
+
+The p-value is calculated using a $t$ distribution with $\color{purple}{n-p-1}$ degrees of freedom, where $p$ is the number of coefficients in the model.
+
+--
+
+In this example, the p-value is calculated using a $t$ distribution with $\color{purple}{85-6-1 = 78}$ degrees of freedom.
+
+--
+
+.alert[ Given $\beta_{living\_area}  = 0$ the probability of observing a coefficient at least as extreme as the one we've observed, 65.903, is 0.00009.
+]
+
+---
+
+## `r emo::ji('four')` State the conclusion
+
+.tiny[
+```{r}
+price_model <- lm(sale_price ~ bedrooms + bathrooms + living_area + lot_size + year_built + property_tax, 
+                  data = homes)
+
+tidy(price_model) %>%
+  kable(format = "html", digits = 3) %>%
+  row_spec(4, background = "#dce5b2")
+```
+]
+
+<font class = "vocab">The p-value is very small, so we reject $H_0$. The data provide sufficient evidence that the living area is a helpful predictor in the model explaining some of the variability in price.
+
+---
+
+class: middle, center
+
+## Confidence interval for $\beta_j$
+
+---
+
+## Confidence Interval for $\beta_j$
+
+.eq[
+The $C%$ confidence interval for $\beta_j$ 
+$$\hat{\beta}_j \pm t^* SE(\hat{\beta}_j)$$
+where $t^*$ follows a $t$ distribution with $n - p - 1$ degrees of freedom
+]
+
+**General Interpretation**: We are $C%$ confident that the interval LB to UB contains the population coefficient of $x_j$. Therefore, for every one unit increase in $x_j$, we expect $y$ to change by LB to UB units, holding all else constant. 
+
+---
+
+## Confidence interval for `living_area`
+
+
+.tiny[
+```{r}
+price_model <- lm(sale_price ~ bedrooms + bathrooms + living_area + lot_size + year_built + property_tax, 
+                  data = homes)
+
+tidy(price_model, conf.int = TRUE) %>%
+  kable(format = "html", digits = 3)%>%
+  row_spec(4, background = "#dce5b2")
+```
+]
+.vocab[
+We are 95% confident that for every one additional square foot in living area, we expect the price to increase by $34.09 to $97.71, holding all other characteristics constant.
+]
+
+---
+
+## `r emo::ji("stop_sign")` Caution: Large sample sizes
+
+
+If the sample size is large enough, the test will likely result in rejecting $H_0: \beta_j=0$ even $x_j$ has a very small effect on $y$
+
+- Consider the .vocab[practical significance] of the result not just the statistical significance 
+
+- Use the confidence interval to draw conclusions instead of relying only p-values
+
+---
+
+## `r emo::ji("stop_sign")` Caution: Small sample sizes
+
+If the sample size is small, there may not be enough evidence to reject $H_0: \beta_j=0$
+
+- When you fail to reject the null hypothesis, **DON'T** immediately conclude that the variable has no association with the response. 
+  
+- There may be a linear association that is just not strong enough to detect given your data, or there may be a non-linear association.
+    
+
+---
+
+class: middle, center
+
+## Math details
+
+---
+
+## Regression Model 
+
+The multiple linear regression model assumes 
+
+.eq[
+$$Y|X_1, X_2,  \ldots, X_p \sim N(\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \dots + \beta_p X_p, \sigma_\epsilon^2)$$
+]
+
+--
+
+For a given observation $(x_{i1}, x_{i2}, \ldots, x_{ip}, y_i)$, we can rewrite the previous statement as 
+
+.eq[
+$$y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \dots + \beta_p x_{ip} + \epsilon_{i} \hspace{10mm} \epsilon_i \sim N(0,\sigma^2)$$
+]
+
+---
+
+## Estimating $\sigma_\epsilon^2$
+
+For a given observation $(x_{i1}, x_{i2}, \ldots,x_{ip}, y_i)$ the residual is 
+
+.eq[
+$$e_i = y_{i} - (\hat{\beta}_0 + \hat{\beta}_1 x_{i1} + \hat{\beta}_{2} x_{i2} + \dots + \hat{\beta}_p x_{ip})$$
+]
+
+--
+
+The estimated value of the regression variance , $\sigma_{\epsilon}^2$, is 
+
+.eq[
+$$\hat{\sigma}_\epsilon^2  = \frac{\sum_{i=1}^ne_i^2}{n-p-1}$$
+]
+
+---
+
+## Estimating Coefficients 
+
+One way to estimate the coefficients is by taking partial derivatives of the formula
+
+.eq[
+$$\sum_{i=1}^n e_i^2 = \sum_{i=1}^{n}[y_{i} - (\hat{\beta}_0 + \hat{\beta}_1 x_{i1} + \hat{\beta}_{2} x_{i2} + \dots + \hat{\beta}_p x_{ip})]^2$$
+]
+
+--
+
+This produces messy formulas, so instead we can use matrix notation for multiple linear regression and estimate the coefficients using rules from linear algebra. For more details, see [A Matrix Formulation of the Multiple Regression Model](https://online.stat.psu.edu/stat462/node/132/).
+
+---
+
+## Recap
+
+- Conduct a hypothesis test for $\beta_j$
+
+- Calculate a confidence interval for $\beta_j$
+
+- Quick overview of math details for MLR
+

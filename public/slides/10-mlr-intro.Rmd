@@ -1,0 +1,339 @@
+---
+title: "Multiple linear regression"
+subtitle: ""
+author: "Prof.  Maria Tackett"
+output:
+  xaringan::moon_reader:
+    mathjax: "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML"
+    css: "sta210-slides.css"
+    logo: img/sta199-sticker-icon.png
+    lib_dir: libs/font-awesome
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      slideNumberFormat: "%current%" 
+      ratio: "16:9"
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r child = "setup.Rmd"}
+```
+
+class: middle, center
+
+## [Click here for PDF of slides](10-mlr-intro.pdf)
+
+---
+
+## Topics
+
+- Introduce multiple linear regression 
+
+- Interpret a coefficient $\hat{\beta}_j$
+
+- Use the model to calculate predicted values and the corresponding interval
+
+```{r echo = F}
+library(tidyverse)
+library(knitr)
+library(broom)
+library(patchwork) # use plot_grid function
+```
+
+---
+
+## House prices in Levittown 
+
+The data set contains the sales price and characteristics of  85 homes in Levittown, NY that sold between June 2010 and May 2011. 
+
+Levittown was built right after WWII and was the first planned suburban community built using mass production techniques. 
+
+The article ["Levittown, the prototypical American suburb – a history of cities in 50 buildings, day 25"](https://www.theguardian.com/cities/2015/apr/28/levittown-america-prototypical-suburb-history-cities) gives an overview of Levittown's controversial history.
+
+---
+
+## Analysis goals
+
+We would like to use the characteristics of a house to understand variability in the sales price.
+
+To do so, we will fit a .vocab[multiple linear regression model]
+
+Using our model, we can answers questions such as
+- What is the relationship between the characteristics of a house in Levittown and its sale price? 
+- Given its characteristics, what is the expected sale price of a house in Levittown?  
+
+---
+
+## The data 
+
+```{r,echo=F}
+homes <- read_csv("data/homeprices.csv")
+```
+
+.midi[
+```{r}
+homes %>%
+  slice(1:10)
+```
+]
+
+---
+
+## Variables
+
+**Predictors**
+- .vocab[`bedrooms`]: Number of bedrooms
+- .vocab[`bathrooms`]: Number of bathrooms
+- .vocab[`living_area`]: Total living area of the house (in square feet)
+- .vocab[`lot_size`]: Total area of the lot (in square feet)
+- .vocab[`year_built`]: Year the house was built
+- .vocab[`property_tax`]: Annual property taxes (in U.S. dollars)
+
+**Response**
+- .vocab[`sale_price`]: Sales price (in U.S. dollars)
+
+---
+
+## EDA: Response variable
+
+```{r echo = F, fig.height = 3}
+ggplot(data = homes, aes(x = sale_price)) +
+  geom_histogram() + 
+  labs(title = "Distribution of Sale Price", 
+       x = "Sale Price (in US Dollars)")
+```
+
+
+---
+
+## EDA: Predictor variables 
+
+```{r echo = F, fig.height = 3}
+p1 <- ggplot(data = homes, aes(x = bedrooms)) +
+  geom_histogram()
+
+p2 <- ggplot(data = homes, aes(x = bathrooms)) +
+  geom_histogram()
+
+p3 <- ggplot(data = homes, aes(x = living_area)) +
+  geom_histogram()
+
+p4 <- ggplot(data = homes, aes(x = lot_size)) +
+  geom_histogram()
+
+p5 <- ggplot(data = homes, aes(x = year_built)) +
+  geom_histogram()
+
+p6 <- ggplot(data = homes, aes(x = property_tax)) +
+  geom_histogram()
+
+(p1 + p2 + p3) / (p4 + p5 + p6)
+```
+
+---
+
+## EDA: Response vs. Predictors
+
+```{r echo = F, fig.height = 3}
+p1 <- ggplot(data = homes, aes(x = bedrooms, y = sale_price)) +
+  geom_point()
+
+p2 <- ggplot(data = homes, aes(x = bathrooms, y = sale_price)) +
+  geom_point()
+
+p3 <- ggplot(data = homes, aes(x = living_area, y = sale_price)) +
+  geom_point()
+
+p4 <- ggplot(data = homes, aes(x = lot_size, y = sale_price)) +
+  geom_point()
+
+p5 <- ggplot(data = homes, aes(x = year_built, y = sale_price)) +
+  geom_point()
+
+p6 <- ggplot(data = homes, aes(x = property_tax, y = sale_price)) +
+  geom_point()
+
+(p1 + p2 + p3) / (p4 + p5 + p6)
+```
+
+---
+
+class: middle
+
+So far we've used a .vocab[*single predictor variable*] to understand variation in a quantitative response variable 
+
+--
+
+Now we want to use .vocab[*multiple predictor variables*] to understand variation in a quantitative response variable
+
+---
+
+## Multiple linear regression (MLR)
+
+Based on the analysis goals, we will use a .vocab[multiple linear regression] model of the following form
+
+.eq[
+.small[
+$$\begin{aligned}\hat{\text{sale_price}} ~ = & ~
+\hat{\beta}_0 + \hat{\beta}_1 \text{bedrooms} + \hat{\beta}_2 \text{bathrooms} + \hat{\beta}_3 \text{living_area} \\
+&+ \hat{\beta}_4 \text{lot_size} + \hat{\beta}_5 \text{year_built} + \hat{\beta}_6 \text{property_tax}\end{aligned}$$
+]
+]
+
+
+Similar to simple linear regression, this model assumes that at each combination of the predictor variables, the values **`sale_price`** follow a Normal distribution
+
+---
+
+## Regression Model
+
+- **Recall:** The simple linear regression model assumes 
+
+$$Y|X\sim N(\beta_0 + \beta_1 X, \sigma_{\epsilon}^2)$$
+--
+
+<br>
+
+- **Similarly:** The multiple linear regression model assumes 
+
+$$Y|X_1, X_2, \ldots, X_p \sim N(\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \dots + \beta_p X_p, \sigma_{\epsilon}^2)$$
+
+---
+
+class: middle, center
+
+
+.eq[
+For a given observation $(x_{i1}, x_{i2} \ldots, x_{ip}, y_i)$
+
+$$y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \dots + \beta_p x_{ip} + \epsilon_{i} \hspace{8mm} \epsilon_i \sim N(0,\sigma_\epsilon^2)$$
+]
+
+---
+
+## Regression Model 
+
+- At any combination of the predictors, the mean value of the response $Y$, is 
+$$\mu_{Y|X_1, \ldots, X_p} = \beta_0 + \beta_1 X_{1} + \beta_2 X_2 + \dots + \beta_p X_p$$
+--
+
+<br>
+
+- Using multiple linear regression, we can estimate the mean response for any combination of predictors
+
+$$\hat{Y} = \hat{\beta}_0 + \hat{\beta}_1 X_{1} + \hat{\beta}_2 X_2 + \dots + \hat{\beta}_p X_{p}$$
+
+---
+
+## Home price model
+
+.small[
+```{r}
+price_model <- lm(sale_price ~ bedrooms + bathrooms + living_area + lot_size + year_built + property_tax, 
+                  data = homes)
+
+tidy(price_model) %>%
+  kable(format = "markdown", digits = 3)
+```
+]
+
+---
+
+class: middle
+
+.eq[
+$$\begin{align}\hat{\text{price}} = & -7148818.957 - 12291.011 \times \text{bedrooms}\\[5pt]  
+&+ 51699.236 \times \text{bathrooms}  + 65.903 \times \text{living area}\\[5pt]
+&- 0.897 \times \text{lot size} +  3760.898 \times \text{year built}\\[5pt] 
+&+ 1.476 \times \text{property tax}\end{align}$$
+]
+
+
+
+---
+
+## Interpreting $\hat{\beta}_j$
+
+- The estimated coefficient $\hat{\beta}_j$ is the expected change in the mean of $y$ when $x_j$ increases by one unit,  **<i>holding the values of all other predictor variables constant</i>**.
+
+--
+
+<br>
+
+- **Example:** The estimated coefficient for **`living_area`** is 65.90. This means for each additional square foot of living area, we expect the sale price of a house in Levittown, NY to increase by $65.90, on average, holding all other predictor variables constant.
+
+---
+
+## Prediction
+
+**Example:** What is the predicted sale price for a house in Levittown, NY with 3 bedrooms, 1 bathroom, 1050 square feet of living area, 6000 square foot lot size, built in 1948 with $6306 in property taxes?
+
+.midi[
+```{r echo = TRUE}
+-7148818.957 - 12291.011 * 3 + 51699.236 * 1 + 
+  65.903 * 1050 - 0.897 * 6000 + 3760.898 * 1948 + 
+  1.476 * 6306
+```
+]
+
+--
+
+The predicted sale price for a house in Levittown, NY with 3 bedrooms, 1 bathroom, 1050 square feet of living area, 6000 square foot lot size, built in 1948 with $6306 in property taxes is **$265,360**.
+
+---
+
+## Intervals for predictions
+
+Just like with simple linear regression, we can use the .vocab[`predict`] function in R to calculate the appropriate intervals for our predicted values 
+
+```{r echo  = TRUE}
+x0 <- data.frame(bedrooms = 3, bathrooms = 1, 
+                 living_area = 1050, lot_size = 6000, 
+                 year_built = 1948, 
+                 property_tax = 6306)
+```
+
+---
+
+## Confidence interval for $\hat{\mu}_y$
+
+Calculate a 95% confidence interval for the **estimated mean price** of houses in Levittown, NY with 3 bedrooms, 1 bathroom, 1050 square feet of living area, 6000 square foot lot size, built in 1948 with $6306 in property taxes: 
+
+```{r echo = T}
+predict(price_model, x0, interval = "confidence", 
+        level = 0.95)
+```
+
+---
+
+## Prediction interval for $\hat{y}$
+
+Calculate a 95% prediction interval for an individual house in Levittown, NY with 3 bedrooms, 1 bathroom, 1050 square feet of living area, 6000 square foot lot size, built in 1948 with $6306 in property taxes: 
+
+```{r echo = T}
+predict(price_model, x0, interval = "prediction", 
+        level = 0.95)
+```
+
+---
+
+## `r emo::ji("stop_sign")` Cautions
+
+- .vocab3[Do not extrapolate!] Because there are multiple predictor variables, there is the potential to extrapolate in many directions
+
+--
+
+- The multiple regression model only shows .vocab3[association, not causality]
+  + To show causality, you must have a carefully designed experiment or carefully account for confounding variables in an observational study 
+  
+---
+
+## Recap 
+
+- Introduced multiple linear regression 
+
+- Interpreted a coefficient $\hat{\beta}_j$
+
+- Used the model to calculate predicted values and the corresponding interval
