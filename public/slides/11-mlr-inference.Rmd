@@ -23,7 +23,7 @@ editor_options:
 
 class: middle, center
 
-## [Click here for PDF of slides](09-mlr-inference.pdf)
+## [Click here for PDF of slides](11-mlr-inference.pdf)
 
 ---
 
