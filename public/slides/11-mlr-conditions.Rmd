@@ -22,7 +22,7 @@ editor_options:
 
 class: middle, center
 
-## [Click here for PDF of slides](14-mlr-conditions.pdf)
+## [Click here for PDF of slides](11-mlr-conditions.pdf)
 
 ```{r}
 library(tidyverse)
@@ -259,8 +259,3 @@ p1 + p2
 
 Multiple linear regression is **not** robust to violations of independence, so we need to fit a new model that includes region as a predictor to account for the systematic differences by region.
 
----
-
-## Next, check the model diagnostics
-
-Once you've assessed the conditions for multiple linear regression, then you can use the [model diagnostics](https://sta210-fa20.netlify.app/slides/14-model-diagnostics.html#1) to detect influential points or multicollinearity. 
