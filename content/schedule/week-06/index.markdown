@@ -14,9 +14,8 @@ font-size: 18px;
 
 |           | Slides                   | Videos | Application Exercises (AE) |
 |-----------|--------------------------|--------|--------|
-| Tuesday  | [Multiple linear regression (MLR)](https://sta210-sp21.netlify.app/slides/10-mlr-intro.html#1) | Multiple linear regression | AE 10 |
-| Thursday   | [MLR: Inference](https://sta210-sp21.netlify.app/slides/11-mlr-inference#1) | MLR: Inference | AE 11|
-|   | [MLR: Conditions](https://sta210-sp21.netlify.app/slides/11-mlr-conditions.html#1)| MLR: Conditions | |
+| Tuesday  | [Multiple linear regression (MLR)](https://sta210-sp21.netlify.app/slides/10-mlr-intro.html#1) | [Multiple linear regression](https://warpwire.duke.edu/w/Q00FAA/) | AE 10 |
+| Thursday   | [MLR: Inference](https://sta210-sp21.netlify.app/slides/11-mlr-inference#1) | [MLR: Inference](https://warpwire.duke.edu/w/RU0FAA/) | AE 11|
 
 ## Readings
 

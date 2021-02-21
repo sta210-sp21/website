@@ -73,8 +73,6 @@ lessons:
   - date: "Thu, Feb 25"
     title: "MLR: Inference"
     slides: "11-mlr-inference.html"
-  - title: "MLR: Conditions"
-    slides: "11-mlr-inference.html"
   - title: "Quiz 01 assigned"
     quiz: "quiz-01.html"
   
@@ -82,7 +80,8 @@ lessons:
     date: "Mon, Mar 01"
     title: "Writing lab"
   - date: "Tue, Mar 02"
-    title: "Variable types"
+    title: "MLR: Conditions"
+  - title: "Variable types"
   - date: "Thu, Mar 04"
     title: "Variable transformations"
   - title: "HW 03 assigned"
