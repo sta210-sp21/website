@@ -418,7 +418,7 @@ font-size: 18px;
       <pubDate>12 Mar 17 10:00 +0000</pubDate>
       
       <guid>/schedule/week-06/</guid>
-      <description> table { font-size: 18px; }  Lectures     Slides Videos Application Exercises (AE)     Tuesday Multiple linear regression (MLR) Multiple linear regression AE 10   Thursday MLR: Inference MLR: Inference AE 11    Readings         IMS Section 4.1: Regression with multiple predictors    Assignments          Quiz 01 open Thu, Feb 25 at 12p; due Fri, Feb 26 at 11:59p EST   Lab 05 due Sun, Feb 28 at 11:59p EST    </description>
+      <description> table { font-size: 18px; }  Lectures     Slides Videos Application Exercises (AE)     Tuesday Multiple linear regression (MLR) Multiple linear regression AE 10   Thursday MLR: Inference MLR: Inference AE 11    Readings         IMS Section 4.1: Regression with multiple predictors    Assignments          Quiz 01 open Thu, Feb 25 at 12p; due Fri, Feb 26 at 11:59p EST   Lab 05: ANOVA with Palmer Penguins due Sun, Feb 28 at 11:59p EST    </description>
       <content>&lt;style&gt;
 table {
 font-size: 18px;
@@ -477,7 +477,7 @@ font-size: 18px;
 &lt;td&gt;&lt;strong&gt;open Thu, Feb 25 at 12p; due Fri, Feb 26 at 11:59p EST&lt;/strong&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;Lab 05&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/labs/lab-05-penguins.html&#34;&gt;Lab 05: ANOVA with Palmer Penguins&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;&lt;strong&gt;due Sun, Feb 28 at 11:59p EST&lt;/strong&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;

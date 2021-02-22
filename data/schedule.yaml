@@ -66,7 +66,8 @@ lessons:
     
   - week: "Week 06"
     date: "Mon, Feb 22"
-    title: "Lab 05: ANOVA"
+    title: "Lab 05: ANOVA with Palmer Penguins"
+    lab: "lab-05-penguins.html"
   - date: "Tue, Feb 23"
     title: "Multiple linear regression (MLR)"
     slides: "10-mlr-intro.html"
