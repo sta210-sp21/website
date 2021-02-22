@@ -29,7 +29,7 @@ font-size: 18px;
 
 |                        |   |
 |------------------------|---|
-|Quiz 01 | **open Thu, Feb 25 at 12p; due Fri, Feb 26 at 11:59p EST**| 
+|[Quiz 01](https://sta210-sp21.netlify.app/quiz/quiz-01.html) | **open Thu, Feb 25 at 12p; due Fri, Feb 26 at 11:59p EST**| 
 |[Lab 05: ANOVA with Palmer Penguins](https://sta210-sp21.netlify.app/labs/lab-05-penguins.html) | **due Sun, Feb 28 at 11:59p EST**| 
 
 
