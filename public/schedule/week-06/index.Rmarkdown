@@ -16,6 +16,7 @@ font-size: 18px;
 |-----------|--------------------------|--------|--------|
 | Tuesday  | [Multiple linear regression (MLR)](https://sta210-sp21.netlify.app/slides/10-mlr-intro.html#1) | [Multiple linear regression](https://warpwire.duke.edu/w/Q00FAA/) | [AE 10: Q&A on Weeks 01 - 04](https://sta210-sp21.netlify.app/appex/ae-10-questions.html)|
 | Thursday   | [MLR: Inference](https://sta210-sp21.netlify.app/slides/11-mlr-inference#1) | [MLR: Inference](https://warpwire.duke.edu/w/RU0FAA/) | [AE 11: Harris Trust & Savings Bank](https://sta210-sp21.netlify.app/appex/ae-11-mlr.html)|
+| Thursday   |  | | [AE 11 Solutions](https://sta210-sp21.netlify.app/appex/ae-11-solutions.pdf)|
 
 ## Readings
 
