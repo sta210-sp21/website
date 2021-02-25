@@ -418,7 +418,7 @@ font-size: 18px;
       <pubDate>12 Mar 17 10:00 +0000</pubDate>
       
       <guid>/schedule/week-06/</guid>
-      <description>table { font-size: 18px; }  Lectures     Slides Videos Application Exercises (AE)     Tuesday Multiple linear regression (MLR) Multiple linear regression AE 10: Q&amp;amp;A on Weeks 01 - 04   Thursday MLR: Inference MLR: Inference AE 11: Harris Trust &amp;amp; Savings Bank   Thursday   AE 11 Solutions    Readings         IMS Section 4.</description>
+      <description>table { font-size: 18px; }  Lectures     Slides Videos Application Exercises (AE)     Tuesday Multiple linear regression (MLR) Multiple linear regression AE 10: Q&amp;amp;A on Weeks 01 - 04   Thursday MLR: Inference MLR: Inference AE 11: Harris Trust &amp;amp; Savings Bank      AE 11 Solutions    Readings         IMS Section 4.</description>
       <content>&lt;style&gt;
 table {
 font-size: 18px;
@@ -449,7 +449,7 @@ font-size: 18px;
 &lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/appex/ae-11-mlr.html&#34;&gt;AE 11: Harris Trust &amp;amp; Savings Bank&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;Thursday&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
 &lt;td&gt;&lt;/td&gt;
 &lt;td&gt;&lt;/td&gt;
 &lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/appex/ae-11-solutions.pdf&#34;&gt;AE 11 Solutions&lt;/a&gt;&lt;/td&gt;
