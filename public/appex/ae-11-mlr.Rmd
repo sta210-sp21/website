@@ -1,0 +1,50 @@
+---
+title: "AE 11: Harris Trust & Savings Bank"
+subtitle: "Multiple linear regression"
+date: "`r Sys.Date()`"
+output: 
+  html_document: 
+    fig_height: 3
+    fig_width: 6
+    theme: readable
+    code_folding: hide
+---
+
+```{r include = F}
+knitr::opts_chunk$set(warning = F, 
+                      message = F)
+```
+
+
+## Class announcements
+
+- See this week's schedule: [Week 06](https://sta210-sp21.netlify.app/schedule/week-05/)
+  - [Lab 05](https://sta210-sp21.netlify.app/labs/lab-05-penguins.html) due Sun, Feb 28 at 11:59p
+
+- [Quiz 01](https://sta210-sp21.netlify.app/quiz/quiz-01.html): opens today at 12p, closes Fri at 11:59p 
+
+## Questions? 
+
+## AE 11: Harris Trust & Savings Bank 
+
+Clone the **ae-11** repo and open a new project in RStudio. We will walk through the AE as a class.
+
+## Visualizing multiple linear regression 
+
+```{r load-packages-data, warning = F, message = F}
+library(tidyverse)
+library(plotly)
+wages <- read_csv("data/wages.csv")
+```
+
+```{r scatterplot, warning = F, message = F}
+wages_scatterplot <- plot_ly(wages, x = ~Senior, y = ~Educ, z = ~Bsal, model = "lines") %>%
+  add_markers() %>%
+  layout(scene = list(xaxis = list(title = 'Senior'),
+                     yaxis = list(title = 'Education'),
+                     zaxis = list(title = 'Starting salary')))
+
+wages_scatterplot
+```
+
+

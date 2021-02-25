@@ -15,7 +15,7 @@ knitr::opts_chunk$set(echo = TRUE,
 
 ## General instructions
 
-Quiz 01 will be released on **Thu, Feb 25 at 12p EST** and must be completed by **Fri, Feb 26 at 11:59p EST **. Once you open the quiz, you will have **45 minutes** to complete it. The timer automatically starts when you click to begin the assignment, and it stops accepting responses when you reach the time limit.
+Quiz 01 will be released on **Thu, Feb 25 at 12p EST** and must be completed by **Fri, Feb 26 at 11:59p EST **. Once you open the quiz, you will have **45 minutes** to complete it. The timer automatically starts when you click to begin the assignment, and the quiz stops accepting responses when you reach the time limit.
 
 You will see a **Quiz 01** assignment under the Tests & Quizzes tab on Sakai. You will complete the entire quiz in Sakai. You do **<u>not</u>** need to use RStudio or GitHub for the quiz.
 
