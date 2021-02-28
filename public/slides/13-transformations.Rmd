@@ -22,7 +22,7 @@ editor_options:
 
 class: middle, center
 
-## [Click here for PDF of slides](11-transformations.pdf)
+## [Click here for PDF of slides](12-transformations.pdf)
 
 ---
 

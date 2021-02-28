@@ -23,7 +23,7 @@ editor_options:
 
 class: middle, center
 
-## [Click here for PDF of slides](10-mlr-predictor-types.pdf)
+## [Click here for PDF of slides](12-mlr-predictor-types.pdf)
 
 ---
 

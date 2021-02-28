@@ -22,7 +22,7 @@ editor_options:
 
 class: middle, center
 
-## [Click here for PDF of slides](14-mlr-conditions.pdf)
+## [Click here for PDF of slides](13-mlr-conditions.pdf)
 
 ```{r}
 library(tidyverse)

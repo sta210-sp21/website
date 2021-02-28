@@ -14,9 +14,9 @@ font-size: 18px;
 
 |           | Slides                   | Videos | Application Exercises (AE) |
 |-----------|--------------------------|--------|--------|
-| Tuesday  | [MLR: Types of predictors](https://sta210-sp21.netlify.app/slides/12-mlr-predictor-types.html) | MLR: Variable types| AE 12|
+| Tuesday  | [MLR: Types of predictors](https://sta210-sp21.netlify.app/slides/12-mlr-predictor-types.html) | [MLR: Types of predictors](https://warpwire.duke.edu/w/v1kFAA/)| AE 12|
 | Thursday   | [MLR: Conditions](https://sta210-sp21.netlify.app/slides/12-mlr-conditions.html)| MLR: Conditions | AE 13 |
-|   |  [Variable transformations](https://sta210-sp21.netlify.app/slides/13-transformations.html) | Variable transformations | |
+|   |  [Variable transformations](https://sta210-sp21.netlify.app/slides/13-transformations.html) | [Variable transformations](https://warpwire.duke.edu/w/v1kFAA/)| |
 
 ## Readings
 
