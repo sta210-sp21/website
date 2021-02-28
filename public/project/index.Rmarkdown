@@ -340,7 +340,7 @@ of many concepts and is unable to put together a cogent argument. Communication
 of results is unclear.
 - *Below 60%*: Student is not making a sufficient effort.
 
-## Late work policy
+### Late work policy
 
 **There is no late work accepted on this project.** Be sure to turn in your work early to avoid any technological mishaps.
 

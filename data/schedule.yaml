@@ -80,6 +80,7 @@ lessons:
   - week: "Week 07"
     date: "Mon, Mar 01"
     title: "Project: topic ideas"
+    lab: "project-topic-ideas.html"
   - date: "Tue, Mar 02"
     title: "MLR: Types of predictors"
     slides: "12-mlr-predictor-types.html"

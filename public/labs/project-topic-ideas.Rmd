@@ -1,0 +1,47 @@
+---
+title: "Project topic ideas" 
+subtitle: "due Sun, Mar 07, at 11:59p EST"
+output: 
+  tufte::tufte_html:
+    css: "./sta210-labs.css"
+    tufte_variant: "envisioned"
+    highlight: pygments
+    fig_height: 10
+    toc: true
+    toc_depth: 1
+link-citations: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(eval = FALSE)
+```
+
+The goal for this lab is to identify 2 - 3 potential data sets to use for the final project. The objective of this task is to give you enough time to find a data set that will help you be successful on the project. 
+
+# Getting started
+
+## Clone assignment repo + start new project
+
+A repository has already been created for you and your teammates. Everyone in your team has access to the same repo.
+
+- Go to [course organization](https://www.github.com/sta210-sp21) on GitHub.
+
+- In addition to your private individual repositories, you should now see a repo named **project-**. Go to that repository.
+  
+- Each person on the team should clone the repository and open a new project in RStudio.
+
+# Topic ideas 
+
+Go to the [Project](https://sta210-sp21.netlify.app/project/) page on the course website and read in the introduction to the project an the **Topic Ideas** section. 
+
+The goal of this lab is to identify 2 - 3 potential data sets for the final project. Be sure to read the criteria under **Topic Ideas** carefully to ensure your data meet the stated criteria. 
+
+A member of the teaching team will be available f you have questions or need help finding date. 
+
+See the [Tips + Resources](https://sta210-sp21.netlify.app/project/#tips--resources) section of the project instructions for a list of data repositories to help you find data. 
+
+# Submission
+
+You will submit the final project ideas by pushing your work to your GitHub repo. The teaching team will provide feedback under the **Issues** on GitHub. 
+
+You do **<u>not</u>** need to submit anything for the topic ideas on Gradescope. 
