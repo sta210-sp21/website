@@ -1,0 +1,406 @@
+---
+title: "Multiple Linear Regression"
+subtitle: "Types of Predictors"
+author: "Prof. Maria Tackett"
+output:
+  xaringan::moon_reader:
+    mathjax: "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML"
+    css: "sta210-slides.css"
+    logo: img/sta199-sticker-icon.png
+    lib_dir: libs/font-awesome
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      slideNumberFormat: "%current%" 
+      ratio: "16:9"
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r child = "setup.Rmd"}
+```
+
+class: middle, center
+
+## [Click here for PDF of slides](10-mlr-predictor-types.pdf)
+
+---
+
+## Topics
+
+- Mean-centering quantitative predictors
+
+- Using indicator variables for categorical predictors
+
+- Using interaction terms 
+
+
+
+```{r echo = F}
+library(tidyverse)
+library(knitr)
+library(broom)
+library(patchwork)
+library(openintro)
+library(kableExtra)
+```
+
+---
+
+## Peer-to-peer lender
+
+Today's data is a sample of 50 loans made through a  peer-to-peer lending club. The data is in the `loan50` data frame in the openintro R package.
+
+
+```{r echo = F}
+ggplot(data = loan50, aes(x = interest_rate)) +
+  geom_histogram() + 
+  labs(x = "Interest rate", 
+       title = "Distribution of interest rate")
+```
+
+---
+
+## Variables
+
+**Predictors**
+- .vocab[`verified_income`]: Whether borrower's income source and amount have been verified (`Not Verified`, `Source Verified`, `Verified`)
+- .vocab[`debt_to_income`]: Debt-to-income ratio, i.e. the percentage of a borrower's total debt divided by their total income
+- .vocab[`annual_income`]: Annual income (in $1000s)
+
+**Response**
+- .vocab[`interest_rate`]: Interest rate for the loan
+
+```{r}
+loan50 <- loan50 %>%
+  mutate(annual_income = annual_income / 1000)
+```
+
+---
+
+## Predictor variables 
+
+```{r echo = F, fig.height = 4, fig.width = 9}
+library(patchwork)
+
+p1 <- ggplot(data = loan50, aes(x = verified_income)) +
+  geom_bar() +
+  labs(title = "Verified Income", 
+       x = "", y = "") +
+  coord_flip()
+
+p2 <- ggplot(data = loan50, aes(x = debt_to_income)) +
+  geom_histogram() + 
+  labs(title = "Debt to income ratio",
+       x = "", y = "")
+
+p3 <- ggplot(data = loan50, aes(x = annual_income)) +
+  geom_histogram() + 
+  labs(title = "Annual income (in $1000s)",
+       x = "", y = "")
+
+p1 + p2 / p3
+```
+
+---
+
+## Response vs. Predictors
+
+```{r echo = F, fig.height = 4, fig.width = 9}
+p4 <- ggplot(data = loan50, aes(x = verified_income, y = interest_rate)) +
+  geom_boxplot(fill = "steelblue") + 
+  labs(y = "Interest Rate", 
+       x = "Income verification")
+
+p5 <- ggplot(data = loan50, aes(x = debt_to_income, y = interest_rate)) +
+  geom_point(color = "steelblue") + 
+  labs(y = "", 
+       x = "Debt to income ratio")
+
+
+p6 <- ggplot(data = loan50, aes(x = annual_income, y = interest_rate)) +
+  geom_point(color = "steelblue") + 
+  labs(y = "", 
+       x = "Annual income (in $1000s)")
+
+p4 + p5 / p6
+```
+
+---
+
+## Regression Model 
+
+```{r echo = F}
+int_model <- lm(interest_rate ~ debt_to_income + verified_income  + annual_income, data = loan50)
+tidy(int_model, conf.int = T) %>% kable(format = "markdown", digits = 3)
+```
+
+--
+
+.question[
+- Describe the subset of borrowers who are expected to get an interest rate of 10.726% based on our model
+- Is this interpretation meaningful? Why or why not?
+]
+---
+
+class: middle, center
+
+## Mean-centered variables
+
+---
+
+
+## Mean-Centered Variables
+
+If we are interested in interpreting the intercept, we can .vocab[mean-center] the quantitative predictors in the model.
+
+We can mean-center a quantitative predictor $X_j$ using the following: 
+
+$$X_{j_{Cent}} = X_{j}- \bar{X}_{j}$$
+
+--
+
+If we mean-center all quantitative variables, then the intercept is interpreted as the expected value of the response variable when all quantitative variables are at their mean value.
+
+---
+
+## Loans data: mean-center variables
+
+```{r}
+loan50 <- loan50 %>%
+  mutate(debt_inc_cent = debt_to_income - mean(debt_to_income), 
+         annual_income_cent = annual_income - mean(annual_income))
+```
+
+```{r fig.height = 4, fig.width = 9}
+p1 <- ggplot(data = loan50, aes(x = debt_to_income)) +
+  geom_density(fill = "steelblue", alpha = 0.7) +
+  labs(x = "", 
+       title = "Debt to income ratio")
+
+p2 <- ggplot(data = loan50, aes(x = debt_inc_cent)) +
+  geom_density(fill = "steelblue", alpha = 0.7) +
+  labs(x = "", 
+       title = "Mean-centered Debt to income ratio")
+
+p3 <- ggplot(data = loan50, aes(x = annual_income)) +
+  geom_density(fill = "steelblue", alpha = 0.7) +
+  labs(x = "", 
+       title = "Annual income (in $1000s)")
+
+p4 <- ggplot(data = loan50, aes(x = annual_income_cent)) +
+  geom_density(fill = "steelblue", alpha = 0.7) +
+  labs(x = "", 
+       title = "Mean-centered Annual income (in $1000s)")
+
+(p1 + p3) / (p2 + p4)
+```
+
+---
+
+## Using mean-centere variables in the model 
+
+.question[
+How do you expect the model to change if we use the `debt_inc_cent` and `annual_income_cent` in the model? 
+]
+
+--
+
+```{r echo = F}
+cent_model <- lm(interest_rate ~ debt_inc_cent + verified_income + annual_income_cent, data = loan50)
+tidy(cent_model, conf.int = T) %>% 
+  kable(format = "markdown" , digits = 3)
+```
+
+---
+
+## Original vs. mean-centered model 
+
+.pull-left[
+.small[
+```{r}
+tidy(int_model) %>%
+  select(term, estimate) %>%
+kable(format = "markdown", digits = 3)
+```
+]
+]
+
+.pull-right[
+.small[
+```{r}
+tidy(cent_model) %>%
+  select(term, estimate) %>%
+kable(format = "markdown", digits = 3)
+```
+]
+]
+
+---
+
+class: middle, center
+
+## Indicator variables 
+
+---
+
+## Indicator variables
+
+- Suppose there is a categorical variable with $K$ categories (levels)
+
+- We can make $K$ indicator variables - one indicator for each category
+
+- An .vocab[indicator variable] takes values 1 or 0 
+  - 1 if the observation belongs to that category
+  - 0 if the observation does not belong to that category
+
+---
+
+## Indicator variable for `verified_income`
+
+.small[
+```{r echo = T}
+loan50 <- loan50 %>%
+  mutate(not_verified = 
+           if_else(verified_income == "Not Verified", 1, 0),
+         source_verified = 
+           if_else(verified_income == "Source Verified", 1, 0),
+         verified = 
+           if_else(verified_income == "Verified", 1, 0)
+  )
+```
+]
+
+--
+
+.small[
+```{r}
+loan50 %>%
+  select(verified_income, not_verified, source_verified, verified) %>%
+  slice(1, 3, 6)
+```
+]
+
+---
+
+## Indicators in the model
+
+We will use $K-1$ of the indicator variables in the model
+    
+The .vocab[baseline] is the category that doesn't have a term in the model. 
+
+The coefficients of the indicator variables in the model are interpreted as  the expected change in the response compared to the baseline, holding all other variables constant.
+
+---
+## Interpreting `verified_income`
+
+.small[
+```{r echo = F}
+tidy(cent_model, conf.int  = T) %>%
+  kable(format = "html", digits = 3) %>%
+  row_spec(c(3,4), background = "#dce5b2")
+```
+]
+
+--
+
+.vocab[The baseline category is "Not verified".]
+
+---
+
+## Interpreting `verified_income`
+
+A person with source verified income is expected to take a loan with an interest rate that is 2.211% higher than the rate on loans to those whose income is not verified, holding all else constant. 
+
+--
+
+<br> 
+
+A person with verified income is expected to take a loan with an interest rate that is 6.880% higher than the rate on loans to those whose income is not verified, holding all else constant.
+
+---
+
+class: middle, center
+
+## Interaction terms
+
+---
+
+## Interaction Terms
+
+Sometimes the relationship between a predictor variable and the response depends on the value of another predictor variable
+
+This is an .vocab[interaction effect]
+  
+To account for this, we can include .vocab[interaction terms] in the model.
+
+---
+
+## Interest rate vs. annual income
+
+```{r, fig.height = 3, fig.width = 9}
+p1 <- ggplot(data = loan50, aes(x = annual_income, y = interest_rate)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) + 
+  labs(x = "Annual income (in $1000s)", 
+       y = "Interest rate")
+```
+
+```{r, fig.height = 3, fig.width = 9}
+p2 <- ggplot(data = loan50, aes(x = annual_income, y = interest_rate, 
+          color = verified_income)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+    labs(x = "Annual income (in $1000s)", 
+       y = "", color = "")  + theme(legend.position="top")
+```
+
+```{r fig.height = 3}
+patchwork <- p1 + p2
+patchwork + plot_annotation(title = 'Interest rate vs. annual income')
+```
+
+--
+
+The lines are .vocab[not parallel] indicating there is an .vocab[interaction effect]. The slope of annual income differs based on the income verification. 
+
+---
+
+## Interaction term in model
+
+```{r}
+model_w_int <- lm(interest_rate ~ debt_inc_cent  +  debt_inc_cent + annual_income_cent + verified_income * annual_income_cent, data = loan50)
+```
+
+```{r echo = F}
+tidy(model_w_int) %>%
+  kable(format = "html", digits = 3) %>%
+  row_spec(c(6,7), background = "#dce5b2")
+```
+
+---
+
+## Interpreting interaction terms
+
+.vocab[What the interaction means: ]
+
+The effect of annual income on the interest rate differs by -0.016 when the income is source verified compared to when it is not verified, holding all else constant. 
+
+--
+
+<br>
+
+.vocab[Interpreting `annual_income` for source verified:]
+
+If the income is source verified, we expect the interest rate to decrease by 0.023% (-0.007 + -0.016) for each additional thousand dollars in annual income, holding all else constant.
+
+---
+
+## Recap
+
+- Mean-centering quantitative predictors
+
+- Using indicator variables for categorical predictors
+
+- Using interaction terms 

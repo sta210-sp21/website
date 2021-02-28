@@ -1,0 +1,447 @@
+---
+title: "Variable transformations"
+author: "Prof. Maria Tackett"
+output:
+  xaringan::moon_reader:
+    mathjax: "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML"
+    css: "sta210-slides.css"
+    logo: img/sta199-sticker-icon.png
+    lib_dir: libs/font-awesome
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      slideNumberFormat: "%current%" 
+      ratio: "16:9"
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r child = "setup.Rmd"}
+```
+
+class: middle, center
+
+## [Click here for PDF of slides](11-transformations.pdf)
+
+---
+
+## Topics
+
+- Log transformation on the response
+
+- Log transformation on the predictor 
+
+
+```{r echo = F}
+library(tidyverse)
+library(knitr)
+library(broom)
+library(Sleuth3) 
+library(patchwork)
+```
+
+
+---
+
+## Respiratory Rate vs. Age
+
+- A high respiratory rate can potentially indicate a respiratory infection in children. In order to determine what indicates a "high" rate, we first want to understand the relationship between a child's age and their respiratory rate. 
+
+- The data contain the respiratory rate for 618 children ages 15 days to 3 years.
+
+- **Variables**: 
+    - <font class="vocab">`Age`</font>: age in months
+    - <font class="vocab">`Rate`</font>: respiratory rate (breaths per minute)
+
+---
+
+## Rate vs. Age
+
+```{r}
+respiratory <- ex0824
+ggplot(data=respiratory, aes(x=Age, y=Rate)) +
+  geom_point(alpha = 0.7) + 
+  labs("Respiratory Rate vs. Age")
+```
+
+---
+
+## Rate vs. Age
+
+```{r echo=FALSE}
+model <- lm(Rate ~ Age, data=respiratory)
+kable(tidy(model, conf.int=TRUE),format="html", digits=3)
+```
+
+```{r echo=FALSE}
+respiratory <- respiratory %>% 
+  mutate(residuals = resid(model), predicted = predict(model))
+
+ggplot(data=respiratory, aes(x=predicted, y=residuals)) +
+  geom_point(alpha = 0.7) + 
+  geom_hline(yintercept=0,color="red")
+```
+
+---
+
+class: middle, center
+
+## Log transformation on the response
+
+---
+
+## Need to transform $Y$ 
+
+- Typically, a "fan-shaped" residual plot indicates the need for a transformation of the response variable $y$
+  + .vocab[log(Y)] is the most straightforward to interpret
+
+--
+
+
+- When building a model: 
+  + Choose a transformation and build the model on the transformed data
+  + Reassess the residual plots
+  + If the residuals plots did not sufficiently improve, try a new transformation!
+
+---
+
+## Log transformation on $Y$
+
+- If we apply a log transformation to the response variable, we want to estimate the parameters for the model...
+.alert[
+$$\widehat{\log(Y)} = \hat{\beta}_0 + \hat{\beta}_1 X$$
+]
+
+--
+
+- We want to interpret the model in terms of $y$ not $\log(Y)$, so we write all interpretations in terms of 
+
+.alert[
+$$y = \exp\{\hat{\beta}_0 + \hat{\beta}_1 X\} = \exp\{\hat{\beta}_0\}\exp\{\hat{\beta}_1X\}$$
+]
+
+---
+
+## Mean and logs
+
+Suppose we have a set of values
+
+```{r echo = TRUE}
+x <- c(3, 5, 6, 8, 10, 14, 19)
+```
+
+--
+
+.pull-left[
+Let's calculate $\overline{\log(x)}$
+
+.small[
+```{r, echo = TRUE}
+log_x <- log(x)
+mean(log_x)
+```
+]
+]
+
+--
+
+.pull-right[
+Let's calculate $\log(\bar{x})$
+
+.small[
+```{r, echo = TRUE}
+xbar <- mean(x)
+log(xbar)
+```
+]
+]
+---
+
+## Median and logs
+
+```{r echo = TRUE}
+x <- c(3, 5, 6, 8, 10, 14, 19)
+```
+
+--
+
+.pull-left[
+Let's calculate $\text{Median}(\log(x))$
+
+.small[
+```{r , echo = TRUE}
+log_x <- log(x)
+median(log_x)
+```
+]
+]
+--
+
+.pull-right[
+Let's calculate $\log(\text{Median}(x))$
+
+.small[
+```{r, echo = TRUE}
+median_x <- median(x)
+log(median_x)
+```
+]
+]
+
+---
+
+## Mean, Median, and log
+
+```{r}
+x <- c(3, 5, 6, 8, 10, 14, 19)
+```
+
+--
+
+$$\overline{\log(x)} \neq \log(\bar{x})$$
+
+```{r echo = T}
+mean(log_x) == log(xbar)
+```
+
+--
+
+$$\text{Median}(\log(x)) = \log(\text{Median}(x))$$
+```{r echo = T}
+median(log_x) == log(median_x)
+```
+
+
+---
+
+## Mean and median of $\log(Y)$
+
+- Recall that $y= \beta_0 + \beta_1 x_i$ is the **mean** value of $y$ at the given value $x_i$. This doesn't hold when we log-transform $y$
+
+--
+
+- The mean of the logged values is **not** equal to the log of the mean value. Therefore at a given value of $x$
+
+.alert[
+$$\begin{aligned}\exp\{\text{Mean}(\log(y))\} \neq \text{Mean}(y) \\[5pt]
+\Rightarrow \exp\{\beta_0 + \beta_1 x\} \neq \text{Mean}(y) \end{aligned}$$
+]
+
+---
+
+## Mean and median of $\log(y)$
+
+- However, the median of the logged values **is** equal to the log of the median value. Therefore,
+
+.alert[
+$$\exp\{\text{Median}(\log(y))\} = \text{Median}(y)$$
+]
+
+--
+
+- If the distribution of $\log(y)$ is symmetric about the regression line, for a given value $x_i$,
+.alert[
+$$\text{Median}(\log(y)) = \text{Mean}(\log(y))$$
+]
+---
+
+## Interpretation with log-transformed $y$
+
+- Given the previous facts, if $\widehat{\log(Y)} = \hat{\beta}_0 + \hat{\beta}_1 x$, then 
+.alert[
+$$\text{Median}(\hat{Y}) = \exp\{\hat{\beta}_0\}\exp\{\hat{\beta}_1 x\}$$
+]
+
+<br><br>
+
+
+- <font class="vocab">Intercept:</font> When $X=0$, the median of $Y$ is expected to be $\exp\{\hat{\beta}_0\}$
+<br>
+
+
+- <font class="vocab">Slope: </font>For every one unit increase in $X$, the median of $Y$ is expected to multiply by a factor of $\exp\{\hat{\beta}_1\}$
+
+
+---
+
+## log(Rate) vs. Age
+
+```{r}
+respiratory <- respiratory %>% mutate(log_rate = log(Rate))
+```
+
+```{r echo=F}
+ggplot(data=respiratory, aes(x=Age,y=log_rate)) + 
+  geom_point(alpha = 0.7) +
+  labs(title="Log-Transformed Rate vs. Age")
+```
+
+---
+
+## log(Rate) vs. Age
+
+```{r}
+log_model <- lm(log_rate ~ Age, data = respiratory)
+```
+
+```{r echo=F}
+ggplot(data=respiratory, aes(x=predict(log_model), y=resid(log_model))) +
+  geom_point(alpha = 0.7) + 
+  geom_hline(yintercept=0, color="red") +
+  labs(x="Predicted", y="Residuals",
+       title="Residuals vs. Predicted", 
+       subtitle="log-transformed Rate")
+```
+
+---
+
+## log(Rate) vs. Age
+
+```{r echo = F}
+kable(tidy(log_model, conf.int=TRUE),format="markdown", digits=3)
+```
+
+
+--
+
+<br>
+
+.vocab[Intercept]: The median respiratory rate for a new born child is expected to be `r round(exp(3.845),3)` (exp{3.845}) breaths per minute.
+
+--
+
+.vocab[Slope]: For each additional month in a child's age, the respiratory rate is expected to multiply by a factor of `r round(exp(-0.019), 3)` (exp{-0.019}).
+
+---
+
+## Confidence interval for $\beta_j$
+
+- The confidence interval for the coefficient of $X$ describing its relationship with $\log(Y)$ is
+
+$$\hat{\beta}_j \pm t^* SE(\hat{\beta_j})$$
+
+--
+
+- The confidence interval for the coefficient of $x$ describing its relationship with $Y$ is
+
+.alert[
+$$\exp\big\{\hat{\beta}_j \pm t^* SE(\hat{\beta_j})\big\}$$
+]
+
+---
+
+## Coefficient of `Age`
+
+```{r echo = F}
+kable(tidy(log_model, conf.int=TRUE),format="html", digits=3)
+```
+
+.vocab[We are 95% confident that for each additional month in age, the respiratory rate will multiply by a factor of `r round(exp(-0.02),3)` to `r round(exp(-0.018),3)` (exp{-0.02} to exp{-0.018}).]
+
+---
+
+class: middle, center
+
+## Log transformation on the predictor
+
+---
+
+## Log Transformation on $X$
+
+```{r,echo=F}
+set.seed(1)
+s <- ggplot2::diamonds %>% sample_n(100)
+p1 <- ggplot(data=s,aes(x=carat,y=log(price)))+
+  geom_point(color="blue")+
+  ggtitle("Scatterplot")+
+  xlab("X")+
+  ylab("Y")
+```
+
+```{r,echo=F}
+mod2 <- lm(log(price) ~ carat, data=s)
+s <- s %>% mutate(residuals = resid(mod2), predicted = predict(mod2))
+p2 <- ggplot(data=s,aes(x=predicted, y=residuals)) + 
+geom_point(alpha = 0.7)+
+geom_hline(yintercept=0,color="red") +
+  ggtitle("Residual vs. Predicted")+
+  xlab("Predicted")+
+  ylab("residuals") 
+```
+
+
+
+```{r, fig.height = 2.5}
+p1 + p2
+```
+
+
+Try a transformation on $X$ if the scatterplot shows some curvature but the variance is constant for all values of $X$
+
+---
+
+## Model with Transformation on $X$
+
+.alert[
+$$\hat{Y} = \hat{\beta}_0 + \hat{\beta}_1 \log(X)$$
+]
+<br> 
+
+--
+
+- <font class="vocab">Intercept: </font> When $\log(X)=0$, $(X=1)$, $Y$ is expected to be $\hat{\beta}_0$ (i.e. the mean of $y$ is $\hat{\beta}_0$)
+
+--
+
+- <font class="vocab">Slope: </font> When $X$ is multiplied by a factor of $\mathbf{C}$, the mean of $Y$ is expected to change by $\boldsymbol{\hat{\beta}_1}\mathbf{\log(C)}$ units
+    - *Example*: when $X$ is multiplied by a factor of 2, $y$ is expected to change by $\boldsymbol{\hat{\beta}_1}\mathbf{\log(2)}$ units
+
+---
+
+## Rate vs. log(Age)
+
+```{r,echo=F}
+ex0824 <- ex0824 %>% mutate(log_age = log(Age))
+ggplot(data=ex0824,aes(x=log_age,y=Rate)) + 
+  geom_point(alpha = 0.7)  +
+  ggtitle("Respiratory Rate vs. log(Age)") + 
+  xlab("log(Age)")+
+  ylab("Respiratory Rate")
+```
+
+---
+
+## Rate vs. log(Age)
+
+```{r,echo=F}
+mod3 <- lm(Rate ~ log_age,data=ex0824)
+kable(tidy(mod3, conf.int=TRUE),format="markdown", digits = 3)
+```
+
+--
+
+<br> 
+
+.vocab[Intercept]: The expected (mean) respiratory rate for children who are 1 month old (log(1) = 0) is 50.135	breaths per minute.
+
+--
+
+.vocab[Slope]: If a child's age doubles, we expect their respiratory rate to decrease by `r round(5.982*log(2),3)` (-5.982*log(2)) breaths per minute.
+
+---
+
+class: middle 
+
+See [Log Transformations in Linear Regression](https://github.com/sta210-sp20/supplemental-notes/blob/master/log-transformations.pdf) for more details about interpreting regression models with log-transformed variables.
+
+---
+
+## Recap
+
+- Log transformation on the response
+
+- Log transformation on the predictor 
+
+
+

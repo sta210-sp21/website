@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Multiple Linear Regression</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Prof. Maria Tackett" />
+    <script src="libs/font-awesome/header-attrs/header-attrs.js"></script>
+    <script src="libs/font-awesome/kePrint/kePrint.js"></script>
+    <link href="libs/font-awesome/lightable/lightable.css" rel="stylesheet" />
+    <link rel="stylesheet" href="sta210-slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Multiple Linear Regression
+## Types of Predictors
+### Prof. Maria Tackett
+
+---
+
+
+
+
+
+class: middle, center
+
+## [Click here for PDF of slides](10-mlr-predictor-types.pdf)
+
+---
+
+## Topics
+
+- Mean-centering quantitative predictors
+
+- Using indicator variables for categorical predictors
+
+- Using interaction terms 
+
+
+
+
+
+---
+
+## Peer-to-peer lender
+
+Today's data is a sample of 50 loans made through a  peer-to-peer lending club. The data is in the `loan50` data frame in the openintro R package.
+
+
+&lt;img src="12-mlr-predictor-types_files/figure-html/unnamed-chunk-3-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Variables
+
+**Predictors**
+- .vocab[`verified_income`]: Whether borrower's income source and amount have been verified (`Not Verified`, `Source Verified`, `Verified`)
+- .vocab[`debt_to_income`]: Debt-to-income ratio, i.e. the percentage of a borrower's total debt divided by their total income
+- .vocab[`annual_income`]: Annual income (in $1000s)
+
+**Response**
+- .vocab[`interest_rate`]: Interest rate for the loan
+
+
+
+---
+
+## Predictor variables 
+
+&lt;img src="12-mlr-predictor-types_files/figure-html/unnamed-chunk-5-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Response vs. Predictors
+
+&lt;img src="12-mlr-predictor-types_files/figure-html/unnamed-chunk-6-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Regression Model 
+
+
+|term                           | estimate| std.error| statistic| p.value| conf.low| conf.high|
+|:------------------------------|--------:|---------:|---------:|-------:|--------:|---------:|
+|(Intercept)                    |   10.726|     1.507|     7.116|   0.000|    7.690|    13.762|
+|debt_to_income                 |    0.671|     0.676|     0.993|   0.326|   -0.690|     2.033|
+|verified_incomeSource Verified |    2.211|     1.399|     1.581|   0.121|   -0.606|     5.028|
+|verified_incomeVerified        |    6.880|     1.801|     3.820|   0.000|    3.253|    10.508|
+|annual_income                  |   -0.021|     0.011|    -1.804|   0.078|   -0.043|     0.002|
+
+--
+
+.question[
+- Describe the subset of borrowers who are expected to get an interest rate of 10.726% based on our model
+- Is this interpretation meaningful? Why or why not?
+]
+---
+
+class: middle, center
+
+## Mean-centered variables
+
+---
+
+
+## Mean-Centered Variables
+
+If we are interested in interpreting the intercept, we can .vocab[mean-center] the quantitative predictors in the model.
+
+We can mean-center a quantitative predictor `\(X_j\)` using the following: 
+
+`$$X_{j_{Cent}} = X_{j}- \bar{X}_{j}$$`
+
+--
+
+If we mean-center all quantitative variables, then the intercept is interpreted as the expected value of the response variable when all quantitative variables are at their mean value.
+
+---
+
+## Loans data: mean-center variables
+
+
+
+&lt;img src="12-mlr-predictor-types_files/figure-html/unnamed-chunk-9-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Using mean-centere variables in the model 
+
+.question[
+How do you expect the model to change if we use the `debt_inc_cent` and `annual_income_cent` in the model? 
+]
+
+--
+
+
+|term                           | estimate| std.error| statistic| p.value| conf.low| conf.high|
+|:------------------------------|--------:|---------:|---------:|-------:|--------:|---------:|
+|(Intercept)                    |    9.444|     0.977|     9.663|   0.000|    7.476|    11.413|
+|debt_inc_cent                  |    0.671|     0.676|     0.993|   0.326|   -0.690|     2.033|
+|verified_incomeSource Verified |    2.211|     1.399|     1.581|   0.121|   -0.606|     5.028|
+|verified_incomeVerified        |    6.880|     1.801|     3.820|   0.000|    3.253|    10.508|
+|annual_income_cent             |   -0.021|     0.011|    -1.804|   0.078|   -0.043|     0.002|
+
+---
+
+## Original vs. mean-centered model 
+
+.pull-left[
+.small[
+
+|term                           | estimate|
+|:------------------------------|--------:|
+|(Intercept)                    |   10.726|
+|debt_to_income                 |    0.671|
+|verified_incomeSource Verified |    2.211|
+|verified_incomeVerified        |    6.880|
+|annual_income                  |   -0.021|
+]
+]
+
+.pull-right[
+.small[
+
+|term                           | estimate|
+|:------------------------------|--------:|
+|(Intercept)                    |    9.444|
+|debt_inc_cent                  |    0.671|
+|verified_incomeSource Verified |    2.211|
+|verified_incomeVerified        |    6.880|
+|annual_income_cent             |   -0.021|
+]
+]
+
+---
+
+class: middle, center
+
+## Indicator variables 
+
+---
+
+## Indicator variables
+
+- Suppose there is a categorical variable with `\(K\)` categories (levels)
+
+- We can make `\(K\)` indicator variables - one indicator for each category
+
+- An .vocab[indicator variable] takes values 1 or 0 
+  - 1 if the observation belongs to that category
+  - 0 if the observation does not belong to that category
+
+---
+
+## Indicator variable for `verified_income`
+
+.small[
+
+```r
+loan50 &lt;- loan50 %&gt;%
+  mutate(not_verified = 
+           if_else(verified_income == "Not Verified", 1, 0),
+         source_verified = 
+           if_else(verified_income == "Source Verified", 1, 0),
+         verified = 
+           if_else(verified_income == "Verified", 1, 0)
+  )
+```
+]
+
+--
+
+.small[
+
+```
+## # A tibble: 3 x 4
+##   verified_income not_verified source_verified verified
+##   &lt;fct&gt;                  &lt;dbl&gt;           &lt;dbl&gt;    &lt;dbl&gt;
+## 1 Not Verified               1               0        0
+## 2 Verified                   0               0        1
+## 3 Source Verified            0               1        0
+```
+]
+
+---
+
+## Indicators in the model
+
+We will use `\(K-1\)` of the indicator variables in the model
+    
+The .vocab[baseline] is the category that doesn't have a term in the model. 
+
+The coefficients of the indicator variables in the model are interpreted as  the expected change in the response compared to the baseline, holding all other variables constant.
+
+---
+## Interpreting `verified_income`
+
+.small[
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; estimate &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; std.error &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p.value &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; conf.low &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; conf.high &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; (Intercept) &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 9.444 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.977 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 9.663 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.000 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 7.476 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 11.413 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; debt_inc_cent &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.671 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.676 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.993 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.326 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.690 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.033 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;background-color: #dce5b2 !important;"&gt; verified_incomeSource Verified &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 2.211 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 1.399 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 1.581 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 0.121 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; -0.606 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 5.028 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;background-color: #dce5b2 !important;"&gt; verified_incomeVerified &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 6.880 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 1.801 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 3.820 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 0.000 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 3.253 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 10.508 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; annual_income_cent &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.021 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.011 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -1.804 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.078 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.043 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.002 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+]
+
+--
+
+.vocab[The baseline category is "Not verified".]
+
+---
+
+## Interpreting `verified_income`
+
+A person with source verified income is expected to take a loan with an interest rate that is 2.211% higher than the rate on loans to those whose income is not verified, holding all else constant. 
+
+--
+
+&lt;br&gt; 
+
+A person with verified income is expected to take a loan with an interest rate that is 6.880% higher than the rate on loans to those whose income is not verified, holding all else constant.
+
+---
+
+class: middle, center
+
+## Interaction terms
+
+---
+
+## Interaction Terms
+
+Sometimes the relationship between a predictor variable and the response depends on the value of another predictor variable
+
+This is an .vocab[interaction effect]
+  
+To account for this, we can include .vocab[interaction terms] in the model.
+
+---
+
+## Interest rate vs. annual income
+
+
+
+
+
+&lt;img src="12-mlr-predictor-types_files/figure-html/unnamed-chunk-18-1.png" style="display: block; margin: auto;" /&gt;
+
+--
+
+The lines are .vocab[not parallel] indicating there is an .vocab[interaction effect]. The slope of annual income differs based on the income verification. 
+
+---
+
+## Interaction term in model
+
+
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; estimate &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; std.error &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p.value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; (Intercept) &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 9.484 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.989 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 9.586 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.000 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; debt_inc_cent &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.691 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.685 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.009 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.319 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; annual_income_cent &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.007 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.020 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.341 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.735 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; verified_incomeSource Verified &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.157 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.418 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.522 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.135 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; verified_incomeVerified &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 7.181 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.870 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.840 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.000 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;background-color: #dce5b2 !important;"&gt; annual_income_cent:verified_incomeSource Verified &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; -0.016 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 0.026 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; -0.643 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 0.523 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;background-color: #dce5b2 !important;"&gt; annual_income_cent:verified_incomeVerified &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; -0.032 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 0.033 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; -0.979 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 0.333 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+
+## Interpreting interaction terms
+
+.vocab[What the interaction means: ]
+
+The effect of annual income on the interest rate differs by -0.016 when the income is source verified compared to when it is not verified, holding all else constant. 
+
+--
+
+&lt;br&gt;
+
+.vocab[Interpreting `annual_income` for source verified:]
+
+If the income is source verified, we expect the interest rate to decrease by 0.023% (-0.007 + -0.016) for each additional thousand dollars in annual income, holding all else constant.
+
+---
+
+## Recap
+
+- Mean-centering quantitative predictors
+
+- Using indicator variables for categorical predictors
+
+- Using interaction terms 
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"slideNumberFormat": "%current%",
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
