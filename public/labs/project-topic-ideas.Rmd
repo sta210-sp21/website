@@ -40,6 +40,14 @@ A member of the teaching team will be available f you have questions or need hel
 
 See the [Tips + Resources](https://sta210-sp21.netlify.app/project/#tips--resources) section of the project instructions for a list of data repositories to help you find data. 
 
+**Note**: The `topic-ideas.Rmd` file and data sets are stored in different folders, so you will need to use `../data/` before the file name to read in the data set. 
+
+For example, 
+
+```{r eval = F}
+my_data_frame <- read_csv("../data/my_data.csv")
+```
+
 # Submission
 
 You will submit the final project ideas by pushing your work to your GitHub repo. The teaching team will provide feedback under the **Issues** on GitHub. 
