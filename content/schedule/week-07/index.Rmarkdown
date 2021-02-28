@@ -30,7 +30,7 @@ font-size: 18px;
 
 |                        |   |
 |------------------------|---|
-| Project data proposals | **due Sun, Mar 7 at 11:59pEST**| 
+| [Project topic ideas](https://sta210-sp21.netlify.app/project/) | **due Sun, Mar 7 at 11:59pEST**| 
 |[HW 03](https://sta210-sp21.netlify.app/hw/hw-03.html) | **due Wed, Mar 10 at 11:59p EST**| 
 |Statistics Experience | **due Sun, Apr 25 at 11:59p EST**| 
 

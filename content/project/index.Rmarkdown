@@ -4,26 +4,26 @@ title: "STA 210 Final Project"
 
 ## Timeline 
 
-Topic ideas due **Sun,Mar 7 at 11:59p EST**
+[Topic ideas](#topic-ideas) due **Sun,Mar 7 at 11:59p EST**
 
-Proposal due **Mon, Mar 29 at 11:59p EST**
+[Proposa](#project-proposal) due **Mon, Mar 29 at 11:59p EST**
 
-Draft report due **Sun, Apr 18 at 11:59p EST** 
+[Draft report](#peer-review) due **Sun, Apr 18 at 11:59p EST** 
 
-Peer feedback due **Mon, Apr 19 at 11:59p EST**
+[Peer review](#peer-review) due **Mon, Apr 19 at 11:59p EST**
 
-Final report due **Sun, Apr 25 at 11:59p EST** 
+[Final report](#written-report) due **Sun, Apr 25 at 11:59p EST** 
 
-Presentation video, slides, repo due **Tue, Apr 28 at 9a EST**
+[Video presentation + slides](#video-presentation--slides) due **Tue, Apr 28 at 9a EST**
 
-Presentation comments due **Thu, Apr 30 at 11:59p EST**
+[Presentation comments](#presentation-comments) due **Thu, Apr 30 at 11:59p EST**
 
 ## Introduction 
 
 **TL;DR**: *Pick a data set and do a regression analysis. That is your 
 final project.*
 
-The goal of the final project is for you to use regression analysis to analyze a dataset of your own choosing. The dataset may already exist or you may collect your own data by scraping the web.  
+The goal of the final project is for you to use regression analysis to analyze a data set of your own choosing. The data set may already exist or you may collect your own data by scraping the web.  
 
 Choose the data based on your group's interests or work you all have done in other courses or research projects. The goal of this project is for you to demonstrate proficiency in the techniques we have covered in this class (and beyond, if you like!) and apply them to a data set to analyze it in a meaningful way. 
 
@@ -204,13 +204,13 @@ summary of what you have learned about your research question along with statist
 -->
 
 
-## Presentation Slides
+## Video presentation + slides
 
 Check back for more details.
 
 <!--
 In addition to the write-up, your team must also create presentation
-slides that summarize and showcase your project. Introduce your research question and dataset, showcase visualizations, and provide some conclusions. These slides should serve as a brief visual accompaniment to your write-up and will be graded for content and quality. For submission, convert these slides to a .pdf document to be submitted to Gradescope. The slides are due on **Friday, November 20**.
+slides that summarize and showcase your project. Introduce your research question and data set, showcase visualizations, and provide some conclusions. These slides should serve as a brief visual accompaniment to your write-up and will be graded for content and quality. For submission, convert these slides to a .pdf document to be submitted to Gradescope. The slides are due on **Friday, November 20**.
 
 The slide deck should have no more than 6 content slides + 1 title slide. Here is a *<u>suggested</u>* outline as you think through the slides; you do *<u>not</u>* have to use this exact format for the 6 slides.
 
@@ -512,7 +512,7 @@ tidy(model) %>%
 
 #### Guidelines for communicating results 
 
-- **Don't use variable names in your narrative!** Use descriptive terms, so the reader understands your narrative without relying on the codebook.
+- **Don't use variable names in your narrative!** Use descriptive terms, so the reader understands your narrative without relying on the data dictionary.
   - `r emo::ji("x")` There is a negative linear relationship between mpg and hp.
   - `r emo::ji("white_check_mark")` There is a negative linear relationship between a car's fuel economy (in miles per gallon) and its horsepower.
 - **Know your audience:** Your report should be written for a general audience who has an understanding of statistics at the level of STA 210.

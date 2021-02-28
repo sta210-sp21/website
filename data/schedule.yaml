@@ -79,7 +79,7 @@ lessons:
   
   - week: "Week 07"
     date: "Mon, Mar 01"
-    title: "Writing lab"
+    title: "Project: topic ideas"
   - date: "Tue, Mar 02"
     title: "MLR: Types of predictors"
     slides: "12-mlr-predictor-types.html"
@@ -90,7 +90,10 @@ lessons:
     slides: "13-transformations.html"
   - title: "HW 03 assigned"
     hw: "hw-03.html"
-
+  - date: "Sun, Mar 07"
+    title: "Topic ideas due"
+    project: "#topic-ideas"
+    
   - week: "Week 08"
     date: "Mon, Mar 08"
     title: "Lab 06"
@@ -124,7 +127,9 @@ lessons:
   
   - week: "Week 11"
     date: "Mon, Mar 29"
-    title: "Writing lab"
+    title: "Project: Proposals"
+  - title: "Project proposal due"
+    project: "#project-proposal"
   - date: "Tue, Mar 30"
     title: "Logistic regression: Inference"
   - title: "Logistic regression: Conditions"
@@ -159,14 +164,27 @@ lessons:
     title: "Weighted least squares"
   - title: "Quiz 03 assigned"
     quiz: "quiz-03.html"
-
+  - date: "Sun, Apr 18"
+    title: "Project draft due"
+    project: "#peer-review"
+    
   - week: "Week 14"
     date: "Mon, Apr 19"
-    title: "Writing lab"
+    title: "Project: Peer review"
+  - title: "Peer review due"
+    project: "#peer-review"
   - date: "Tue, Apr 20"
     title: "Communicating results"
   - date: "Thu, Apr 22"
     title: "Communicating results"
 
   - week: "Exam period"
- 
+  - date: "Sun, Apr 25"
+    title: "Project written report due"
+    project: "#written-report"
+  - date: "Wed, Apr 28 at 9a"
+    title: "Video + slides due"
+    project: "#video-presentation--slides"
+  - date: "Fri, Apr 30"
+    title: "Video comments due"
+    project: "#presentation-comments"
