@@ -183,6 +183,8 @@ lessons:
   - date: "Sun, Apr 25"
     title: "Project written report due"
     project: "#written-report"
+  - title: "Statistics experience due"
+    hw: "stats-experience.html"
   - date: "Wed, Apr 28 at 9a"
     title: "Video + slides due"
     project: "#video-presentation--slides"

@@ -1,0 +1,79 @@
+---
+title: "Statistics Experience"
+author: ""
+output: 
+  html_document: 
+    css: "sta210-hw.css"
+    toc: false
+    toc_float: false
+    toc_depth: 2
+---   
+
+The world of statistics and data science is vast and continually growing! The goal of the statistics experience assignments is to help you engage with the statistics and data science communities outside of the classroom.
+
+There will be one statistics experience assignment that will count as a homework grade. **The submission for the statistics experience is due on Sunday, April 25 at 11:59p EST on Gradescope. No late work will be accepted for the statistics experience.** You may submit the statistics experience assignment anytime between now and the deadline. 
+
+Each experience has two parts:
+
+`r emo::ji("one")` Have a statistics experience
+
+`r emo::ji("two")` Make a slide summarizing on your experience
+
+**You must complete both parts to receive credit.**
+
+
+## Part 1: Have a statistics experience
+
+Complete an activity in one of the categories below. Under each category are suggested activities. You  do not have to do one these suggested activities. You are welcome to find other activities as long as they are related to statistics/data science and they fit in one of the five categories. You can email Professor Tackett if there is an activity you'd like to do but you're not sure if it qualifies for the statistics experience.
+
+### Category 1: Attend a (virtual) talk or conference
+
+Attend an talk, panel, or conference related to statistics or data science. If you are attending a single talk or panel, it must be **<u>at least 30 minutes</u>** to count towards the statistics experience. 
+
+
+### Category 2: Talk with a statistician/ data scientist
+
+Talk with someone who uses statistics in their daily work. This could include a professor, professional in industry, graduate student, etc. 
+
+### Category 3: Listen to a podcast / watch video
+
+Listen to a podcast or watch a video about statistics and data science. The podcast or video must be **<u>at least 30 minutes</u>** to count towards the statistics experience. A few suggestions are below: 
+
+- [FiveThirtyEight Model Talk](https://fivethirtyeight.com/tag/model-talk/)
+- [Stats + Stories Podcast](https://statsandstories.net/)
+- [Causal Inference Podcast](https://casualinfer.libsyn.com/)
+
+### Category 4: Participate in a data science competition
+
+Participate in a statistics or data science competition. You can participate individually or with a team. Information for an upcoming data challenge is linked below.
+
+- [DataFest 2021 @ Duke](http://www2.stat.duke.edu/datafest/), April 9 - 11
+
+### Category 5: Read a book on statistics/data science
+
+There are *a lot* of books about statistics, data science, and related topics. A few suggestions are below. If you decide to read a book that isn't on this list, ask your professor to make sure it counts toward the experience. Many of these books are available through Duke library.
+
+- *The Signal and the Noise: Why so many predictions fail - but some don't* by Nate Silver
+- *Weapons of Math Destruction* by Cathy O'Neil
+- *How Charts Lie: Getting Smarter about Visual Information* by Alberto Cairo
+- *The Art of Statistics: How to learn from data* by David Spiegelhalter
+- [List of books about data science ethics](https://teachdatascience.com/bookclub/)
+
+
+## Part 2: Summarize your experience
+
+Make one slide summarizing your experience. Submit the slide as a PDF on Gradescope. 
+
+Include the following on your slide:
+
+- Name and brief description of the event/podcast/competition/etc.
+- Something you found new, interesting, or unexpected
+- How the event/podcast/competition/etc. connects to something we've done in class.
+- Citation or link to web page for event/competition/etc.
+
+[Click here](https://docs.google.com/presentation/d/1Ua7rmAQn8FaRLxJpxaRvOZfBLIlEjYVxugEaaTcIjMQ/edit?usp=sharing) to see a template to help you get started on your slide. Your slide does not have to follow this exact format; it just needs to include the information mentioned above and be easily readable (i.e. use a reasonable font size!).
+
+## Submission 
+
+Submit the reflection as a PDF under the  **Statistics Experience** assignment on Gradescope by **Sunday, April 25 at 11:59p EST.** It must be submitted by the deadline on Gradescope to be considered for grading.
+
