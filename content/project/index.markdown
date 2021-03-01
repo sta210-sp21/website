@@ -42,7 +42,7 @@ The four primary deliverables for the final project are
 
 ## Topic ideas
 
-Identify 3 data sets you're interested in potentially using for the final project. If you're unsure where to find data, you can use the list of potential data sources in the [Tips + Resources](#tips--resources) section as a starting point. It may also help to think of topics you're interested in investigating and find data sets on those topics. 
+Identify 2-3 data sets you're interested in potentially using for the final project. If you're unsure where to find data, you can use the list of potential data sources in the [Tips + Resources](#tips--resources) section as a starting point. It may also help to think of topics you're interested in investigating and find data sets on those topics. 
 
 The purpose of submitting project ideas is to give you time to find data for the project and to make sure you have a data set that can help you be successful in the project. **Therefore, you must use one of the data sets submitted as a topic idea, unless otherwise notified by the teaching team.**
 
@@ -50,9 +50,10 @@ The data sets should meet the following criteria:
 
 - At least 100 observations
 - At least 10 columns 
-- At least 6 of the columns must be useful and unique predictor variables.     - Identifier variables such as "name", "social security number", etc. are not useful predictor variables.
+- At least 6 of the columns must be useful and unique predictor variables.
+    - Identifier variables such as "name", "social security number", etc. are not useful predictor variables.
     - If you have multiple columns with the same information (e.g. "state abbreviation" and "state name"), then they are not unique predictors.
-- At least one variable that can be identified as a reasonable predictor variable. 
+- At least one variable that can be identified as a reasonable response variable. 
   - The response variable can be quantitative or categorical.
 - A mix of quantitative and categorical variables that can be used as predictors. 
 - Observations should reasonably meet the independence condition. Therefore, avoid data with repeated measures, data collected over time, etc.
@@ -62,7 +63,7 @@ The data sets should meet the following criteria:
 
 ### Submission
 
-You will submit the topic ideas in the `project` repo. The submission should include the following for each data set: 
+You will submit the topic ideas in the `01-topic-ideas` folder in the  `project` repo on GitHub. The submission should include the following for each data set: 
 
 - Short description of the data (1 - 2 sentences). 
 - Description of the variables or link to data dictionary.

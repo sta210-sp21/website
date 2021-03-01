@@ -835,18 +835,19 @@ final project.&lt;/em&gt;&lt;/p&gt;
 &lt;li&gt;Formal peer review on another team&amp;rsquo;s project&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;topic-ideas&#34;&gt;Topic ideas&lt;/h2&gt;
-&lt;p&gt;Identify 3 data sets you&amp;rsquo;re interested in potentially using for the final project. If you&amp;rsquo;re unsure where to find data, you can use the list of potential data sources in the &lt;a href=&#34;#tips--resources&#34;&gt;Tips + Resources&lt;/a&gt; section as a starting point. It may also help to think of topics you&amp;rsquo;re interested in investigating and find data sets on those topics.&lt;/p&gt;
+&lt;p&gt;Identify 2-3 data sets you&amp;rsquo;re interested in potentially using for the final project. If you&amp;rsquo;re unsure where to find data, you can use the list of potential data sources in the &lt;a href=&#34;#tips--resources&#34;&gt;Tips + Resources&lt;/a&gt; section as a starting point. It may also help to think of topics you&amp;rsquo;re interested in investigating and find data sets on those topics.&lt;/p&gt;
 &lt;p&gt;The purpose of submitting project ideas is to give you time to find data for the project and to make sure you have a data set that can help you be successful in the project. &lt;strong&gt;Therefore, you must use one of the data sets submitted as a topic idea, unless otherwise notified by the teaching team.&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;The data sets should meet the following criteria:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;At least 100 observations&lt;/li&gt;
 &lt;li&gt;At least 10 columns&lt;/li&gt;
-&lt;li&gt;At least 6 of the columns must be useful and unique predictor variables.     - Identifier variables such as &amp;ldquo;name&amp;rdquo;, &amp;ldquo;social security number&amp;rdquo;, etc. are not useful predictor variables.
+&lt;li&gt;At least 6 of the columns must be useful and unique predictor variables.
 &lt;ul&gt;
+&lt;li&gt;Identifier variables such as &amp;ldquo;name&amp;rdquo;, &amp;ldquo;social security number&amp;rdquo;, etc. are not useful predictor variables.&lt;/li&gt;
 &lt;li&gt;If you have multiple columns with the same information (e.g. &amp;ldquo;state abbreviation&amp;rdquo; and &amp;ldquo;state name&amp;rdquo;), then they are not unique predictors.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;At least one variable that can be identified as a reasonable predictor variable.
+&lt;li&gt;At least one variable that can be identified as a reasonable response variable.
 &lt;ul&gt;
 &lt;li&gt;The response variable can be quantitative or categorical.&lt;/li&gt;
 &lt;/ul&gt;
@@ -857,7 +858,7 @@ final project.&lt;/em&gt;&lt;/p&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;Please ask a member of the teaching team if you&amp;rsquo;re unsure whether your data set meets the criteria.&lt;/strong&gt;&lt;/p&gt;
 &lt;h3 id=&#34;submission&#34;&gt;Submission&lt;/h3&gt;
-&lt;p&gt;You will submit the topic ideas in the &lt;code&gt;project&lt;/code&gt; repo. The submission should include the following for each data set:&lt;/p&gt;
+&lt;p&gt;You will submit the topic ideas in the &lt;code&gt;01-topic-ideas&lt;/code&gt; folder in the  &lt;code&gt;project&lt;/code&gt; repo on GitHub. The submission should include the following for each data set:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Short description of the data (1 - 2 sentences).&lt;/li&gt;
 &lt;li&gt;Description of the variables or link to data dictionary.&lt;/li&gt;
