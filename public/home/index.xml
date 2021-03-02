@@ -497,7 +497,7 @@ font-size: 18px;
       <pubDate>12 Mar 17 10:00 +0000</pubDate>
       
       <guid>/schedule/week-07/</guid>
-      <description> table { font-size: 18px; }  Lectures     Slides Videos Application Exercises (AE)     Tuesday MLR: Types of predictors MLR: Types of predictors AE 12   Thursday MLR: Conditions MLR: Conditions AE 13    Variable transformations Variable transformations     Readings         Beyond Multiple Linear regression: Section 1.6 - Multiple Linear Regression    Assignments          Project topic ideas due Sun, Mar 7 at 11:59pEST   HW 03 due Wed, Mar 10 at 11:59p EST   Statistics Experience due Sun, Apr 25 at 11:59p EST    </description>
+      <description> table { font-size: 18px; }  Lectures     Slides Videos Application Exercises (AE)     Tuesday MLR: Types of predictors MLR: Types of predictors AE 12: Price of diamonds   Thursday MLR: Conditions MLR: Conditions AE 13    Variable transformations Variable transformations     Readings         Beyond Multiple Linear regression: Section 1.6 - Multiple Linear Regression    Assignments          Project topic ideas due Sun, Mar 7 at 11:59pEST   HW 03 due Wed, Mar 10 at 11:59p EST   Statistics Experience due Sun, Apr 25 at 11:59p EST    </description>
       <content>&lt;style&gt;
 table {
 font-size: 18px;
@@ -519,7 +519,7 @@ font-size: 18px;
 &lt;td&gt;Tuesday&lt;/td&gt;
 &lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/slides/12-mlr-predictor-types.html&#34;&gt;MLR: Types of predictors&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;&lt;a href=&#34;https://warpwire.duke.edu/w/v1kFAA/&#34;&gt;MLR: Types of predictors&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;AE 12&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/appex/ae-12-mlr-diamonds.html&#34;&gt;AE 12: Price of diamonds&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;Thursday&lt;/td&gt;
@@ -566,7 +566,7 @@ font-size: 18px;
 &lt;td&gt;&lt;strong&gt;due Wed, Mar 10 at 11:59p EST&lt;/strong&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;Statistics Experience&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/hw/stats-experience.html&#34;&gt;Statistics Experience&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;&lt;strong&gt;due Sun, Apr 25 at 11:59p EST&lt;/strong&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;

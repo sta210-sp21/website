@@ -1,0 +1,57 @@
+---
+title: "AE 12: Price of Diamonds"
+subtitle: "Multiple linear regression"
+date: "`r Sys.Date()`"
+output: 
+  html_document: 
+    fig_height: 8
+    fig_width: 8
+    theme: readable
+    code_folding: hide
+---
+
+```{r include = F}
+knitr::opts_chunk$set(warning = F, 
+                      message = F)
+```
+
+## Check in 
+
+What is your favorite TV show or movie? 
+
+[www.menti.com](https://www.menti.com)
+
+## Class announcements
+
+- See this week's schedule: [Week 07](https://sta210-sp21.netlify.app/schedule/week-07/)
+
+- [Project topic ideas](https://sta210-sp21.netlify.app/project/) due Sun, Mar 07 at 11:59p EST on GitHub
+
+- [Statistics experience](https://sta210-sp21.netlify.app/hw/stats-experience.html) due Sun, Apr 25 at 11:59p EST 
+
+## Upcoming events 
+
+- [**DataFest 2021 @ Duke**](http://www2.stat.duke.edu/datafest/)
+  - **April 9 - 11**
+  - Sign up by March 26!
+  
+- The inaugural **Sport Ideas Symposium**: March 4  - 5  
+  - A two-day online event featuring three keynote speakers -- Brian Kopp (Phoenix Sports Partners), Alexandra Mandrycky (Director of Hockey Administration, Seattle Kraken) and Evan Wasch (Executive Vice President, Basketball Strategy & Analytics at NBA), as well as five panel discussions featuring industry experts from a variety of sports. (https://sports-ideas.com/) 
+
+  The primary goal of the Symposium is to provide an accessible platform to learn about the dissemination and practice of analytics within sports organizations. Registration is only $10, and can be done at the link below
+
+  https://us02web.zoom.us/webinar/register/WN_-BnQPQbUQASxH6lt0GSD8g
+
+- The **NFL's third annual Big Data Bowl**: March 18   
+  - Will run live on YouTube, Twitch, and the NFL App at 3:00 PM EST. This event showcases 8 finalists (competing for an additional $10,000 in prize money), as well as a featured conversation with an NFL head coach known for his analytics use. The event is free to attend. Finalists for the event, as well as more information on the theme's covered this year, can be found at https://www.kaggle.com/c/nfl-big-data-bowl-2021/discussion/217170
+
+
+## Questions about project?
+
+## Questions from videos? 
+
+## AE 12: Price of diamonds 
+
+Clone the **ae-12** repo and open a new project in RStudio.
+
+
