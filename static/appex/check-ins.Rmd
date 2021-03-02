@@ -168,3 +168,69 @@ Be able to fly
 ```{r echo = F}
 knitr::include_graphics("img/cat-checkin.png")
 ```
+
+---
+.col-3[
+.midi[**1)** Avatar 2.0]
+
+.midi[**2)** Team 01L-2]
+
+.midi[**3)** The Office]
+
+.midi[**4)** META]
+
+.midi[**5)** Rash]
+
+.midi[**6)** Dog Lovers]
+
+.midi[**7)** Team Tuition]
+
+.midi[**8)** Blue Devils]
+
+.midi[**9)** Unexciting Places]
+
+.midi[**10)** Whataburger]
+]
+
+.col-3[
+
+.midi[**11)** The Water Tribe]
+
+.midi[**12)** ABP Lovers]
+
+.midi[**13)** JJAY]
+
+.midi[**14)** Psychologists]
+
+.midi[**15)** The Outliers]
+
+.midi[**16)** The Unoriginals]
+
+.midi[**17)** I'm Fine with Anything]
+
+.midi[**18)** Piano Plot]
+
+.midi[**19)**  CASA]
+
+.midi[**20)** Rtists]
+]
+]
+
+.col-3[
+.midi[**21)**Team Six]
+
+.midi[**22)**The Blue Wolves]
+
+.midi[**23)** ZZZ Test]
+
+.midi[**24)** y2k]
+
+.midi[**25)** ggplot]
+
+.midi[**26)** The A Team]
+
+.midi[**27)** Easy As Pie]
+
+.midi[**28)** Last!]
+]
+
