@@ -214,7 +214,7 @@ knitr::include_graphics("img/cat-checkin.png")
 
 .midi[**20)** Rtists]
 ]
-]
+
 
 .col-3[
 .midi[**21)**Team Six]
