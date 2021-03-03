@@ -73,33 +73,31 @@ class: middle, center
 
 ## Model conditions
 
-1. .vocab[Linearity: ]There is a linear relationship between the response and **each** predictor variable
+1. .vocab[Linearity: ]There is a linear relationship between the response and predictor variables.
 
-2. .vocab[Constant Variance: ]The variability of the errors is equal for all values of the predictor variable.
+2. .vocab[Constant Variance: ]The variability about the least squares line is generally constant.
 
-3. .vocab[Normality: ]The errors follow a normal distribution.
+3. .vocab[Normality: ]The distribution of the residuals is approximately normal.
 
-4. .vocab[Independence: ]The errors are independent from each other.
-
-.alert[
-Use plots of the standardized residuals to check conditions.
-]
+4. .vocab[Independence: ]The residuals are independent from each other.
 
 ---
 
-## Standardized residuals vs. predicted values
+## Residuals vs. predicted values
 
 &lt;img src="13-mlr-conditions_files/figure-html/unnamed-chunk-6-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
-## Checking linearity: Std. residuals vs. predicted
+## Linearity: Residuals vs. predicted
 
 &lt;img src="13-mlr-conditions_files/figure-html/unnamed-chunk-7-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
-## Checking linearity: Std. residuals vs. each predictor
+## Linearity: Residuals vs. each predictor
+
+If there is some pattern in the plot of residuals vs. predicted values, you can look at individual plots of residuals vs. each predictor to try to identify the issue.
 
 &lt;img src="13-mlr-conditions_files/figure-html/unnamed-chunk-8-1.png" style="display: block; margin: auto;" /&gt;
 
@@ -107,11 +105,11 @@ Use plots of the standardized residuals to check conditions.
 
 ## Checking linearity 
 
-✅ The plot of standardized residuals vs. predicted shows no distinguishable pattern 
+✅ The plot of residuals vs. predicted shows no distinguishable pattern 
 
-✅ The plots of standardized residuals vs. each predictor variable show no distinguishable pattern 
+✅ The plots of residuals vs. each predictor variable are generally fine; perhaps look into `Years` more closely. 
 
-.vocab[The linearity condition is satisfied.]
+.vocab[The linearity condition is generally satisfied.] 
 
 ---
 
@@ -129,7 +127,7 @@ Use plots of the standardized residuals to check conditions.
 
 --
 
-⚠️ .vocab[Normality is not satisfied]; however, `\(n&gt;30\)`, so our sample is large enough that we can relax the Normality condition and proceed.
+⚠️ .vocab[Normality is not satisfied]. However, `\(n&gt;30\)`, so by the Central Limit Theorem, we can still do inference about the model parameters.
 
 ---
 
@@ -137,14 +135,16 @@ Use plots of the standardized residuals to check conditions.
 
 - We can often check the independence condition based on the context of the data and how the observations were collected.
 
-- If the data were collected in a particular order, examine a scatterplot of the standardized residuals versus order in which the data were collected. 
+- If the data were collected in a particular order, examine a scatterplot of the residuals versus order in which the data were collected. 
+
+- If there is a grouping variable lurking in the background, check the residuals based on that grouping variable.
 
 
 ---
 
 ## Checking independence
 
-Since the observations are US states, let's take a look at the standardized residuals by region. 
+Since the observations are US states, let's take a look at the residuals by region. 
 
 
 &lt;img src="13-mlr-conditions_files/figure-html/unnamed-chunk-12-1.png" style="display: block; margin: auto;" /&gt;
@@ -155,15 +155,8 @@ Since the observations are US states, let's take a look at the standardized resi
 
 ❌ The model tends to overpredict for states in the South and underpredict for states in the North Central, so the .vocab[independence condition is not satisfied].
 
-Multiple linear regression is **not** robust to violations of independence, so we need to fit a new model that includes region as a predictor to account for the systematic differences by region.
+Multiple linear regression is **not** robust to violations of independence, so before moving forward, we should try fitting a model that includes **region** to account for these differences by region. 
 
----
-
-## Next, check the model diagnostics
-
-Once you've assessed the conditions for multiple linear regression, then you can use the **model diagnostics** to detect influential points or multicollinearity.
-
-We will address model diagnostics in an upcoming lecture.
 
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>

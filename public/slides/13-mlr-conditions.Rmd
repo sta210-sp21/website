@@ -79,77 +79,75 @@ sat_aug <- augment(sat_model) %>%
 
 ## Model conditions
 
-1. .vocab[Linearity: ]There is a linear relationship between the response and **each** predictor variable
+1. .vocab[Linearity: ]There is a linear relationship between the response and predictor variables.
 
-2. .vocab[Constant Variance: ]The variability of the errors is equal for all values of the predictor variable.
+2. .vocab[Constant Variance: ]The variability about the least squares line is generally constant.
 
-3. .vocab[Normality: ]The errors follow a normal distribution.
+3. .vocab[Normality: ]The distribution of the residuals is approximately normal.
 
-4. .vocab[Independence: ]The errors are independent from each other.
-
-.alert[
-Use plots of the standardized residuals to check conditions.
-]
+4. .vocab[Independence: ]The residuals are independent from each other.
 
 ---
 
-## Standardized residuals vs. predicted values
+## Residuals vs. predicted values
 
 ```{r, fig.height = 3}
-ggplot(data = sat_aug, aes(x = .fitted, y = .std.resid)) + 
+ggplot(data = sat_aug, aes(x = .fitted, y = .resid)) + 
   geom_point(alpha = 0.7) + 
   geom_hline(yintercept = 0, color = "red") +
   labs(x = "Predicted values", 
-       y = "Standardized Residuals") +
+       y = "Residuals") +
   theme_bw() +
   theme(axis.title=element_text(size=14))
 ```
 
 ---
 
-## Checking linearity: Std. residuals vs. predicted
+## Linearity: Residuals vs. predicted
 
-```{r, fig.height = 3}
-ggplot(data = sat_aug, aes(x = .fitted, y = .std.resid)) + 
+```{r, fig.height = 2.5}
+ggplot(data = sat_aug, aes(x = .fitted, y = .resid)) + 
   geom_point(alpha = 0.7) + 
   geom_hline(yintercept = 0, color = "red") +
   labs(x = "Predicted values", 
-       y = "Standardized Residuals") +
+       y = "Residuals") +
   theme_bw() +
   theme(axis.title=element_text(size=14))
 ```
 
 ---
 
-## Checking linearity: Std. residuals vs. each predictor
+## Linearity: Residuals vs. each predictor
+
+If there is some pattern in the plot of residuals vs. predicted values, you can look at individual plots of residuals vs. each predictor to try to identify the issue.
 
 ```{r, fig.height = 3}
-p1 <- ggplot(data = sat_aug, aes(x = Takers, y = .std.resid)) +
+p1 <- ggplot(data = sat_aug, aes(x = Takers, y = .resid)) +
   geom_point() + 
   geom_hline(yintercept = 0, color = "red") + 
   theme_bw()
 
-p2 <- ggplot(data = sat_aug, aes(x = Income, y = .std.resid)) +
+p2 <- ggplot(data = sat_aug, aes(x = Income, y = .resid)) +
   geom_point() + 
   geom_hline(yintercept = 0, color = "red") + 
   theme_bw()
 
-p3 <- ggplot(data = sat_aug, aes(x = Years, y = .std.resid)) +
+p3 <- ggplot(data = sat_aug, aes(x = Years, y = .resid)) +
   geom_point() + 
   geom_hline(yintercept = 0, color = "red") + 
   theme_bw()
 
-p4 <- ggplot(data = sat_aug, aes(x = Public, y = .std.resid)) +
+p4 <- ggplot(data = sat_aug, aes(x = Public, y = .resid)) +
   geom_point() + 
   geom_hline(yintercept = 0, color = "red") + 
   theme_bw()
 
-p5 <- ggplot(data = sat_aug, aes(x = Expend, y = .std.resid)) +
+p5 <- ggplot(data = sat_aug, aes(x = Expend, y = .resid)) +
   geom_point() + 
   geom_hline(yintercept = 0, color = "red") + 
   theme_bw()
 
-p6 <- ggplot(data = sat_aug, aes(x = Rank, y = .std.resid)) +
+p6 <- ggplot(data = sat_aug, aes(x = Rank, y = .resid)) +
   geom_point() + 
   geom_hline(yintercept = 0, color = "red") + 
   theme_bw()
@@ -161,22 +159,22 @@ p6 <- ggplot(data = sat_aug, aes(x = Rank, y = .std.resid)) +
 
 ## Checking linearity 
 
-`r emo::ji("white_check_mark")` The plot of standardized residuals vs. predicted shows no distinguishable pattern 
+`r emo::ji("white_check_mark")` The plot of residuals vs. predicted shows no distinguishable pattern 
 
-`r emo::ji("white_check_mark")` The plots of standardized residuals vs. each predictor variable show no distinguishable pattern 
+`r emo::ji("white_check_mark")` The plots of residuals vs. each predictor variable are generally fine; perhaps look into `Years` more closely. 
 
-.vocab[The linearity condition is satisfied.]
+.vocab[The linearity condition is generally satisfied.] 
 
 ---
 
 ## Checking constant variance
 
 ```{r, fig.height = 2.5}
-ggplot(data = sat_aug, aes(x = .fitted, y = .std.resid)) + 
+ggplot(data = sat_aug, aes(x = .fitted, y = .resid)) + 
   geom_point(alpha = 0.7) + 
   geom_hline(yintercept = 0, color = "red") +
   labs(x = "Predicted values", 
-       y = "Standardized Residuals") +
+       y = "Residuals") +
   theme_bw() +
   theme(axis.title=element_text(size=14))
 ```
@@ -188,11 +186,12 @@ ggplot(data = sat_aug, aes(x = .fitted, y = .std.resid)) +
 ## Checking normality
 
 ```{r, fig.height = 2.5}
-resid_hist <- ggplot(data = sat_aug, aes(x = .std.resid)) + 
+resid_hist <- ggplot(data = sat_aug, aes(x = .resid)) + 
   geom_histogram() + 
-  theme_bw() 
+  theme_bw() +
+  labs(x= "Residuals")
 
-resid_qq <- ggplot(data = sat_aug, aes(sample = .std.resid)) + 
+resid_qq <- ggplot(data = sat_aug, aes(sample = .resid)) + 
   stat_qq() + 
   stat_qq_line() +
   labs(x = "Theoretical quantile", 
@@ -204,7 +203,7 @@ resid_hist + resid_qq
 
 --
 
-`r emo::ji("warning")` .vocab[Normality is not satisfied]; however, $n>30$, so our sample is large enough that we can relax the Normality condition and proceed.
+`r emo::ji("warning")` .vocab[Normality is not satisfied]. However, $n>30$, so by the Central Limit Theorem, we can still do inference about the model parameters.
 
 ---
 
@@ -212,14 +211,16 @@ resid_hist + resid_qq
 
 - We can often check the independence condition based on the context of the data and how the observations were collected.
 
-- If the data were collected in a particular order, examine a scatterplot of the standardized residuals versus order in which the data were collected. 
+- If the data were collected in a particular order, examine a scatterplot of the residuals versus order in which the data were collected. 
+
+- If there is a grouping variable lurking in the background, check the residuals based on that grouping variable.
 
 
 ---
 
 ## Checking independence
 
-Since the observations are US states, let's take a look at the standardized residuals by region. 
+Since the observations are US states, let's take a look at the residuals by region. 
 
 ```{r}
 regions <- bind_cols(state.name, state.region) %>%
@@ -239,14 +240,14 @@ p1 <- ggplot(data = states, aes(x = .fitted, y = .std.resid, color = Region)) +
   geom_point() + 
   geom_hline(yintercept = 0)  +
   labs(x = "Predicted", 
-       y = "Standardized residuals", 
+       y = "Residuals", 
        color = "US Regions")
 
 p2 <- ggplot(data = states, aes(x = Region, y = .std.resid)) +
   geom_boxplot() + 
   geom_hline(yintercept = 0)  +
   labs(x = "U.S. Region", 
-       y = "Standardized residuals")
+       y = "Residuals")
 
 p1 + p2
 ```
@@ -257,13 +258,6 @@ p1 + p2
 
 `r emo::ji("x")` The model tends to overpredict for states in the South and underpredict for states in the North Central, so the .vocab[independence condition is not satisfied].
 
-Multiple linear regression is **not** robust to violations of independence, so we need to fit a new model that includes region as a predictor to account for the systematic differences by region.
+Multiple linear regression is **not** robust to violations of independence, so before moving forward, we should try fitting a model that includes **region** to account for these differences by region. 
 
----
-
-## Next, check the model diagnostics
-
-Once you've assessed the conditions for multiple linear regression, then you can use the **model diagnostics** to detect influential points or multicollinearity.
-
-We will address model diagnostics in an upcoming lecture.
 
