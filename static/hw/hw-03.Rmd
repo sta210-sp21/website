@@ -82,7 +82,7 @@ $$\begin{align} &H_0: \mu_{<HS} = \mu_{HS} = \mu_{JC} = \mu_{B} = \mu_{G} \\
     &H_a: \text{ at least one }\mu_i \text{ is not equal to the others} \end{align}$$
 
 
-4. Part of the ANOVA table associated with this test is shown below. Use the information above to fill in the missing values, labeled A - H. 
+4. Part of the ANOVA table associated with this test is shown below. Use the information above to fill in the missing values, labeled A - H. Show how you calculate each value.
     
 |  | Df | Sum Sq | Mean Sq | F-Stat | Pr(F > F-Stat) |
 |-----------|:--:|:------:|:-------:|:------:|:--------------:|
