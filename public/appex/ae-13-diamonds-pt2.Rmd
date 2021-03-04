@@ -7,7 +7,6 @@ output:
     fig_height: 8
     fig_width: 8
     theme: readable
-    code_folding: hide
 ---
 
 ```{r include = F}
