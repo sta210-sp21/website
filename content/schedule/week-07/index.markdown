@@ -31,7 +31,7 @@ font-size: 18px;
 |                        |   |
 |------------------------|---|
 | [Project topic ideas](https://sta210-sp21.netlify.app/project/) | **due Sun, Mar 7 at 11:59pEST**| 
-|[HW 03](https://sta210-sp21.netlify.app/hw/hw-03.html) | **due Wed, Mar 10 at 11:59p EST**| 
+|[HW 03](https://sta210-sp21.netlify.app/hw/hw-03.html) | **due Fri, Mar 12 at 11:59p EST**| 
 |[Statistics Experience](https://sta210-sp21.netlify.app/hw/stats-experience.html) | **due Sun, Apr 25 at 11:59p EST**| 
 
 
