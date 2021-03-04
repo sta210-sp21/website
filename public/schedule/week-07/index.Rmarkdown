@@ -15,7 +15,7 @@ font-size: 18px;
 |           | Slides                   | Videos | Application Exercises (AE) |
 |-----------|--------------------------|--------|--------|
 | Tuesday  | [MLR: Types of predictors](https://sta210-sp21.netlify.app/slides/12-mlr-predictor-types.html) | [MLR: Types of predictors](https://warpwire.duke.edu/w/v1kFAA/)| [AE 12: Price of diamonds](https://sta210-sp21.netlify.app/appex/ae-12-mlr-diamonds.html) |
-| Thursday   | [MLR: Conditions](https://sta210-sp21.netlify.app/slides/13-mlr-conditions.html)| [MLR: Conditions](https://warpwire.duke.edu/w/J2AFAA/) | AE 13 |
+| Thursday   | [MLR: Conditions](https://sta210-sp21.netlify.app/slides/13-mlr-conditions.html)| [MLR: Conditions](https://warpwire.duke.edu/w/J2AFAA/) | [AE 13: Diamonds cont'd](https://sta210-sp21.netlify.app/appex/ae-13-diamonds-pt2.html) |
 |   |  [Variable transformations](https://sta210-sp21.netlify.app/slides/13-transformations.html) | [Variable transformations](https://warpwire.duke.edu/w/xVkFAA/)| |
 
 ## Readings

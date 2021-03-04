@@ -497,7 +497,7 @@ font-size: 18px;
       <pubDate>12 Mar 17 10:00 +0000</pubDate>
       
       <guid>/schedule/week-07/</guid>
-      <description> table { font-size: 18px; }  Lectures     Slides Videos Application Exercises (AE)     Tuesday MLR: Types of predictors MLR: Types of predictors AE 12: Price of diamonds   Thursday MLR: Conditions MLR: Conditions AE 13    Variable transformations Variable transformations     Readings         Beyond Multiple Linear regression: Section 1.6 - Multiple Linear Regression    Assignments          Project topic ideas due Sun, Mar 7 at 11:59pEST   HW 03 due Fri, Mar 12 at 11:59p EST   Statistics Experience due Sun, Apr 25 at 11:59p EST    </description>
+      <description>table { font-size: 18px; }  Lectures     Slides Videos Application Exercises (AE)     Tuesday MLR: Types of predictors MLR: Types of predictors AE 12: Price of diamonds   Thursday MLR: Conditions MLR: Conditions AE 13: Diamonds cont&amp;rsquo;d    Variable transformations Variable transformations     Readings         Beyond Multiple Linear regression: Section 1.</description>
       <content>&lt;style&gt;
 table {
 font-size: 18px;
@@ -525,7 +525,7 @@ font-size: 18px;
 &lt;td&gt;Thursday&lt;/td&gt;
 &lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/slides/13-mlr-conditions.html&#34;&gt;MLR: Conditions&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;&lt;a href=&#34;https://warpwire.duke.edu/w/J2AFAA/&#34;&gt;MLR: Conditions&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;AE 13&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/appex/ae-13-diamonds-pt2.html&#34;&gt;AE 13: Diamonds cont&amp;rsquo;d&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;/td&gt;
