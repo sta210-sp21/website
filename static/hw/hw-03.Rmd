@@ -78,7 +78,7 @@ include_graphics("img/hw-03-work-hours-ed.png")
 
 We wish to test the following hypotheses: 
 
-$$\begin{align} &H_0: \mu_{<HS} = \mu_{HS} = \mu_{JC} = \mu_{B} = \mu_{G} \\
+$$\begin{align} &H_0: \mu_{LHS} = \mu_{HS} = \mu_{JC} = \mu_{B} = \mu_{G} \\
     &H_a: \text{ at least one }\mu_i \text{ is not equal to the others} \end{align}$$
 
 
