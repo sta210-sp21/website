@@ -101,15 +101,18 @@ lessons:
   - date: "Tue, Mar 09"
     title: "No class"
   - date: "Thu, Mar 11"
-    title: "Model comparison"
-  - title: "HW 04 assigned"
-    hw: "hw-04.html"
+    title: "Review Multiple linear regression concepts"
+
+
     
   - week: "Week 09"
     date: "Mon, Mar 15"
     title: "Lab 07"
   - date: "Tue, Mar 16"
-    title: "Model selection"
+    title: "Model comparison"
+  - title: "Model selection"
+  - title: "HW 04 assigned"
+    hw: "hw-04.html"
   - date: "Thu, Mar 18"
     title: "Influential points"
 
