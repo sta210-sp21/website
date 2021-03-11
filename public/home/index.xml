@@ -580,7 +580,7 @@ font-size: 18px;
       <pubDate>12 Mar 17 10:00 +0000</pubDate>
       
       <guid>/schedule/week-08/</guid>
-      <description> table { font-size: 18px; }  Lectures     Slides Videos Application Exercises (AE)     Tuesday No slides No video NO AE 14 (Duke brak)   Thursday No slides No video AE 15: Concepts in MLR    Readings         Beyond Multiple Linear regression: Section 1.6 - Multiple Linear Regression    Assignments          Mar 8 lab tasks (see Mar 08 announcement) due Thu, Mar 11 at 11:59p EST   HW 03 due Fri, Mar 12 at 11:59p EST   Statistics Experience due Sun, Apr 25 at 11:59p EST    </description>
+      <description> table { font-size: 18px; }  Lectures     Slides Videos Application Exercises (AE)     Tuesday No slides No video NO AE 14 (Duke break)   Thursday No slides No video AE 15: Review multiple linear regression concepts    Readings         Beyond Multiple Linear regression: Section 1.6 - Multiple Linear Regression    Assignments          Mar 8 lab tasks (see Mar 08 announcement) due Thu, Mar 11 at 11:59p EST   HW 03 due Fri, Mar 12 at 11:59p EST   Statistics Experience due Sun, Apr 25 at 11:59p EST    </description>
       <content>&lt;style&gt;
 table {
 font-size: 18px;
@@ -602,13 +602,13 @@ font-size: 18px;
 &lt;td&gt;Tuesday&lt;/td&gt;
 &lt;td&gt;No slides&lt;/td&gt;
 &lt;td&gt;No video&lt;/td&gt;
-&lt;td&gt;NO AE 14 (Duke brak)&lt;/td&gt;
+&lt;td&gt;NO AE 14 (Duke break)&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;Thursday&lt;/td&gt;
 &lt;td&gt;No slides&lt;/td&gt;
 &lt;td&gt;No video&lt;/td&gt;
-&lt;td&gt;AE 15: Concepts in MLR&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/appex/ae-15-mlr-concepts.html&#34;&gt;AE 15: Review multiple linear regression concepts&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;

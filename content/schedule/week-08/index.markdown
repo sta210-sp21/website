@@ -15,7 +15,7 @@ font-size: 18px;
 |           | Slides                   | Videos | Application Exercises (AE) |
 |-----------|--------------------------|--------|--------|
 | Tuesday  | No slides | No video| NO AE 14 (Duke break) |
-| Thursday   |No slides | No video | AE 15: Review multiple linear regression concepts |
+| Thursday   |No slides | No video | [AE 15: Review multiple linear regression concepts](https://sta210-sp21.netlify.app/appex/ae-15-mlr-concepts.html) |
 
 
 ## Readings

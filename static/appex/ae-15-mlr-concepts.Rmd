@@ -1,0 +1,48 @@
+---
+title: "AE 15: Reviw multiple linear regression concepts"
+date: "`r Sys.Date()`"
+output: 
+  html_document: 
+    fig_height: 8
+    fig_width: 8
+    theme: readable
+---
+
+```{r include = F}
+knitr::opts_chunk$set(warning = F, 
+                      message = F)
+```
+
+## Class announcements
+
+- See this week's schedule: [Week 08](https://sta210-sp21.netlify.app/schedule/week-07/)
+
+-  Mark 08 lab activities **due today at 11:59p EST**
+
+- [HW 03](https://sta210-sp21.netlify.app/hw/hw-03.html/) due Fri, Mar 12 at 11:59p EST
+
+- [Statistics experience](https://sta210-sp21.netlify.app/hw/stats-experience.html) due Sun, Apr 25 at 11:59p EST 
+
+
+### Tea with the Teaching Team 
+
+Meet the STA 210 teaching team! This is a casual conversation and a fun opportunity to meet the members of the STA 210 teaching team. The only rule is these can't turn into office hours!
+
+Tea with the Teaching Team can be used for a statistics experience. 
+
+- Tea with Sophie Dalldorf on March 17 at 12p EST. [Click here](https://forms.gle/qHzVQRqcj4nzUqBc7) to sign up.
+
+
+## Upcoming events 
+
+- [**DataFest 2021 @ Duke**](http://www2.stat.duke.edu/datafest/)
+  - **April 9 - 11**
+  - Sign up by March 26!
+  
+## Questions?
+
+## AE 15: Review concepts from multiple linear regression
+
+Clone the **ae-15** repo and open a new project in RStudio.
+
+
