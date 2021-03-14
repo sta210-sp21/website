@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Model selection</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Prof. Maria Tackett" />
+    <script src="libs/font-awesome/header-attrs/header-attrs.js"></script>
+    <link rel="stylesheet" href="sta210-slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Model selection
+### Prof. Maria Tackett
+
+---
+
+
+
+
+
+class: middle, center
+
+## [Click here for PDF of slides](16-model-selection.pdf)
+
+---
+
+## Topics
+
+- Identifying modeling objectives
+
+- Model selection processes
+  - Forward selection 
+  - Backward selection 
+
+
+
+---
+
+## Which variables should be in the model?
+
+- This is a very hard question that is the subject of a lot of statistical research 
+
+- There are many different opinions about how to answer this question 
+
+- This lecture will mostly focus on how to approach variable selection
+    - We will introduce some specific methods, but there are many others out there
+
+---
+
+## Which variables should you include?
+
+- It depends on the goal of your analysis
+
+- Though a variable selection procedure will select one set of variables for the model, that set is usually one of several equally good sets
+
+- It is best to start with a well-defined purpose and question to help guide the variable selection
+
+---
+
+## Prediction 
+
+- .vocab[Goal:] to calculate the most precise prediction of the response variable 
+
+- Interpreting coefficients is **not** important
+
+- Choose only the variables that are strong predictors of the response variable
+  + Excluding irrelevant variables can help reduce widths of the prediction intervals
+
+
+---
+
+## One variable's effect
+
+- .vocab[Goal:] Understand one variable's effect on the response after adjusting for other factors
+
+- Only interpret the coefficient of the variable that is the focus of the study
+  + Interpreting the coefficients of the other variables is **not** important
+
+
+- Any variables not selected for the final model have still been adjusted for, since they had a chance to be in the model
+
+
+---
+
+## Explanation
+
+- .vocab[Goal:] Identify variables that are important in explaining variation in the response
+
+- Interpret any variables of interest 
+
+- Include all variables you think are related to the response, even if they are not statistically significant 
+  + This improves the interpretation of the coefficients of interest
+  
+- Interpret the coefficients with caution, especially if there are problems with multicollinearity in the model
+
+---
+
+## Example: SAT Averages by State
+
+- This data set contains the average SAT score (out of 1600) and other variables that may be associated with SAT performance for each of the 50 U.S. states. The data is based on test takers for the 1982 exam.
+
+- Response variable:
+  + &lt;font class="vocab"&gt;`SAT`&lt;/font&gt;: average total SAT score
+
+.footnote[Data comes from `case1201` data set in the `Sleuth3` package]
+
+---
+
+## SAT Averages: Predictors
+
+- &lt;font class="vocab"&gt;`Takers`&lt;/font&gt;: percentage of high school seniors who took exam
+- &lt;font class="vocab"&gt;`Income`&lt;/font&gt;: median income of families of test-takers ($ hundreds)
+- &lt;font class="vocab"&gt;`Years`&lt;/font&gt;: average number of years test-takers had formal education in social sciences, natural sciences, and humanities
+- &lt;font class="vocab"&gt;`Public`&lt;/font&gt;: percentage of test-takers who attended public high schools
+- &lt;font class="vocab"&gt;`Expend`&lt;/font&gt;: total state expenditure on high schools ($ hundreds per student)
+- &lt;font class="vocab"&gt;`Rank`&lt;/font&gt;: median percentile rank of test-takers within their high school classes
+
+---
+
+.alert[
+Suppose you are on a legislative watchdog committee, and you want to determine the impact of state expenditures on state SAT scores. You decide to build a regression model for this purpose. What is the primary modeling objective? 
+]
+
+--
+
+.vocab[Understand one variable's effect]
+
+---
+
+.alert[
+Suppose you are on a committee tasked with improving the average SAT scores for your state. You have already determined that the number of test takers is an important variable, so you decide to include it in the regression model. Now you want to know what other variables significantly impact the average SAT score after accounting for the number of test takers. What is the primary modeling objective?
+]
+
+--
+
+.vocab[Explanation]
+
+---
+
+## Model selection criteria
+
+--
+
+.eq[
+`$$Adj. R^2 = 1 - \frac{SS_{Error}/(n-p-1)}{SS_{Total}/(n-1)}$$`
+]
+
+--
+
+.eq[
+`$$AIC = n\log(SS_\text{Error}) - n \log(n) + 2(p+1)$$`
+]
+
+--
+
+.eq[
+`$$BIC = n\log(SS_\text{Error}) - n\log(n) + log(n)\times(p+1)$$`
+]
+
+---
+
+## Selection Process: Backward Selection
+
+- Start with model that includes all variables of interest
+
+--
+
+- Drop variables one at a time that are deemed irrelevant based on some criterion. Common criterion include 
+  + Drop variable that results in the model with the highest Adj. `\(R^2\)` **&lt;i&gt;or&lt;/i&gt;**
+  + Drop variable that results in the model with the lowest value of AIC or BIC 
+
+--
+
+- Stop when no more variables can be removed from the model based on the criterion
+
+---
+
+
+## Selection Process: Forward Selection
+
+- Start with the intercept-only model (i.e. model with no predictors)
+
+--
+
+- Include variables one at a time based on some criterion. Common criterion include 
+  + Add variable that results in the model with highest Adj. `\(R^2\)` **&lt;i&gt;or&lt;/i&gt;**
+  + Add variable that results in the model with the lowest value of AIC or BIC 
+
+--
+
+- Stop when no more variables can be added to the model based on the criterion
+
+---
+
+## Forward selection example 
+
+
+```r
+sat_scores &lt;- Sleuth3::case1201 %&gt;%
+  select(-State) 
+```
+
+
+```r
+int_only_model &lt;- lm(SAT ~ 1, data = sat_scores)
+```
+
+
+```r
+full_model &lt;- lm(SAT ~ ., data = sat_scores)
+```
+
+---
+
+## Step 1
+
+.small[
+
+```r
+add1(int_only_model, full_model, data = sat_scores)
+```
+
+```
+## Single term additions
+## 
+## Model:
+## SAT ~ 1
+##        Df Sum of Sq    RSS    AIC
+## &lt;none&gt;              246011 427.06
+## Takers  1    181024  64987 362.50
+## Income  1     84038 161973 408.16
+## Years   1     26948 219063 423.25
+## Public  1      1589 244422 428.73
+## Expend  1       973 245038 428.86
+## Rank    1    190471  55539 354.64
+```
+]
+
+--
+
+.vocab[Add `Rank` to the model.]
+
+---
+
+## Step 2
+
+.small[
+
+```r
+current_model &lt;- lm(SAT ~ Rank, data = sat_scores)
+```
+]
+
+--
+
+.small[
+
+```r
+add1(current_model, full_model, data = sat_scores)
+```
+
+```
+## Single term additions
+## 
+## Model:
+## SAT ~ Rank
+##        Df Sum of Sq   RSS    AIC
+## &lt;none&gt;              55539 354.64
+## Takers  1    1761.8 53778 355.03
+## Income  1    4601.1 50938 352.32
+## Years   1   17913.6 37626 337.17
+## Public  1    3847.7 51692 353.05
+## Expend  1    7671.0 47868 349.21
+```
+]
+
+--
+
+.vocab[Add `Years` to the model]
+
+---
+
+## Step 3
+
+.small[
+
+```r
+current_model &lt;- lm(SAT ~ Rank + Years, data = sat_scores)
+```
+]
+
+--
+
+.small[
+
+```r
+add1(current_model, full_model, data = sat_scores)
+```
+
+```
+## Single term additions
+## 
+## Model:
+## SAT ~ Rank + Years
+##        Df Sum of Sq   RSS    AIC
+## &lt;none&gt;              37626 337.17
+## Takers  1     778.7 36847 338.13
+## Income  1    2782.4 34843 335.33
+## Public  1      37.0 37589 339.12
+## Expend  1    5917.6 31708 330.62
+```
+]
+
+--
+
+.vocab[Add `Expend` to the model.]
+
+---
+
+## Step 4
+
+.small[
+
+```r
+current_model &lt;- lm(SAT ~ Rank + Years + Expend, data = sat_scores)
+```
+]
+
+--
+
+.small[
+
+```r
+add1(current_model, full_model, data = sat_scores)
+```
+
+```
+## Single term additions
+## 
+## Model:
+## SAT ~ Rank + Years + Expend
+##        Df Sum of Sq   RSS    AIC
+## &lt;none&gt;              31708 330.62
+## Takers  1   1368.28 30340 330.41
+## Income  1    848.47 30860 331.26
+## Public  1   1462.46 30246 330.25
+```
+]
+
+--
+
+.vocab[Add `Public` to the model.]
+
+---
+
+## Step 5
+
+.small[
+
+```r
+current_model &lt;- lm(SAT ~ Rank + Years + Expend + Public, data = sat_scores)
+```
+]
+
+--
+
+.small[
+
+```r
+add1(current_model, full_model, data = sat_scores)
+```
+
+```
+## Single term additions
+## 
+## Model:
+## SAT ~ Rank + Years + Expend + Public
+##        Df Sum of Sq   RSS    AIC
+## &lt;none&gt;              30246 330.25
+## Takers  1    401.32 29844 331.59
+## Income  1     70.95 30175 332.14
+```
+]
+
+--
+
+🛑 .vocab[Stop. We won't add any other variables to the model]
+
+---
+
+## Final model 
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; estimate &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; std.error &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p.value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; (Intercept) &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -204.598 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 117.687 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -1.738 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.089 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Rank &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 10.003 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.603 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 16.581 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.000 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Years &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21.890 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6.037 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.626 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.001 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Expend &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.242 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.678 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.305 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.002 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Public &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.664 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.450 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -1.475 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.147 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+--
+
+.vocab[Try backward selection using the `drop1` function in R.]
+---
+
+## Recap
+
+- Identifying modeling objectives
+
+- Model selection processes
+  - Forward selection 
+  - Backward selection 
+
+
+
+
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"slideNumberFormat": "%current%",
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

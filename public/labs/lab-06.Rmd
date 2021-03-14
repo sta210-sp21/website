@@ -16,6 +16,8 @@ link-citations: yes
 knitr::opts_chunk$set(eval = FALSE)
 ```
 
+Instructions will be posted when the lab is assigned.
+<!--
 This lab will focus on using Analysis of Variance to analyze data about penguins in the Palmer Archipelago near Palmer Station. 
 
 # Learning goals
@@ -125,3 +127,4 @@ Type `?kable` in the console to access the help file for the `kable` function.
 **One team member:** Upload the team's PDF to Gradescope. Be sure to include every team member's name in the Gradescope submission Associate the "Overall" graded section with the first page of your PDF, and mark where each answer is to the exercises. If any answer spans multiple pages, then mark all pages.
 
 There should only be <u>one</u> submission per team on Gradescope.
+--> 

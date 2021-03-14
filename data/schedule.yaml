@@ -108,6 +108,7 @@ lessons:
   - week: "Week 09"
     date: "Mon, Mar 15"
     title: "Lab 06"
+    lab: "lab-06.html"
   - date: "Tue, Mar 16"
     title: "Model comparison"
     slides: "16-model-comparison.html"
