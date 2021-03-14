@@ -16,17 +16,15 @@ link-citations: yes
 knitr::opts_chunk$set(eval = FALSE)
 ```
 
-Instructions will be posted when the lab is assigned.
-<!--
-This lab will focus on using Analysis of Variance to analyze data about penguins in the Palmer Archipelago near Palmer Station. 
+In this lab, you will use multiple linear regression to understand variability in the price of houses in King County, WA. 
 
 # Learning goals
 
 By the end of the lab you will be able to...
 
-- Use Analysis of Variance to compare means for multiple groups
-- Calculate confidence intervals to estimate differences between groups
-- Account for multiple comparisons using the Bonferroni correction 
+- Wrangle data and create new variables
+- Fit a multiple linear regression model including quantitative and categorical predictors
+- Interpret coefficients for models with a log-transformed response variable
 
 # Getting started
 
@@ -36,7 +34,7 @@ A repository has already been created for you and your teammates. Everyone in yo
 
 - Go to [course organization](https://www.github.com/sta210-sp21) on GitHub.
 
-- In addition to your private individual repositories, you should now see a repo named **lab-05-**. Go to that repository.
+- In addition to your private individual repositories, you should now see a repo named **lab-06-**. Go to that repository.
   
 - Each person on the team should clone the repository and open a new project in RStudio.
 
@@ -46,85 +44,96 @@ Now that you have had some experience collaborating as a team on GitHub, it will
 
 **Every team member should have at least one meaningful commit to the repo on GitHub.**
 
+## Password caching
+
+If you would like your git password cached for a week for this project, type the following in the **Terminal** in RStudio:
+
+```{bash eval=FALSE}
+git config --global credential.helper 'cache --timeout 604800'
+```
+
 # Packages + data
 
 ## Packages
 
-We'll use the following packages in this lab. 
+We will use the following packages in today's lab. Feel free to add any other packages as needed.
 
-```{r load-packages, message=FALSE, eval=TRUE}
+```{r load-packages}
 library(tidyverse)
-library(knitr)
 library(broom)
-library(pairwiseCI)
-# add more packages as needed
+library(knitr)
 ```
 
-# Data: Palmer penguins
+## Data 
 
-The data is the `penguins` data set from the [palmerpenguins R package](https://allisonhorst.github.io/palmerpenguins/) maintained by Dr. Allison Horst. This data set contains measurements and other characteristics for 344 penguins observed near Palmer Station in Antarctica. The data were originally collected by Dr. Kristen Gorman. 
+The for today's lab contains the price and other characteristics of over 20,000 houses sold in King County, Washington (the county that includes Seattle). The data set includes the following variables:
 
-The data set is in `penguins.csv` located in the `data` folder. 
-
-The following variables are in the `penguins` data set. 
-
-|variable          |class   |description |
-|:----------|:-------|:-----------|
-|species           |integer | Penguin species (Adelie, Gentoo, Chinstrap) |
-|island            |integer | Island where recorded (Biscoe, Dream, Torgersen) |
-|bill_length_mm    |double  | Bill length in millimeters (also known as culmen length) |
-|bill_depth_mm     |double  | Bill depth in millimeters (also known as culmen depth) |
-|flipper_length_mm |integer | Flipper length in mm |
-|body_mass_g       |integer | Body mass in grams |
-|sex               |integer | sex of the animal |
-|year              |integer | year recorded |
+- `price`: selling price of the house
+- `date`: date house was sold, measured in days since January 1, 2014
+- `bedrooms`: number of bedrooms
+- `bathrooms`: number of bathrooms
+- `sqft`: interior square footage
+- `floors`: number of floors
+- `waterfront`: 1 if the house has a view of the waterfront, 0 otherwise
+- `yr_built`: year the house was built
+- `yr_renovated`: 0 if the house was never renovated, the year the house was renovated if else
 
 
-
-
-# Exercises
-
-Can we differentiate penguin species based on their bill length? To analyze this question we will use Analysis of Variance to compare the mean bill length for  Adelie, Gentoo, Chinstrap penguins found near the Palmer Station in Antarctica. 
-
-::: {.commit}
-
-As you complete the lab 
-
-- Use informative axis labels and title for all visualizations. 
-- Neatly display all tables using 3 digits for numeric values and include an informative caption. 
-- Write all narrative in complete sentences. 
-- Write all narrative in the context of the data and use the appropriate units, when applicable. 
-
-:::
-
-1. Let's take a look at the `bill_length_mm` based on the `species`. Create a visualization to explore the relationship between the two variables. Interpret the visualization in the context of the data. 
-
-2. We'd like to use ANOVA to assess if there's a relationship between bill length and species. Write the null and alternative hypotheses for the ANOVA test (a) using mathematical notation (b) using words.
-
-3. Before conducting the test, let's check the conditions for ANOVA. For each condition write whether or not it is satisfied. Briefly explain your response for each condition, including  any plots, summary statistics, etc. used to make your determination.
-
-```{marginfigure}
-Type `?kable` in the console to access the help file for the `kable` function.
+```{r}
+houses <- read_csv("data/KingCountyHouses.csv") %>%
+  mutate(waterfront = as.factor(waterfront))
 ```
 
-4. Display the ANOVA table obtained from R. Update the column names in  the table, so they are more informative for a general audience (e.g. "Sum of Squares" instead of "sumsq"). 
+# Exercises 
 
+1. Use data visualization and summary statistics to examine the distribution of `bedrooms`. Is this distribution what you expected? Briefly explain why or why not. 
 
-5. What is $s_y^2$, the variance of the distribution of bill length? Show how you calculated this value from the ANOVA table.
+1. We'll limit the scope of the analysis to houses with 1 to 4 bedrooms. Filter the data set to only include these observations. Then, calculate the mean and standard deviation of `bedrooms` in the updated data.
 
-6. What is the conclusion from the ANOVA test? State the conclusion in the context of the data. 
+**We will use this data set for the remainder of the lab.**
 
-7. Let's dive into the data further and use pairwise comparisons to understand how bill length compares across species. We want the probability of making a family-wise Type I error to be 0.08. Briefly explain what this means in the context of the data. 
+1. Visualize the distribution of `price`. Then use the visualization and appropriate summary statistics to describe the distribution of this variable. 
 
-8. To achieve the desired family-wise Type I error rate from the previous question, what confidence level should be used for the individual confidence intervals? Briefly explain your response.
+1. We need to do a little more data wrangling before fitting the model. 
+    
+  - Create a new variable to aggregate `floors` into the following levels: 
 
-9. Calculate the pairwise confidence intervals. You may calculate them in R using the `pairwiseCI` function. 
+    "one-story" if 1 $\leq$ `floors` $<$ 2
 
-10. How does the bill length compare across the species of penguins? In your description, include numerical and inferential conclusions based on your analysis. 
+    "two-story" if  2 $\leq$ `floors` $<$ 3
 
-## Submission
+    "three-story' if 3 $\leq$ `floors` 
+    
+  - Create a new indicator variable that takes values "1" if a house has been renovated and "0" otherwise. 
+  
+You'll use these variables instead of `floors` and `yr_renovated` in the analysis.
+
+1. Fit a regression model that can be used to explain variability in the price of houses in King County based on the characteristics in the data. Display the model using 3 digits for the numeric values. 
+
+1. Check the model conditions. For each condition, state whether it is satisfied and briefly explain using any relevant plots or summary statistics. 
+
+1. We want to refit the model using `log(price)`, the log-transformed price, as the response variable. Briefly explain why we might want to refit the model with the new response variable. 
+
+1. Refit the model with `log(price)` as the response variable. Display the model using 3 digits for the numeric values. 
+
+1. Interpret the following effects in terms of(1) the change in `log(price)` and (2) the change in `price` of houses in King County: 
+
+    - when the house was built
+    - number of floors in the house
+
+1. Interpret the effect of square footage on the price of houses in King County. The interpretation should be written in a way that would be practical to a home-buyer. 
+
+# Submission
 
 **One team member:** Upload the team's PDF to Gradescope. Be sure to include every team member's name in the Gradescope submission Associate the "Overall" graded section with the first page of your PDF, and mark where each answer is to the exercises. If any answer spans multiple pages, then mark all pages.
 
 There should only be <u>one</u> submission per team on Gradescope.
---> 
+
+**Note that your submission on Gradescope should be identical to the PDF that is rendered when we knit the Rmd file in your repo.** 
+
+
+## Acknowledgements
+
+The data used in this lab was obtained from [https://github.com/proback/BYSH](https://github.com/proback/BYSH).
+
+

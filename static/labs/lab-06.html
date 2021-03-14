@@ -28,6 +28,100 @@
     </style>
 
 
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
 
 
 
@@ -45,120 +139,120 @@
 
 
 <h1 class="title toc-ignore">Lab 06</h1>
-<h3 class="subtitle">due Sun, Mar 21, at 11:59p EST</h3>
+<h3 class="subtitle">due Sun, Mar 21, at 11:59p EDT</h3>
 
 
+<div id="TOC">
+<ul>
+<li><a href="#learning-goals">Learning goals</a></li>
+<li><a href="#getting-started">Getting started</a></li>
+<li><a href="#packages-data">Packages + data</a></li>
+<li><a href="#exercises">Exercises</a></li>
+<li><a href="#submission">Submission</a></li>
+</ul>
+</div>
 
-<p>Instructions will be posted when the lab is assigned. <!--
-This lab will focus on using Analysis of Variance to analyze data about penguins in the Palmer Archipelago near Palmer Station. 
-
-# Learning goals
-
-By the end of the lab you will be able to...
-
-- Use Analysis of Variance to compare means for multiple groups
-- Calculate confidence intervals to estimate differences between groups
-- Account for multiple comparisons using the Bonferroni correction 
-
-# Getting started
-
-## Clone assignment repo + start new project
-
-A repository has already been created for you and your teammates. Everyone in your team has access to the same repo.
-
-- Go to [course organization](https://www.github.com/sta210-sp21) on GitHub.
-
-- In addition to your private individual repositories, you should now see a repo named **lab-05-**. Go to that repository.
-  
-- Each person on the team should clone the repository and open a new project in RStudio.
-
-## Workflow: Using git and GitHub as a team
-
-Now that you have had some experience collaborating as a team on GitHub, it will be up to your team to decide who types the responses to each question. Every team member should contribute to the discussion about each lab exercise even if they are not the one typing the team's responses. 
-
-**Every team member should have at least one meaningful commit to the repo on GitHub.**
-
-# Packages + data
-
-## Packages
-
-We'll use the following packages in this lab. 
-
-
-```r
-library(tidyverse)
-library(knitr)
-library(broom)
-library(pairwiseCI)
-# add more packages as needed
-```
-
-# Data: Palmer penguins
-
-The data is the `penguins` data set from the [palmerpenguins R package](https://allisonhorst.github.io/palmerpenguins/) maintained by Dr. Allison Horst. This data set contains measurements and other characteristics for 344 penguins observed near Palmer Station in Antarctica. The data were originally collected by Dr. Kristen Gorman. 
-
-The data set is in `penguins.csv` located in the `data` folder. 
-
-The following variables are in the `penguins` data set. 
-
-|variable          |class   |description |
-|:----------|:-------|:-----------|
-|species           |integer | Penguin species (Adelie, Gentoo, Chinstrap) |
-|island            |integer | Island where recorded (Biscoe, Dream, Torgersen) |
-|bill_length_mm    |double  | Bill length in millimeters (also known as culmen length) |
-|bill_depth_mm     |double  | Bill depth in millimeters (also known as culmen depth) |
-|flipper_length_mm |integer | Flipper length in mm |
-|body_mass_g       |integer | Body mass in grams |
-|sex               |integer | sex of the animal |
-|year              |integer | year recorded |
-
-
-
-
-# Exercises
-
-Can we differentiate penguin species based on their bill length? To analyze this question we will use Analysis of Variance to compare the mean bill length for  Adelie, Gentoo, Chinstrap penguins found near the Palmer Station in Antarctica. 
-
-::: {.commit}
-
-As you complete the lab 
-
-- Use informative axis labels and title for all visualizations. 
-- Neatly display all tables using 3 digits for numeric values and include an informative caption. 
-- Write all narrative in complete sentences. 
-- Write all narrative in the context of the data and use the appropriate units, when applicable. 
-
-:::
-
-1. Let's take a look at the `bill_length_mm` based on the `species`. Create a visualization to explore the relationship between the two variables. Interpret the visualization in the context of the data. 
-
-2. We'd like to use ANOVA to assess if there's a relationship between bill length and species. Write the null and alternative hypotheses for the ANOVA test (a) using mathematical notation (b) using words.
-
-3. Before conducting the test, let's check the conditions for ANOVA. For each condition write whether or not it is satisfied. Briefly explain your response for each condition, including  any plots, summary statistics, etc. used to make your determination.
-
-<label for="tufte-mn-1" class="margin-toggle">&#8853;</label><input type="checkbox" id="tufte-mn-1" class="margin-toggle"><span class="marginnote"><span style="display: block;">Type <code>?kable</code> in the console to access the help file for the <code>kable</code> function.</span></span>
-
-4. Display the ANOVA table obtained from R. Update the column names in  the table, so they are more informative for a general audience (e.g. "Sum of Squares" instead of "sumsq"). 
-
-
-5. What is $s_y^2$, the variance of the distribution of bill length? Show how you calculated this value from the ANOVA table.
-
-6. What is the conclusion from the ANOVA test? State the conclusion in the context of the data. 
-
-7. Let's dive into the data further and use pairwise comparisons to understand how bill length compares across species. We want the probability of making a family-wise Type I error to be 0.08. Briefly explain what this means in the context of the data. 
-
-8. To achieve the desired family-wise Type I error rate from the previous question, what confidence level should be used for the individual confidence intervals? Briefly explain your response.
-
-9. Calculate the pairwise confidence intervals. You may calculate them in R using the `pairwiseCI` function. 
-
-10. How does the bill length compare across the species of penguins? In your description, include numerical and inferential conclusions based on your analysis. 
-
-## Submission
-
-**One team member:** Upload the team's PDF to Gradescope. Be sure to include every team member's name in the Gradescope submission Associate the "Overall" graded section with the first page of your PDF, and mark where each answer is to the exercises. If any answer spans multiple pages, then mark all pages.
-
-There should only be <u>one</u> submission per team on Gradescope.
---></p>
+<p>In this lab, you will use multiple linear regression to understand variability in the price of houses in King County, WA.</p>
+<div id="learning-goals" class="section level1">
+<h1>Learning goals</h1>
+<p>By the end of the lab you will be able to…</p>
+<ul>
+<li>Wrangle data and create new variables</li>
+<li>Fit a multiple linear regression model including quantitative and categorical predictors</li>
+<li>Interpret coefficients for models with a log-transformed response variable</li>
+</ul>
+</div>
+<div id="getting-started" class="section level1">
+<h1>Getting started</h1>
+<div id="clone-assignment-repo-start-new-project" class="section level2">
+<h2>Clone assignment repo + start new project</h2>
+<p>A repository has already been created for you and your teammates. Everyone in your team has access to the same repo.</p>
+<ul>
+<li><p>Go to <a href="https://www.github.com/sta210-sp21">course organization</a> on GitHub.</p></li>
+<li><p>In addition to your private individual repositories, you should now see a repo named <strong>lab-06-</strong>. Go to that repository.</p></li>
+<li><p>Each person on the team should clone the repository and open a new project in RStudio.</p></li>
+</ul>
+</div>
+<div id="workflow-using-git-and-github-as-a-team" class="section level2">
+<h2>Workflow: Using git and GitHub as a team</h2>
+<p>Now that you have had some experience collaborating as a team on GitHub, it will be up to your team to decide who types the responses to each question. Every team member should contribute to the discussion about each lab exercise even if they are not the one typing the team’s responses.</p>
+<p><strong>Every team member should have at least one meaningful commit to the repo on GitHub.</strong></p>
+</div>
+<div id="password-caching" class="section level2">
+<h2>Password caching</h2>
+<p>If you would like your git password cached for a week for this project, type the following in the <strong>Terminal</strong> in RStudio:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config --global credential.helper <span class="st">&#39;cache --timeout 604800&#39;</span></span></code></pre></div>
+</div>
+</div>
+<div id="packages-data" class="section level1">
+<h1>Packages + data</h1>
+<div id="packages" class="section level2">
+<h2>Packages</h2>
+<p>We will use the following packages in today’s lab. Feel free to add any other packages as needed.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span></code></pre></div>
+</div>
+<div id="data" class="section level2">
+<h2>Data</h2>
+<p>The for today’s lab contains the price and other characteristics of over 20,000 houses sold in King County, Washington (the county that includes Seattle). The data set includes the following variables:</p>
+<ul>
+<li><code>price</code>: selling price of the house</li>
+<li><code>date</code>: date house was sold, measured in days since January 1, 2014</li>
+<li><code>bedrooms</code>: number of bedrooms</li>
+<li><code>bathrooms</code>: number of bathrooms</li>
+<li><code>sqft</code>: interior square footage</li>
+<li><code>floors</code>: number of floors</li>
+<li><code>waterfront</code>: 1 if the house has a view of the waterfront, 0 otherwise</li>
+<li><code>yr_built</code>: year the house was built</li>
+<li><code>yr_renovated</code>: 0 if the house was never renovated, the year the house was renovated if else</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>houses <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/KingCountyHouses.csv&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">waterfront =</span> <span class="fu">as.factor</span>(waterfront))</span></code></pre></div>
+</div>
+</div>
+<div id="exercises" class="section level1">
+<h1>Exercises</h1>
+<ol style="list-style-type: decimal">
+<li><p>Use data visualization and summary statistics to examine the distribution of <code>bedrooms</code>. Is this distribution what you expected? Briefly explain why or why not.</p></li>
+<li><p>We’ll limit the scope of the analysis to houses with 1 to 4 bedrooms. Filter the data set to only include these observations. Then, calculate the mean and standard deviation of <code>bedrooms</code> in the updated data.</p></li>
+</ol>
+<p><strong>We will use this data set for the remainder of the lab.</strong></p>
+<ol style="list-style-type: decimal">
+<li><p>Visualize the distribution of <code>price</code>. Then use the visualization and appropriate summary statistics to describe the distribution of this variable.</p></li>
+<li><p>We need to do a little more data wrangling before fitting the model.</p></li>
+</ol>
+<ul>
+<li><p>Create a new variable to aggregate <code>floors</code> into the following levels:</p>
+<p>“one-story” if 1 <span class="math inline">\(\leq\)</span> <code>floors</code> <span class="math inline">\(&lt;\)</span> 2</p>
+<p>“two-story” if 2 <span class="math inline">\(\leq\)</span> <code>floors</code> <span class="math inline">\(&lt;\)</span> 3</p>
+<p>&quot;three-story’ if 3 <span class="math inline">\(\leq\)</span> <code>floors</code></p></li>
+<li><p>Create a new indicator variable that takes values “1” if a house has been renovated and “0” otherwise.</p></li>
+</ul>
+<p>You’ll use these variables instead of <code>floors</code> and <code>yr_renovated</code> in the analysis.</p>
+<ol style="list-style-type: decimal">
+<li><p>Fit a regression model that can be used to explain variability in the price of houses in King County based on the characteristics in the data. Display the model using 3 digits for the numeric values.</p></li>
+<li><p>Check the model conditions. For each condition, state whether it is satisfied and briefly explain using any relevant plots or summary statistics.</p></li>
+<li><p>We want to refit the model using <code>log(price)</code>, the log-transformed price, as the response variable. Briefly explain why we might want to refit the model with the new response variable.</p></li>
+<li><p>Refit the model with <code>log(price)</code> as the response variable. Display the model using 3 digits for the numeric values.</p></li>
+<li><p>Interpret the following effects in terms of(1) the change in <code>log(price)</code> and (2) the change in <code>price</code> of houses in King County:</p>
+<ul>
+<li>when the house was built</li>
+<li>number of floors in the house</li>
+</ul></li>
+<li><p>Interpret the effect of square footage on the price of houses in King County. The interpretation should be written in a way that would be practical to a home-buyer.</p></li>
+</ol>
+</div>
+<div id="submission" class="section level1">
+<h1>Submission</h1>
+<p><strong>One team member:</strong> Upload the team’s PDF to Gradescope. Be sure to include every team member’s name in the Gradescope submission Associate the “Overall” graded section with the first page of your PDF, and mark where each answer is to the exercises. If any answer spans multiple pages, then mark all pages.</p>
+<p>There should only be <u>one</u> submission per team on Gradescope.</p>
+<p><strong>Note that your submission on Gradescope should be identical to the PDF that is rendered when we knit the Rmd file in your repo.</strong></p>
+<div id="acknowledgements" class="section level2">
+<h2>Acknowledgements</h2>
+<p>The data used in this lab was obtained from <a href="https://github.com/proback/BYSH">https://github.com/proback/BYSH</a>.</p>
+</div>
+</div>
 
 
 
