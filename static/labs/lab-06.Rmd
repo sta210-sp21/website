@@ -1,0 +1,127 @@
+---
+title: "Lab 06" 
+subtitle: "due Sun, Mar 21,  at 11:59p EST"
+output: 
+  tufte::tufte_html:
+    css: "./sta210-labs.css"
+    tufte_variant: "envisioned"
+    highlight: pygments
+    fig_height: 10
+    toc: true
+    toc_depth: 1
+link-citations: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(eval = FALSE)
+```
+
+This lab will focus on using Analysis of Variance to analyze data about penguins in the Palmer Archipelago near Palmer Station. 
+
+# Learning goals
+
+By the end of the lab you will be able to...
+
+- Use Analysis of Variance to compare means for multiple groups
+- Calculate confidence intervals to estimate differences between groups
+- Account for multiple comparisons using the Bonferroni correction 
+
+# Getting started
+
+## Clone assignment repo + start new project
+
+A repository has already been created for you and your teammates. Everyone in your team has access to the same repo.
+
+- Go to [course organization](https://www.github.com/sta210-sp21) on GitHub.
+
+- In addition to your private individual repositories, you should now see a repo named **lab-05-**. Go to that repository.
+  
+- Each person on the team should clone the repository and open a new project in RStudio.
+
+## Workflow: Using git and GitHub as a team
+
+Now that you have had some experience collaborating as a team on GitHub, it will be up to your team to decide who types the responses to each question. Every team member should contribute to the discussion about each lab exercise even if they are not the one typing the team's responses. 
+
+**Every team member should have at least one meaningful commit to the repo on GitHub.**
+
+# Packages + data
+
+## Packages
+
+We'll use the following packages in this lab. 
+
+```{r load-packages, message=FALSE, eval=TRUE}
+library(tidyverse)
+library(knitr)
+library(broom)
+library(pairwiseCI)
+# add more packages as needed
+```
+
+# Data: Palmer penguins
+
+The data is the `penguins` data set from the [palmerpenguins R package](https://allisonhorst.github.io/palmerpenguins/) maintained by Dr. Allison Horst. This data set contains measurements and other characteristics for 344 penguins observed near Palmer Station in Antarctica. The data were originally collected by Dr. Kristen Gorman. 
+
+The data set is in `penguins.csv` located in the `data` folder. 
+
+The following variables are in the `penguins` data set. 
+
+|variable          |class   |description |
+|:----------|:-------|:-----------|
+|species           |integer | Penguin species (Adelie, Gentoo, Chinstrap) |
+|island            |integer | Island where recorded (Biscoe, Dream, Torgersen) |
+|bill_length_mm    |double  | Bill length in millimeters (also known as culmen length) |
+|bill_depth_mm     |double  | Bill depth in millimeters (also known as culmen depth) |
+|flipper_length_mm |integer | Flipper length in mm |
+|body_mass_g       |integer | Body mass in grams |
+|sex               |integer | sex of the animal |
+|year              |integer | year recorded |
+
+
+
+
+# Exercises
+
+Can we differentiate penguin species based on their bill length? To analyze this question we will use Analysis of Variance to compare the mean bill length for  Adelie, Gentoo, Chinstrap penguins found near the Palmer Station in Antarctica. 
+
+::: {.commit}
+
+As you complete the lab 
+
+- Use informative axis labels and title for all visualizations. 
+- Neatly display all tables using 3 digits for numeric values and include an informative caption. 
+- Write all narrative in complete sentences. 
+- Write all narrative in the context of the data and use the appropriate units, when applicable. 
+
+:::
+
+1. Let's take a look at the `bill_length_mm` based on the `species`. Create a visualization to explore the relationship between the two variables. Interpret the visualization in the context of the data. 
+
+2. We'd like to use ANOVA to assess if there's a relationship between bill length and species. Write the null and alternative hypotheses for the ANOVA test (a) using mathematical notation (b) using words.
+
+3. Before conducting the test, let's check the conditions for ANOVA. For each condition write whether or not it is satisfied. Briefly explain your response for each condition, including  any plots, summary statistics, etc. used to make your determination.
+
+```{marginfigure}
+Type `?kable` in the console to access the help file for the `kable` function.
+```
+
+4. Display the ANOVA table obtained from R. Update the column names in  the table, so they are more informative for a general audience (e.g. "Sum of Squares" instead of "sumsq"). 
+
+
+5. What is $s_y^2$, the variance of the distribution of bill length? Show how you calculated this value from the ANOVA table.
+
+6. What is the conclusion from the ANOVA test? State the conclusion in the context of the data. 
+
+7. Let's dive into the data further and use pairwise comparisons to understand how bill length compares across species. We want the probability of making a family-wise Type I error to be 0.08. Briefly explain what this means in the context of the data. 
+
+8. To achieve the desired family-wise Type I error rate from the previous question, what confidence level should be used for the individual confidence intervals? Briefly explain your response.
+
+9. Calculate the pairwise confidence intervals. You may calculate them in R using the `pairwiseCI` function. 
+
+10. How does the bill length compare across the species of penguins? In your description, include numerical and inferential conclusions based on your analysis. 
+
+## Submission
+
+**One team member:** Upload the team's PDF to Gradescope. Be sure to include every team member's name in the Gradescope submission Associate the "Overall" graded section with the first page of your PDF, and mark where each answer is to the exercises. If any answer spans multiple pages, then mark all pages.
+
+There should only be <u>one</u> submission per team on Gradescope.

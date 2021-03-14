@@ -1,0 +1,538 @@
+---
+title: "Model comparison"
+author: "Prof. Maria Tackett"
+output:
+  xaringan::moon_reader:
+    mathjax: "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML"
+    css: "sta210-slides.css"
+    logo: img/sta199-sticker-icon.png
+    lib_dir: libs/font-awesome
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      slideNumberFormat: "%current%" 
+      ratio: "16:9"
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r child = "setup.Rmd"}
+```
+
+class: middle, center
+
+## [Click here for PDF of slides](16-model-comparison.pdf)
+
+---
+
+## Topics
+
+- ANOVA for Multiple Linear Regression
+
+- Nested F Test
+
+- $R^2$ vs. Adj. $R^2$
+
+- AIC & BIC
+
+
+```{r}
+library(tidyverse)
+library(knitr)
+library(broom)
+library(patchwork)
+library(kableExtra)
+```
+
+
+---
+
+## Restaurant tips
+
+What affects the amount customers tip at a restaurant?
+
+- **Response:**
+    - <font class="vocab">`Tip`</font>: amount of the tip
+    
+- **Predictors:**
+    - <font class="vocab">`Party`</font>: number of people in the party
+    - <font class="vocab">`Meal`</font>:  time of day (Lunch, Dinner, Late Night) 
+    - <font class="vocab">`Age`</font>: age category of person paying the bill (Yadult, Middle, SenCit)
+
+```{r echo = F}
+tips <- read_csv("data/tip-data.csv") %>%
+  filter(!is.na(Party))
+```
+
+---
+
+## Response Variable
+
+```{r echo = F}
+ggplot(data = tips, aes(x = Tip)) +
+  geom_histogram() +
+  labs("Distribution of Tips")
+```
+
+---
+
+## Predictor Variables
+
+```{r echo = F}
+p1 <- ggplot(data = tips, aes(x = Party)) +
+  geom_histogram() + 
+  labs(title = "Party Size", 
+       x = "", y = "")
+
+p2 <- ggplot(data = tips, aes(x = Meal)) +
+  geom_bar() + 
+  labs(title = "Meal Time", 
+       x = "", y = "")
+
+p3 <- ggplot(data = tips, aes(x = Age)) +
+  geom_bar() + 
+  labs(title = "Age of Payer", 
+       x = "", y = "")
+
+p1 + p2 + p3
+```
+
+
+---
+
+## Response vs. Predictors
+
+```{r echo = F}
+p1 <- ggplot(data = tips, aes(x = Party, y = Tip)) +
+  geom_point() +
+  labs(title = "Tips vs. Party")
+
+p2 <- ggplot(data = tips, aes(x = Meal, y = Tip)) +
+  geom_boxplot() +
+  labs(title = "Tips vs. Meal Time", 
+       x = "Time of Day")
+
+p3 <- ggplot(data = tips, aes(x = Age, y = Tip)) +
+  geom_boxplot() +
+  labs(title = "Tips vs. Age", 
+       x = "Age")
+
+p1 + p2  + p3
+```
+
+---
+
+## Restaurant tips: model
+
+```{r}
+model1 <- lm(Tip ~ Party +  Age , data = tips)
+tidy(model1, conf.int = TRUE) %>%
+  kable(format = "markdown", digits=3)
+```
+<br>
+
+.center[
+.question[
+**Is this the best model to explain variation in Tips?**
+]
+]
+
+
+---
+
+## ANOVA test for MLR
+
+Using the ANOVA table, we can test whether any variable in the model is a significant predictor of the response. We conduct this test using the following hypotheses: 
+
+.eq[
+$$\begin{aligned}&H_0: \beta_{1} =  \beta_{2} = \dots = \beta_p = 0 \\ 
+&H_a: \text{at least one }\beta_j \text{ is not equal to 0}\end{aligned}$$
+]
+
+- The statistic for this test is the $F$ test statistic in the ANOVA table 
+
+- We calculate the p-value using an $F$ distribution with $p$ and $(n-p-1)$ degrees of freedom
+
+---
+
+## Tips: ANOVA Test
+
+```{r}
+model1 <- lm(Tip ~ Party + Age , data = tips)
+```
+
+```{r}
+anova(model1) %>% 
+  tidy() %>%
+  kable(format = "html", digits = 3) %>%
+  row_spec(c(1,2), background = "#dce5b2")
+```
+
+```{r}
+dfm <- 3
+ssm <- 1188.636 + 38.028
+modelms <- round(ssm / dfm,3)
+
+fstat <- modelms /  4.160
+pval <- 1-pf(fstat, 3, 165)
+```
+
+--
+
+**Model df**: 3
+
+**Model SS**: 1188.636 + 38.028 = `r ssm`
+
+**Model MS**: `r ssm`/ 3 = `r modelms`
+
+--
+
+**FStat**: `r modelms` /  4.160 = `r fstat`
+
+**P-value**: P(F > `r fstat`) $\approx 0$
+  - calculated using an F distribution with 3 and 165 degrees of freedom 
+
+---
+
+## Tips: ANOVA Test
+
+```{r}
+anova(model1) %>% 
+  tidy() %>%
+  kable(format = "html", digits = 3) %>%
+  row_spec(c(1,2), background = "#dce5b2")
+```
+
+
+.vocab[The data provide sufficient evidence to conclude that at least one coefficient is non-zero, i.e. at least one predictor in the model is significant.]
+
+---
+
+## Testing subset of coefficients
+
+- Sometimes we want to test whether a **subset of coefficients** are all equal to 0
+
+- This is often the case when we want test 
+    - whether a categorical variable with $k$ levels is a significant predictor of the response
+    - whether the interaction between a categorical and quantitative variable is significant
+
+- To do so, we will use the .vocab[Nested (Partial) F Test]
+
+---
+
+## Nested (Partial) F Test
+
+- Suppose we have a full and reduced model: 
+
+$$\begin{aligned}&\text{Full}: y = \beta_0 + \beta_1 x_1 + \dots + \beta_q x_q + \beta_{q+1} x_{q+1} + \dots \beta_p x_p \\
+&\text{Reduced}: y = \beta_0 + \beta_1 x_1 + \dots + \beta_q x_q\end{aligned}$$
+
+--
+
+- We want to test whether any of the variables $x_{q+1}, x_{q+2}, \ldots, x_p$ are significant predictors. To do so, we will test the hypothesis: 
+
+.eq[
+$$\begin{aligned}&H_0: \beta_{q+1} =  \beta_{q+2} = \dots = \beta_p = 0 \\ 
+&H_a: \text{at least one }\beta_j \text{ is not equal to 0}\end{aligned}$$
+]
+
+---
+
+## Nested F Test
+
+- The test statistic for this test is 
+
+
+$$F = \frac{(SSE_{reduced} - SSE_{full})\big/\text{# predictors tested}}{SSE_{full}\big/(n-p_{full}-1)}$$
+<br> 
+
+- Calculate the p-value using the F distribution with df1 = # predictors tested and df2 = $(n-p_{full}-1)$ 
+
+---
+
+## Is `Meal` a significant predictor of tips?
+
+```{r echo=F}
+model.tips <- lm(Tip ~ Party + Age + Meal, data = tips)
+tidy(model.tips) %>%
+  select(term, estimate) %>%
+  kable(format="html", digits=3) %>%
+  row_spec(c(5,6), background = "#dce5b2")
+```
+
+---
+
+## Tips: Nested F test
+
+$$\begin{aligned}&H_0: \beta_{late night} = \beta_{lunch} = 0\\
+&H_a: \text{ at least one }\beta_j \text{ is not equal to 0}\end{aligned}$$
+
+--
+
+```{r echo = T}
+reduced <- lm(Tip ~ Party + Age, data = tips)
+```
+
+--
+
+```{r echo = T}
+full <- lm(Tip ~ Party + Age + Meal, data = tips)
+```
+
+--
+
+```{r echo = T, eval = F}
+#Nested F test in R
+anova(reduced, full)
+```
+
+---
+
+## Tips: Nested F test
+
+```{r echo = F}
+kable(anova(reduced, full), format="markdown", digits = 3) %>%
+ row_spec(2, background = "#dce5b2")
+```
+
+--
+
+.vocab[F Stat]: $\frac{(686.444 - 622.979)/2}{622.979/(169 - 5 - 1)} = 8.303$ 
+
+--
+
+.vocab[P-value]: P(F > 8.303) = 0.0003
+  - calculated using an F distribution with 2 and 163 degrees of freedom
+  
+--
+
+.vocab[The data provide sufficient evidence to conclude that at least one coefficient associated with `Meal` is not zero. Therefore, `Meal` is a significant predictor of `Tips`.]
+
+---
+
+## Model with `Meal`
+
+```{r echo=F}
+model.tips <- lm(Tip ~ Party + Age + Meal, data = tips)
+tidy(model.tips, conf.int = TRUE) %>%
+  kable(format="html", digits=3)
+```
+
+---
+
+## Including interactions 
+
+Does the effect of `Party` differ based on the `Meal` time? 
+
+```{r echo=F}
+full <- lm(Tip ~ Party + Age + Meal + Meal*Party, data = tips)
+tidy(full) %>%
+  select(term, estimate) %>%
+  kable(format = "markdown", digits = 3)
+```
+
+---
+
+## Nested F test for interactions
+
+Let's use a Nested F test to determine if `Party*Meal` is statistically significant. 
+
+```{r echo = T}
+reduced <- lm(Tip ~ Party + Age + Meal, data = tips)
+```
+
+--
+
+```{r echo = T}
+full <- lm(Tip ~ Party + Age + Meal + Meal * Party, 
+           data = tips)
+```
+
+--
+
+```{r}
+kable(anova(reduced, full), format = "markdown", digits = 3) %>%
+  row_spec(2, background = "#dce5b2")
+```
+
+---
+
+## Final model for now
+
+We conclude that the effect of **`Party`** does not differ based **`Meal`**. Therefore, we will use the original model that only included main effects. 
+
+
+```{r echo  =F}
+model.tips <- lm(Tip ~ Party + Age + Meal,data=tips)
+kable(tidy(model.tips),format="html", digits=3)
+```
+
+---
+
+class: middle, center
+
+## Model comparision
+
+---
+
+## $R^2$ 
+
+**Recall**: $\color{purple}{R^2}$ is the proportion of the variation in the response variable explained by the regression model
+
+--
+
+$R^2$ will always increase as we add more variables to the model 
+  + If we add enough variables, we can always achieve $R^2=100\%$
+
+--
+
+If we only use $R^2$ to choose a best fit model, we will be prone to choose the model with the most predictor variables
+
+---
+
+
+## Adjusted $R^2$
+
+.vocab[Adjusted R<sup>2</sup>]: measure that includes a penalty for unnecessary predictor variables
+
+--
+
+Similar to $R^2$, it is a measure of the amount of variation in the response that is explained by the regression model 
+
+--
+
+Differs from $R^2$ by using the mean squares rather than sums of squares and therefore adjusting for the number of predictor variables
+
+---
+
+## $R^2$ and Adjusted $R^2$
+
+$$R^2 = \frac{SS_{Model}}{SS_{Total}} = 1 - \frac{SS_{Error}}{SS_{Total}}$$
+<br>
+
+--
+
+.eq[
+$$Adj. R^2 = 1 - \frac{SS_{Error}/(n-p-1)}{SS_{Total}/(n-1)}$$
+]
+
+---
+
+## Using $R^2$ and $Adj. R^2$
+
+$Adj. R^2$ can be used as a quick assessment to compare the fit of multiple models; however, it should not be the only assessment!
+
+--
+
+Use $R^2$ when describing the relationship between the response and predictor variables
+
+
+---
+
+## Tips: Comparing models 
+
+Let's compare two models: 
+
+.small[
+```{r echo = T}
+model1 <- lm(Tip ~ Party + Age + Meal, data = tips)
+glance(model1) %>% select(r.squared, adj.r.squared)
+```
+
+```{r echo = T}
+model2 <- lm(Tip ~ Party + Age + Meal + Day, data = tips)
+glance(model2) %>% select(r.squared, adj.r.squared)
+```
+]
+
+---
+
+## AIC & BIC
+
+.vocab[Akaike's Information Criterion (AIC):]
+$$AIC = n\log(SS_\text{Error}) - n \log(n) + 2(p+1)$$
+<br> 
+
+.vocab[Schwarz's Bayesian Information Criterion (BIC)]
+$$BIC = n\log(SS_\text{Error}) - n\log(n) + log(n)\times(p+1)$$
+<br>
+<br>
+
+See the [supplemental note](https://github.com/sta210-sp20/supplemental-notes/blob/master/model-selection-criteria.pdf) on AIC & BIC for derivations.
+
+---
+
+## AIC & BIC
+
+$$\begin{aligned} & AIC = \color{blue}{n\log(SS_\text{Error})} - n \log(n) + 2(p+1) \\
+& BIC = \color{blue}{n\log(SS_\text{Error})} - n\log(n) + \log(n)\times(p+1) \end{aligned}$$
+
+--
+
+<br> 
+
+.vocab3[First Term: Decreases as *p* increases]
+
+---
+
+## AIC & BIC
+
+$$\begin{aligned} & AIC = n\log(SS_\text{Error}) - \color{blue}{n \log(n)} + 2(p+1) \\
+& BIC = n\log(SS_\text{Error}) - \color{blue}{n\log(n)} + \log(n)\times(p+1) \end{aligned}$$
+
+<br> 
+
+.vocab3[Second Term: Fixed for a given sample size *n*]
+
+---
+
+## AIC & BIC
+
+$$\begin{aligned} & AIC = n\log(SS_\text{Error}) - n\log(n) + \color{blue}{2(p+1)} \\
+& BIC = n\log(SS_\text{Error}) - n\log(n) + \color{blue}{\log(n)\times(p+1)} \end{aligned}$$
+
+<br> 
+
+.vocab3[Third Term: Increases as *p* increases]
+
+---
+
+## Using AIC & BIC
+
+$$\begin{aligned} & AIC = n\log(SS_{Error}) - n \log(n) + \color{red}{2(p+1)} \\
+& BIC = n\log(SS_{Error}) - n\log(n) + \color{red}{\log(n)\times(p+1)} \end{aligned}$$
+<br>
+<br>
+
+- Choose model with the smaller value of AIC or BIC
+
+- If $n \geq 8$, the <font color="red">penalty</font> for BIC is larger than that of AIC, so BIC tends to favor *more parsimonious* models (i.e. models with fewer terms)
+
+---
+
+## Tips: AIC & BIC
+
+.small[
+```{r echo = T}
+model1 <- lm(Tip ~ Party + Age + Meal, data = tips)
+glance(model1) %>% select(AIC, BIC)
+```
+
+```{r echo = T}
+model2 <- lm(Tip ~ Party + Age + Meal + Day, data = tips)
+glance(model2) %>% select(AIC, BIC)
+```
+]
+
+---
+
+## Recap
+
+- ANOVA for Multiple Linear Regression
+
+- Nested F Test
+
+- $R^2$ vs. Adj. $R^2$
+
+- AIC & BIC

@@ -1,0 +1,346 @@
+---
+title: "Model selection"
+author: "Prof. Maria Tackett"
+output:
+  xaringan::moon_reader:
+    mathjax: "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML"
+    css: "sta210-slides.css"
+    logo: img/sta199-sticker-icon.png
+    lib_dir: libs/font-awesome
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      slideNumberFormat: "%current%" 
+      ratio: "16:9"
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r child = "setup.Rmd"}
+```
+
+class: middle, center
+
+## [Click here for PDF of slides](13-model-selection.pdf)
+
+---
+
+## Topics
+
+- Identifying modeling objectives
+
+- Model selection processes
+  - Forward selection 
+  - Backward selection 
+
+```{r}
+library(tidyverse)
+library(knitr)
+library(broom)
+library(patchwork)
+library(kableExtra)
+```
+
+---
+
+## Which variables should be in the model?
+
+- This is a very hard question that is the subject of a lot of statistical research 
+
+- There are many different opinions about how to answer this question 
+
+- This lecture will mostly focus on how to approach variable selection
+    - We will introduce some specific methods, but there are many others out there
+
+---
+
+## Which variables should you include?
+
+- It depends on the goal of your analysis
+
+- Though a variable selection procedure will select one set of variables for the model, that set is usually one of several equally good sets
+
+- It is best to start with a well-defined purpose and question to help guide the variable selection
+
+---
+
+## Prediction 
+
+- .vocab[Goal:] to calculate the most precise prediction of the response variable 
+
+- Interpreting coefficients is **not** important
+
+- Choose only the variables that are strong predictors of the response variable
+  + Excluding irrelevant variables can help reduce widths of the prediction intervals
+
+
+---
+
+## One variable's effect
+
+- .vocab[Goal:] Understand one variable's effect on the response after adjusting for other factors
+
+- Only interpret the coefficient of the variable that is the focus of the study
+  + Interpreting the coefficients of the other variables is **not** important
+
+
+- Any variables not selected for the final model have still been adjusted for, since they had a chance to be in the model
+
+
+---
+
+## Explanation
+
+- .vocab[Goal:] Identify variables that are important in explaining variation in the response
+
+- Interpret any variables of interest 
+
+- Include all variables you think are related to the response, even if they are not statistically significant 
+  + This improves the interpretation of the coefficients of interest
+  
+- Interpret the coefficients with caution, especially if there are problems with multicollinearity in the model
+
+---
+
+## Example: SAT Averages by State
+
+- This data set contains the average SAT score (out of 1600) and other variables that may be associated with SAT performance for each of the 50 U.S. states. The data is based on test takers for the 1982 exam.
+
+- Response variable:
+  + <font class="vocab">`SAT`</font>: average total SAT score
+
+.footnote[Data comes from `case1201` data set in the `Sleuth3` package]
+
+---
+
+## SAT Averages: Predictors
+
+- <font class="vocab">`Takers`</font>: percentage of high school seniors who took exam
+- <font class="vocab">`Income`</font>: median income of families of test-takers ($ hundreds)
+- <font class="vocab">`Years`</font>: average number of years test-takers had formal education in social sciences, natural sciences, and humanities
+- <font class="vocab">`Public`</font>: percentage of test-takers who attended public high schools
+- <font class="vocab">`Expend`</font>: total state expenditure on high schools ($ hundreds per student)
+- <font class="vocab">`Rank`</font>: median percentile rank of test-takers within their high school classes
+
+---
+
+.alert[
+Suppose you are on a legislative watchdog committee, and you want to determine the impact of state expenditures on state SAT scores. You decide to build a regression model for this purpose. What is the primary modeling objective? 
+]
+
+--
+
+.vocab[Understand one variable's effect]
+
+---
+
+.alert[
+Suppose you are on a committee tasked with improving the average SAT scores for your state. You have already determined that the number of test takers is an important variable, so you decide to include it in the regression model. Now you want to know what other variables significantly impact the average SAT score after accounting for the number of test takers. What is the primary modeling objective?
+]
+
+--
+
+.vocab[Explanation]
+
+---
+
+## Model selection criteria
+
+--
+
+.eq[
+$$Adj. R^2 = 1 - \frac{SS_{Error}/(n-p-1)}{SS_{Total}/(n-1)}$$
+]
+
+--
+
+.eq[
+$$AIC = n\log(SS_\text{Error}) - n \log(n) + 2(p+1)$$
+]
+
+--
+
+.eq[
+$$BIC = n\log(SS_\text{Error}) - n\log(n) + log(n)\times(p+1)$$
+]
+
+---
+
+## Selection Process: Backward Selection
+
+- Start with model that includes all variables of interest
+
+--
+
+- Drop variables one at a time that are deemed irrelevant based on some criterion. Common criterion include 
+  + Drop variable that results in the model with the highest Adj. $R^2$ **<i>or</i>**
+  + Drop variable that results in the model with the lowest value of AIC or BIC 
+
+--
+
+- Stop when no more variables can be removed from the model based on the criterion
+
+---
+
+
+## Selection Process: Forward Selection
+
+- Start with the intercept-only model (i.e. model with no predictors)
+
+--
+
+- Include variables one at a time based on some criterion. Common criterion include 
+  + Add variable that results in the model with highest Adj. $R^2$ **<i>or</i>**
+  + Add variable that results in the model with the lowest value of AIC or BIC 
+
+--
+
+- Stop when no more variables can be added to the model based on the criterion
+
+---
+
+## Forward selection example 
+
+```{r echo = T}
+sat_scores <- Sleuth3::case1201 %>%
+  select(-State) 
+```
+
+```{r echo = T}
+int_only_model <- lm(SAT ~ 1, data = sat_scores)
+```
+
+```{r echo = T}
+full_model <- lm(SAT ~ ., data = sat_scores)
+```
+
+---
+
+## Step 1
+
+.small[
+```{r echo = T}
+add1(int_only_model, full_model, data = sat_scores)
+```
+]
+
+--
+
+.vocab[Add `Rank` to the model.]
+
+---
+
+## Step 2
+
+.small[
+```{r echo = T}
+current_model <- lm(SAT ~ Rank, data = sat_scores)
+```
+]
+
+--
+
+.small[
+```{r echo = T}
+add1(current_model, full_model, data = sat_scores)
+```
+]
+
+--
+
+.vocab[Add `Years` to the model]
+
+---
+
+## Step 3
+
+.small[
+```{r echo = T}
+current_model <- lm(SAT ~ Rank + Years, data = sat_scores)
+```
+]
+
+--
+
+.small[
+```{r echo = T}
+add1(current_model, full_model, data = sat_scores)
+```
+]
+
+--
+
+.vocab[Add `Expend` to the model.]
+
+---
+
+## Step 4
+
+.small[
+```{r echo = T}
+current_model <- lm(SAT ~ Rank + Years + Expend, data = sat_scores)
+```
+]
+
+--
+
+.small[
+```{r echo = T}
+add1(current_model, full_model, data = sat_scores)
+```
+]
+
+--
+
+.vocab[Add `Public` to the model.]
+
+---
+
+## Step 5
+
+.small[
+```{r echo = T}
+current_model <- lm(SAT ~ Rank + Years + Expend + Public, data = sat_scores)
+```
+]
+
+--
+
+.small[
+```{r echo = T}
+add1(current_model, full_model, data = sat_scores)
+```
+]
+
+--
+
+`r emo::ji("stop_sign")` .vocab[Stop. We won't add any other variables to the model]
+
+---
+
+## Final model 
+
+```{r}
+tidy(current_model) %>%
+  kable(digits = 3)
+```
+
+--
+
+.vocab[Try backward selection using the `drop1` function in R.]
+---
+
+## Recap
+
+- Identifying modeling objectives
+
+- Model selection processes
+  - Forward selection 
+  - Backward selection 
+
+
+
+
+
+

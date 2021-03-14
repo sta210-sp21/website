@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Model comparison</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Prof. Maria Tackett" />
+    <script src="libs/font-awesome/header-attrs/header-attrs.js"></script>
+    <script src="libs/font-awesome/kePrint/kePrint.js"></script>
+    <link href="libs/font-awesome/lightable/lightable.css" rel="stylesheet" />
+    <link rel="stylesheet" href="sta210-slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Model comparison
+### Prof. Maria Tackett
+
+---
+
+
+
+
+
+class: middle, center
+
+## [Click here for PDF of slides](16-model-comparison.pdf)
+
+---
+
+## Topics
+
+- ANOVA for Multiple Linear Regression
+
+- Nested F Test
+
+- `\(R^2\)` vs. Adj. `\(R^2\)`
+
+- AIC &amp; BIC
+
+
+
+
+
+---
+
+## Restaurant tips
+
+What affects the amount customers tip at a restaurant?
+
+- **Response:**
+    - &lt;font class="vocab"&gt;`Tip`&lt;/font&gt;: amount of the tip
+    
+- **Predictors:**
+    - &lt;font class="vocab"&gt;`Party`&lt;/font&gt;: number of people in the party
+    - &lt;font class="vocab"&gt;`Meal`&lt;/font&gt;:  time of day (Lunch, Dinner, Late Night) 
+    - &lt;font class="vocab"&gt;`Age`&lt;/font&gt;: age category of person paying the bill (Yadult, Middle, SenCit)
+
+
+
+---
+
+## Response Variable
+
+&lt;img src="16-model-comparison_files/figure-html/unnamed-chunk-4-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Predictor Variables
+
+&lt;img src="16-model-comparison_files/figure-html/unnamed-chunk-5-1.png" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+## Response vs. Predictors
+
+&lt;img src="16-model-comparison_files/figure-html/unnamed-chunk-6-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Restaurant tips: model
+
+
+|term        | estimate| std.error| statistic| p.value| conf.low| conf.high|
+|:-----------|--------:|---------:|---------:|-------:|--------:|---------:|
+|(Intercept) |    0.838|     0.397|     2.112|   0.036|    0.055|     1.622|
+|Party       |    1.837|     0.124|    14.758|   0.000|    1.591|     2.083|
+|AgeSenCit   |    0.379|     0.410|     0.925|   0.356|   -0.430|     1.189|
+|AgeYadult   |   -1.009|     0.408|    -2.475|   0.014|   -1.813|    -0.204|
+&lt;br&gt;
+
+.center[
+.question[
+**Is this the best model to explain variation in Tips?**
+]
+]
+
+
+---
+
+## ANOVA test for MLR
+
+Using the ANOVA table, we can test whether any variable in the model is a significant predictor of the response. We conduct this test using the following hypotheses: 
+
+.eq[
+`$$\begin{aligned}&amp;H_0: \beta_{1} =  \beta_{2} = \dots = \beta_p = 0 \\ 
+&amp;H_a: \text{at least one }\beta_j \text{ is not equal to 0}\end{aligned}$$`
+]
+
+- The statistic for this test is the `\(F\)` test statistic in the ANOVA table 
+
+- We calculate the p-value using an `\(F\)` distribution with `\(p\)` and `\((n-p-1)\)` degrees of freedom
+
+---
+
+## Tips: ANOVA Test
+
+
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; df &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; sumsq &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; meansq &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p.value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;background-color: #dce5b2 !important;"&gt; Party &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 1188.636 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 1188.636 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 285.712 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 0.000 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;background-color: #dce5b2 !important;"&gt; Age &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 38.028 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 19.014 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 4.570 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 0.012 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Residuals &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 165 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 686.444 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4.160 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+
+--
+
+**Model df**: 3
+
+**Model SS**: 1188.636 + 38.028 = 1226.664
+
+**Model MS**: 1226.664/ 3 = 408.888
+
+--
+
+**FStat**: 408.888 /  4.160 = 98.2903846
+
+**P-value**: P(F &gt; 98.2903846) `\(\approx 0\)`
+  - calculated using an F distribution with 3 and 165 degrees of freedom 
+
+---
+
+## Tips: ANOVA Test
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; df &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; sumsq &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; meansq &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p.value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;background-color: #dce5b2 !important;"&gt; Party &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 1188.636 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 1188.636 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 285.712 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 0.000 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;background-color: #dce5b2 !important;"&gt; Age &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 38.028 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 19.014 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 4.570 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 0.012 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Residuals &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 165 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 686.444 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4.160 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+.vocab[The data provide sufficient evidence to conclude that at least one coefficient is non-zero, i.e. at least one predictor in the model is significant.]
+
+---
+
+## Testing subset of coefficients
+
+- Sometimes we want to test whether a **subset of coefficients** are all equal to 0
+
+- This is often the case when we want test 
+    - whether a categorical variable with `\(k\)` levels is a significant predictor of the response
+    - whether the interaction between a categorical and quantitative variable is significant
+
+- To do so, we will use the .vocab[Nested (Partial) F Test]
+
+---
+
+## Nested (Partial) F Test
+
+- Suppose we have a full and reduced model: 
+
+`$$\begin{aligned}&amp;\text{Full}: y = \beta_0 + \beta_1 x_1 + \dots + \beta_q x_q + \beta_{q+1} x_{q+1} + \dots \beta_p x_p \\
+&amp;\text{Reduced}: y = \beta_0 + \beta_1 x_1 + \dots + \beta_q x_q\end{aligned}$$`
+
+--
+
+- We want to test whether any of the variables `\(x_{q+1}, x_{q+2}, \ldots, x_p\)` are significant predictors. To do so, we will test the hypothesis: 
+
+.eq[
+`$$\begin{aligned}&amp;H_0: \beta_{q+1} =  \beta_{q+2} = \dots = \beta_p = 0 \\ 
+&amp;H_a: \text{at least one }\beta_j \text{ is not equal to 0}\end{aligned}$$`
+]
+
+---
+
+## Nested F Test
+
+- The test statistic for this test is 
+
+
+`$$F = \frac{(SSE_{reduced} - SSE_{full})\big/\text{# predictors tested}}{SSE_{full}\big/(n-p_{full}-1)}$$`
+&lt;br&gt; 
+
+- Calculate the p-value using the F distribution with df1 = # predictors tested and df2 = `\((n-p_{full}-1)\)` 
+
+---
+
+## Is `Meal` a significant predictor of tips?
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; estimate &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; (Intercept) &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.254 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Party &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.808 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; AgeSenCit &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.390 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; AgeYadult &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.505 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;background-color: #dce5b2 !important;"&gt; MealLate Night &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; -1.632 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;background-color: #dce5b2 !important;"&gt; MealLunch &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; -0.612 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+
+## Tips: Nested F test
+
+`$$\begin{aligned}&amp;H_0: \beta_{late night} = \beta_{lunch} = 0\\
+&amp;H_a: \text{ at least one }\beta_j \text{ is not equal to 0}\end{aligned}$$`
+
+--
+
+
+```r
+reduced &lt;- lm(Tip ~ Party + Age, data = tips)
+```
+
+--
+
+
+```r
+full &lt;- lm(Tip ~ Party + Age + Meal, data = tips)
+```
+
+--
+
+
+```r
+#Nested F test in R
+anova(reduced, full)
+```
+
+---
+
+## Tips: Nested F test
+
+
+| Res.Df|     RSS| Df| Sum of Sq|     F| Pr(&gt;F)|
+|------:|-------:|--:|---------:|-----:|------:|
+|    165| 686.444|   |          |      |       |
+|    163| 622.979|  2|    63.465| 8.303|      0|
+
+--
+
+.vocab[F Stat]: `\(\frac{(686.444 - 622.979)/2}{622.979/(169 - 5 - 1)} = 8.303\)` 
+
+--
+
+.vocab[P-value]: P(F &gt; 8.303) = 0.0003
+  - calculated using an F distribution with 2 and 163 degrees of freedom
+  
+--
+
+.vocab[The data provide sufficient evidence to conclude that at least one coefficient associated with `Meal` is not zero. Therefore, `Meal` is a significant predictor of `Tips`.]
+
+---
+
+## Model with `Meal`
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; estimate &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; std.error &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p.value &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; conf.low &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; conf.high &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; (Intercept) &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.254 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.394 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.182 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.002 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.476 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.032 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Party &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.808 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.121 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 14.909 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.000 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.568 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.047 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; AgeSenCit &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.390 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.394 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.990 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.324 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.388 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.168 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; AgeYadult &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.505 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.412 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -1.227 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.222 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -1.319 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.308 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; MealLate Night &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -1.632 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.407 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -4.013 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.000 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -2.435 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.829 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; MealLunch &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.612 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.402 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -1.523 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.130 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -1.405 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.181 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+
+## Including interactions 
+
+Does the effect of `Party` differ based on the `Meal` time? 
+
+
+|term                 | estimate|
+|:--------------------|--------:|
+|(Intercept)          |    1.276|
+|Party                |    1.795|
+|AgeSenCit            |    0.401|
+|AgeYadult            |   -0.470|
+|MealLate Night       |   -1.845|
+|MealLunch            |   -0.461|
+|Party:MealLate Night |    0.111|
+|Party:MealLunch      |   -0.050|
+
+---
+
+## Nested F test for interactions
+
+Let's use a Nested F test to determine if `Party*Meal` is statistically significant. 
+
+
+```r
+reduced &lt;- lm(Tip ~ Party + Age + Meal, data = tips)
+```
+
+--
+
+
+```r
+full &lt;- lm(Tip ~ Party + Age + Meal + Meal * Party, 
+           data = tips)
+```
+
+--
+
+
+| Res.Df|     RSS| Df| Sum of Sq|     F| Pr(&gt;F)|
+|------:|-------:|--:|---------:|-----:|------:|
+|    163| 622.979|   |          |      |       |
+|    161| 621.965|  2|     1.014| 0.131|  0.877|
+
+---
+
+## Final model for now
+
+We conclude that the effect of **`Party`** does not differ based **`Meal`**. Therefore, we will use the original model that only included main effects. 
+
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; estimate &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; std.error &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p.value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; (Intercept) &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.254 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.394 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.182 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.002 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Party &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.808 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.121 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 14.909 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.000 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; AgeSenCit &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.390 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.394 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.990 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.324 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; AgeYadult &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.505 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.412 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -1.227 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.222 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; MealLate Night &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -1.632 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.407 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -4.013 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.000 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; MealLunch &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.612 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.402 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -1.523 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.130 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+
+class: middle, center
+
+## Model comparision
+
+---
+
+## `\(R^2\)` 
+
+**Recall**: `\(\color{purple}{R^2}\)` is the proportion of the variation in the response variable explained by the regression model
+
+--
+
+`\(R^2\)` will always increase as we add more variables to the model 
+  + If we add enough variables, we can always achieve `\(R^2=100\%\)`
+
+--
+
+If we only use `\(R^2\)` to choose a best fit model, we will be prone to choose the model with the most predictor variables
+
+---
+
+
+## Adjusted `\(R^2\)`
+
+.vocab[Adjusted R&lt;sup&gt;2&lt;/sup&gt;]: measure that includes a penalty for unnecessary predictor variables
+
+--
+
+Similar to `\(R^2\)`, it is a measure of the amount of variation in the response that is explained by the regression model 
+
+--
+
+Differs from `\(R^2\)` by using the mean squares rather than sums of squares and therefore adjusting for the number of predictor variables
+
+---
+
+## `\(R^2\)` and Adjusted `\(R^2\)`
+
+`$$R^2 = \frac{SS_{Model}}{SS_{Total}} = 1 - \frac{SS_{Error}}{SS_{Total}}$$`
+&lt;br&gt;
+
+--
+
+.eq[
+`$$Adj. R^2 = 1 - \frac{SS_{Error}/(n-p-1)}{SS_{Total}/(n-1)}$$`
+]
+
+---
+
+## Using `\(R^2\)` and `\(Adj. R^2\)`
+
+`\(Adj. R^2\)` can be used as a quick assessment to compare the fit of multiple models; however, it should not be the only assessment!
+
+--
+
+Use `\(R^2\)` when describing the relationship between the response and predictor variables
+
+
+---
+
+## Tips: Comparing models 
+
+Let's compare two models: 
+
+.small[
+
+```r
+model1 &lt;- lm(Tip ~ Party + Age + Meal, data = tips)
+glance(model1) %&gt;% select(r.squared, adj.r.squared)
+```
+
+```
+## # A tibble: 1 x 2
+##   r.squared adj.r.squared
+##       &lt;dbl&gt;         &lt;dbl&gt;
+## 1     0.674         0.664
+```
+
+
+```r
+model2 &lt;- lm(Tip ~ Party + Age + Meal + Day, data = tips)
+glance(model2) %&gt;% select(r.squared, adj.r.squared)
+```
+
+```
+## # A tibble: 1 x 2
+##   r.squared adj.r.squared
+##       &lt;dbl&gt;         &lt;dbl&gt;
+## 1     0.683         0.662
+```
+]
+
+---
+
+## AIC &amp; BIC
+
+.vocab[Akaike's Information Criterion (AIC):]
+`$$AIC = n\log(SS_\text{Error}) - n \log(n) + 2(p+1)$$`
+&lt;br&gt; 
+
+.vocab[Schwarz's Bayesian Information Criterion (BIC)]
+`$$BIC = n\log(SS_\text{Error}) - n\log(n) + log(n)\times(p+1)$$`
+&lt;br&gt;
+&lt;br&gt;
+
+See the [supplemental note](https://github.com/sta210-sp20/supplemental-notes/blob/master/model-selection-criteria.pdf) on AIC &amp; BIC for derivations.
+
+---
+
+## AIC &amp; BIC
+
+`$$\begin{aligned} &amp; AIC = \color{blue}{n\log(SS_\text{Error})} - n \log(n) + 2(p+1) \\
+&amp; BIC = \color{blue}{n\log(SS_\text{Error})} - n\log(n) + \log(n)\times(p+1) \end{aligned}$$`
+
+--
+
+&lt;br&gt; 
+
+.vocab3[First Term: Decreases as *p* increases]
+
+---
+
+## AIC &amp; BIC
+
+`$$\begin{aligned} &amp; AIC = n\log(SS_\text{Error}) - \color{blue}{n \log(n)} + 2(p+1) \\
+&amp; BIC = n\log(SS_\text{Error}) - \color{blue}{n\log(n)} + \log(n)\times(p+1) \end{aligned}$$`
+
+&lt;br&gt; 
+
+.vocab3[Second Term: Fixed for a given sample size *n*]
+
+---
+
+## AIC &amp; BIC
+
+`$$\begin{aligned} &amp; AIC = n\log(SS_\text{Error}) - n\log(n) + \color{blue}{2(p+1)} \\
+&amp; BIC = n\log(SS_\text{Error}) - n\log(n) + \color{blue}{\log(n)\times(p+1)} \end{aligned}$$`
+
+&lt;br&gt; 
+
+.vocab3[Third Term: Increases as *p* increases]
+
+---
+
+## Using AIC &amp; BIC
+
+`$$\begin{aligned} &amp; AIC = n\log(SS_{Error}) - n \log(n) + \color{red}{2(p+1)} \\
+&amp; BIC = n\log(SS_{Error}) - n\log(n) + \color{red}{\log(n)\times(p+1)} \end{aligned}$$`
+&lt;br&gt;
+&lt;br&gt;
+
+- Choose model with the smaller value of AIC or BIC
+
+- If `\(n \geq 8\)`, the &lt;font color="red"&gt;penalty&lt;/font&gt; for BIC is larger than that of AIC, so BIC tends to favor *more parsimonious* models (i.e. models with fewer terms)
+
+---
+
+## Tips: AIC &amp; BIC
+
+.small[
+
+```r
+model1 &lt;- lm(Tip ~ Party + Age + Meal, data = tips)
+glance(model1) %&gt;% select(AIC, BIC)
+```
+
+```
+## # A tibble: 1 x 2
+##     AIC   BIC
+##   &lt;dbl&gt; &lt;dbl&gt;
+## 1  714.  736.
+```
+
+
+```r
+model2 &lt;- lm(Tip ~ Party + Age + Meal + Day, data = tips)
+glance(model2) %&gt;% select(AIC, BIC)
+```
+
+```
+## # A tibble: 1 x 2
+##     AIC   BIC
+##   &lt;dbl&gt; &lt;dbl&gt;
+## 1  720.  757.
+```
+]
+
+---
+
+## Recap
+
+- ANOVA for Multiple Linear Regression
+
+- Nested F Test
+
+- `\(R^2\)` vs. Adj. `\(R^2\)`
+
+- AIC &amp; BIC
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"slideNumberFormat": "%current%",
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

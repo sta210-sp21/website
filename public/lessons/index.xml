@@ -657,13 +657,80 @@ font-size: 18px;
       <pubDate>12 Mar 17 10:00 +0000</pubDate>
       
       <guid>/schedule/week-09/</guid>
-      <description> table { font-size: 18px; }  </description>
+      <description> table { font-size: 18px; }  Lectures     Slides Videos Application Exercises (AE)     Tuesday Model comparison Model comparison AE 16    Model selection Model selection    Thursday Model diagnostics Model diagnostics AE 17    Readings         Beyond Multiple Linear regression: Section 1.6 - Multiple Linear Regression    Assignments          Lab 06 due Sun, Mar 21 at 11:59p EST   HW 04 due Mon, Mar 22 at 11:59p EST   Statistics Experience due Sun, Apr 25 at 11:59p EST    </description>
       <content>&lt;style&gt;
 table {
 font-size: 18px;
 }
 
 &lt;/style&gt;
+&lt;h2 id=&#34;lectures&#34;&gt;Lectures&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;Slides&lt;/th&gt;
+&lt;th&gt;Videos&lt;/th&gt;
+&lt;th&gt;Application Exercises (AE)&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Tuesday&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/slides/16-model-comparison.html&#34;&gt;Model comparison&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Model comparison&lt;/td&gt;
+&lt;td&gt;AE 16&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/slides/16-model-selection.html&#34;&gt;Model selection&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://warpwire.duke.edu/w/3W0FAA/&#34;&gt;Model selection&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Thursday&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/slides/17-model-diagnostics.html&#34;&gt;Model diagnostics&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Model diagnostics&lt;/td&gt;
+&lt;td&gt;AE 17&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;readings&#34;&gt;Readings&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://bookdown.org/roback/bookdown-BeyondMLR/ch-MLRreview.html#multreg&#34;&gt;Beyond Multiple Linear regression: Section 1.6 - Multiple Linear Regression&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;assignments&#34;&gt;Assignments&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/hw/lab-06.html&#34;&gt;Lab 06&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;due Sun, Mar 21 at 11:59p EST&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/hw/hw-04.html&#34;&gt;HW 04&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;due Mon, Mar 22 at 11:59p EST&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/hw/stats-experience.html&#34;&gt;Statistics Experience&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;due Sun, Apr 25 at 11:59p EST&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 </content>
     </item>
     
