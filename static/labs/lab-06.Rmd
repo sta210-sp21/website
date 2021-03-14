@@ -1,5 +1,5 @@
 ---
-title: "Lab 06" 
+title: "Lab 06: Houses in King County" 
 subtitle: "due Sun, Mar 21,  at 11:59p EDT"
 output: 
   tufte::tufte_html:
