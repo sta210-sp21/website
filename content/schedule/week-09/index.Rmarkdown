@@ -31,7 +31,7 @@ font-size: 18px;
 
 |                        |   |
 |------------------------|---|
-|[Lab 06](https://sta210-sp21.netlify.app/hw/lab-06.html) | **due Sun, Mar 21 at 11:59p EST**|
+|[Lab 06](https://sta210-sp21.netlify.app/labs/lab-06.html) | **due Sun, Mar 21 at 11:59p EST**|
 |[HW 04](https://sta210-sp21.netlify.app/hw/hw-04.html) | **due Mon, Mar 22 at 11:59p EST**| 
 |[Statistics Experience](https://sta210-sp21.netlify.app/hw/stats-experience.html) | **due Sun, Apr 25 at 11:59p EST**| 
 
