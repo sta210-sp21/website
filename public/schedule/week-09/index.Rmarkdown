@@ -15,7 +15,7 @@ font-size: 18px;
 |           | Slides                   | Videos | Application Exercises (AE) |
 |-----------|--------------------------|--------|--------|
 | Tuesday  | [Model comparison](https://sta210-sp21.netlify.app/slides/16-model-comparison.html) | [Model comparison](https://warpwire.duke.edu/w/420FAA/)| AE 16 |
-|  | [Model selection](https://sta210-sp21.netlify.app/slides/16-model-selection.html) | [Model selection](https://warpwire.duke.edu/w/320FAA/) | |
+|  | [Model selection](https://sta210-sp21.netlify.app/slides/16-model-selection.html) | [Model selection](https://warpwire.duke.edu/w/3W0FAA/) | |
 | Thursday   |[Model diagnostics](https://sta210-sp21.netlify.app/slides/17-model-diagnostics.html) | [Model diagnostics](https://warpwire.duke.edu/w/6W0FAA/) | AE 17 |
 
 
