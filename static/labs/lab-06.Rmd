@@ -68,7 +68,7 @@ library(knitr)
 
 The for today's lab contains the price and other characteristics of over 20,000 houses sold in King County, Washington (the county that includes Seattle). The data set includes the following variables:
 
-- `price`: selling price of the house
+- `price`: selling price of the house in US dollars
 - `date`: date house was sold, measured in days since January 1, 2014
 - `bedrooms`: number of bedrooms
 - `bathrooms`: number of bathrooms
@@ -86,13 +86,13 @@ houses <- read_csv("data/KingCountyHouses.csv") %>%
 
 # Exercises 
 
-1. Use data visualization and summary statistics to examine the distribution of `bedrooms`. Is this distribution what you expected? Briefly explain why or why not. 
+1. Create a data visualization and calculate summary statistics to describe the distribution of `bedrooms`. Is this distribution what you expected? Briefly explain why or why not. 
 
-1. We'll limit the scope of the analysis to houses with 1 to 4 bedrooms. Filter the data set to only include these observations. Then, calculate the mean and standard deviation of `bedrooms` in the updated data.
+1. We'll limit the scope of the analysis to houses with 1 to 4 bedrooms. Filter the data set to only include these observations. Then, calculate the mean and standard deviation of `bedrooms` in the updated data. Display the results using 3 digits.
 
 **We will use this data set for the remainder of the lab.**
 
-1. Visualize the distribution of `price`. Then use the visualization and appropriate summary statistics to describe the distribution of this variable. 
+1. Visualize the distribution of `price` using a different type of visualization than used in Exercise 1. Then use the visualization and appropriate summary statistics to describe the distribution.
 
 1. We need to do a little more data wrangling before fitting the model. 
     
@@ -108,20 +108,20 @@ houses <- read_csv("data/KingCountyHouses.csv") %>%
   
 You'll use these variables instead of `floors` and `yr_renovated` in the analysis.
 
-1. Fit a regression model that can be used to explain variability in the price of houses in King County based on the characteristics in the data. Display the model using 3 digits for the numeric values. 
+1. Fit the full regression model using the characteristics in the data set to help explain variability in the price of houses in King County. Display the model using 3 digits for the numeric values. 
 
-1. Check the model conditions. For each condition, state whether it is satisfied and briefly explain using any relevant plots or summary statistics. 
+1. Now let's check the model conditions. For each condition, state whether it is satisfied and briefly explain using any relevant plots or summary statistics. 
 
 1. We want to refit the model using `log(price)`, the log-transformed price, as the response variable. Briefly explain why we might want to refit the model with the new response variable. 
 
-1. Refit the model with `log(price)` as the response variable. Display the model using 3 digits for the numeric values. 
+1. Refit the model with `log(price)` as the response variable. Display the model using 5 digits for the numeric values. 
 
-1. Interpret the following effects in terms of(1) the change in `log(price)` and (2) the change in `price` of houses in King County: 
+1. Interpret the following effects in terms of (1) the change in the log(price) and (2) the change in the price of houses in King County: 
 
     - when the house was built
-    - number of floors in the house
+    - whether the house is on the waterfront
 
-1. Interpret the effect of square footage on the price of houses in King County. The interpretation should be written in a way that would be practical to a home-buyer. 
+1. Based on the model, how do you expect the price to differ for a one-story house that is 1500 square feet compared to a two-story house that is 2000 square feet?  Assume all other characteristics are the same for the two houses. *The response should be in terms of price, not log(price)*.
 
 # Submission
 
@@ -134,6 +134,6 @@ There should only be <u>one</u> submission per team on Gradescope.
 
 ## Acknowledgements
 
-The data used in this lab was obtained from [https://github.com/proback/BYSH](https://github.com/proback/BYSH).
+The data used in this lab is from [https://github.com/proback/BYSH](https://github.com/proback/BYSH).
 
 

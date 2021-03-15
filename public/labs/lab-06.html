@@ -197,7 +197,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2>Data</h2>
 <p>The for today’s lab contains the price and other characteristics of over 20,000 houses sold in King County, Washington (the county that includes Seattle). The data set includes the following variables:</p>
 <ul>
-<li><code>price</code>: selling price of the house</li>
+<li><code>price</code>: selling price of the house in US dollars</li>
 <li><code>date</code>: date house was sold, measured in days since January 1, 2014</li>
 <li><code>bedrooms</code>: number of bedrooms</li>
 <li><code>bathrooms</code>: number of bathrooms</li>
@@ -214,12 +214,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="exercises" class="section level1">
 <h1>Exercises</h1>
 <ol style="list-style-type: decimal">
-<li><p>Use data visualization and summary statistics to examine the distribution of <code>bedrooms</code>. Is this distribution what you expected? Briefly explain why or why not.</p></li>
-<li><p>We’ll limit the scope of the analysis to houses with 1 to 4 bedrooms. Filter the data set to only include these observations. Then, calculate the mean and standard deviation of <code>bedrooms</code> in the updated data.</p></li>
+<li><p>Create a data visualization and calculate summary statistics to describe the distribution of <code>bedrooms</code>. Is this distribution what you expected? Briefly explain why or why not.</p></li>
+<li><p>We’ll limit the scope of the analysis to houses with 1 to 4 bedrooms. Filter the data set to only include these observations. Then, calculate the mean and standard deviation of <code>bedrooms</code> in the updated data. Display the results using 3 digits.</p></li>
 </ol>
 <p><strong>We will use this data set for the remainder of the lab.</strong></p>
 <ol style="list-style-type: decimal">
-<li><p>Visualize the distribution of <code>price</code>. Then use the visualization and appropriate summary statistics to describe the distribution of this variable.</p></li>
+<li><p>Visualize the distribution of <code>price</code> using a different type of visualization than used in Exercise 1. Then use the visualization and appropriate summary statistics to describe the distribution.</p></li>
 <li><p>We need to do a little more data wrangling before fitting the model.</p></li>
 </ol>
 <ul>
@@ -231,16 +231,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>You’ll use these variables instead of <code>floors</code> and <code>yr_renovated</code> in the analysis.</p>
 <ol style="list-style-type: decimal">
-<li><p>Fit a regression model that can be used to explain variability in the price of houses in King County based on the characteristics in the data. Display the model using 3 digits for the numeric values.</p></li>
-<li><p>Check the model conditions. For each condition, state whether it is satisfied and briefly explain using any relevant plots or summary statistics.</p></li>
+<li><p>Fit the full regression model using the characteristics in the data set to help explain variability in the price of houses in King County. Display the model using 3 digits for the numeric values.</p></li>
+<li><p>Now let’s check the model conditions. For each condition, state whether it is satisfied and briefly explain using any relevant plots or summary statistics.</p></li>
 <li><p>We want to refit the model using <code>log(price)</code>, the log-transformed price, as the response variable. Briefly explain why we might want to refit the model with the new response variable.</p></li>
-<li><p>Refit the model with <code>log(price)</code> as the response variable. Display the model using 3 digits for the numeric values.</p></li>
-<li><p>Interpret the following effects in terms of(1) the change in <code>log(price)</code> and (2) the change in <code>price</code> of houses in King County:</p>
+<li><p>Refit the model with <code>log(price)</code> as the response variable. Display the model using 5 digits for the numeric values.</p></li>
+<li><p>Interpret the following effects in terms of (1) the change in the log(price) and (2) the change in the price of houses in King County:</p>
 <ul>
 <li>when the house was built</li>
-<li>number of floors in the house</li>
+<li>whether the house is on the waterfront</li>
 </ul></li>
-<li><p>Interpret the effect of square footage on the price of houses in King County. The interpretation should be written in a way that would be practical to a home-buyer.</p></li>
+<li><p>Based on the model, how do you expect the price to differ for a one-story house that is 1500 square feet compared to a two-story house that is 2000 square feet? Assume all other characteristics are the same for the two houses. <em>The response should be in terms of price, not log(price)</em>.</p></li>
 </ol>
 </div>
 <div id="submission" class="section level1">
@@ -250,7 +250,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>Note that your submission on Gradescope should be identical to the PDF that is rendered when we knit the Rmd file in your repo.</strong></p>
 <div id="acknowledgements" class="section level2">
 <h2>Acknowledgements</h2>
-<p>The data used in this lab was obtained from <a href="https://github.com/proback/BYSH">https://github.com/proback/BYSH</a>.</p>
+<p>The data used in this lab is from <a href="https://github.com/proback/BYSH">https://github.com/proback/BYSH</a>.</p>
 </div>
 </div>
 
