@@ -1,6 +1,6 @@
 ---
-title: "HW 04"
-subtitle: ""
+title: "HW 04: Multiple linear regression"
+subtitle: "due Mon, Mar 22 at 11:59p"
 author: ""
 date: ""
 output: 
@@ -16,4 +16,94 @@ knitr::opts_chunk$set(echo = TRUE,
                       message=FALSE)
 ```
 
-Instructions will be posted when the homework is assigned. 
+# Getting Started
+
+You can find the **hw-04** repo in the [sta210-sp21 organization](https://github.com/sta210-sp2) on GitHub. This repo contains the starter documents and data set needed to complete the lab. 
+
+See the [Lab 01 instructions](https://sta210-sp21.netlify.app/labs/lab-01-ikea.html#getting-started) for more details about cloning the repo, starting a new RStudio project, and configuring git.
+
+## Tips
+
+Here are some tips as you complete the assignment:
+
+- Periodically knit your document and commit changes (the more often the better, for example, once per each new task). You should have at least 3 commit messages by the end of the assignment.
+- Push all your changes back to your GitHub repo. The Git pane in RStudio should be empty after you push. You can also check your assignment repo on github.com to make sure it has updated.
+- Once you have completed your work, you will submit your assignment in Gradescope. You are welcome to resubmit multiple times until the assignment deadline. We will grade the most recent version of the .pdf file in Gradescope.
+
+
+## Packages 
+
+We will use the following packages in this assignment: 
+
+```{r}
+library(tidyverse)
+library(broom)
+library(knitr)
+#add other packages as needed
+```
+
+## Part 1: Conceptual questions
+
+For Questions 1 - 4, we will use data from an analysis by [Siddarth et al. (2018)](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0195549) on the relations between time spent sitting (sedentary behavior) and the thickness of a participant's medial temporal lobe (MTL). Their 2018 paper is  entitled, ["Sedentary behavior associated with reduced medial temporal lobe thickness in middle-aged and older adults"](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0195549). 
+
+It is important to understand MTL volume, since it is negatively associated with Alzheimer's disease and memory impairment. Their data on 35 adults can be found in `sitting.csv`. Key variables include: 
+
+- `MTL` = Medial temporal lobe thickness in mm 
+- `sitting` =  Reported hours per day spent sitting
+- `MET` =  Reported metabolic equivalent unit minutes per week
+- `age` = Age in years
+- `sex` = Sex (`M` = Male, `F` = Female)
+- `education` = Years of education completed
+
+    
+1. In their article's introduction, Siddarth et al. (2018) differentiate their analysis on sedentary behavior from an analysis on active behavior by citing evidence supporting the claim that, "one can be highly active yet still be sedentary for most of the day."  Fit your own linear model with `MET` and `sitting` as your predictor and response variables, respectively. 
+
+  - Using $R^2$, how much of the subject to subject variability in hours/day spent sitting can be explained by MET minutes per week? 
+  - Does this support the claim that sedentary behaviors may be independent from physical activity? Briefly explain why or why not.
+
+3. Fit a preliminary model with `MTL` as the response and `sitting` as the sole predictor variable. Then, interpret the coefficient of `sitting` in the context of the data. 
+
+4. Next, let's consider the model using `sitting`, `MET`, and mean-centered `age` as  predictor variables. Fit the model, then interpret the coefficients of sitting and age in the context of the data. 
+
+5. Compare the two models you've fit thus far. Which model would you select based on the following criteria (1) Adjusted $R^2$, (2) AIC, (3) BIC. For each criterion, state your choice and briefly explain your reasoning. 
+
+<hr>
+
+For Questions 5 - 7 we will go back to data on houses in King County you used in [Lab 06](https://sta210-sp21.netlify.app/labs/lab-06.html). The data set `KingCountyHouses.csv` contains the price and other characteristics of over 20,000 houses sold in King County, Washington (the county that includes Seattle). We will focus on the following variables: 
+
+- `price`: selling price of the house in US dollars
+- `sqft`: interior square footage
+- `waterfront`: 1 if the house has a view of the waterfront, 0 otherwise
+
+**As in Lab 06, use only the observations with 1 to 4 bedrooms**
+
+6. We are interested in the fitting a model using the square footage, whether the house has a waterfront view, and the interaction between the two variables to help explain variability in the price. Make a visualization of the price versus square footage with the points differentiated by `waterfront`. Interpret the visualization.
+
+7. Fit a model with the log-transformed price (see Lab 06 to see why we use log-transformed price!) as the response and `sqft`,  `waterfront`, and their interaction as the predictors.
+
+8. Interpret the effect of square footage on the price of a house for 
+
+  - houses with no waterfront view
+  - houses with a waterfront view 
+
+## Part 2: Communicating results
+
+Use the results from Questions 6 - 8 to write a short paragraph ( ~ 3- 5 sentences) about the relationship between square footage and the price of houses in King County, WA, and how (if at all) the relationship differs based on whether the house has a waterfront view. The paragraph should be written in a way that is practical and can be easily understood by a general audience. 
+
+# Submission
+
+Knit, commit, and push your final changes to your GitHub repo. Then, submit the PDF on [Gradescope](http://www.gradescope.com). See [Lab 01](https://sta210-sp21.netlify.app/labs/lab-01-ikea.html#submission) for more detailed submission instructions. 
+
+
+# Grading
+
+| **Total** | **50** |
+|-------------------------------------------------------------|:--:|
+| Part 1: Conceptual questions | 40 |
+| Part 2: Communicating results | 5 |
+| Document a PDF rendered from the Rmd file with clear question headers| 3 	|
+| At least 3 informative commit messages 	| 2 	|
+
+# Acknowledgements
+
+The questions from Part 1 are adapted from [Beyond Multiple Linear Regression](https://bookdown.org/roback/bookdown-BeyondMLR/).

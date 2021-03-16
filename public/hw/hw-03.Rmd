@@ -18,7 +18,7 @@ knitr::opts_chunk$set(echo = TRUE,
 
 # Getting Started
 
-You can find the **hw-02** repo in the [sta210-sp21 organization](https://github.com/sta210-sp2) on GitHub. This repo contains the starter documents and data set needed to complete the lab. 
+You can find the **hw-03** repo in the [sta210-sp21 organization](https://github.com/sta210-sp2) on GitHub. This repo contains the starter documents and data set needed to complete the lab. 
 
 See the [Lab 01 instructions](https://sta210-sp21.netlify.app/labs/lab-01-ikea.html#getting-started) for more details about cloning the repo, starting a new RStudio project, and configuring git.
 

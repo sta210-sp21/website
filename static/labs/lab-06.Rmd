@@ -66,7 +66,7 @@ library(knitr)
 
 ## Data 
 
-The for today's lab contains the price and other characteristics of over 20,000 houses sold in King County, Washington (the county that includes Seattle). The data set includes the following variables:
+The data for today's lab contains the price and other characteristics of over 20,000 houses sold in King County, Washington (the county that includes Seattle). The data set includes the following variables:
 
 - `price`: selling price of the house in US dollars
 - `date`: date house was sold, measured in days since January 1, 2014
