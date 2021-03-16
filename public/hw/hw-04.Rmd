@@ -58,8 +58,8 @@ It is important to understand MTL volume, since it is negatively associated with
     
 1. In their article's introduction, Siddarth et al. (2018) differentiate their analysis on sedentary behavior from an analysis on active behavior by citing evidence supporting the claim that, "one can be highly active yet still be sedentary for most of the day."  Fit your own linear model with `MET` and `sitting` as your predictor and response variables, respectively. 
 
-  - Using $R^2$, how much of the subject to subject variability in hours/day spent sitting can be explained by MET minutes per week? 
-  - Does this support the claim that sedentary behaviors may be independent from physical activity? Briefly explain why or why not.
+    - Using $R^2$, how much of the subject to subject variability in hours/day spent sitting can be explained by MET minutes per week? 
+    - Does this support the claim that sedentary behaviors may be independent from physical activity? Briefly explain why or why not.
 
 3. Fit a preliminary model with `MTL` as the response and `sitting` as the sole predictor variable. Then, interpret the coefficient of `sitting` in the context of the data. 
 
@@ -83,8 +83,8 @@ For Questions 5 - 7 we will go back to data on houses in King County you used in
 
 8. Interpret the effect of square footage on the price of a house for 
 
-  - houses with no waterfront view
-  - houses with a waterfront view 
+    - houses with no waterfront view
+    - houses with a waterfront view 
 
 ## Part 2: Communicating results
 
