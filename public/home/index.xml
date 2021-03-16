@@ -657,7 +657,7 @@ font-size: 18px;
       <pubDate>12 Mar 17 10:00 +0000</pubDate>
       
       <guid>/schedule/week-09/</guid>
-      <description> table { font-size: 18px; }  Lectures     Slides Videos Application Exercises (AE)     Tuesday Model comparison Model comparison AE 16    Model selection Model selection    Thursday Model diagnostics Model diagnostics AE 17    Readings         Beyond Multiple Linear regression: Section 1.6 - Multiple Linear Regression    Assignments          Lab 06 due Sun, Mar 21 at 11:59p EDT   HW 04 due Mon, Mar 22 at 11:59p EDT   Statistics Experience due Sun, Apr 25 at 11:59p EDT    </description>
+      <description> table { font-size: 18px; }  Lectures     Slides Videos Application Exercises (AE)     Tuesday Model comparison Model comparison AE 16: Model comparison    Model selection Model selection    Thursday Model diagnostics Model diagnostics AE 17    Readings         Beyond Multiple Linear regression: Section 1.6 - Multiple Linear Regression    Assignments          Lab 06 due Sun, Mar 21 at 11:59p EDT   HW 04 due Mon, Mar 22 at 11:59p EDT   Statistics Experience due Sun, Apr 25 at 11:59p EDT    </description>
       <content>&lt;style&gt;
 table {
 font-size: 18px;
@@ -679,7 +679,7 @@ font-size: 18px;
 &lt;td&gt;Tuesday&lt;/td&gt;
 &lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/slides/16-model-comparison.html&#34;&gt;Model comparison&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;&lt;a href=&#34;https://warpwire.duke.edu/w/420FAA/&#34;&gt;Model comparison&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;AE 16&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/appex/ae-16-model-comparison.html&#34;&gt;AE 16: Model comparison&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;/td&gt;
@@ -961,7 +961,7 @@ visit &lt;a href=&#34;https://studentaffairs.duke.edu/duwell/holistic-wellness&#
       
       <guid>/project/</guid>
       <description>Timeline Topic ideas due Sun,Mar 7 at 11:59p EST
-Proposa due Mon, Mar 29 at 11:59p EST
+Proposal due Mon, Mar 29 at 11:59p EST
 Draft report due Sun, Apr 18 at 11:59p EST
 Peer review due Mon, Apr 19 at 11:59p EST
 Final report due Sun, Apr 25 at 11:59p EST
@@ -970,7 +970,7 @@ Presentation comments due Thu, Apr 30 at 11:59p EST
 Introduction TL;DR: Pick a data set and do a regression analysis.</description>
       <content>&lt;h2 id=&#34;timeline&#34;&gt;Timeline&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&#34;#topic-ideas&#34;&gt;Topic ideas&lt;/a&gt; due &lt;strong&gt;Sun,Mar 7 at 11:59p EST&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;#project-proposal&#34;&gt;Proposa&lt;/a&gt; due &lt;strong&gt;Mon, Mar 29 at 11:59p EST&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;#project-proposal&#34;&gt;Proposal&lt;/a&gt; due &lt;strong&gt;Mon, Mar 29 at 11:59p EST&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;#peer-review&#34;&gt;Draft report&lt;/a&gt; due &lt;strong&gt;Sun, Apr 18 at 11:59p EST&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;#peer-review&#34;&gt;Peer review&lt;/a&gt; due &lt;strong&gt;Mon, Apr 19 at 11:59p EST&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;#written-report&#34;&gt;Final report&lt;/a&gt; due &lt;strong&gt;Sun, Apr 25 at 11:59p EST&lt;/strong&gt;&lt;/p&gt;

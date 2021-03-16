@@ -1,0 +1,35 @@
+---
+title: "AE 17"
+date: "`r Sys.Date()`"
+output: 
+  html_document: 
+    fig_height: 8
+    fig_width: 8
+    theme: readable
+---
+
+```{r include = F}
+knitr::opts_chunk$set(warning = F, 
+                      message = F)
+```
+
+## Class announcements
+
+- See this week's schedule: [Week 09](https://sta210-sp21.netlify.app/schedule/week-09/)
+
+- Lab 06 due Sun, Mar 21 at 11:59p EDT
+
+- HW 04 due Mon, Mar 22 at 11:59p EDT 
+  - Released later today
+
+- [Statistics experience](https://sta210-sp21.netlify.app/hw/stats-experience.html) due Sun, Apr 25 at 11:59p EDT 
+
+## Mid semester feedback
+
+## Questions?
+
+## AE 16: Model comparison
+
+Clone the **ae-16** repo and open a new project in RStudio.
+
+

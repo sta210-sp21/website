@@ -15,9 +15,9 @@ knitr::opts_chunk$set(warning = F,
 
 ## Class announcements
 
-- See this week's schedule: [Week 08](https://sta210-sp21.netlify.app/schedule/week-07/)
+- See this week's schedule: [Week 08](https://sta210-sp21.netlify.app/schedule/week-08/)
 
--  Mark 08 lab activities **due today at 11:59p EST**
+-  March 08 lab activities **due today at 11:59p EST**
 
 - [HW 03](https://sta210-sp21.netlify.app/hw/hw-03.html/) due Fri, Mar 12 at 11:59p EST
 

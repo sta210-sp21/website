@@ -6,7 +6,7 @@ title: "STA 210 Final Project"
 
 [Topic ideas](#topic-ideas) due **Sun,Mar 7 at 11:59p EST**
 
-[Proposa](#project-proposal) due **Mon, Mar 29 at 11:59p EST**
+[Proposal](#project-proposal) due **Mon, Mar 29 at 11:59p EST**
 
 [Draft report](#peer-review) due **Sun, Apr 18 at 11:59p EST** 
 
