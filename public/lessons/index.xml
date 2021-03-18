@@ -657,7 +657,7 @@ font-size: 18px;
       <pubDate>12 Mar 17 10:00 +0000</pubDate>
       
       <guid>/schedule/week-09/</guid>
-      <description> table { font-size: 18px; }  Lectures     Slides Videos Application Exercises (AE)     Tuesday Model comparison Model comparison AE 16: Model comparison    Model selection Model selection    Thursday Model diagnostics Model diagnostics AE 17    Readings         Beyond Multiple Linear regression: Section 1.6 - Multiple Linear Regression    Assignments          Lab 06 due Sun, Mar 21 at 11:59p EDT   HW 04 due Mon, Mar 22 at 11:59p EDT   Statistics Experience due Sun, Apr 25 at 11:59p EDT    </description>
+      <description> table { font-size: 18px; }  Lectures     Slides Videos Application Exercises (AE)     Tuesday Model comparison Model comparison AE 16: Model comparison    Model selection Model selection    Thursday Model diagnostics Model diagnostics AE 17: Model selection + diagnostics    Readings         Beyond Multiple Linear regression: Section 1.6 - Multiple Linear Regression    Assignments          Lab 06 due Sun, Mar 21 at 11:59p EDT   HW 04 due Mon, Mar 22 at 11:59p EDT   Statistics Experience due Sun, Apr 25 at 11:59p EDT    </description>
       <content>&lt;style&gt;
 table {
 font-size: 18px;
@@ -691,7 +691,7 @@ font-size: 18px;
 &lt;td&gt;Thursday&lt;/td&gt;
 &lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/slides/17-model-diagnostics.html&#34;&gt;Model diagnostics&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;&lt;a href=&#34;https://warpwire.duke.edu/w/6W0FAA/&#34;&gt;Model diagnostics&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;AE 17&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/appex/ae-17-model-selection.html&#34;&gt;AE 17: Model selection + diagnostics&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
