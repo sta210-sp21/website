@@ -173,7 +173,7 @@ knitr::include_graphics("img/cat-checkin.png")
 .col-3[
 .midi[**1)** Avatar 2.0]
 
-.midi[**2)** Team 01L-2]
+.midi[**2)** GG Gods]
 
 .midi[**3)** The Office]
 
@@ -225,12 +225,10 @@ knitr::include_graphics("img/cat-checkin.png")
 
 .midi[**24)** y2k]
 
-.midi[**25)** ggplot]
+.midi[**25)** The A Team]
 
-.midi[**26)** The A Team]
+.midi[**26)** Easy As Pie]
 
-.midi[**27)** Easy As Pie]
-
-.midi[**28)** Last!]
+.midi[**27)** Last!]
 ]
 
