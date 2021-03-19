@@ -113,15 +113,21 @@ Submit your work by pushing it to your GitHub repo by the deadline. The teaching
 
 ### Proposal grading
 
-<!--
+
 Total                                                   | 10 pts
 --------------------------------------------------------|--------
-**Introduction**                                        | 4 pts
-**Data description**                                    | 4 pts
-**Glimpse of data**                                     | 2 pts
---> 
+**Introduction**                                        | 3 pts
+**Data description**                                    | 2 pts
+**Analysis plan**                                       | 4 pts
+**Data dictionary**                                     | 1 pts
 
-Check back for more details.
+Each component will be graded as follows:
+
+- **Meets expectations (full credit)**: All required elements are completed and are accurate. The narrative is written clearly, all tables and visualizations are nicely formatted, and the work would be presentable in a professional setting. 
+
+- **Close to expectations (half credit)**: There are some elements missing and/or inaccurate. There are some issues with formatting. 
+
+- **Does not meet expectations (no credit)**: Major elements missing. Work is not neatly formatted and would not be presentable in a professional setting. 
 
 ## Peer review
 

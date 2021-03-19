@@ -1052,14 +1052,44 @@ final project.&lt;/em&gt;&lt;/p&gt;
 &lt;h3 id=&#34;submission-1&#34;&gt;Submission&lt;/h3&gt;
 &lt;p&gt;Submit your work by pushing it to your GitHub repo by the deadline. The teaching team will submit feedback about your proposal using the &lt;strong&gt;Issues&lt;/strong&gt; on GitHub.&lt;/p&gt;
 &lt;h3 id=&#34;proposal-grading&#34;&gt;Proposal grading&lt;/h3&gt;
-&lt;!--
-Total                                                   | 10 pts
---------------------------------------------------------|--------
-**Introduction**                                        | 4 pts
-**Data description**                                    | 4 pts
-**Glimpse of data**                                     | 2 pts
---&gt; 
-&lt;p&gt;Check back for more details.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Total&lt;/th&gt;
+&lt;th&gt;10 pts&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Introduction&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;3 pts&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Data description&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;2 pts&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Analysis plan&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;4 pts&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Data dictionary&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;1 pts&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Each component will be graded as follows:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Meets expectations (full credit)&lt;/strong&gt;: All required elements are completed and are accurate. The narrative is written clearly, all tables and visualizations are nicely formatted, and the work would be presentable in a professional setting.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Close to expectations (half credit)&lt;/strong&gt;: There are some elements missing and/or inaccurate. There are some issues with formatting.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Does not meet expectations (no credit)&lt;/strong&gt;: Major elements missing. Work is not neatly formatted and would not be presentable in a professional setting.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h2 id=&#34;peer-review&#34;&gt;Peer review&lt;/h2&gt;
 &lt;p&gt;Check back for more details.&lt;/p&gt;
 &lt;!--
