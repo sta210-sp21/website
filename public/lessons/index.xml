@@ -740,13 +740,78 @@ font-size: 18px;
       <pubDate>12 Mar 17 10:00 +0000</pubDate>
       
       <guid>/schedule/week-10/</guid>
-      <description> table { font-size: 18px; }  </description>
+      <description> table { font-size: 18px; }  Lectures     Slides Videos Application Exercises (AE)     Tuesday Logistic Regression: Odds + probabilities Logistic Regression: Odds + probabilities AE 18   Thursday Logistic Regression: Odds ratios Logistic Regression: Odds ratios AE 19    Readings         Introduction to Modern Statistics: Section 4.3 Logistic regression    Assignments          Lab 07 due Sun, Mar 28 at 11:59p   Quiz 02 open Mar 25 at 12a; closes Mar 26 at 11:59p   Project proposal due Mar 29 at 11:59p   Statistics Experience due Sun, Apr 25 at 11:59p    </description>
       <content>&lt;style&gt;
 table {
 font-size: 18px;
 }
 
 &lt;/style&gt;
+&lt;h2 id=&#34;lectures&#34;&gt;Lectures&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;Slides&lt;/th&gt;
+&lt;th&gt;Videos&lt;/th&gt;
+&lt;th&gt;Application Exercises (AE)&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Tuesday&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/slides/18-logistic-odds.html&#34;&gt;Logistic Regression: Odds + probabilities&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;&#34;&gt;Logistic Regression: Odds + probabilities&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;AE 18&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Thursday&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/slides/19-logistic-odds-ratios.html&#34;&gt;Logistic Regression: Odds ratios&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://warpwire.duke.edu/w/o3gFAA/&#34;&gt;Logistic Regression: Odds ratios&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;AE 19&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;readings&#34;&gt;Readings&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://openintro-ims.netlify.app/multi-logistic-models.html#logistic-regression&#34;&gt;Introduction to Modern Statistics: Section 4.3 Logistic regression&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;assignments&#34;&gt;Assignments&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/labs/lab-07.html&#34;&gt;Lab 07&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;due Sun, Mar 28 at 11:59p&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/quiz/quiz-02.html&#34;&gt;Quiz 02&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;open Mar 25 at 12a; closes Mar 26 at 11:59p&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/project/#project-proposal&#34;&gt;Project proposal&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;due Mar 29 at 11:59p&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/hw/stats-experience.html&#34;&gt;Statistics Experience&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;due Sun, Apr 25 at 11:59p&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 </content>
     </item>
     

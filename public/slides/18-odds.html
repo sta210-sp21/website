@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Logistic Regression</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Prof. Maria Tackett" />
+    <script src="libs/font-awesome/header-attrs/header-attrs.js"></script>
+    <link rel="stylesheet" href="sta210-slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Logistic Regression
+## Odds + probabilities
+### Prof. Maria Tackett
+
+---
+
+
+
+
+
+
+
+class: middle, center
+
+## [Click here for PDF of slides](18-logistic-odds.pdf)
+
+---
+
+## Topics
+
+- Logistic regression for binary response variable
+
+- Relationship between odds and probabilities
+
+- Use logistic regression model to calculate predicted odds and probabilities
+
+---
+
+## Types of response variables
+
+.vocab[Quantitative response variable]: 
+- Sales price of a house in Levittown, NY
+- **Model**: Expected sales price given the number of bedrooms, lot size, etc.
+
+--
+
+.vocab[Categorical response variable]: 
+- High risk of coronary heart disease
+- **Model**: Probability an adult is high risk of heart disease given their age, total cholesterol, etc. 
+
+---
+
+## Models for categorical response variables
+
+.pull-left[
+.vocab[Logistic Regression]
+
+2 Outcomes
+
+1: Yes, 0: No
+]
+
+--
+
+.pull-right[
+.vocab[Multinomial Logistic Regression]
+
+3+ Outcomes 
+
+1: Democrat, 2: Republican, 3: Independent
+]
+
+&lt;br&gt;&lt;br&gt;
+
+--
+
+.center[
+**Let's focus on logistic regression models for now.**
+]
+
+---
+
+## FiveThirtyEight 2020 election forcasts
+
+&lt;img src="img/15/fivethirtyeight_president_nc.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+.footnote[[FiveThirtyEight Election Forcasts](https://projects.fivethirtyeight.com/2020-election-forecast/)]
+
+---
+## FiveThirtyEight NBA finals predictions
+
+&lt;img src="img/15/nba-predictions.png" width="40%" style="display: block; margin: auto;" /&gt;
+
+.footnote[[2019-20 NBA Predictions](https://projects.fivethirtyeight.com/2020-nba-predictions/games/?ex_cid=rrpromo)]
+
+---
+
+## Do teenagers get 7+ hours of sleep?
+
+.pull-left[
+Students in grades 9 - 12 surveyed about health risk behaviors including whether they usually get 7 or more hours of sleep. 
+
+.vocab[`Sleep7`]
+
+1: yes
+
+0: no
+]
+
+.pull-right[
+
+| Age| Sleep7|
+|---:|------:|
+|  16|      1|
+|  17|      0|
+|  18|      0|
+|  17|      1|
+|  15|      0|
+|  17|      0|
+|  17|      1|
+|  16|      1|
+|  16|      1|
+|  18|      0|
+]
+
+---
+
+## Let's fit a linear regression model
+
+.vocab[Response]: `\(Y\)` = 1: yes, 0: no
+
+&lt;img src="18-odds_files/figure-html/unnamed-chunk-6-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Let's use proportions 
+
+.vocab[Response]: Probability of getting 7+ hours of sleep
+
+&lt;img src="18-odds_files/figure-html/unnamed-chunk-7-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+## What happens if we zoom out? 
+
+.vocab[Response]: Probability of getting 7+ hours of sleep
+
+&lt;img src="18-odds_files/figure-html/unnamed-chunk-8-1.png" style="display: block; margin: auto;" /&gt;
+
+🛑 **This model produces predictions outside of 0 and 1.**
+
+---
+
+## Let's try another model 
+
+&lt;img src="18-odds_files/figure-html/unnamed-chunk-9-1.png" style="display: block; margin: auto;" /&gt;
+
+✅ This model (called a .vocab[logistic regression model]) only produces predictions between 0 and 1. 
+
+---
+
+## Different types of models
+
+| Method                        | Response Type | Model |   
+|-------------------------------|---------------|-------|
+| Linear Regression             | Quantitative       | `\(Y = \beta_0 + \beta_1~ X\)` |   
+| Linear regression (transform Y) | Quantitative       | `\(\log(Y) = \beta_0 + \beta_1~ X\)` |   
+| Logistic regression           | Binary        | `\(\log\big(\frac{\pi}{1-\pi}\big) = \beta_0  + \beta_1 ~ X\)` |  
+
+---
+
+## Binary response variable 
+
+- `\(Y = 1: \text{ yes}, 0: \text{ no}\)`
+
+--
+
+- `\(\pi\)`: .vocab[probability] that `\(Y=1\)`, i.e., `\(P(Y = 1)\)`
+
+--
+
+- `\(\frac{\pi}{1-\pi}\)`: .vocab[odds] that `\(Y = 1\)`
+
+--
+
+- `\(\log\big(\frac{\pi}{1-\pi}\big)\)`: .vocab[log odds] 
+
+--
+
+- Go from `\(\pi\)` to `\(\log\big(\frac{\pi}{1-\pi}\big)\)` using the .vocab[logit transformation]
+
+---
+
+## Odds
+
+Suppose there is a **70% chance** it will rain tomorrow
+
+--
+
+- Probability it will rain is `\(\mathbf{p = 0.7}\)`
+
+--
+
+- Probability it won't rain is `\(\mathbf{1 - p = 0.3}\)`
+
+--
+
+- Odds it will rain are **7 to 3**, **7:3**, `\(\mathbf{\frac{0.7}{0.3} \approx 2.33}\)` 
+
+---
+
+## Are teenagers getting enough sleep? 
+
+.center[
+
+```
+## # A tibble: 2 x 3
+##   Sleep7     n     p
+##    &lt;int&gt; &lt;int&gt; &lt;dbl&gt;
+## 1      0   150 0.336
+## 2      1   296 0.664
+```
+]
+
+--
+
+`\(P(\text{7+ hours of sleep}) = P(Y = 1) = p = 0.664\)` 
+
+--
+
+`\(P(\text{&lt; 7 hours of sleep}) = P(Y = 0) = 1 - p = 0.336\)`
+
+--
+
+`\(P(\text{odds of 7+ hours of sleep}) = \frac{0.664}{0.336} = 1.976\)`
+
+---
+
+## From odds to probabilities
+
+.vocab[odds] 
+
+`$$\omega = \frac{\pi}{1-\pi}$$`
+
+--
+
+.vocab[probability]
+
+`$$\pi = \frac{\omega}{1 + \omega}$$`
+
+---
+
+## Logistic model: from odds to probabilities
+
+1️⃣ **Logistic model**: log odds = `\(\log\big(\frac{\pi}{1-\pi}\big) = \beta_0 + \beta_1~X\)`
+
+
+--
+
+
+2️⃣ **odds =** `\(\exp\big\{\log\big(\frac{\pi}{1-\pi}\big)\big\} = \frac{\pi}{1-\pi}\)`
+
+
+--
+
+
+Combining 1️⃣ and 2️⃣ with what we saw earlier
+
+`$$\text{probability} = \pi = \frac{\exp\{\beta_0 + \beta_1~X\}}{1 + \exp\{\beta_0 + \beta_1~X\}}$$`
+
+---
+
+## Logistic regression model
+
+.eq[
+**Logit form**: 
+`$$\log\big(\frac{\pi}{1-\pi}\big) = \beta_0 + \beta_1~X$$`
+]
+
+--
+
+.eq[
+**Probability form**:
+
+`$$\pi = \frac{\exp\{\beta_0 + \beta_1~X\}}{1 + \exp\{\beta_0 + \beta_1~X\}}$$`
+]
+
+---
+
+## Risk of coronary heart disease 
+
+This dataset is from an ongoing cardiovascular study on residents of the town of Framingham, Massachusetts. We want to use .vocab[`age`] to predict if a randomly selected adult is high risk of having coronary heart disease in the next 10 years. 
+
+.vocab[`high_risk`]: 
+
+- 1: High risk of having heart disease in next 10 years
+- 0: Not high risk of having heart disease in next 10 years
+
+.vocab[`age`]: Age at exam time (in years)
+
+
+
+---
+
+## High risk vs. age
+
+&lt;img src="18-odds_files/figure-html/unnamed-chunk-12-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Let's fit the model 
+
+
+```r
+*high_risk_model &lt;- glm(high_risk ~ age,
+                       data = heart_data,
+*                      family = "binomial")
+tidy(high_risk_model) %&gt;% 
+  kable(digits = 3)
+```
+
+
+
+|term        | estimate| std.error| statistic| p.value|
+|:-----------|--------:|---------:|---------:|-------:|
+|(Intercept) |   -5.561|     0.284|   -19.599|       0|
+|age         |    0.075|     0.005|    14.178|       0|
+
+---
+
+## Let's fit the model 
+
+
+|term        | estimate| std.error| statistic| p.value|
+|:-----------|--------:|---------:|---------:|-------:|
+|(Intercept) |   -5.561|     0.284|   -19.599|       0|
+|age         |    0.075|     0.005|    14.178|       0|
+
+&lt;br&gt; 
+
+.eq[
+`$$\log\Big(\frac{\hat{\pi}}{1-\hat{\pi}}\Big) = -5.561 + 0.075 \times \text{age}$$`
+where `\(\hat{\pi}\)` is the predicted probability of being high risk 
+]
+
+---
+
+## Predicted log odds 
+
+
+```r
+predict(high_risk_model)
+```
+
+
+```
+##      1      2      3      4      5      6      7      8      9     10 
+## -2.650 -2.127 -1.978 -1.007 -2.127 -2.351 -0.858 -2.202 -1.679 -2.351
+```
+
+--
+
+**For observation 1**
+
+`$$\text{predicted odds} = \hat{\omega} = \frac{\hat{\pi}}{1-\hat{\pi}} = \exp\{-2.650\} = 0.071$$`
+
+---
+
+## Predcited probabilities 
+
+
+```r
+predict(high_risk_model, 
+*       type = "response")
+```
+
+
+```
+##     1     2     3     4     5     6     7     8     9    10 
+## 0.066 0.106 0.122 0.267 0.106 0.087 0.298 0.100 0.157 0.087
+```
+
+--
+
+`$$\text{predicted probabilities} = \hat{\pi} = \frac{\exp\{-2.650\}}{1 + \exp\{-2.650\}} = 0.066$$`
+---
+
+## Recap
+
+- Logistic regression for binary response variable
+
+- Relationship between odds and probabilities
+
+- Used logistic regression model to calculate predicted odds and probabilities
+
+
+
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"slideNumberFormat": "%current%",
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

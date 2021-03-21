@@ -107,7 +107,7 @@ lessons:
     
   - week: "Week 09"
     date: "Mon, Mar 15"
-    title: "Lab 06"
+    title: "Lab 06: Houses in King County"
     lab: "lab-06.html"
   - date: "Tue, Mar 16"
     title: "Model comparison"
@@ -127,9 +127,11 @@ lessons:
     date: "Mon, Mar 22"
     title: "Lab 07"
   - date: "Tue, Mar 23"
-    title: "Probabilities + Odds"
+    title: "Logistic regression: Odds + probabilities"
+    slides: "18-logistic-odds.html"
   - date: "Thu, Mar 25"
-    title: "Logistic regression"
+    title: "Logistic regression: Odds ratios"
+    slides: "19-logistic-odds-ratios.html"
   - title: "Quiz 02 assigned"
     quiz: "quiz-02.html"
   

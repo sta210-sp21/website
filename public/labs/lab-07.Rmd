@@ -1,0 +1,142 @@
+---
+title: "Lab 07" 
+subtitle: "due Sun, Mar 21,  at 11:59p EDT"
+output: 
+  tufte::tufte_html:
+    css: "./sta210-labs.css"
+    tufte_variant: "envisioned"
+    highlight: pygments
+    fig_height: 10
+    toc: true
+    toc_depth: 1
+link-citations: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(eval = FALSE)
+```
+
+Instructions will be posted when the lab is assigned. 
+
+<!--
+In this lab, you will use multiple linear regression to understand variability in the price of houses in King County, WA. 
+
+# Learning goals
+
+By the end of the lab you will be able to...
+
+- Wrangle data and create new variables
+- Fit a multiple linear regression model including quantitative and categorical predictors
+- Interpret coefficients for models with a log-transformed response variable
+
+# Getting started
+
+## Clone assignment repo + start new project
+
+A repository has already been created for you and your teammates. Everyone in your team has access to the same repo.
+
+- Go to [course organization](https://www.github.com/sta210-sp21) on GitHub.
+
+- In addition to your private individual repositories, you should now see a repo named **lab-06-**. Go to that repository.
+  
+- Each person on the team should clone the repository and open a new project in RStudio.
+
+## Workflow: Using git and GitHub as a team
+
+Now that you have had some experience collaborating as a team on GitHub, it will be up to your team to decide who types the responses to each question. Every team member should contribute to the discussion about each lab exercise even if they are not the one typing the team's responses. 
+
+**Every team member should have at least one meaningful commit to the repo on GitHub.**
+
+## Password caching
+
+If you would like your git password cached for a week for this project, type the following in the **Terminal** in RStudio:
+
+```{bash eval=FALSE}
+git config --global credential.helper 'cache --timeout 604800'
+```
+
+# Packages + data
+
+## Packages
+
+We will use the following packages in today's lab. Feel free to add any other packages as needed.
+
+```{r load-packages}
+library(tidyverse)
+library(broom)
+library(knitr)
+```
+
+## Data 
+
+The data for today's lab contains the price and other characteristics of over 20,000 houses sold in King County, Washington (the county that includes Seattle). The data set includes the following variables:
+
+- `price`: selling price of the house in US dollars
+- `date`: date house was sold, measured in days since January 1, 2014
+- `bedrooms`: number of bedrooms
+- `bathrooms`: number of bathrooms
+- `sqft`: interior square footage
+- `floors`: number of floors
+- `waterfront`: 1 if the house has a view of the waterfront, 0 otherwise
+- `yr_built`: year the house was built
+- `yr_renovated`: 0 if the house was never renovated, the year the house was renovated if else
+
+
+```{r}
+houses <- read_csv("data/KingCountyHouses.csv") %>%
+  mutate(waterfront = as.factor(waterfront))
+```
+
+# Exercises 
+
+1. Create a data visualization and calculate summary statistics to describe the distribution of `bedrooms`. Is this distribution what you expected? Briefly explain why or why not. 
+
+1. We'll limit the scope of the analysis to houses with 1 to 4 bedrooms. Filter the data set to only include these observations. Then, calculate the mean and standard deviation of `bedrooms` in the updated data. Display the results using 3 digits.
+
+**We will use this data set for the remainder of the lab.**
+
+1. Visualize the distribution of `price` using a different type of visualization than used in Exercise 1. Then use the visualization and appropriate summary statistics to describe the distribution.
+
+1. We need to do a little more data wrangling before fitting the model. 
+    
+  - Create a new variable to aggregate `floors` into the following levels: 
+
+    "one-story" if 1 $\leq$ `floors` $<$ 2
+
+    "two-story" if  2 $\leq$ `floors` $<$ 3
+
+    "three-story' if 3 $\leq$ `floors` 
+    
+  - Create a new indicator variable that takes values "1" if a house has been renovated and "0" otherwise. 
+  
+You'll use these variables instead of `floors` and `yr_renovated` in the analysis.
+
+1. Fit the full regression model using the characteristics in the data set to help explain variability in the price of houses in King County. Display the model using 3 digits for the numeric values. 
+
+1. Now let's check the model conditions. For each condition, state whether it is satisfied and briefly explain using any relevant plots or summary statistics. 
+
+1. We want to refit the model using `log(price)`, the log-transformed price, as the response variable. Briefly explain why we might want to refit the model with the new response variable. 
+
+1. Refit the model with `log(price)` as the response variable. Display the model using 5 digits for the numeric values. 
+
+1. Interpret the following effects in terms of (1) the change in the log(price) and (2) the change in the price of houses in King County: 
+
+    - when the house was built
+    - whether the house is on the waterfront
+
+1. Based on the model, how do you expect the price to differ for a one-story house that is 1500 square feet compared to a two-story house that is 2000 square feet?  Assume all other characteristics are the same for the two houses. *The response should be in terms of price, not log(price)*.
+
+# Submission
+
+**One team member:** Upload the team's PDF to Gradescope. Be sure to include every team member's name in the Gradescope submission Associate the "Overall" graded section with the first page of your PDF, and mark where each answer is to the exercises. If any answer spans multiple pages, then mark all pages.
+
+There should only be <u>one</u> submission per team on Gradescope.
+
+**Note that your submission on Gradescope should be identical to the PDF that is rendered when we knit the Rmd file in your repo.** 
+
+
+## Acknowledgements
+
+The data used in this lab is from [https://github.com/proback/BYSH](https://github.com/proback/BYSH).
+-->
+

@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Logistic Regression</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Prof. Maria Tackett" />
+    <script src="libs/font-awesome/header-attrs/header-attrs.js"></script>
+    <link rel="stylesheet" href="sta210-slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Logistic Regression
+## Odds ratios
+### Prof. Maria Tackett
+
+---
+
+
+
+
+
+
+
+class: middle, center
+
+## [Click here for PDF of slides](19-logistic-odds-ratios.pdf)
+
+---
+
+## Topics
+
+- Use the odds ratio to compare the odds of two groups
+
+- Interpret the coefficients of a logistic regression model with 
+  - a single categorical predictor
+  - a single quantitative predictor
+  - multiple predictors
+
+
+---
+
+## Risk of coronary heart disease 
+
+This dataset is from an ongoing cardiovascular study on residents of the town of Framingham, Massachusetts. We want to examine the relationship between various health characteristics and the risk of having heart disease. 
+
+.vocab[`high_risk`]: 
+- 1: High risk of having heart disease in next 10 years
+- 0: Not high risk of having heart disease in next 10 years
+
+.vocab[`age`]: Age at exam time (in years)
+
+.vocab[`education`]: 1 = Some High School; 2 = High School or GED; 3 = Some College or Vocational School; 4 = College
+
+
+
+---
+
+## High risk vs. education 
+
+
+|                                  | High Risk| Not High Risk|
+|:---------------------------------|---------:|-------------:|
+|Some high school                  |       323|          1397|
+|High school or GED                |       147|          1106|
+|Some college or vocational school |        88|           601|
+|College                           |        70|           403|
+
+---
+
+## Compare the odds for two groups
+
+
+|                                  | High Risk| Not High Risk|
+|:---------------------------------|---------:|-------------:|
+|Some high school                  |       323|          1397|
+|High school or GED                |       147|          1106|
+|Some college or vocational school |        88|           601|
+|College                           |        70|           403|
+
+- We want to compare the risk of heart disease for those with a High School diploma/GED and those with a college degree.
+
+- We'll use the **odds** to compare the two groups
+
+---
+
+## Compare the odds for two groups
+
+
+|                                  | High Risk| Not High Risk|
+|:---------------------------------|---------:|-------------:|
+|Some high school                  |       323|          1397|
+|High school or GED                |       147|          1106|
+|Some college or vocational school |        88|           601|
+|College                           |        70|           403|
+
+&lt;br&gt; 
+
+.eq[
+`$$\text{odds} = \frac{P(\text{success})}{P(\text{failure})} = \frac{\text{# of successes}}{\text{# of failures}}$$`
+]
+
+---
+
+Odds of being high risk for the .vocab[High school or GED] group
+
+`$$\frac{147}{1106} = 0.133$$`
+
+--
+
+Odds of being high risk for the .vocab[College] group
+
+`$$\frac{70}{403} = 0.174$$`
+
+--
+
+Based on this, we see those with a college degree had higher odds of being high risk of heart disease than those with a high school diploma or GED.
+
+---
+
+## Odds ratio
+
+
+|                                  | High Risk| Not High Risk|
+|:---------------------------------|---------:|-------------:|
+|Some high school                  |       323|          1397|
+|High school or GED                |       147|          1106|
+|Some college or vocational school |        88|           601|
+|College                           |        70|           403|
+
+Let's summarize the relationship between the two groups. To do so, we'll use the .vocab[odds ratio (OR)].
+
+.eq[
+`$$OR = \frac{\text{odds}_1}{\text{odds}_2} = \frac{\omega_1}{\omega_2}$$`
+]
+
+---
+
+## Odds ratio: College vs. High school or GED
+
+
+|                                  | High Risk| Not High Risk|
+|:---------------------------------|---------:|-------------:|
+|Some high school                  |       323|          1397|
+|High school or GED                |       147|          1106|
+|Some college or vocational school |        88|           601|
+|College                           |        70|           403|
+
+`$$OR = \frac{\text{odds}_{College}}{\text{odds}_{HS}} = \frac{0.174}{0.133} = \mathbf{1.308}$$`
+
+--
+
+.vocab[The odds of being high risk of heart disease are 1.30 times higher for those with a college degree than those with a high school diploma or GED.]
+
+---
+
+## Odds ratio: College vs. Some high school
+
+
+|                                  | High Risk| Not High Risk|
+|:---------------------------------|---------:|-------------:|
+|Some high school                  |       323|          1397|
+|High school or GED                |       147|          1106|
+|Some college or vocational school |        88|           601|
+|College                           |        70|           403|
+
+`$$OR = \frac{\text{odds}_{College}}{\text{odds}_{Some HS}} = \frac{70/403}{323/1397} = 0.751$$`
+--
+
+.vocab[The odds of being high risk of having heart disease for those with a college degree are 0.751 times the odds of being high risk for heart disease for those with some high school.]
+
+---
+
+## More natural interpretation 
+
+It's more natural to interpret the odds ratio with a statement with the odds ratio greater than  1. 
+
+--
+
+.vocab[The odds of being high risk for heart disease are 1.33 times higher for those with some high school than those with a college degree.]
+
+---
+
+## Logistic regression: categorical predictor
+
+Recall:  Education -  1 = Some High School; 2 = High School or GED; 3 = Some College or Vocational School; 4 = College
+
+
+```r
+risk_model &lt;- glm(high_risk ~ education, 
+                  data  = heart, family = "binomial")
+```
+
+
+|term        | estimate| std.error| statistic| p.value|
+|:-----------|--------:|---------:|---------:|-------:|
+|(Intercept) |   -1.464|     0.062|   -23.719|   0.000|
+|education2  |   -0.554|     0.107|    -5.159|   0.000|
+|education3  |   -0.457|     0.130|    -3.520|   0.000|
+|education4  |   -0.286|     0.143|    -1.994|   0.046|
+
+---
+
+## Interpreting `education4` - log-odds
+
+
+|term        | estimate| std.error| statistic| p.value|
+|:-----------|--------:|---------:|---------:|-------:|
+|(Intercept) |   -1.464|     0.062|   -23.719|   0.000|
+|education2  |   -0.554|     0.107|    -5.159|   0.000|
+|education3  |   -0.457|     0.130|    -3.520|   0.000|
+|education4  |   -0.286|     0.143|    -1.994|   0.046|
+
+
+The **log-odds** of being high risk of heart disease are expected to be 0.286 less for those with a college degree compared to those with some high school (the baseline group).
+
+
+---
+
+## Interpreting `education4` - odds
+
+
+|term        | estimate| std.error| statistic| p.value|
+|:-----------|--------:|---------:|---------:|-------:|
+|(Intercept) |   -1.464|     0.062|   -23.719|   0.000|
+|education2  |   -0.554|     0.107|    -5.159|   0.000|
+|education3  |   -0.457|     0.130|    -3.520|   0.000|
+|education4  |   -0.286|     0.143|    -1.994|   0.046|
+
+
+The **odds** of being high risk of heart disease for those with a college degree are expected to be 0.751 (exp(-0.286)) **times** the odds for those with some high school. 
+
+---
+
+## Coefficients + odds ratios
+
+The model coefficient, -0.286, is the expected change in the log-odds when going from the *Some high school* group to the *College* group. 
+
+--
+
+Therefore, `\(\exp\{-0.286\}\)` = 0.751 is the expected change in the **odds** when going from the *Some high school* group to the *College* group. 
+
+--
+
+.eq[
+`$$OR  = \exp\{\hat{\beta}_j\} = e^{\hat{\beta}_j}$$`
+]
+
+---
+
+## Logistic regression: quantitative predictor
+
+
+
+
+|term        | estimate| std.error| statistic| p.value|
+|:-----------|--------:|---------:|---------:|-------:|
+|(Intercept) |   -5.619|     0.288|   -19.498|       0|
+|age         |    0.076|     0.005|    14.174|       0|
+
+---
+
+## Interpreting `age`: log-odds
+
+
+|term        | estimate| std.error| statistic| p.value|
+|:-----------|--------:|---------:|---------:|-------:|
+|(Intercept) |   -5.619|     0.288|   -19.498|       0|
+|age         |    0.076|     0.005|    14.174|       0|
+
+For each additional year in age, the log-odds of being high risk of heart disease are expected to increase by 0.076.
+
+
+
+---
+
+## Interpretating `age`: odds
+
+
+|term        | estimate| std.error| statistic| p.value|
+|:-----------|--------:|---------:|---------:|-------:|
+|(Intercept) |   -5.619|     0.288|   -19.498|       0|
+|age         |    0.076|     0.005|    14.174|       0|
+
+For each additional year in age, the odds of being high risk of heart disease are expected to multiply by a factor of 1.08 (exp(0.076)). 
+
+--
+
+**Alternate interpretation**
+
+For each additional year in age, the odds of being high risk for heart disease are expected to increase by 8%.
+
+---
+
+## Logistic regression: multiple predictors
+
+
+```r
+risk_model_3 &lt;- glm(high_risk ~ education + age, 
+                    data = heart, family = "binomial")
+```
+
+
+|term        | estimate| std.error| statistic| p.value|
+|:-----------|--------:|---------:|---------:|-------:|
+|(Intercept) |   -5.385|     0.308|   -17.507|   0.000|
+|education2  |   -0.242|     0.112|    -2.162|   0.031|
+|education3  |   -0.235|     0.134|    -1.761|   0.078|
+|education4  |   -0.020|     0.148|    -0.136|   0.892|
+|age         |    0.073|     0.005|    13.385|   0.000|
+
+---
+
+## Interpretation in terms of the log-odds
+
+
+
+|term        | estimate| std.error| statistic| p.value|
+|:-----------|--------:|---------:|---------:|-------:|
+|(Intercept) |   -5.385|     0.308|   -17.507|   0.000|
+|education2  |   -0.242|     0.112|    -2.162|   0.031|
+|education3  |   -0.235|     0.134|    -1.761|   0.078|
+|education4  |   -0.020|     0.148|    -0.136|   0.892|
+|age         |    0.073|     0.005|    13.385|   0.000|
+
+.vocab[`education4`]: The **log-odds** of being high risk of heart disease are expected to be 0.020 less for those with a college degree compared to those with some high school, **holding age constant.** 
+
+---
+
+## Interpretation in terms of the log-odds
+
+
+
+|term        | estimate| std.error| statistic| p.value|
+|:-----------|--------:|---------:|---------:|-------:|
+|(Intercept) |   -5.385|     0.308|   -17.507|   0.000|
+|education2  |   -0.242|     0.112|    -2.162|   0.031|
+|education3  |   -0.235|     0.134|    -1.761|   0.078|
+|education4  |   -0.020|     0.148|    -0.136|   0.892|
+|age         |    0.073|     0.005|    13.385|   0.000|
+
+.vocab[`age`]: For each additional year in age, the log-odds of being high risk of heart disease are expected to increase by 0.073, **holding education level constant.**
+
+---
+
+## Interpretation in terms of the odds
+
+
+
+|term        | estimate| std.error| statistic| p.value|
+|:-----------|--------:|---------:|---------:|-------:|
+|(Intercept) |   -5.385|     0.308|   -17.507|   0.000|
+|education2  |   -0.242|     0.112|    -2.162|   0.031|
+|education3  |   -0.235|     0.134|    -1.761|   0.078|
+|education4  |   -0.020|     0.148|    -0.136|   0.892|
+|age         |    0.073|     0.005|    13.385|   0.000|
+
+
+.vocab[`education4`]: The **odds** of being high risk of heart disease for those with a college degree are expected to be 0.98 (exp(-0.020)) **times** the odds for those with some high school, **holding age constant**.  
+
+---
+
+## Interpretation in terms of the odds
+
+
+
+|term        | estimate| std.error| statistic| p.value|
+|:-----------|--------:|---------:|---------:|-------:|
+|(Intercept) |   -5.385|     0.308|   -17.507|   0.000|
+|education2  |   -0.242|     0.112|    -2.162|   0.031|
+|education3  |   -0.235|     0.134|    -1.761|   0.078|
+|education4  |   -0.020|     0.148|    -0.136|   0.892|
+|age         |    0.073|     0.005|    13.385|   0.000|
+
+
+.vocab[`age`]: For each additional year in age, the odds being high risk of heart disease are expected to multiply by a factor of 1.08 (exp(0.073)), **holding education level constant**. 
+
+---
+
+## Recap 
+
+- Use the odds ratio to compare the odds of two groups
+
+- Interpret the coefficients of a logistic regression model with 
+  - a single categorical predictor
+  - a single quantitative predictor
+  - multiple predictors
+  
+ 
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"slideNumberFormat": "%current%",
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

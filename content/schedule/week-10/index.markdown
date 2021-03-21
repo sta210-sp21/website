@@ -10,3 +10,36 @@ font-size: 18px;
 
 </style>
 
+
+## Lectures
+
+|           | Slides                   | Videos | Application Exercises (AE) |
+|-----------|--------------------------|--------|--------|
+| Tuesday  | [Logistic Regression: Odds + probabilities](https://sta210-sp21.netlify.app/slides/18-logistic-odds.html)| [Logistic Regression: Odds + probabilities](https://warpwire.duke.edu/w/pXgFAA/)| AE 18 |
+| Thursday   |[Logistic Regression: Odds ratios](https://sta210-sp21.netlify.app/slides/19-logistic-odds-ratios.html) |[Logistic Regression: Odds ratios](https://warpwire.duke.edu/w/o3gFAA/)  | AE 19|
+
+
+## Readings
+
+|            | 
+|------------|
+| [Introduction to Modern Statistics: Section 4.3 Logistic regression](https://openintro-ims.netlify.app/multi-logistic-models.html#logistic-regression) |
+
+
+
+## Assignments
+
+|                        |   |
+|------------------------|---|
+|[Lab 07](https://sta210-sp21.netlify.app/labs/lab-07.html) | **due Sun, Mar 28 at 11:59p**|
+| [Quiz 02](https://sta210-sp21.netlify.app/quiz/quiz-02.html) | **open Mar 25 at 12a; closes Mar 26 at 11:59p** |
+| [Project proposal](https://sta210-sp21.netlify.app/project/#project-proposal) | **due Mar 29 at 11:59p** |
+|[Statistics Experience](https://sta210-sp21.netlify.app/hw/stats-experience.html) | **due Sun, Apr 25 at 11:59p**| 
+
+
+
+
+
+
+
+
