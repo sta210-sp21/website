@@ -1,0 +1,86 @@
+---
+title: "Midsemester Check-in + Quiz study tips"
+output:
+  xaringan::moon_reader:
+    mathjax: "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML"
+    css: "sta210-slides.css"
+    logo: img/sta199-sticker-icon.png
+    lib_dir: libs/font-awesome
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      slideNumberFormat: "%current%" 
+      ratio: "16:9"
+editor_options: 
+  chunk_output_type: console
+---
+
+## Things the teaching team can do 
+
+- Brief review of key ideas from videos during live lecture
+
+- More instruction at beginning of lab
+
+- More guidance on preparing for quiz
+
+---
+
+## Things you can start / keep doing
+
+- Keep up with and review course materials
+  - Use lecture recordings in Sakai for AE solutions + coding
+
+- Attend office hours
+  - See office hours schedule on [course homepage](https://sta210-sp21.netlify.app/) (Zoom links in Sakai)
+
+---
+
+class: middle, center
+
+## Tips to prepare for Quiz 02
+
+---
+
+## Topics (weeks 05 - 08)
+
+- Comparing means with ANOVA
+- Multiple comparisons
+- Introduction to multiple linear regression 
+- Inference for regression coefficients
+- Types of predictors in regression (categorical, mean-centered, interaction terms, etc. )
+- Conditions for multiple linear regression
+- Variable transformations (transformation on response variable only)
+
+---
+
+## Tips
+
+- Review course materials (lectures, AEs, assignment solutions)
+
+--
+
+- Use readings posted in course schedule for additional examples and practice problems
+
+--
+
+- Make a page of notes summarizing the material 
+  - Helps with studying
+  - Helps make notes easier to navigate during quiz
+
+---
+
+## Tips
+
+- Don't just memorize things, ask "why" questions as you review the material 
+  - Example: We include $\epsilon$ when we write a statistical model 
+  
+  $$y = \beta_0 + \beta_1 x + \epsilon, \epsilon \sim N(0, \sigma_\epsilon^2)$$ 
+  
+  but not when we write the regression equation $$\hat{y} = \hat{\beta}_0 + \hat{\beta}_1 x$$
+  
+  **Why?**
+
+  
+
+

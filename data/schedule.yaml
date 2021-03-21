@@ -125,7 +125,8 @@ lessons:
     
   - week: "Week 10"
     date: "Mon, Mar 22"
-    title: "Lab 07"
+    title: "Lab 07: What makes song positive?"
+    lab: "lab-07.html"
   - date: "Tue, Mar 23"
     title: "Logistic regression: Odds + probabilities"
     slides: "18-logistic-odds.html"
