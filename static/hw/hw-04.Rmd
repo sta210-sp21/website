@@ -63,9 +63,9 @@ It is important to understand MTL volume, since it is negatively associated with
 
 3. Fit a preliminary model with `MTL` as the response and `sitting` as the sole predictor variable. Then, interpret the coefficient of `sitting` in the context of the data. 
 
-4. Next, let's consider the model using `sitting`, `MET`, and mean-centered `age` as  predictor variables. Fit the model, then interpret the coefficients of sitting and age in the context of the data. 
+4. Next, let's extend the model from the previous exercise and consider the model using `sitting`, `MET`, and mean-centered `age` as  predictor variables. Fit the model, then interpret the coefficients of sitting and age in the context of the data. 
 
-5. Compare the two models you've fit thus far. Which model would you select based on the following criteria (1) Adjusted $R^2$, (2) AIC, (3) BIC. For each criterion, state your choice and briefly explain your reasoning. 
+5. Compare the two models you've fit to understand variability in `MTL` . Which model would you select based on the following criteria (1) Adjusted $R^2$, (2) AIC, (3) BIC. For each criterion, state your choice and briefly explain your reasoning. 
 
 <hr>
 
