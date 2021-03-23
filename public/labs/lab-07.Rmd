@@ -134,7 +134,7 @@ forward_aic <- step(int_only_model, formula(full_model), direction = "forward")
 1. Let's conclude by checking for potential multicollinearity. Fill in the name of the selected model in the `vif` function (from the **rms** R package) to get the variance inflation factor (VIF) for the predictors. Display VIF using 3 digits. 
 
     - Based on VIF, are there any potential concerns with multicollinearity? Briefly explain.
-    - If so, which variables appear to be correlated?
+    - If so, which variables?
 
 
 # Submission
