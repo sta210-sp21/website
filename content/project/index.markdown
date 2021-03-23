@@ -14,9 +14,9 @@ title: "STA 210 Final Project"
 
 [Final report](#written-report) due **Sun, Apr 25 at 11:59p EST** 
 
-[Video presentation + slides](#video-presentation--slides) due **Tue, Apr 28 at 9a EST**
+[Video presentation + slides](#video-presentation--slides) due **Wed, Apr 28 at 9a EST**
 
-[Presentation comments](#presentation-comments) due **Thu, Apr 30 at 11:59p EST**
+[Presentation comments](#presentation-comments) due **Fri, Apr 30 at 11:59p EST**
 
 ## Introduction 
 
