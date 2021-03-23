@@ -1,11 +1,10 @@
 ---
 title: "Quiz 02"
-subtitle: ""
+subtitle: "Open Mar 25 at 12p - Mar 26 at 11:59p"
 output: 
   html_document:
     css: "sta210-quiz.css"
-    toc: true
-    toc_float: true
+    toc: false
 ---
 
 ```{r setup, include=FALSE}
@@ -14,4 +13,22 @@ knitr::opts_chunk$set(echo = TRUE,
                       message=FALSE)
 ```
 
-Instructions will be posted when the quiz is assigned.
+## General instructions
+
+Quiz 02 will be released on **Thu, Mar 25 at 12p** and must be completed by **Fri, Mar 26 at 11:59p**. Once you open the quiz, you will have **45 minutes** to complete it. The timer automatically starts when you click to begin the assignment, and the quiz stops accepting responses when you reach the time limit.
+
+You will see a **Quiz 02** assignment under the Tests & Quizzes tab on Sakai. You will complete the entire quiz in Sakai. You do **<u>not</u>** need to use RStudio or GitHub for the quiz.
+
+## Notes
+
+- The quiz is an individual assignment. You may **<u>not</u>** discuss it with anyone else (in the class or otherwise). See the Academic Honesty guidelines in the [course syllabus](https://sta210-sp21.netlify.app/syllabus/#academic-conduct) for more information.
+
+- The quiz is open-book, open-note, so you may use any materials from class as you take the quiz. 
+
+- Be sure to read all instructions and quiz questions carefully!
+
+- Piazza will be inactive during the duration of the quiz, so no one will be able to post questions on Piazza from Mar 25 at 12p to Mar 26 at 11:59p. If you have computing issues or trouble accessing the quiz on Sakai, please email Professor Tackett with **STA 210 Quiz** in the subject line. 
+
+- The teaching team will not be able to answer questions about while it is open. This is to ensure all students have the same information regardless of when they take the quiz. 
+
+

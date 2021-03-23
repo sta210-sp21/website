@@ -1,0 +1,35 @@
+---
+title: "AE 18: Logistic regression"
+subtitle: "Odds + probabilities"
+date: "`r Sys.Date()`"
+output: 
+  html_document: 
+    fig_height: 8
+    fig_width: 8
+    theme: readable
+---
+
+```{r include = F}
+knitr::opts_chunk$set(warning = F, 
+                      message = F)
+```
+
+## Class announcements
+
+- See this week's schedule: [Week 10](https://sta210-sp21.netlify.app/schedule/week-10/)
+
+- [Quiz 02](https://sta210-sp21.netlify.app/quiz/quiz-02.html) - March 25 - 26
+  - Covers weeks 05 - 08
+
+- [Project proposal](https://sta210-sp21.netlify.app/project/#project-proposal) due Mon, Mar 29 at 11:59p
+
+- [Statistics experience](https://sta210-sp21.netlify.app/hw/stats-experience.html) due Sun, Apr 25 at 11:59p 
+
+## Questions? 
+
+## AE 18: Logistic regression
+
+Clone the **ae-18** repo and open a new project in RStudio.
+
+
+
