@@ -3,7 +3,7 @@ title: "Class check ins"
 author: "Prof. Maria Tackett"
 
 output:
-  xaringan::moon_reader:
+  xaringan::moon_reader: 
     mathjax: "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML"
     css: "sta210-slides.css"
     logo: img/sta210_sticker.png

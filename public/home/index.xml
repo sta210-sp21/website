@@ -740,7 +740,7 @@ font-size: 18px;
       <pubDate>12 Mar 17 10:00 +0000</pubDate>
       
       <guid>/schedule/week-10/</guid>
-      <description> table { font-size: 18px; }  Lectures     Slides Videos Application Exercises (AE)     Tuesday Logistic Regression: Odds + probabilities Logistic Regression: Odds + probabilities AE 18: Logistic regression   Thursday Logistic Regression: Odds ratios Logistic Regression: Odds ratios AE 19    Readings         Introduction to Modern Statistics: Section 4.3 Logistic regression    Assignments          Lab 07 due Sun, Mar 28 at 11:59p   Quiz 02 open Mar 25 at 12a; closes Mar 26 at 11:59p   Project proposal due Mar 29 at 11:59p   Statistics Experience due Sun, Apr 25 at 11:59p    </description>
+      <description> table { font-size: 18px; }  Lectures     Slides Videos Application Exercises (AE)     Tuesday Logistic Regression: Odds + probabilities Logistic Regression: Odds + probabilities AE 18: Logistic regression   Thursday Logistic Regression: Odds ratios Logistic Regression: Odds ratios AE 19: Odds ratios    Readings         Introduction to Modern Statistics: Section 4.3 Logistic regression    Assignments          Lab 07 due Sun, Mar 28 at 11:59p   Quiz 02 open Mar 25 at 12a; closes Mar 26 at 11:59p   Project proposal due Mar 29 at 11:59p   Statistics Experience due Sun, Apr 25 at 11:59p    </description>
       <content>&lt;style&gt;
 table {
 font-size: 18px;
@@ -768,7 +768,7 @@ font-size: 18px;
 &lt;td&gt;Thursday&lt;/td&gt;
 &lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/slides/19-logistic-odds-ratios.html&#34;&gt;Logistic Regression: Odds ratios&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;&lt;a href=&#34;https://warpwire.duke.edu/w/o3gFAA/&#34;&gt;Logistic Regression: Odds ratios&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;AE 19&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/appex/ae-19-odds-ratios.html&#34;&gt;AE 19: Odds ratios&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;

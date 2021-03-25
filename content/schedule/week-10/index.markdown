@@ -16,7 +16,7 @@ font-size: 18px;
 |           | Slides                   | Videos | Application Exercises (AE) |
 |-----------|--------------------------|--------|--------|
 | Tuesday  | [Logistic Regression: Odds + probabilities](https://sta210-sp21.netlify.app/slides/18-logistic-odds.html)| [Logistic Regression: Odds + probabilities](https://warpwire.duke.edu/w/pXgFAA/)| [AE 18: Logistic regression](https://sta210-sp21.netlify.app/appex/ae-18-logistic.html) |
-| Thursday   |[Logistic Regression: Odds ratios](https://sta210-sp21.netlify.app/slides/19-logistic-odds-ratios.html) |[Logistic Regression: Odds ratios](https://warpwire.duke.edu/w/o3gFAA/)  | AE 19|
+| Thursday   |[Logistic Regression: Odds ratios](https://sta210-sp21.netlify.app/slides/19-logistic-odds-ratios.html) |[Logistic Regression: Odds ratios](https://warpwire.duke.edu/w/o3gFAA/)  | [AE 19: Odds ratios](https://sta210-sp21.netlify.app/appex/ae-19-odds-ratios.html)|
 
 
 ## Readings
