@@ -1,0 +1,25 @@
+---
+title: "Project proposal" 
+subtitle: "due Mon, Mar 29, at 11:59p EDT"
+output: 
+  tufte::tufte_html:
+    css: "./sta210-labs.css"
+    tufte_variant: "envisioned"
+    highlight: pygments
+    fig_height: 10
+    toc: true
+    toc_depth: 1
+link-citations: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(eval = FALSE)
+```
+
+This lab will be focused on finishing your project proposal. [Click here](https://sta210-sp21.netlify.app/project/#project-proposal) to see the instructions for the proposal.
+
+# Submission
+
+You will submit the proposal by pushing your work to your project GitHub repo. The teaching team will provide feedback under the **Issues** on GitHub. 
+
+You do **<u>not</u>** need to submit anything for the proposal on Gradescope.

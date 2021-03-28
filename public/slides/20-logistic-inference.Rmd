@@ -1,0 +1,457 @@
+---
+title: "Logistic regression"
+subtitle: "Inference"
+author: "Prof. Maria Tackett"
+output:
+  xaringan::moon_reader:
+    mathjax: "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML"
+    css: "sta210-slides.css"
+    logo: img/sta199-sticker-icon.png
+    lib_dir: libs/font-awesome
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      slideNumberFormat: "%current%" 
+      ratio: "16:9"
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE, echo=FALSE}
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(
+	fig.align = "center",
+	fig.height =5,
+	fig.width = 8,
+	message = FALSE,
+	warning = FALSE,
+	echo = FALSE
+)
+```
+
+class: middle, center
+
+## [Click for PDF of slides](20-logistic-inference.pdf)
+
+```{r,echo=F}
+library(tidyverse)
+library(knitr)
+library(broom)
+library(pROC) 
+library(kableExtra)
+```
+
+---
+
+## Risk of coronary heart disease 
+
+.midi[This dataset is from an ongoing cardiovascular study on residents of the town of Framingham, Massachusetts. We want to examine the relationship between various health characteristics and the risk of having heart disease in the next 10 years.]
+
+.midi[.vocab[`high_risk`]: 1 = High risk, 0 = Not high risk]
+
+.midi[.vocab[`age`]: Age at exam time (in years)]
+
+.midi[.vocab[`education`]: 1 = Some High School; 2 = High School or GED; 3 = Some College or Vocational School; 4 = College]
+
+.midi[.vocab[`currentSmoker`]: 0 = nonsmoker; 1 = smoker]
+
+```{r echo = F}
+heart <- read_csv("https://raw.githubusercontent.com/sta210-sp20/datasets/master/framingham.csv") %>%
+  select(age, education, TenYearCHD, currentSmoker) %>%
+  drop_na() %>%
+  mutate(high_risk = as.factor(TenYearCHD), 
+         education = as.factor(education), 
+         currentSmoker = as.factor(currentSmoker))
+```
+
+---
+
+## Modeling risk of coronary heart disease
+
+```{r}
+risk_m <- glm(TenYearCHD ~ age + education, 
+              data = heart, family = "binomial")
+tidy(risk_m, conf.int = TRUE) %>% 
+  kable(format = "markdown", digits = 3)
+```
+
+$$\small{\log\Big(\frac{\hat{\pi}}{1-\hat{\pi}}\Big) = -5.385 + 0.073 ~ \text{age} - 0.242 ~ \text{ed2} - 0.235 ~ \text{ed3} - 0.020 ~ \text{ed4}}$$
+---
+
+## Hypothesis test for $\beta_j$
+
+.vocab[Hypotheses]: $H_0: \beta_j = 0 \hspace{2mm} \text{ vs } \hspace{2mm} H_a: \beta_j \neq 0$
+
+--
+
+.vocab[Test Statistic]: $$z = \frac{\hat{\beta}_j - 0}{SE_{\hat{\beta}_j}}$$
+
+--
+
+.vocab[P-value]: $P(|Z| > |z|)$, 
+
+where $Z \sim N(0, 1)$, the Standard Normal distribution
+
+
+---
+
+## Confidence interval for $\beta_j$
+
+We can calculate the .vocab[C% confidence interval] for $\beta_j$ as the following: 
+
+.eq[
+$$\Large{\hat{\beta}_j \pm z^* SE_{\hat{\beta}_j}}$$
+where $z^*$ is calculated from the $N(0,1)$ distribution
+
+]
+
+
+--
+
+This is an interval for the change in the log-odds for every one unit increase in $x_j$. 
+
+---
+
+## Interpretation in terms of the odds
+
+The change in **odds** for every one unit increase in $x_j$. 
+
+.eq[
+$$\Large{\exp\{\hat{\beta}_j \pm z^* SE_{\hat{\beta}_j}\}}$$
+]
+
+--
+
+.vocab[Interpretation]: We are $C\%$ confident that for every one unit increase in $x_j$, the odds multiply by a factor of $\exp\{\hat{\beta}_j - z^* SE_{\hat{\beta}_j}\}$ to $\exp\{\hat{\beta}_j + z^* SE_{\hat{\beta}_j}\}$, holding all else constant.
+
+
+---
+
+## Model
+
+```{r echo = F}
+risk_m <- glm(high_risk ~ age + education, data = heart, 
+         family = "binomial")
+tidy(risk_m, conf.int = TRUE) %>% kable(format = "markdown", digits = 3)
+```
+
+---
+
+## Let's look at the coefficient for `age`
+
+.midi[
+```{r}
+tidy(risk_m, conf.int = TRUE) %>% 
+  kable(format = "html", digits = 3) %>%
+  row_spec(2, background = "#dce5b2")
+```
+]
+--
+
+.eq[
+.vocab[Hypotheses]
+
+$$H_0: \beta_{1} = 0 \hspace{2mm} \text{ vs } \hspace{2mm} H_a: \beta_{1} \neq 0$$
+]
+
+
+---
+
+## Let's look at the coefficient for `age`
+
+.midi[
+```{r}
+tidy(risk_m, conf.int = TRUE) %>% 
+  kable(format = "html", digits = 3) %>%
+  row_spec(2, background = "#dce5b2")
+```
+]
+
+.eq[
+.vocab[Test statistic]
+
+$$z = \frac{0.0733 - 0}{0.00547} = 13.4$$
+]
+
+---
+
+## Let's look at the coefficient for `age`
+
+.midi[
+```{r}
+tidy(risk_m, conf.int = TRUE) %>% 
+  kable(format = "html", digits = 3) %>%
+  row_spec(2, background = "#dce5b2")
+```
+]
+
+.eq[
+.vocab[P-value]
+
+$$P(|Z| > |13.4|) \approx 0$$
+]
+
+---
+
+## Let's look at the coefficient for `age`
+
+.midi[
+```{r}
+tidy(risk_m, conf.int = TRUE) %>% 
+  kable(format = "html", digits = 3) %>%
+  row_spec(2, background = "#dce5b2")
+```
+]
+
+
+```{r echo = T}
+2 * pnorm(13.4,lower.tail = FALSE)
+```
+
+---
+
+## Let's look at the coefficient for `age`
+
+.midi[
+```{r}
+tidy(risk_m, conf.int = TRUE) %>% 
+  kable(format = "html", digits = 3) %>%
+  row_spec(2, background = "#dce5b2")
+```
+]
+
+.vocab[Conclusion]: The p-value is very small, so we reject $H_0$. The data provide sufficient evidence that age is a statistically significant predictor of whether someone is high risk of having heart disease, *after accounting for education*.
+
+---
+
+class: middle, center
+
+## Comparing models 
+
+---
+
+## Log likelihood
+
+
+.eq[
+$$\log L = \sum\limits_{i=1}^n[y_i \log(\hat{\pi}_i) + (1 - y_i)\log(1 - \hat{\pi}_i)]$$
+]
+
+--
+
+- Measure of how well the model fits the data 
+
+--
+
+- Higher values of $\log L$ are better
+
+--
+
+- .vocab[Deviance] = $-2 \log L$
+  - $-2 \log L$ follows a $\chi^2$ distribution with $n - p - 1$ degrees of freedom
+  
+---
+
+## Comparing nested models
+
+- Suppose there are two models: 
+    - Reduced Model includes predictors $x_1, \ldots, x_q$
+    - Full Model includes predictors $x_1, \ldots, x_q, x_{q+1}, \ldots, x_p$
+
+--
+
+- We want to test the hypotheses
+$$\begin{aligned}&H_0: \beta_{q+1} = \dots = \beta_p = 0 \\
+& H_a: \text{ at least 1 }\beta_j \text{ is not } 0\end{aligned}$$
+
+--
+
+- To do so, we will use the .vocab[Drop-in-deviance test] (also known as the Nested Likelihood Ratio test)
+
+---
+
+## Drop-in-deviance test
+
+.vocab[Hypotheses]:
+$$\begin{aligned}&H_0: \beta_{q+1} = \dots = \beta_p = 0 \\
+& H_a: \text{ at least 1 }\beta_j \text{ is not } 0\end{aligned}$$
+
+--
+
+.vocab[Test Statistic]: $$G = (-2 \log L_{reduced}) - (-2 \log L_{full})$$
+
+--
+
+.vocab[P-value]: $P(\chi^2 > G)$, 
+
+calculated using a $\chi^2$ distribution with degrees of freedom equal to the difference in the number of parameters in the full and reduced models
+
+---
+
+## $\chi^2$ distribution 
+
+```{r, echo=F, fig.height = 6}
+x <- seq(from =0, to = 10, length = 100)
+
+# Evaluate the densities
+y_1 <- dchisq(x, 1)
+y_2 <- dchisq(x,2)
+y_3 <- dchisq(x,3)
+y_4 <- dchisq(x,5)
+
+# Plot the densities
+plot(x, y_1, col = 1, type = "l", ylab="",lwd=3, ylim = c(0, 0.5), 
+     main  = "Chi-square Distribution")
+lines(x,y_2, col = 2,lwd=3)
+lines(x, y_3, col = 3,lwd=3)
+lines(x, y_4, col = 4,lwd=3)
+
+# Add the legend
+legend("topright",
+       c("df = 1", "df = 2 ", "df = 3", "df = 5"), 
+       col = c(1, 2, 3, 4), lty = 1)
+```
+
+---
+
+.small[
+```{r}
+model_reduced <- glm(high_risk ~ age + education, 
+              data = heart, family = "binomial")
+model_full <- glm(high_risk ~ age + education + currentSmoker,
+              data = heart, family = "binomial")
+```
+]
+
+```{r echo = F}
+tidy(model_reduced, conf.int = T) %>% kable(format = "markdown", digits = 3)
+```
+
+<br> 
+
+--
+
+.question[
+Should we add `currentSmoker` to this model?
+]
+
+---
+
+## Should we add `currentSmoker` to the model?
+
+```{r echo = T, eval = F}
+model_reduced <- glm(high_risk ~ age + education, 
+              data = heart, family = "binomial")
+```
+
+```{r echo = T, eval = F}
+model_full <- glm(high_risk ~ age + education + 
+                    currentSmoker, #<<
+              data = heart, family = "binomial")
+```
+
+---
+
+## Should we add `currentSmoker` to the model?
+
+```{r echo = T}
+# Calculate deviance for each model
+(dev_reduced <- glance(model_reduced)$deviance)
+(dev_full <- glance(model_full)$deviance)
+```
+
+--
+
+```{r echo = T}
+# Drop-in-deviance test statistic
+(test_stat <- dev_reduced - dev_full)
+```
+
+---
+
+## Should we add `currentSmoker` to the model?
+
+```{r echo = T}
+# p-value
+#1 = number of new model terms in model 2
+pchisq(test_stat, 1, lower.tail = FALSE) 
+```
+
+
+--
+
+.vocab[Conclusion]: The p-value is very small, so we reject $H_0$. The data provide sufficient evidence that the coefficient of `currentSmoker` is not equal to 0. Therefore, we should add it to the model.
+
+---
+
+## Drop-in-Deviance test in R
+
+We can use the **`anova`** function to conduct this test 
+
+- Add **`test = "Chisq"`** to conduct the drop-in-deviance test
+
+```{r echo = T}
+anova(model_reduced, model_full, test = "Chisq") %>%
+  tidy()
+```
+
+---
+
+## Model selection 
+
+Use AIC or BIC for model selection 
+
+.eq[
+$$\begin{align}&AIC = - 2 * \log L - \color{red}{n\log(n)}+ 2(p +1)\\[5pt]
+&BIC =- 2 * \log L - \color{red}{n\log(n)} + log(n)\times(p+1)\end{align}$$
+]
+
+---
+
+## AIC from `glance` function
+
+Let's look at the AIC for the model that includes `age`, `education`, and `currentSmoker`
+
+```{r echo = T}
+glance(model_full)$AIC
+```
+
+--
+
+**Calculating AIC**
+
+```{r echo = T}
+- 2 * glance(model_full)$logLik + 2 * (5 + 1)
+```
+
+---
+
+## Comparing the models using AIC
+
+Let's compare the full and reduced models using AIC. 
+
+```{r echo = T}
+glance(model_reduced)$AIC
+glance(model_full)$AIC
+```
+
+.question[
+Based on AIC, which model would you choose?
+]
+
+---
+
+## Comparing the models using BIC
+
+Let's compare the full and reduced models using BIC
+
+```{r echo = T}
+glance(model_reduced)$BIC
+glance(model_full)$BIC
+```
+
+.question[
+Based on BIC, which model would you choose?
+]
+

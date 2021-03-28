@@ -1,0 +1,225 @@
+---
+title: "Logistic regression"
+subtitle: "Conditions"
+author: "Prof. Maria Tackett"
+output:
+  xaringan::moon_reader:
+    mathjax: "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML"
+    css: "sta210-slides.css"
+    logo: img/sta199-sticker-icon.png
+    lib_dir: libs/font-awesome
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      slideNumberFormat: "%current%" 
+      ratio: "16:9"
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE, echo=FALSE}
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(
+	fig.align = "center",
+	fig.height =5,
+	fig.width = 8,
+	message = FALSE,
+	warning = FALSE,
+	echo = FALSE
+)
+```
+
+class: middle, center
+
+## [Click for PDF of slides](21-logistic-conditions.pdf)
+
+```{r,echo=F}
+library(tidyverse)
+library(knitr)
+library(broom)
+library(pROC) 
+library(kableExtra)
+```
+
+---
+
+## Topics
+
+- Checking conditions for logistic regression
+
+---
+
+## Risk of coronary heart disease 
+
+.midi[This dataset is from an ongoing cardiovascular study on residents of the town of Framingham, Massachusetts. We want to examine the relationship between various health characteristics and the risk of having heart disease in the next 10 years.]
+
+.midi[.vocab[`high_risk`]: 1 = High risk, 0 = Not high risk]
+
+.midi[.vocab[`age`]: Age at exam time (in years)]
+
+.midi[.vocab[`totChol`]: Total cholesterol (in mg/dL)]
+
+.midi[.vocab[`currentSmoker`]: 0 = nonsmoker; 1 = smoker]
+
+```{r echo = F}
+heart <- read_csv("https://raw.githubusercontent.com/sta210-sp20/datasets/master/framingham.csv") %>%
+  select(age, totChol, TenYearCHD, currentSmoker) %>%
+  drop_na() %>%
+  mutate(high_risk = as.factor(TenYearCHD), 
+         currentSmoker = as.factor(currentSmoker))
+```
+
+---
+
+## Modeling risk of coronary heart disease
+
+```{r}
+risk_m <- glm(high_risk ~ age + totChol + currentSmoker, 
+              data = heart, family = "binomial")
+tidy(risk_m, conf.int = TRUE) %>% 
+  kable(format = "markdown", digits = 3)
+```
+
+---
+
+## Conditions for logistic regression
+
+1. .vocab[Linearity]: The log-odds have a linear relationship with the predictors. 
+
+2. .vocab[Randomness]: The data were obtained from a random process
+
+3. .vocab[Independence]: The observations are independent from one another.
+
+
+---
+
+## Empirical logit
+
+The .vocab[empirical logit] is the log of the observed odds
+
+.eq[
+**Empirical logit**
+
+$$\text{logit}(\hat{p}) = \log\Big(\frac{\hat{p}}{1 - \hat{p}}\Big) = \log\Big(\frac{\# \text{Yes}}{\# \text{No}}\Big)$$ 
+]
+
+---
+
+## Calculating empirical logit (categorical predictor)
+
+If the predictor is categorical, we can calculate the empirical logit for each level of the predictor.
+
+.midi[
+```{r echo = T, eval = F}
+heart %>%
+  count(currentSmoker, high_risk) %>%
+  group_by(currentSmoker) %>%
+  mutate(prop = n/sum(n)) %>%
+  filter(high_risk == "1") %>%
+  mutate(emp_logit = log(prop/(1-prop)))
+```
+]
+
+---
+
+## Calculating empirical logit (categorical predictor)
+
+If the predictor is categorical, we can calculate the empirical logit for each level of the predictor
+
+```{r}
+heart %>%
+  count(currentSmoker, high_risk) %>%
+  group_by(currentSmoker) %>%
+  mutate(prop = n/sum(n)) %>%
+  filter(high_risk == "1") %>%
+  mutate(emp_logit = log(prop/(1-prop)))
+```
+
+---
+
+## Calculating empirical logit (quantitative predictor)
+
+1. Divide the range of the predictor into intervals with approximately equal number of cases. 
+  - If you have enough observations, use 5 - 10 intervals.
+  
+2. Calculate the mean value of the predictor in each interval. 
+
+3. Compute the empirical logit for each interval.
+
+--
+
+Then, we can create a plot of the empirical logit versus the mean value of the predictor in each interval.
+
+---
+
+## Empirical logit plot in R (quantitative predictor)
+
+.midi[
+```{r echo = T}
+library(Stat2Data)
+```
+
+```{r echo = T}
+emplogitplot1(high_risk ~ age, data = heart, 
+              ngroups = 10)
+```
+]
+
+---
+
+## Empirical logit plot in R (interactions)
+
+.midi[
+```{r echo = T}
+library(Stat2Data)
+```
+
+```{r echo = T}
+emplogitplot2(high_risk ~ age + currentSmoker, data = heart, 
+              ngroups = 10, putlegend = "bottomright")
+```
+]
+
+---
+
+## Checking linearity 
+
+```{r}
+par(mfrow = c(1,2))
+
+emplogitplot1(high_risk ~ age, data = heart, ngroups = 10)
+
+emplogitplot1(high_risk ~ totChol, data = heart, ngroups = 10)
+```
+
+`r emo::ji("white_check_mark")` The linearity condition is satisfied. There is a linear relationship between the empirical logit and the predictor variables. 
+
+---
+
+## Checking randomness
+
+We can check the randomness condition based on the context of the data and how the observations were collected. 
+
+- Was the sample randomly selected?
+
+- If the sample was not randomly selected, ask whether there is reason to believe the observations in the sample differ systematically from the population of interest. 
+
+--
+
+`r emo::ji("white_check_mark")` The randomness condition is satisfied. We do not have reason to believe that the participants in this study differ systematically from adults in the U.S.  in regards to health characteristics and risk of heart disease.
+
+
+---
+
+## Checking independence
+
+
+We can check the independence condition based on the context of the data and how the observations were collected.
+
+Independence is most often violated if the data were collected over time or there is a strong spatial relationship between the observations. 
+
+--
+
+`r emo::ji("white_check_mark")` The independence condition is satisfied. It is reasonable to conclude that the participants' health characteristics are independent of one another.
+

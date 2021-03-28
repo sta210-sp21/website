@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Logistic regression</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Prof. Maria Tackett" />
+    <script src="libs/font-awesome/header-attrs/header-attrs.js"></script>
+    <script src="libs/font-awesome/kePrint/kePrint.js"></script>
+    <link href="libs/font-awesome/lightable/lightable.css" rel="stylesheet" />
+    <link rel="stylesheet" href="sta210-slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Logistic regression
+## Inference
+### Prof. Maria Tackett
+
+---
+
+
+
+
+class: middle, center
+
+## [Click for PDF of slides](20-logistic-inference.pdf)
+
+
+
+---
+
+## Risk of coronary heart disease 
+
+.midi[This dataset is from an ongoing cardiovascular study on residents of the town of Framingham, Massachusetts. We want to examine the relationship between various health characteristics and the risk of having heart disease in the next 10 years.]
+
+.midi[.vocab[`high_risk`]: 1 = High risk, 0 = Not high risk]
+
+.midi[.vocab[`age`]: Age at exam time (in years)]
+
+.midi[.vocab[`education`]: 1 = Some High School; 2 = High School or GED; 3 = Some College or Vocational School; 4 = College]
+
+.midi[.vocab[`currentSmoker`]: 0 = nonsmoker; 1 = smoker]
+
+
+
+---
+
+## Modeling risk of coronary heart disease
+
+
+|term        | estimate| std.error| statistic| p.value| conf.low| conf.high|
+|:-----------|--------:|---------:|---------:|-------:|--------:|---------:|
+|(Intercept) |   -5.385|     0.308|   -17.507|   0.000|   -5.995|    -4.788|
+|age         |    0.073|     0.005|    13.385|   0.000|    0.063|     0.084|
+|education2  |   -0.242|     0.112|    -2.162|   0.031|   -0.463|    -0.024|
+|education3  |   -0.235|     0.134|    -1.761|   0.078|   -0.501|     0.023|
+|education4  |   -0.020|     0.148|    -0.136|   0.892|   -0.317|     0.266|
+
+`$$\small{\log\Big(\frac{\hat{\pi}}{1-\hat{\pi}}\Big) = -5.385 + 0.073 ~ \text{age} - 0.242 ~ \text{ed2} - 0.235 ~ \text{ed3} - 0.020 ~ \text{ed4}}$$`
+---
+
+## Hypothesis test for `\(\beta_j\)`
+
+.vocab[Hypotheses]: `\(H_0: \beta_j = 0 \hspace{2mm} \text{ vs } \hspace{2mm} H_a: \beta_j \neq 0\)`
+
+--
+
+.vocab[Test Statistic]: `$$z = \frac{\hat{\beta}_j - 0}{SE_{\hat{\beta}_j}}$$`
+
+--
+
+.vocab[P-value]: `\(P(|Z| &gt; |z|)\)`, 
+
+where `\(Z \sim N(0, 1)\)`, the Standard Normal distribution
+
+
+---
+
+## Confidence interval for `\(\beta_j\)`
+
+We can calculate the .vocab[C% confidence interval] for `\(\beta_j\)` as the following: 
+
+.eq[
+`$$\Large{\hat{\beta}_j \pm z^* SE_{\hat{\beta}_j}}$$`
+where `\(z^*\)` is calculated from the `\(N(0,1)\)` distribution
+
+]
+
+
+--
+
+This is an interval for the change in the log-odds for every one unit increase in `\(x_j\)`. 
+
+---
+
+## Interpretation in terms of the odds
+
+The change in **odds** for every one unit increase in `\(x_j\)`. 
+
+.eq[
+`$$\Large{\exp\{\hat{\beta}_j \pm z^* SE_{\hat{\beta}_j}\}}$$`
+]
+
+--
+
+.vocab[Interpretation]: We are `\(C\%\)` confident that for every one unit increase in `\(x_j\)`, the odds multiply by a factor of `\(\exp\{\hat{\beta}_j - z^* SE_{\hat{\beta}_j}\}\)` to `\(\exp\{\hat{\beta}_j + z^* SE_{\hat{\beta}_j}\}\)`, holding all else constant.
+
+
+---
+
+## Model
+
+
+|term        | estimate| std.error| statistic| p.value| conf.low| conf.high|
+|:-----------|--------:|---------:|---------:|-------:|--------:|---------:|
+|(Intercept) |   -5.385|     0.308|   -17.507|   0.000|   -5.995|    -4.788|
+|age         |    0.073|     0.005|    13.385|   0.000|    0.063|     0.084|
+|education2  |   -0.242|     0.112|    -2.162|   0.031|   -0.463|    -0.024|
+|education3  |   -0.235|     0.134|    -1.761|   0.078|   -0.501|     0.023|
+|education4  |   -0.020|     0.148|    -0.136|   0.892|   -0.317|     0.266|
+
+---
+
+## Let's look at the coefficient for `age`
+
+.midi[
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; estimate &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; std.error &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p.value &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; conf.low &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; conf.high &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; (Intercept) &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -5.385 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.308 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -17.507 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.000 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -5.995 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -4.788 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;background-color: #dce5b2 !important;"&gt; age &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 0.073 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 0.005 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 13.385 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 0.000 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 0.063 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 0.084 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; education2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.242 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.112 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -2.162 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.031 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.463 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.024 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; education3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.235 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.134 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -1.761 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.078 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.501 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.023 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; education4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.020 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.148 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.136 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.892 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.317 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.266 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+]
+--
+
+.eq[
+.vocab[Hypotheses]
+
+`$$H_0: \beta_{1} = 0 \hspace{2mm} \text{ vs } \hspace{2mm} H_a: \beta_{1} \neq 0$$`
+]
+
+
+---
+
+## Let's look at the coefficient for `age`
+
+.midi[
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; estimate &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; std.error &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p.value &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; conf.low &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; conf.high &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; (Intercept) &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -5.385 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.308 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -17.507 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.000 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -5.995 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -4.788 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;background-color: #dce5b2 !important;"&gt; age &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 0.073 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 0.005 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 13.385 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 0.000 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 0.063 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 0.084 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; education2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.242 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.112 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -2.162 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.031 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.463 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.024 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; education3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.235 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.134 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -1.761 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.078 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.501 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.023 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; education4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.020 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.148 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.136 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.892 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.317 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.266 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+]
+
+.eq[
+.vocab[Test statistic]
+
+`$$z = \frac{0.0733 - 0}{0.00547} = 13.4$$`
+]
+
+---
+
+## Let's look at the coefficient for `age`
+
+.midi[
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; estimate &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; std.error &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p.value &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; conf.low &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; conf.high &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; (Intercept) &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -5.385 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.308 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -17.507 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.000 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -5.995 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -4.788 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;background-color: #dce5b2 !important;"&gt; age &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 0.073 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 0.005 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 13.385 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 0.000 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 0.063 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 0.084 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; education2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.242 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.112 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -2.162 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.031 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.463 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.024 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; education3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.235 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.134 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -1.761 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.078 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.501 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.023 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; education4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.020 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.148 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.136 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.892 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.317 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.266 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+]
+
+.eq[
+.vocab[P-value]
+
+`$$P(|Z| &gt; |13.4|) \approx 0$$`
+]
+
+---
+
+## Let's look at the coefficient for `age`
+
+.midi[
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; estimate &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; std.error &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p.value &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; conf.low &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; conf.high &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; (Intercept) &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -5.385 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.308 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -17.507 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.000 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -5.995 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -4.788 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;background-color: #dce5b2 !important;"&gt; age &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 0.073 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 0.005 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 13.385 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 0.000 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 0.063 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 0.084 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; education2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.242 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.112 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -2.162 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.031 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.463 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.024 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; education3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.235 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.134 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -1.761 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.078 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.501 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.023 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; education4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.020 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.148 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.136 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.892 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.317 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.266 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+]
+
+
+
+```r
+2 * pnorm(13.4,lower.tail = FALSE)
+```
+
+```
+## [1] 6.046315e-41
+```
+
+---
+
+## Let's look at the coefficient for `age`
+
+.midi[
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; estimate &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; std.error &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p.value &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; conf.low &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; conf.high &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; (Intercept) &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -5.385 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.308 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -17.507 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.000 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -5.995 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -4.788 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;background-color: #dce5b2 !important;"&gt; age &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 0.073 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 0.005 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 13.385 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 0.000 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 0.063 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 0.084 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; education2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.242 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.112 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -2.162 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.031 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.463 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.024 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; education3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.235 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.134 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -1.761 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.078 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.501 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.023 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; education4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.020 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.148 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.136 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.892 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.317 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.266 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+]
+
+.vocab[Conclusion]: The p-value is very small, so we reject `\(H_0\)`. The data provide sufficient evidence that age is a statistically significant predictor of whether someone is high risk of having heart disease, *after accounting for education*.
+
+---
+
+class: middle, center
+
+## Comparing models 
+
+---
+
+## Log likelihood
+
+
+.eq[
+`$$\log L = \sum\limits_{i=1}^n[y_i \log(\hat{\pi}_i) + (1 - y_i)\log(1 - \hat{\pi}_i)]$$`
+]
+
+--
+
+- Measure of how well the model fits the data 
+
+--
+
+- Higher values of `\(\log L\)` are better
+
+--
+
+- .vocab[Deviance] = `\(-2 \log L\)`
+  - `\(-2 \log L\)` follows a `\(\chi^2\)` distribution with `\(n - p - 1\)` degrees of freedom
+  
+---
+
+## Comparing nested models
+
+- Suppose there are two models: 
+    - Reduced Model includes predictors `\(x_1, \ldots, x_q\)`
+    - Full Model includes predictors `\(x_1, \ldots, x_q, x_{q+1}, \ldots, x_p\)`
+
+--
+
+- We want to test the hypotheses
+`$$\begin{aligned}&amp;H_0: \beta_{q+1} = \dots = \beta_p = 0 \\
+&amp; H_a: \text{ at least 1 }\beta_j \text{ is not } 0\end{aligned}$$`
+
+--
+
+- To do so, we will use the .vocab[Drop-in-deviance test] (also known as the Nested Likelihood Ratio test)
+
+---
+
+## Drop-in-deviance test
+
+.vocab[Hypotheses]:
+`$$\begin{aligned}&amp;H_0: \beta_{q+1} = \dots = \beta_p = 0 \\
+&amp; H_a: \text{ at least 1 }\beta_j \text{ is not } 0\end{aligned}$$`
+
+--
+
+.vocab[Test Statistic]: `$$G = (-2 \log L_{reduced}) - (-2 \log L_{full})$$`
+
+--
+
+.vocab[P-value]: `\(P(\chi^2 &gt; G)\)`, 
+
+calculated using a `\(\chi^2\)` distribution with degrees of freedom equal to the difference in the number of parameters in the full and reduced models
+
+---
+
+## `\(\chi^2\)` distribution 
+
+&lt;img src="20-logistic-inference_files/figure-html/unnamed-chunk-11-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+.small[
+
+]
+
+
+|term        | estimate| std.error| statistic| p.value| conf.low| conf.high|
+|:-----------|--------:|---------:|---------:|-------:|--------:|---------:|
+|(Intercept) |   -5.385|     0.308|   -17.507|   0.000|   -5.995|    -4.788|
+|age         |    0.073|     0.005|    13.385|   0.000|    0.063|     0.084|
+|education2  |   -0.242|     0.112|    -2.162|   0.031|   -0.463|    -0.024|
+|education3  |   -0.235|     0.134|    -1.761|   0.078|   -0.501|     0.023|
+|education4  |   -0.020|     0.148|    -0.136|   0.892|   -0.317|     0.266|
+
+&lt;br&gt; 
+
+--
+
+.question[
+Should we add `currentSmoker` to this model?
+]
+
+---
+
+## Should we add `currentSmoker` to the model?
+
+
+```r
+model_reduced &lt;- glm(high_risk ~ age + education, 
+              data = heart, family = "binomial")
+```
+
+
+```r
+model_full &lt;- glm(high_risk ~ age + education + 
+*                   currentSmoker,
+              data = heart, family = "binomial")
+```
+
+---
+
+## Should we add `currentSmoker` to the model?
+
+
+```r
+# Calculate deviance for each model
+(dev_reduced &lt;- glance(model_reduced)$deviance)
+```
+
+```
+## [1] 3300.135
+```
+
+```r
+(dev_full &lt;- glance(model_full)$deviance)
+```
+
+```
+## [1] 3279.359
+```
+
+--
+
+
+```r
+# Drop-in-deviance test statistic
+(test_stat &lt;- dev_reduced - dev_full)
+```
+
+```
+## [1] 20.77589
+```
+
+---
+
+## Should we add `currentSmoker` to the model?
+
+
+```r
+# p-value
+#1 = number of new model terms in model 2
+pchisq(test_stat, 1, lower.tail = FALSE) 
+```
+
+```
+## [1] 5.162887e-06
+```
+
+
+--
+
+.vocab[Conclusion]: The p-value is very small, so we reject `\(H_0\)`. The data provide sufficient evidence that the coefficient of `currentSmoker` is not equal to 0. Therefore, we should add it to the model.
+
+---
+
+## Drop-in-Deviance test in R
+
+We can use the **`anova`** function to conduct this test 
+
+- Add **`test = "Chisq"`** to conduct the drop-in-deviance test
+
+
+```r
+anova(model_reduced, model_full, test = "Chisq") %&gt;%
+  tidy()
+```
+
+```
+## # A tibble: 2 x 5
+##   Resid..Df Resid..Dev    df Deviance     p.value
+##       &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt;
+## 1      4130      3300.    NA     NA   NA         
+## 2      4129      3279.     1     20.8  0.00000516
+```
+
+---
+
+## Model selection 
+
+Use AIC or BIC for model selection 
+
+.eq[
+`$$\begin{align}&amp;AIC = - 2 * \log L - \color{red}{n\log(n)}+ 2(p +1)\\[5pt]
+&amp;BIC =- 2 * \log L - \color{red}{n\log(n)} + log(n)\times(p+1)\end{align}$$`
+]
+
+---
+
+## AIC from `glance` function
+
+Let's look at the AIC for the model that includes `age`, `education`, and `currentSmoker`
+
+
+```r
+glance(model_full)$AIC
+```
+
+```
+## [1] 3291.359
+```
+
+--
+
+**Calculating AIC**
+
+
+```r
+- 2 * glance(model_full)$logLik + 2 * (5 + 1)
+```
+
+```
+## [1] 3291.359
+```
+
+---
+
+## Comparing the models using AIC
+
+Let's compare the full and reduced models using AIC. 
+
+
+```r
+glance(model_reduced)$AIC
+```
+
+```
+## [1] 3310.135
+```
+
+```r
+glance(model_full)$AIC
+```
+
+```
+## [1] 3291.359
+```
+
+.question[
+Based on AIC, which model would you choose?
+]
+
+---
+
+## Comparing the models using BIC
+
+Let's compare the full and reduced models using BIC
+
+
+```r
+glance(model_reduced)$BIC
+```
+
+```
+## [1] 3341.772
+```
+
+```r
+glance(model_full)$BIC
+```
+
+```
+## [1] 3329.323
+```
+
+.question[
+Based on BIC, which model would you choose?
+]
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"slideNumberFormat": "%current%",
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
