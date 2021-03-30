@@ -821,7 +821,7 @@ font-size: 18px;
       <pubDate>12 Mar 17 10:00 +0000</pubDate>
       
       <guid>/schedule/week-11/</guid>
-      <description> table { font-size: 18px; }  Lectures     Slides Videos Application Exercises (AE)     Tuesday Logistic regression: Inference Logistic regression: Inference AE 20   Thursday Logistic regression: Prediction Logistic regression: Prediction AE 21    Logistic regression: Conditions Logistic regression: Conditions     Readings         Beyond Multiple Linear Regression: Chapter 6 Logistic Regression    Assignments          Project proposal due Mon, Mar 29 at 11:59p   HW 05 due Wed, Apr 7 at 11:59p   Statistics Experience due Sun, Apr 25 at 11:59p    </description>
+      <description> table { font-size: 18px; }  Lectures     Slides Videos Application Exercises (AE)     Tuesday Logistic regression: Inference Logistic regression: Inference AE 20: Response to Treatment   Thursday Logistic regression: Prediction Logistic regression: Prediction AE 21    Logistic regression: Conditions Logistic regression: Conditions     Readings         Beyond Multiple Linear Regression: Chapter 6 Logistic Regression    Assignments          Project proposal due Mon, Mar 29 at 11:59p   HW 05 due Wed, Apr 7 at 11:59p   Statistics Experience due Sun, Apr 25 at 11:59p    </description>
       <content>&lt;style&gt;
 table {
 font-size: 18px;
@@ -843,7 +843,7 @@ font-size: 18px;
 &lt;td&gt;Tuesday&lt;/td&gt;
 &lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/slides/20-logistic-inference.html&#34;&gt;Logistic regression: Inference&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;&lt;a href=&#34;https://warpwire.duke.edu/w/SYQFAA/&#34;&gt;Logistic regression: Inference&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;AE 20&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/appex/ae-20-logistic-inference.html&#34;&gt;AE 20: Response to Treatment&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;Thursday&lt;/td&gt;

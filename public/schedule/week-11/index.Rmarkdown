@@ -14,7 +14,7 @@ font-size: 18px;
 
 |           | Slides                   | Videos | Application Exercises (AE) |
 |-----------|--------------------------|--------|--------|
-| Tuesday  | [Logistic regression: Inference](https://sta210-sp21.netlify.app/slides/20-logistic-inference.html) | [Logistic regression: Inference](https://warpwire.duke.edu/w/SYQFAA/) | AE 20|
+| Tuesday  | [Logistic regression: Inference](https://sta210-sp21.netlify.app/slides/20-logistic-inference.html) | [Logistic regression: Inference](https://warpwire.duke.edu/w/SYQFAA/) | [AE 20: Response to Treatment](https://sta210-sp21.netlify.app/appex/ae-20-logistic-inference.html) |
 | Thursday   | [Logistic regression: Prediction](https://sta210-sp21.netlify.app/slides/21-logistic-prediction.html) | [Logistic regression: Prediction](https://warpwire.duke.edu/w/TYQFAA/)|  AE 21|
 |   | [Logistic regression: Conditions](https://sta210-sp21.netlify.app/slides/21-logistic-conditions.html) |[Logistic regression: Conditions](https://warpwire.duke.edu/w/UYQFAA/)|  |
 
