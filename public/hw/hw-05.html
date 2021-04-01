@@ -275,14 +275,14 @@ library(yardstick)
 <p>Respondents were asked a variety of questions about their political beliefs, thoughts on multiple issues, and voting behavior. We will focus on using the demographic variables and someone’s party identification to understand whether a person is a probable voter.</p>
 <p>The variables we’ll focus on are (definitions from the codebook in data set GitHub repo):</p>
 <ul>
-<li><code>ppage</code>: Age of respondent</li>
-<li><code>educ</code>: Highest educational attainment category.<br />
-</li>
-<li><code>race</code>: Race of respondent, census categories. Note: all categories except Hispanic are non-Hispanic.</li>
-<li><code>gender</code>: Gender of respondent<br />
-</li>
-<li><code>income_cat</code>: Household income category of respondent</li>
-<li><code>Q30</code>: Response to the question “Generally speaking, do you think of yourself as a…”
+<li><p><code>ppage</code>: Age of respondent</p></li>
+<li><p><code>educ</code>: Highest educational attainment category.<br />
+</p></li>
+<li><p><code>race</code>: Race of respondent, census categories. Note: all categories except Hispanic are non-Hispanic.</p></li>
+<li><p><code>gender</code>: Gender of respondent<br />
+</p></li>
+<li><p><code>income_cat</code>: Household income category of respondent</p></li>
+<li><p><code>Q30</code>: Response to the question “Generally speaking, do you think of yourself as a…”</p>
 <ul>
 <li>1: Republican</li>
 <li>2: Democrat</li>
@@ -291,7 +291,7 @@ library(yardstick)
 <li>5: No preference</li>
 <li>-1: No response</li>
 </ul></li>
-<li><code>voter_category</code>: past voting behavior:
+<li><p><code>voter_category</code>: past voting behavior:</p>
 <ul>
 <li><strong>always</strong>: respondent voted in all or all-but-one of the elections they were eligible in</li>
 <li><strong>sporadic</strong>: respondent voted in at least two, but fewer than all-but-one of the elections they were eligible in</li>
@@ -300,7 +300,7 @@ library(yardstick)
 </ul>
 <p>You can read in the data directly from the GitHub repo:</p>
 <pre class="r code-size"><code>voter_data &lt;- read_csv(&quot;https://raw.githubusercontent.com/fivethirtyeight/data/master/non-voters/nonvoters_data.csv&quot;)</code></pre>
-<p><strong>Note that the authors use weighting to make the final sample more representative on the US population for their article. We will <u>not</u> use the weighting in this assignment, so we should treat the sample as a convenience sample rather than a random sample of the population.</strong></p>
+<p><strong>Note that the authors use weighting to make the final sample more representative on the US population for their article. We will</strong> <u>not</u> use the weighting in this assignment, so we should treat the sample as a convenience sample rather than a random sample of the population.</p>
 </div>
 <div id="conceptual-questions" class="section level1">
 <h1>Conceptual questions</h1>
@@ -322,7 +322,10 @@ library(yardstick)
 <li>Interpret the effect of age in the context of the data.</li>
 <li>Interpret the effect of party ID in the context of the data. Include discussion about which level(s) differ from the baseline.</li>
 </ul></li>
-<li><p>In the article, the authors write &gt; “Nonvoters were more likely to have lower incomes; to be young; to have lower levels of education; and to say they don’t belong to either political party, which are all traits that square with what we know about people less likely to engage with the political system.”</p></li>
+<li><p>In the article, the authors write</p>
+<blockquote>
+<p>Nonvoters were more likely to have lower incomes; to be young; to have lower levels of education; and to say they don’t belong to either political party, which are all traits that square with what we know about people less likely to engage with the political system.</p>
+</blockquote></li>
 </ol>
 <p>Is your model consistent with this statement? Briefly explain why or why not.</p>
 <ol style="list-style-type: decimal">
