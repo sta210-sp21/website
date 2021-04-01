@@ -1,5 +1,5 @@
 ---
-title: "HW 05"
+title: "HW 05: Logistic regression"
 subtitle: ""
 author: ""
 date: ""
@@ -16,4 +16,36 @@ knitr::opts_chunk$set(echo = TRUE,
                       message=FALSE)
 ```
 
-Instructions will be posted when the homework is assigned. 
+1. Why is it important that they only use people who have been eligible to vote for at least four election cycles?
+
+1. We want to use logistic regression to understand the factors related to a person being a likely voter. The variable `voter_category` identifies how often a person votes. 
+   - The variable `Q30` contains the respondent's party ID. Make a new variable that simplifies `Q30` into four categories: "Democrat", "Republican", "Independent", "Other" ("Other" also includes respondents who did not answer the question, i.e. `Q30 == -1`). 
+   - We want to use logistic regression to identify if a person is a person may vote in the next election. Make a new variable to identify a person a possible voter if their voter category is "always" or "sporadic". 
+   
+1. We will just focus on the demographic variables in our analysis. Fit a model using mean-centered age, race, gender, income, and education to predict if a respondent is a possible voter.
+
+
+1. Should party ID be added to the model? Use a drop-in-deviance test to determine if party identification should be added to the model. Include the hypotheses in mathematical notation, the output from the test, and the conclusion in the context of the data. 
+
+**Use the model you select for the remainder of the assignment**. 
+
+1. Let's interpret the coefficients from the data in terms of the odds that a person is a possible voter.
+
+- Interpret the intercept in the context of the data. *Use actual values in the interpretation.*
+- Interpret the effect of age in the context of the data.
+- Interpret the effect of party ID in the context of the data. Include discussion about which level(s) differ from the baseline. 
+
+1. In the article, the authors write 
+> "Nonvoters were more likely to have lower incomes; to be young; to have lower levels of education; and to say they don’t belong to either political party, which are all traits that square with what we know about people less likely to engage with the political system." 
+
+Is this assessment consistent with conclusions you can draw fro your model? Briefly explain why or why not. 
+
+
+1. We'll use the model for prediction. 
+
+- Make the ROC curve for the model.
+- What is the AUC? Use this value to assess how well the model fits the data.
+
+1. Let's suppose you want to use the model to identify possible voters to help a "get out the vote" campaign to target it's efforts in the final weeks before an election. You decide to use a threshold of 0.58 to classify observations into possible voters vs. unlikely to vote. 
+- Show the confusion matrix at this threshold.
+- Calculate the true and false positive rates and explain what each value means in the context of the data.
