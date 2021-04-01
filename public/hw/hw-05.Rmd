@@ -1,6 +1,6 @@
 ---
-title: "HW 05: Logistic regression"
-subtitle: ""
+title: "HW 05: Who's going to vote? "
+subtitle: "due Wed, Apr 7 at 11:59p EDT"
 author: ""
 date: ""
 output: 
@@ -13,39 +13,112 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE,
                       warning=FALSE,
-                      message=FALSE)
+                      message=FALSE, 
+                      class.source = "code-size")
 ```
 
-1. Why is it important that they only use people who have been eligible to vote for at least four election cycles?
+# Getting Started
 
-1. We want to use logistic regression to understand the factors related to a person being a likely voter. The variable `voter_category` identifies how often a person votes. 
-   - The variable `Q30` contains the respondent's party ID. Make a new variable that simplifies `Q30` into four categories: "Democrat", "Republican", "Independent", "Other" ("Other" also includes respondents who did not answer the question, i.e. `Q30 == -1`). 
-   - We want to use logistic regression to identify if a person is a person may vote in the next election. Make a new variable to identify a person a possible voter if their voter category is "always" or "sporadic". 
-   
-1. We will just focus on the demographic variables in our analysis. Fit a model using mean-centered age, race, gender, income, and education to predict if a respondent is a possible voter.
+You can find the **hw-05** repo in the [sta210-sp21 organization](https://github.com/sta210-sp2) on GitHub. This repo contains all materials needed to start the assignment. 
 
+## Tips
 
-1. Should party ID be added to the model? Use a drop-in-deviance test to determine if party identification should be added to the model. Include the hypotheses in mathematical notation, the output from the test, and the conclusion in the context of the data. 
+Here are some tips as you complete the assignment:
+
+- Periodically knit your document and commit changes (the more often the better, for example, once per each new task). You should have at least 3 commit messages by the end of the assignment.
+- Push all your changes back to your GitHub repo. The Git pane in RStudio should be empty after you push. You can also check your assignment repo on github.com to make sure it has updated.
+- Once you have completed your work, you will submit your assignment in Gradescope. You are welcome to resubmit multiple times until the assignment deadline. We will grade the most recent version of the .pdf file in Gradescope.
+
+## Packages 
+
+We will use the following packages in this assignment: 
+
+```{r}
+library(tidyverse)
+library(broom)
+library(knitr)
+library(yardstick)
+#add other packages as needed
+```
+
+# Data 
+
+The data for this assignment comes from an online Ipsos survey that was conducted for the FiveThirtyEight article ["Why Many Americans Don't Vote"](https://projects.fivethirtyeight.com/non-voters-poll-2020-election/). You can read more about the survey design and respondents in the README of the [GitHub repo](https://github.com/fivethirtyeight/data/tree/master/non-voters) for the data.
+
+Respondents were asked a variety of questions about their political beliefs, thoughts on multiple issues, and voting behavior. We will focus on using the demographic variables and someone's party identification to understand whether a person is a probable voter.  
+
+The variables we'll focus on are (definitions from the codebook in data set GitHub repo): 
+
+- `ppage`: Age of respondent
+- `educ`: Highest educational attainment category.  
+- `race`: Race of respondent, census categories. Note: all categories except Hispanic are non-Hispanic.
+- `gender`: Gender of respondent       
+- `income_cat`: Household income category of respondent
+- `Q30`: Response to the question "Generally speaking, do you think of yourself as a..."
+  - 1: Republican 
+  - 2: Democrat
+  - 3: Independent
+  - 4: Another party, please specify 
+  - 5: No preference
+  - -1: No response
+- `voter_category`: past voting behavior: 
+  - **always**: respondent voted in all or all-but-one of the elections they were eligible in 
+  - **sporadic**: respondent voted in at least two, but fewer than all-but-one of the elections
+they were eligible in
+  - **rarely/never**: respondent voted in 0 or 1 of the elections they were eligible in
+
+You can read in the data directly from the GitHub repo: 
+
+```{r}
+voter_data <- read_csv("https://raw.githubusercontent.com/fivethirtyeight/data/master/non-voters/nonvoters_data.csv")
+```
+
+**Note that the authors use weighting to make the final sample more representative on the US population for their article. We will <u>not</u> use the weighting in this assignment, so we should treat the sample as a convenience sample rather than a random sample of the population.**
+
+# Conceptual questions
+
+1. Why do you think the authors chose to only include data from people who were eligible to vote for at least four election cycles? 
+
+1. Let's prepare the data for analysis and modeling.
+
+    - The variable `Q30` contains the respondent's political party identification. Make a new variable that simplifies `Q30` into four categories: "Democrat", "Republican", "Independent", "Other" ("Other" also includes respondents who did not answer the question). 
+    - We want to use logistic regression to understand the factors related to a person being a possible voter. The variable `voter_category` identifies the respondent's past voter behavior.  We'll consider a person a "possible" voter if they describe their past voting behavior as "always" or "sporadic". Create a new variable that takes value 1 if the `voter_category` is "always" or "sporadic" and 0 otherwise. 
+
+1. Fit a model using mean-centered age, race, gender, income, and education to predict the odds that a person is a possible voter. Display the model.
+
+1. *Should party identification be added to the model?* Use the appropriate test to determine if party identification should be added to the model. Include the hypotheses in mathematical notation, the output from the test, and the conclusion in the context of the data. 
 
 **Use the model you select for the remainder of the assignment**. 
 
 1. Let's interpret the coefficients from the data in terms of the odds that a person is a possible voter.
 
-- Interpret the intercept in the context of the data. *Use actual values in the interpretation.*
-- Interpret the effect of age in the context of the data.
-- Interpret the effect of party ID in the context of the data. Include discussion about which level(s) differ from the baseline. 
+    - Interpret the intercept in the context of the data. *Use actual values in the interpretation.*
+    - Interpret the effect of age in the context of the data.
+    - Interpret the effect of party ID in the context of the data. Include discussion about which level(s) differ from the baseline. 
 
 1. In the article, the authors write 
 > "Nonvoters were more likely to have lower incomes; to be young; to have lower levels of education; and to say they don’t belong to either political party, which are all traits that square with what we know about people less likely to engage with the political system." 
 
-Is this assessment consistent with conclusions you can draw fro your model? Briefly explain why or why not. 
+Is your model consistent with this statement? Briefly explain why or why not. 
 
 
-1. We'll use the model for prediction. 
+1. Let's assess how well the model fits the data. Make a ROC curve and calculate AUC. Based on these, is the model a good fit for the data? Briefly explain why or why not.
 
-- Make the ROC curve for the model.
-- What is the AUC? Use this value to assess how well the model fits the data.
+1. *Lastly, let's use the model to identify possible voters!*  Let's suppose you want to use the model to identify possible voters to help a Get Out the Vote (GOTV) campaign target its efforts in the final weeks before an election. You decide to use a threshold of 0.58 to classify observations into possible voters vs. non-voters.
 
-1. Let's suppose you want to use the model to identify possible voters to help a "get out the vote" campaign to target it's efforts in the final weeks before an election. You decide to use a threshold of 0.58 to classify observations into possible voters vs. unlikely to vote. 
-- Show the confusion matrix at this threshold.
-- Calculate the true and false positive rates and explain what each value means in the context of the data.
+    - Show the confusion matrix at this threshold.
+    - Calculate the true and false positive rates and explain what each value means in the context of the data.
+
+# Submission
+
+Knit, commit, and push your final changes to your GitHub repo. Then, submit the PDF on [Gradescope](http://www.gradescope.com). See [Lab 01](https://sta210-sp21.netlify.app/labs/lab-01-ikea.html#submission) for more detailed submission instructions. 
+
+
+# Grading
+
+| **Total** | **50** |
+|-------------------------------------------------------------|:--:|
+| Part 1: Conceptual questions | 45 |
+| Document a PDF rendered from the Rmd file with clear question headers| 3 	|
+| At least 3 informative commit messages 	| 2 	|
+
