@@ -1,0 +1,120 @@
+---
+title: "Lab 08: Flying etiquette" 
+subtitle: "due Sun, Apr 11, at 11:59p EDT"
+output: 
+  tufte::tufte_html:
+    css: "./sta210-labs.css"
+    tufte_variant: "envisioned"
+    highlight: pygments
+    fig_height: 10
+    toc: true
+    toc_depth: 1
+link-citations: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(eval = FALSE)
+```
+
+In this lab,we will use backward and forward selection to choose a model that can be use to  understand the variability in the positiveness of a song based on other characteristics. We will also check the diagnostics for the selected model. 
+
+# Learning goals
+
+By the end of the lab you will be able to...
+
+- Conduct forward and backward model selection in R
+- Compare models using AIC, BIC, and Adjusted $R^2$
+- Assess model diagnostics and identify potential outliers
+
+# Getting started
+
+## Clone assignment repo + start new project
+
+A repository has already been created for you and your teammates. Everyone in your team has access to the same repo.
+
+- Go to [course organization](https://www.github.com/sta210-sp21) on GitHub.
+
+- In addition to your private individual repositories, you should now see a repo named **lab-07-**. Go to that repository.
+  
+- Each person on the team should clone the repository and open a new project in RStudio.
+
+## Workflow: Using git and GitHub as a team
+
+Now that you have had some experience collaborating as a team on GitHub, it will be up to your team to decide who types the responses to each question. Every team member should contribute to the discussion about each lab exercise even if they are not the one typing the team's responses. 
+
+**Every team member should have at least one meaningful commit to the repo on GitHub.**
+
+## Password caching
+
+If you would like your git password cached for a week for this project, type the following in the **Terminal** in RStudio:
+
+```{bash eval=FALSE}
+git config --global credential.helper 'cache --timeout 604800'
+```
+
+# Packages + data
+
+## Packages
+
+We will use the following packages in today's lab. Feel free to add any other packages as needed.
+
+```{r load-packages, warning = F, message = F}
+library(tidyverse)
+library(broom)
+library(knitr)
+library(Stat2Data)
+```
+
+## Data
+
+Use the code below to load the data set from the FiveThirtyEight GitHub repo and rename some of the columns used in this analysis. 
+
+```{r warning = F, message = F}
+fliers <- read_csv("http://bit.ly/538-flying-survey") %>%
+  rename(frequency = `How often do you travel by plane?`, 
+         height = `How tall are you?`,
+         have_children = `Do you have any children under 18?`, 
+         recline_rude = `Is itrude to recline your seat on a plane?`, 
+         )
+```
+
+
+# Exercises 
+
+1. Let's create a binary indicator for whether a respondent said reclining a seat on the plane is rude. Create a new variable that takes value "1" if the respondent said that reclining a seat on a plane is "Yes, somewhat rude" or "Yes, very rude" and "0" otherwise (including those who didn't answer the question). Visualize the distribution of this variable. 
+
+
+1. Height is currently recorded in feet and inches; for example, `5'9"` means "five feet and nine inches". Create a new quantitative variable for the height in inches. For example, `5'9"` will be recorded as `69` for the new variable. Visualize the distribution of the newly created variable.
+
+*Hint: You can start by using the [`separate` function](https://tidyr.tidyverse.org/reference/separate.html) to split the feet and inches into separate columns splitting the feet and columns into separate columns."
+
+
+1. Create a visualization of the relationship between how often a person flies on airplanes and whether they think it's rude to recline the seat on an airplane. Interpret the visualization. 
+
+1. Create an empirical logit plot of the relationship between a person's height and whether they think it's rude to recline the seat on an airplane. Interpret the visualization. *Hint: See the [lecture notes](https://sta210-sp21.netlify.app/slides/21-logistic-conditions.html#12) on creating empirical logit plots.*
+
+1. Create a visualization to explore whether the relationship between height and thinking it's rude to recline the seat on an airplane differs based on whether a person has children. Interpret the visualization. 
+
+1. Fit the model to understand what factors are associated with the odds a person thinks it's rude to recline the seat on an airplane. Display the model using 3 digits. 
+
+1. Use the model from the previous exercise to interpret the relationship between the following variables and the odds a person thinks it's rude to recline the seat on a plane: 
+
+    - Height
+    - How frequently a person flies on airplanes
+    - Age
+    
+1. Check the conditions for logistic regression. For each condition, state whether it is satisfied and a brief explanation of your response, including any tables or visualizations used to make the conclusion. 
+  
+
+
+
+
+
+# Submission
+
+**One team member:** Upload the team's PDF to Gradescope. Be sure to include every team member's name in the Gradescope submission Associate the "Overall" graded section with the first page of your PDF, and mark where each answer is to the exercises. If any answer spans multiple pages, then mark all pages.
+
+There should only be <u>one</u> submission per team on Gradescope.
+
+**Note that your submission on Gradescope should be identical to the PDF that is rendered when we knit the Rmd file in your repo.** 
+

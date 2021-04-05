@@ -10,3 +10,35 @@ font-size: 18px;
 
 </style>
 
+<style>
+table {
+font-size: 18px;
+}
+
+</style>
+
+
+## Lectures
+
+|           | Slides                   | Videos | Application Exercises (AE) |
+|-----------|--------------------------|--------|--------|
+| Tuesday  | [Multinomial logistic regression: Introduction](https://sta210-sp21.netlify.app/slides/23-multinom-logistic.html) | [Multinomial logistic regression: Introduction](https://warpwire.duke.edu/w/_YwFAA/) | AE 23 |
+| Thursday   | [Multinomial logistic regression cont'd](https://sta210-sp21.netlify.app/slides/24-multinom-logistic-pt2.html) | [Multinomial logistic regression cont'd](https://warpwire.duke.edu/w/_4wFAA/)|  AE 24|
+
+
+
+## Assignments
+
+|                        |   |
+|------------------------|---|
+| [Lab 08: Flying etiquette](https://sta210-sp21.netlify.app/labs/lab-08.html) | **due Sun, Apr 11 at 11:59p** |
+|[Statistics Experience](https://sta210-sp21.netlify.app/hw/stats-experience.html) | **due Sun, Apr 25 at 11:59p**| 
+
+
+
+
+
+
+
+
+

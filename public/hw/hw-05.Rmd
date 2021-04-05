@@ -1,5 +1,5 @@
 ---
-title: "HW 05: Who's going to vote? "
+title: "HW 05: Identifying possible voters "
 subtitle: "due Wed, Apr 7 at 11:59p EDT"
 author: ""
 date: ""

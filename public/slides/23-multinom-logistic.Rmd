@@ -1,0 +1,389 @@
+---
+title: "Multinomial Logistic Regression"
+subtitle: "Introduction"
+author: "Prof. Maria Tackett"
+output:
+  xaringan::moon_reader:
+    mathjax: "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML"
+    css: "sta210-slides.css"
+    logo: img/sta199-sticker-icon.png
+    lib_dir: libs/font-awesome
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      slideNumberFormat: "%current%" 
+      ratio: "16:9"
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE, echo=FALSE}
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(
+	fig.align = "center",
+	fig.height =5,
+	fig.width = 8,
+	message = FALSE,
+	warning = FALSE,
+	echo = FALSE
+)
+```
+
+class: middle, center
+
+## [Click for PDF of slides](23-multinom-logistic.pdf)
+
+```{r,echo=F}
+library(tidyverse)
+library(knitr)
+library(broom)
+library(pROC) 
+library(kableExtra)
+library(patchwork)
+```
+
+---
+
+## Topics
+
+- Introduce multinomial logistic regression 
+
+- Interpret model coefficients
+
+- Inference for a coefficient $\beta_{jk}$
+
+---
+
+## Generalized Linear Models (GLM)
+
+- In practice, there are many different types of response variables including:
+
+  + **Binary**: Win or Lose
+  + **Nominal**: Democrat, Republican or Third Party candidate
+  + **Ordered**: Movie rating (1 - 5 stars)
+  + and others...
+
+- These are all examples of **generalized linear models**, a broader class of models that generalize the multiple linear regression model 
+
+- See [*Generalized Linear Models: A Unifying Theory*](https://bookdown.org/roback/bookdown-bysh/ch-glms.html) for more details about GLMs
+
+
+---
+
+## Binary Response (Logistic)
+
+- Given $P(y_i=1|x_i)= \hat{\pi}_i\hspace{5mm} \text{ and } \hspace{5mm}P(y_i=0|x_i) = 1-\hat{\pi}_i$
+
+$$\log\Big(\frac{\hat{\pi}_i}{1-\hat{\pi}_i}\Big) = \hat{\beta}_0 + \hat{\beta}_1 x_{i}$$
+<br> 
+
+- We can calculate $\hat{\pi}_i$ by solving the logit equation: 
+
+$$\hat{\pi}_i = \frac{\exp\{\hat{\beta}_0 + \hat{\beta}_1 x_{i}\}}{1 + \exp\{\hat{\beta}_0 + \hat{\beta}_1 x_{i}\}}$$
+
+---
+
+## Binary Response (Logistic)
+
+Suppose we consider $y=0$ the .vocab[baseline category] such that 
+
+$$P(y_i=1|x_i) = \hat{\pi}_{i1} \hspace{2mm}  \text{ and } \hspace{2mm} P(y_i=0|x_i) = \hat{\pi}_{i0}$$
+
+--
+
+Then the logistic regression model is 
+
+$$\log\bigg(\frac{\hat{\pi}_{i1}}{1- \hat{\pi}_{i1}}\bigg) = \log\bigg(\frac{\hat{\pi}_{i1}}{\hat{\pi}_{i0}}\bigg) = \hat{\beta}_0 + \hat{\beta}_1 x_i$$
+
+--
+
+<font class="vocab">Slope, $\hat{\beta}_1$</font>: When $x$ increases by one unit, the odds of $y=1$ versus the baseline $y=0$ are expected to multiply by a factor of $\exp\{\hat{\beta}_1\}$
+
+<font class="vocab">Intercept, $\hat{\beta}_0$</font>: When $x=0$, the predicted odds of $y=1$ versus the baseline $y=0$ are $\exp\{\hat{\beta}_0\}$
+
+---
+
+## Multinomial response variable
+
+- Suppose the response variable $y$ is categorical and can take values $1, 2, \ldots, K$ such that $(K > 2)$
+
+- <font class="vocab">Multinomial Distribution: </font>
+
+$$P(y=1) = \pi_1, P(y=2) = \pi_2, \ldots, P(y=K) = \pi_K$$
+
+such that $\sum\limits_{k=1}^{K} \pi_k = 1$
+
+---
+
+## Multinomial Logistic Regression
+
+- If we have an explanatory variable $x$, then we want to fit a model such that $P(y = k) = \pi_k$ is a function of $x$
+
+--
+
+- Choose a baseline category. Let's choose $y=1$.  Then, 
+
+.eq[
+$$\log\bigg(\frac{\pi_{ik}}{\pi_{i1}}\bigg) = \beta_{0k} + \beta_{1k} x_i$$
+]
+
+--
+
+- In the multinomial logistic model, we have a separate equation for each category of the response relative to the baseline category
+    - If the response has $K$ possible categories, there will be $K-1$ equations as part of the multinomial logistic model
+
+---
+
+## Multinomial Logistic Regression 
+
+- Suppose we have a response variable $y$ that can take three possible outcomes that are coded as "A", "B", "C"
+
+- Let "A" be the baseline category. Then 
+
+$$\log\bigg(\frac{\pi_{iB}}{\pi_{iA}}\bigg) = \beta_{0B} + \beta_{1B}x_i \\[10pt]
+\log\bigg(\frac{\pi_{iC}}{\pi_{iA}}\bigg) = \beta_{0C} + \beta_{1C} x_i$$
+
+---
+
+## NHANES Data
+
+- [National Health and Nutrition Examination Survey](https://www.cdc.gov/nchs/nhanes/index.htm) is conducted by the National Center for Health Statistics (NCHS) 
+
+- The goal is to *"assess the health and nutritional status of adults and children in the United States"*
+
+- This survey includes an interview and a physical examination
+
+---
+
+## NHANES Data
+
+- We will use the data from the <font class="vocab">`NHANES`</font> R package
+
+- Contains 75 variables for the 2009 - 2010 and 2011 - 2012 sample years
+
+- The data in this package is modified for educational purposes and should **not** be used for research
+
+- Original data can be obtained from the [NCHS website](https://www.cdc.gov/nchs/data_access/index.htm) for research purposes
+
+- Type <font class="vocab">`?NHANES`</font> in console to see list of variables and definitions
+
+---
+
+## Health Rating vs. Age & Physical Activity
+
+- **Question**: Can we use a person's age and whether they do regular physical activity to predict their self-reported health rating?
+
+- We will analyze the following variables: 
+
+  + <font class="vocab">`HealthGen`: </font>Self-reported rating of participant's health in general.  Excellent, Vgood, Good, Fair, or Poor.
+  
+    + <font class="vocab">`Age`: </font>Age at time of screening (in years). Participants 80 or older were recorded as 80.
+    
+  + <font class="vocab">`PhysActive`: </font>Participant does moderate to vigorous-intensity sports, fitness or recreational activities
+
+ 
+---
+
+## The data
+
+```{r}
+library(NHANES)
+
+nhanes_adult <- NHANES %>%
+  filter(Age >= 18) %>%
+  select(HealthGen, Age, PhysActive) %>%
+  drop_na() %>%
+  mutate(obs_num = 1:n())
+```
+
+```{r}
+glimpse(nhanes_adult)
+```
+
+---
+
+## Exploratory data analysis
+
+```{r echo = F, out.width = "80%"}
+
+p1 <- ggplot(data = nhanes_adult, aes(x = Age)) + 
+  geom_histogram() +
+  labs(title = "Distribution of Age")
+
+p2 <- ggplot(data = nhanes_adult, aes(x = PhysActive)) + 
+  geom_bar() +
+  labs(title = "Moderate or vigorous sport or exercise")
+
+p3 <- ggplot(data = nhanes_adult, aes(x = HealthGen)) + 
+  geom_bar() +
+  labs(title = "Self-reported rating of overall health")
+
+p3 + (p1 / p2)
+```
+
+---
+
+## Exploratory data analysis
+
+```{r echo = F, out.width = "80%"}
+p1 <- ggplot(data = nhanes_adult, aes(x = HealthGen, y = Age)) +
+  geom_boxplot(fill = "steelblue") + 
+  labs(title = "Age vs. Health Rating") +
+  coord_flip()
+
+p2 <- ggplot(data = nhanes_adult, aes(x = PhysActive, fill = HealthGen)) +
+  geom_bar(position = "fill") +
+  labs(y = "Proportion", 
+       title = "Physical Activity vs. Health Rating") 
+
+p1 + p2
+```
+
+---
+
+## Model in R
+
+- Use the <font class="vocab">`multinom()`</font> function in the `nnet` package 
+
+```{r, echo = T, results = "hide"}
+library(nnet)
+health_m <- multinom(HealthGen ~ Age + PhysActive, 
+                     data = nhanes_adult)
+```
+
+- Put `results = "hide"` in the code chunk header to suppress convergence output 
+
+---
+
+## Output results
+
+```{r echo = T, eval = F}
+tidy(health_m, conf.int = TRUE, exponentiate = FALSE) %>%
+  kable(digits = 3, format = "markdown")
+```
+
+---
+
+## Model output
+
+.small[
+```{r}
+tidy(health_m, conf.int = TRUE, exponentiate = FALSE) %>%
+  kable(digits = 3, format = "markdown")
+```
+]
+
+---
+
+## Fair vs. Excellent Health
+
+The baseline category for the model is .vocab[`Excellent`]. 
+
+--
+
+The model equation for the log-odds a person rates themselves as having "Fair" health vs. "Excellent" is
+
+$$\log\Big(\frac{\hat{\pi}_{Fair}}{\hat{\pi}_{Excellent}}\Big) = 0.915  + 0.003 ~ \text{age} - 1.645 ~ \text{PhysActive}$$
+
+---
+
+## Interpretations
+
+.eq[
+$$\log\Big(\frac{\hat{\pi}_{Fair}}{\hat{\pi}_{Excellent}}\Big) = 0.915  + 0.003 ~ \text{age} - 1.645 ~ \text{PhysActive}$$
+]
+
+For each additional year in age, the odds a person rates themselves as having fair health versus excellent health are expected to multiply by `r round(exp(0.003), 3)` (exp(0.003)), holding physical activity constant. 
+
+--
+
+The odds a person who does physical activity will rate themselves as having fair health versus excellent health are  expected to be `r round(exp(-1.645	),3)` (exp(-1.645	)) times the odds for a person who doesn't do physical activity, holding age constant.
+
+---
+
+## Interpretations
+
+.eq[
+$$\log\Big(\frac{\hat{\pi}_{Fair}}{\hat{\pi}_{Excellent}}\Big) = 0.915  + 0.003 ~ \text{age} - 1.645 ~ \text{PhysActive}$$
+]
+
+The odds a 0 year old person who doesn't do physical activity rates themselves as having fair health vs. excellent health are `r round(exp(0.915),3)` (exp(0.915)). 
+
+--
+
+`r emo::ji("warning")` **Need to mean-center age for the intercept to have a meaningful interpretation!**
+
+---
+
+## Hypothesis test for $\beta_{jk}$
+
+The test of significance for the coefficient $\beta_{jk}$ is 
+
+.alert[
+
+**Hypotheses**: $H_0: \beta_{jk} = 0 \hspace{2mm} \text{ vs } \hspace{2mm} H_a: \beta_{jk} \neq 0$
+
+**Test Statistic**: $$z = \frac{\hat{\beta}_{jk} - 0}{SE(\hat{\beta_{jk}})}$$
+
+**P-value**: $P(|Z| > |z|)$, 
+
+where $Z \sim N(0, 1)$, the Standard Normal distribution
+]
+
+---
+
+## Confidence interval for $\beta_{jk}$
+
+- We can calculate the .vocab[C% confidence interval] for $\beta_{jk}$ using the following:
+
+$$\hat{\beta}_{jk} \pm z^* SE(\hat{\beta}_{jk})$$
+where $z^*$ is calculated from the $N(0,1)$ distribution
+
+.alert[
+We are $C\%$ confident that for every one unit change in $x_{j}$, the odds of $y = k$ versus the baseline will multiply by a factor of $\exp\{\hat{\beta}_{jk} - z^* SE(\hat{\beta}_{jk})\}$ to $\exp\{\hat{\beta}_{jk} + z^* SE(\hat{\beta}_{jk})\}$, holding all else constant.
+  ]
+
+---
+
+## Interpreting confidence intervals for $\beta_{jk}$
+
+
+```{r}
+tidy(health_m, conf.int = TRUE, exponentiate = FALSE) %>%
+  filter(y.level == "Fair") %>%
+  kable(digits = 3, format = "markdown")
+```
+<br> 
+
+--
+
+We are 95% confident, that for each additional year in age, the odds a person rates themselves as having fair health versus excellent health will multiply by  `r round(exp(-0.003), 3)` (exp(-0.003)) to `r round(exp(0.009), 3)` (exp(0.009)) , holding physical activity constant. 
+
+---
+
+## Interpreting confidence intervals for $\beta_{jk}$
+
+
+```{r}
+tidy(health_m, conf.int = TRUE, exponentiate = FALSE) %>%
+  filter(y.level == "Fair") %>%
+  kable(digits = 3, format = "markdown")
+```
+
+<br> 
+
+We are 95% confident that the odds a person who does physical activity will rate themselves as having fair health versus excellent health are `r round(exp(-1.856	),3)` (exp(-1.856	)) to `r round(exp(-1.435),3)` (exp(-1.435)) times the odds for a person who doesn't do physical activity, holding age constant.
+
+
+---
+
+## Recap
+
+- Introduce multinomial logistic regression 
+
+- Interpret model coefficients
+
+- Inference for a coefficient $\beta_{jk}$
+
+

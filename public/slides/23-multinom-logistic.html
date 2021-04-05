@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Multinomial Logistic Regression</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Prof. Maria Tackett" />
+    <script src="libs/font-awesome/header-attrs/header-attrs.js"></script>
+    <link rel="stylesheet" href="sta210-slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Multinomial Logistic Regression
+## Introduction
+### Prof. Maria Tackett
+
+---
+
+
+
+
+class: middle, center
+
+## [Click for PDF of slides](23-multinom-logistic.pdf)
+
+
+
+---
+
+## Topics
+
+- Introduce multinomial logistic regression 
+
+- Interpret model coefficients
+
+- Inference for a coefficient `\(\beta_{jk}\)`
+
+---
+
+## Generalized Linear Models (GLM)
+
+- In practice, there are many different types of response variables including:
+
+  + **Binary**: Win or Lose
+  + **Nominal**: Democrat, Republican or Third Party candidate
+  + **Ordered**: Movie rating (1 - 5 stars)
+  + and others...
+
+- These are all examples of **generalized linear models**, a broader class of models that generalize the multiple linear regression model 
+
+- See [*Generalized Linear Models: A Unifying Theory*](https://bookdown.org/roback/bookdown-bysh/ch-glms.html) for more details about GLMs
+
+
+---
+
+## Binary Response (Logistic)
+
+- Given `\(P(y_i=1|x_i)= \hat{\pi}_i\hspace{5mm} \text{ and } \hspace{5mm}P(y_i=0|x_i) = 1-\hat{\pi}_i\)`
+
+`$$\log\Big(\frac{\hat{\pi}_i}{1-\hat{\pi}_i}\Big) = \hat{\beta}_0 + \hat{\beta}_1 x_{i}$$`
+&lt;br&gt; 
+
+- We can calculate `\(\hat{\pi}_i\)` by solving the logit equation: 
+
+`$$\hat{\pi}_i = \frac{\exp\{\hat{\beta}_0 + \hat{\beta}_1 x_{i}\}}{1 + \exp\{\hat{\beta}_0 + \hat{\beta}_1 x_{i}\}}$$`
+
+---
+
+## Binary Response (Logistic)
+
+Suppose we consider `\(y=0\)` the .vocab[baseline category] such that 
+
+`$$P(y_i=1|x_i) = \hat{\pi}_{i1} \hspace{2mm}  \text{ and } \hspace{2mm} P(y_i=0|x_i) = \hat{\pi}_{i0}$$`
+
+--
+
+Then the logistic regression model is 
+
+`$$\log\bigg(\frac{\hat{\pi}_{i1}}{1- \hat{\pi}_{i1}}\bigg) = \log\bigg(\frac{\hat{\pi}_{i1}}{\hat{\pi}_{i0}}\bigg) = \hat{\beta}_0 + \hat{\beta}_1 x_i$$`
+
+--
+
+&lt;font class="vocab"&gt;Slope, `\(\hat{\beta}_1\)`&lt;/font&gt;: When `\(x\)` increases by one unit, the odds of `\(y=1\)` versus the baseline `\(y=0\)` are expected to multiply by a factor of `\(\exp\{\hat{\beta}_1\}\)`
+
+&lt;font class="vocab"&gt;Intercept, `\(\hat{\beta}_0\)`&lt;/font&gt;: When `\(x=0\)`, the predicted odds of `\(y=1\)` versus the baseline `\(y=0\)` are `\(\exp\{\hat{\beta}_0\}\)`
+
+---
+
+## Multinomial response variable
+
+- Suppose the response variable `\(y\)` is categorical and can take values `\(1, 2, \ldots, K\)` such that `\((K &gt; 2)\)`
+
+- &lt;font class="vocab"&gt;Multinomial Distribution: &lt;/font&gt;
+
+`$$P(y=1) = \pi_1, P(y=2) = \pi_2, \ldots, P(y=K) = \pi_K$$`
+
+such that `\(\sum\limits_{k=1}^{K} \pi_k = 1\)`
+
+---
+
+## Multinomial Logistic Regression
+
+- If we have an explanatory variable `\(x\)`, then we want to fit a model such that `\(P(y = k) = \pi_k\)` is a function of `\(x\)`
+
+--
+
+- Choose a baseline category. Let's choose `\(y=1\)`.  Then, 
+
+.eq[
+`$$\log\bigg(\frac{\pi_{ik}}{\pi_{i1}}\bigg) = \beta_{0k} + \beta_{1k} x_i$$`
+]
+
+--
+
+- In the multinomial logistic model, we have a separate equation for each category of the response relative to the baseline category
+    - If the response has `\(K\)` possible categories, there will be `\(K-1\)` equations as part of the multinomial logistic model
+
+---
+
+## Multinomial Logistic Regression 
+
+- Suppose we have a response variable `\(y\)` that can take three possible outcomes that are coded as "A", "B", "C"
+
+- Let "A" be the baseline category. Then 
+
+`$$\log\bigg(\frac{\pi_{iB}}{\pi_{iA}}\bigg) = \beta_{0B} + \beta_{1B}x_i \\[10pt]
+\log\bigg(\frac{\pi_{iC}}{\pi_{iA}}\bigg) = \beta_{0C} + \beta_{1C} x_i$$`
+
+---
+
+## NHANES Data
+
+- [National Health and Nutrition Examination Survey](https://www.cdc.gov/nchs/nhanes/index.htm) is conducted by the National Center for Health Statistics (NCHS) 
+
+- The goal is to *"assess the health and nutritional status of adults and children in the United States"*
+
+- This survey includes an interview and a physical examination
+
+---
+
+## NHANES Data
+
+- We will use the data from the &lt;font class="vocab"&gt;`NHANES`&lt;/font&gt; R package
+
+- Contains 75 variables for the 2009 - 2010 and 2011 - 2012 sample years
+
+- The data in this package is modified for educational purposes and should **not** be used for research
+
+- Original data can be obtained from the [NCHS website](https://www.cdc.gov/nchs/data_access/index.htm) for research purposes
+
+- Type &lt;font class="vocab"&gt;`?NHANES`&lt;/font&gt; in console to see list of variables and definitions
+
+---
+
+## Health Rating vs. Age &amp; Physical Activity
+
+- **Question**: Can we use a person's age and whether they do regular physical activity to predict their self-reported health rating?
+
+- We will analyze the following variables: 
+
+  + &lt;font class="vocab"&gt;`HealthGen`: &lt;/font&gt;Self-reported rating of participant's health in general.  Excellent, Vgood, Good, Fair, or Poor.
+  
+    + &lt;font class="vocab"&gt;`Age`: &lt;/font&gt;Age at time of screening (in years). Participants 80 or older were recorded as 80.
+    
+  + &lt;font class="vocab"&gt;`PhysActive`: &lt;/font&gt;Participant does moderate to vigorous-intensity sports, fitness or recreational activities
+
+ 
+---
+
+## The data
+
+
+
+
+```
+## Rows: 6,710
+## Columns: 4
+## $ HealthGen  &lt;fct&gt; Good, Good, Good, Good, Vgood, Vgood, Vgood, Vgood, Vgood, …
+## $ Age        &lt;int&gt; 34, 34, 34, 49, 45, 45, 45, 66, 58, 54, 50, 33, 60, 56, 56,…
+## $ PhysActive &lt;fct&gt; No, No, No, No, Yes, Yes, Yes, Yes, Yes, Yes, Yes, No, No, …
+## $ obs_num    &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, …
+```
+
+---
+
+## Exploratory data analysis
+
+&lt;img src="23-multinom-logistic_files/figure-html/unnamed-chunk-4-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Exploratory data analysis
+
+&lt;img src="23-multinom-logistic_files/figure-html/unnamed-chunk-5-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Model in R
+
+- Use the &lt;font class="vocab"&gt;`multinom()`&lt;/font&gt; function in the `nnet` package 
+
+
+```r
+library(nnet)
+health_m &lt;- multinom(HealthGen ~ Age + PhysActive, 
+                     data = nhanes_adult)
+```
+
+- Put `results = "hide"` in the code chunk header to suppress convergence output 
+
+---
+
+## Output results
+
+
+```r
+tidy(health_m, conf.int = TRUE, exponentiate = FALSE) %&gt;%
+  kable(digits = 3, format = "markdown")
+```
+
+---
+
+## Model output
+
+.small[
+
+|y.level |term          | estimate| std.error| statistic| p.value| conf.low| conf.high|
+|:-------|:-------------|--------:|---------:|---------:|-------:|--------:|---------:|
+|Vgood   |(Intercept)   |    1.205|     0.145|     8.325|   0.000|    0.922|     1.489|
+|Vgood   |Age           |    0.001|     0.002|     0.369|   0.712|   -0.004|     0.006|
+|Vgood   |PhysActiveYes |   -0.321|     0.093|    -3.454|   0.001|   -0.503|    -0.139|
+|Good    |(Intercept)   |    1.948|     0.141|    13.844|   0.000|    1.672|     2.223|
+|Good    |Age           |   -0.002|     0.002|    -0.977|   0.329|   -0.007|     0.002|
+|Good    |PhysActiveYes |   -1.001|     0.090|   -11.120|   0.000|   -1.178|    -0.825|
+|Fair    |(Intercept)   |    0.915|     0.164|     5.566|   0.000|    0.592|     1.237|
+|Fair    |Age           |    0.003|     0.003|     1.058|   0.290|   -0.003|     0.009|
+|Fair    |PhysActiveYes |   -1.645|     0.107|   -15.319|   0.000|   -1.856|    -1.435|
+|Poor    |(Intercept)   |   -1.521|     0.290|    -5.238|   0.000|   -2.090|    -0.952|
+|Poor    |Age           |    0.022|     0.005|     4.522|   0.000|    0.013|     0.032|
+|Poor    |PhysActiveYes |   -2.656|     0.236|   -11.275|   0.000|   -3.117|    -2.194|
+]
+
+---
+
+## Fair vs. Excellent Health
+
+The baseline category for the model is .vocab[`Excellent`]. 
+
+--
+
+The model equation for the log-odds a person rates themselves as having "Fair" health vs. "Excellent" is
+
+`$$\log\Big(\frac{\hat{\pi}_{Fair}}{\hat{\pi}_{Excellent}}\Big) = 0.915  + 0.003 ~ \text{age} - 1.645 ~ \text{PhysActive}$$`
+
+---
+
+## Interpretations
+
+.eq[
+`$$\log\Big(\frac{\hat{\pi}_{Fair}}{\hat{\pi}_{Excellent}}\Big) = 0.915  + 0.003 ~ \text{age} - 1.645 ~ \text{PhysActive}$$`
+]
+
+For each additional year in age, the odds a person rates themselves as having fair health versus excellent health are expected to multiply by 1.003 (exp(0.003)), holding physical activity constant. 
+
+--
+
+The odds a person who does physical activity will rate themselves as having fair health versus excellent health are  expected to be 0.193 (exp(-1.645	)) times the odds for a person who doesn't do physical activity, holding age constant.
+
+---
+
+## Interpretations
+
+.eq[
+`$$\log\Big(\frac{\hat{\pi}_{Fair}}{\hat{\pi}_{Excellent}}\Big) = 0.915  + 0.003 ~ \text{age} - 1.645 ~ \text{PhysActive}$$`
+]
+
+The odds a 0 year old person who doesn't do physical activity rates themselves as having fair health vs. excellent health are 2.497 (exp(0.915)). 
+
+--
+
+⚠️ **Need to mean-center age for the intercept to have a meaningful interpretation!**
+
+---
+
+## Hypothesis test for `\(\beta_{jk}\)`
+
+The test of significance for the coefficient `\(\beta_{jk}\)` is 
+
+.alert[
+
+**Hypotheses**: `\(H_0: \beta_{jk} = 0 \hspace{2mm} \text{ vs } \hspace{2mm} H_a: \beta_{jk} \neq 0\)`
+
+**Test Statistic**: `$$z = \frac{\hat{\beta}_{jk} - 0}{SE(\hat{\beta_{jk}})}$$`
+
+**P-value**: `\(P(|Z| &gt; |z|)\)`, 
+
+where `\(Z \sim N(0, 1)\)`, the Standard Normal distribution
+]
+
+---
+
+## Confidence interval for `\(\beta_{jk}\)`
+
+- We can calculate the .vocab[C% confidence interval] for `\(\beta_{jk}\)` using the following:
+
+`$$\hat{\beta}_{jk} \pm z^* SE(\hat{\beta}_{jk})$$`
+where `\(z^*\)` is calculated from the `\(N(0,1)\)` distribution
+
+.alert[
+We are `\(C\%\)` confident that for every one unit change in `\(x_{j}\)`, the odds of `\(y = k\)` versus the baseline will multiply by a factor of `\(\exp\{\hat{\beta}_{jk} - z^* SE(\hat{\beta}_{jk})\}\)` to `\(\exp\{\hat{\beta}_{jk} + z^* SE(\hat{\beta}_{jk})\}\)`, holding all else constant.
+  ]
+
+---
+
+## Interpreting confidence intervals for `\(\beta_{jk}\)`
+
+
+
+|y.level |term          | estimate| std.error| statistic| p.value| conf.low| conf.high|
+|:-------|:-------------|--------:|---------:|---------:|-------:|--------:|---------:|
+|Fair    |(Intercept)   |    0.915|     0.164|     5.566|    0.00|    0.592|     1.237|
+|Fair    |Age           |    0.003|     0.003|     1.058|    0.29|   -0.003|     0.009|
+|Fair    |PhysActiveYes |   -1.645|     0.107|   -15.319|    0.00|   -1.856|    -1.435|
+&lt;br&gt; 
+
+--
+
+We are 95% confident, that for each additional year in age, the odds a person rates themselves as having fair health versus excellent health will multiply by  0.997 (exp(-0.003)) to 1.009 (exp(0.009)) , holding physical activity constant. 
+
+---
+
+## Interpreting confidence intervals for `\(\beta_{jk}\)`
+
+
+
+|y.level |term          | estimate| std.error| statistic| p.value| conf.low| conf.high|
+|:-------|:-------------|--------:|---------:|---------:|-------:|--------:|---------:|
+|Fair    |(Intercept)   |    0.915|     0.164|     5.566|    0.00|    0.592|     1.237|
+|Fair    |Age           |    0.003|     0.003|     1.058|    0.29|   -0.003|     0.009|
+|Fair    |PhysActiveYes |   -1.645|     0.107|   -15.319|    0.00|   -1.856|    -1.435|
+
+&lt;br&gt; 
+
+We are 95% confident that the odds a person who does physical activity will rate themselves as having fair health versus excellent health are 0.156 (exp(-1.856	)) to 0.238 (exp(-1.435)) times the odds for a person who doesn't do physical activity, holding age constant.
+
+
+---
+
+## Recap
+
+- Introduce multinomial logistic regression 
+
+- Interpret model coefficients
+
+- Inference for a coefficient `\(\beta_{jk}\)`
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"slideNumberFormat": "%current%",
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
