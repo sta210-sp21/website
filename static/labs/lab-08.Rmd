@@ -95,7 +95,7 @@ The variables we'll use in this lab are
 
 # Exercises 
 
-1. Let's create a binary indicator for whether or not a person thinks it's rude to recline the seat on a plane. Create a new variable that takes value "1" if the respondent said that reclining a seat on a plane is "Yes, somewhat rude" or "Yes, very rude" and "0" otherwise (including those who didn't answer the question). 
+1. Let's create a binary indicator for whether or not a person thinks it's rude to recline the seat on a plane. Create a new variable that takes value "1" if the respondent said that reclining a seat on a plane is "Yes, somewhat rude" or "Yes, very rude" and "0" otherwise.
 
     Are the data consistent with the title of the article? Show any code / output used to make your assessment.
 
