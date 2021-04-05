@@ -91,7 +91,7 @@ The variables we'll use in this lab are
 - `height`: Response to "How tall are you?"
 - `have_children`: Response to "Do you have any children under 18?"
 - `frequency`: Response to "How often do you travel by plane?"
-- `recline_rude`: Response to "Is it rude to recline your seat on a plane?"=
+- `recline_rude`: Response to "Is it rude to recline your seat on a plane?"
 
 # Exercises 
 
@@ -109,7 +109,7 @@ The variables we'll use in this lab are
 
     Visualize the distribution of the newly created variable.
 
-*Hint to get started: Use the [`separate` function](https://tidyr.tidyverse.org/reference/separate.html) to split the feet and inches into separate columns splitting the feet and inches into separate columns.*
+*Hint: Use the [`separate` function](https://tidyr.tidyverse.org/reference/separate.html) to split the feet and inches into separate columns.*
 
 
 1. Create a visualization of the relationship between how often a person travels by plane and whether they think it's rude to recline the seat on an airplane. Interpret the visualization. 
