@@ -16,6 +16,9 @@ link-citations: yes
 knitr::opts_chunk$set(eval = FALSE)
 ```
 
+Instructions will be posted when the lab is assigned. 
+
+<!--
 In this lab,we will use backward and forward selection to choose a model that can be use to  understand the variability in the positiveness of a song based on other characteristics. We will also check the diagnostics for the selected model. 
 
 # Learning goals
@@ -117,4 +120,6 @@ fliers <- read_csv("http://bit.ly/538-flying-survey") %>%
 There should only be <u>one</u> submission per team on Gradescope.
 
 **Note that your submission on Gradescope should be identical to the PDF that is rendered when we knit the Rmd file in your repo.** 
+
+-->
 
