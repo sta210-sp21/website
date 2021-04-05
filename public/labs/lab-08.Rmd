@@ -1,5 +1,5 @@
 ---
-title: "Lab 08: Flying etiquette" 
+title: "Lab 08: Reclining the seat on an airplane" 
 subtitle: "due Sun, Apr 11, at 11:59p EDT"
 output: 
   tufte::tufte_html:
@@ -99,7 +99,9 @@ The variables we'll use in this lab are
 
     Are the data consistent with the title of the article? Show any code / output used to make your assessment.
 
-1. Height is currently recorded in feet and inches; for example, `5'9"` means "five feet and nine inches". Create a new numeric variable for the height recorded in inches. For example, `5'9"` will be recorded as `69` in the new variable. 
+1. Sometimes when we work on analysis, there are variables that could be useful but are not recorded in the data set in a format that's easy to use. In this data, that variable is height, which is currently in the data as a categorical variable. Height is currently recorded in feet and inches; for example, `5'9"` means "five feet and nine inches". 
+
+    Create a new numeric variable for the height recorded in inches. For example, `5'9"` will be recorded as `69` in the new variable. Your new variable should also incorporate the following - 
 
     - If a person has a height of `Under 5 ft.`, record the height as 60 inches.
     - If a person has a height of `6'6" and above`, record the height as 78 inches.

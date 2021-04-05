@@ -904,7 +904,7 @@ font-size: 18px;
       <pubDate>12 Mar 17 10:00 +0000</pubDate>
       
       <guid>/schedule/week-12/</guid>
-      <description> table { font-size: 18px; }   table { font-size: 18px; }  Lectures     Slides Videos Application Exercises (AE)     Tuesday Multinomial logistic regression: Introduction Multinomial logistic regression: Introduction AE 23   Thursday Multinomial logistic regression cont&amp;rsquo;d Multinomial logistic regression cont&amp;rsquo;d AE 24    Assignments          Lab 08: Flying etiquette due Sun, Apr 11 at 11:59p   Statistics Experience due Sun, Apr 25 at 11:59p    </description>
+      <description> table { font-size: 18px; }   table { font-size: 18px; }  Lectures     Slides Videos Application Exercises (AE)     Tuesday Multinomial logistic regression: Introduction Multinomial logistic regression: Introduction AE 23   Thursday Multinomial logistic regression cont&amp;rsquo;d Multinomial logistic regression cont&amp;rsquo;d AE 24    Assignments          Lab 08: Reclining the seat on an airplane due Sun, Apr 11 at 11:59p   Statistics Experience due Sun, Apr 25 at 11:59p    </description>
       <content>&lt;style&gt;
 table {
 font-size: 18px;
@@ -952,7 +952,7 @@ font-size: 18px;
 &lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/labs/lab-08.html&#34;&gt;Lab 08: Flying etiquette&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/labs/lab-08.html&#34;&gt;Lab 08: Reclining the seat on an airplane&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;&lt;strong&gt;due Sun, Apr 11 at 11:59p&lt;/strong&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;

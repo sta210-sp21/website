@@ -31,7 +31,7 @@ font-size: 18px;
 
 |                        |   |
 |------------------------|---|
-| [Lab 08: Flying etiquette](https://sta210-sp21.netlify.app/labs/lab-08.html) | **due Sun, Apr 11 at 11:59p** |
+| [Lab 08: Reclining the seat on an airplane](https://sta210-sp21.netlify.app/labs/lab-08.html) | **due Sun, Apr 11 at 11:59p** |
 |[Statistics Experience](https://sta210-sp21.netlify.app/hw/stats-experience.html) | **due Sun, Apr 25 at 11:59p**| 
 
 
