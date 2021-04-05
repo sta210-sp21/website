@@ -222,7 +222,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1>Exercises</h1>
 <ol style="list-style-type: decimal">
 <li><p>Let’s create a binary indicator for whether or not a person thinks it’s rude to recline the seat on a plane. Create a new variable that takes value “1” if the respondent said that reclining a seat on a plane is “Yes, somewhat rude” or “Yes, very rude” and “0” otherwise (including those who didn’t answer the question).</p>
-<p>Is your data consistent with the title of the article? Show any code / output used to make your assessment.</p></li>
+<p>Are the data consistent with the title of the article? Show any code / output used to make your assessment.</p></li>
 <li><p>Height is currently recorded in feet and inches; for example, <code>5&#39;9&quot;</code> means “five feet and nine inches”. Create a new numeric variable for the height recorded in inches. For example, <code>5&#39;9&quot;</code> will be recorded as <code>69</code> in the new variable.</p>
 <ul>
 <li>If a person has a height of <code>Under 5 ft.</code>, record the height as 60 inches.</li>
@@ -230,11 +230,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>Visualize the distribution of the newly created variable.</p></li>
 </ol>
-<p><em>Hints</em>: - <em>You can start by using the <a href="https://tidyr.tidyverse.org/reference/separate.html"><code>separate</code> function</a> to split the feet and inches into separate columns splitting the feet and inches into separate columns.</em> - <em>Then use <code>str_replace</code> to remove any extra characters, so you can make the feet and inches numeric.</em> - <em>Lastly, calculate the height in inches.</em></p>
+<p><em>Hint to get started: Use the <a href="https://tidyr.tidyverse.org/reference/separate.html"><code>separate</code> function</a> to split the feet and inches into separate columns splitting the feet and inches into separate columns.</em></p>
 <ol style="list-style-type: decimal">
 <li><p>Create a visualization of the relationship between how often a person travels by plane and whether they think it’s rude to recline the seat on an airplane. Interpret the visualization.</p></li>
 <li><p>Create an empirical logit plot of the relationship between a person’s height and whether they think it’s rude to recline the seat on an airplane. Interpret the visualization. <em>Hint: See the <a href="https://sta210-sp21.netlify.app/slides/21-logistic-conditions.html#12">lecture notes</a> on creating empirical logit plots.</em></p></li>
-<li><p>Create a visualization to explore whether the relationship between height and thinking it’s rude to recline the seat on an airplane differs based on whether a person has children. Interpret the visualization.</p></li>
 <li><p>Fit a model using the height (in inches), frequency of traveling by plane, whether a person has children, and age group to understand the odds a person thinks it’s rude to recline the seat on an airplane. Display the model using 3 digits.</p></li>
 <li><p>Use the model from the previous exercise to interpret the relationship between the following variables and the odds a person thinks it’s rude to recline the seat on a plane:</p>
 <ul>

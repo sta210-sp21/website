@@ -97,7 +97,7 @@ The variables we'll use in this lab are
 
 1. Let's create a binary indicator for whether or not a person thinks it's rude to recline the seat on a plane. Create a new variable that takes value "1" if the respondent said that reclining a seat on a plane is "Yes, somewhat rude" or "Yes, very rude" and "0" otherwise (including those who didn't answer the question). 
 
-    Is your data consistent with the title of the article? Show any code / output used to make your assessment.
+    Are the data consistent with the title of the article? Show any code / output used to make your assessment.
 
 1. Height is currently recorded in feet and inches; for example, `5'9"` means "five feet and nine inches". Create a new numeric variable for the height recorded in inches. For example, `5'9"` will be recorded as `69` in the new variable. 
 
@@ -107,17 +107,12 @@ The variables we'll use in this lab are
 
     Visualize the distribution of the newly created variable.
 
-*Hints*: 
-  - *You can start by using the [`separate` function](https://tidyr.tidyverse.org/reference/separate.html) to split the feet and inches into separate columns splitting the feet and inches into separate columns.*
-  - *Then use `str_replace` to remove any extra characters, so you can make the feet and inches numeric.*
-  - *Lastly, calculate the height in inches.*
+*Hint to get started: Use the [`separate` function](https://tidyr.tidyverse.org/reference/separate.html) to split the feet and inches into separate columns splitting the feet and inches into separate columns.*
 
 
 1. Create a visualization of the relationship between how often a person travels by plane and whether they think it's rude to recline the seat on an airplane. Interpret the visualization. 
 
 1. Create an empirical logit plot of the relationship between a person's height and whether they think it's rude to recline the seat on an airplane. Interpret the visualization. *Hint: See the [lecture notes](https://sta210-sp21.netlify.app/slides/21-logistic-conditions.html#12) on creating empirical logit plots.*
-
-1. Create a visualization to explore whether the relationship between height and thinking it's rude to recline the seat on an airplane differs based on whether a person has children. Interpret the visualization. 
 
 1. Fit a model using the height (in inches), frequency of traveling by plane, whether a person has children, and age group to understand the odds a person thinks it's rude to recline the seat on an airplane. Display the model using 3 digits. 
 
