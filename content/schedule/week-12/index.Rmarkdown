@@ -22,8 +22,8 @@ font-size: 18px;
 
 |           | Slides                   | Videos | Application Exercises (AE) |
 |-----------|--------------------------|--------|--------|
-| Tuesday  | [Multinomial logistic regression: Introduction](https://sta210-sp21.netlify.app/slides/23-multinom-logistic.html) | [Multinomial logistic regression: Introduction](https://warpwire.duke.edu/w/_YwFAA/) | AE 23 |
-| Thursday   | [Multinomial logistic regression cont'd](https://sta210-sp21.netlify.app/slides/24-multinom-logistic-pt2.html) | [Multinomial logistic regression cont'd](https://warpwire.duke.edu/w/_4wFAA/)|  AE 24|
+| Tuesday  | [Multinomial logistic regression: Introduction](https://sta210-sp21.netlify.app/slides/23-multinom-logistic.html) | [Multinomial logistic regression: Introduction](https://warpwire.duke.edu/w/_YwFAA/) | [AE 22: Multinomial logistic regression](https://sta210-sp21.netlify.app/appex/ae-22-multinom-logistic.html) |
+| Thursday   | [Multinomial logistic regression cont'd](https://sta210-sp21.netlify.app/slides/24-multinom-logistic-pt2.html) | [Multinomial logistic regression cont'd](https://warpwire.duke.edu/w/_4wFAA/)|  AE 23|
 
 
 

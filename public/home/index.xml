@@ -904,7 +904,7 @@ font-size: 18px;
       <pubDate>12 Mar 17 10:00 +0000</pubDate>
       
       <guid>/schedule/week-12/</guid>
-      <description> table { font-size: 18px; }   table { font-size: 18px; }  Lectures     Slides Videos Application Exercises (AE)     Tuesday Multinomial logistic regression: Introduction Multinomial logistic regression: Introduction AE 23   Thursday Multinomial logistic regression cont&amp;rsquo;d Multinomial logistic regression cont&amp;rsquo;d AE 24    Assignments          Lab 08: Reclining the seat on an airplane due Sun, Apr 11 at 11:59p   Statistics Experience due Sun, Apr 25 at 11:59p    </description>
+      <description> table { font-size: 18px; }   table { font-size: 18px; }  Lectures     Slides Videos Application Exercises (AE)     Tuesday Multinomial logistic regression: Introduction Multinomial logistic regression: Introduction AE 22: Multinomial logistic regression   Thursday Multinomial logistic regression cont&amp;rsquo;d Multinomial logistic regression cont&amp;rsquo;d AE 23    Assignments          Lab 08: Reclining the seat on an airplane due Sun, Apr 11 at 11:59p   Statistics Experience due Sun, Apr 25 at 11:59p    </description>
       <content>&lt;style&gt;
 table {
 font-size: 18px;
@@ -932,13 +932,13 @@ font-size: 18px;
 &lt;td&gt;Tuesday&lt;/td&gt;
 &lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/slides/23-multinom-logistic.html&#34;&gt;Multinomial logistic regression: Introduction&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;&lt;a href=&#34;https://warpwire.duke.edu/w/_YwFAA/&#34;&gt;Multinomial logistic regression: Introduction&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;AE 23&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/appex/ae-22-multinom-logistic.html&#34;&gt;AE 22: Multinomial logistic regression&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;Thursday&lt;/td&gt;
 &lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/slides/24-multinom-logistic-pt2.html&#34;&gt;Multinomial logistic regression cont&amp;rsquo;d&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;&lt;a href=&#34;https://warpwire.duke.edu/w/_4wFAA/&#34;&gt;Multinomial logistic regression cont&amp;rsquo;d&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;AE 24&lt;/td&gt;
+&lt;td&gt;AE 23&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;

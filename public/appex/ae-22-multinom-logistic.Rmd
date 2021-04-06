@@ -1,0 +1,40 @@
+---
+title: "AE 22: Multinomial logistic regression"
+date: "`r Sys.Date()`"
+output: 
+  html_document: 
+    fig_height: 8
+    fig_width: 8
+    theme: readable
+---
+
+```{r include = F}
+knitr::opts_chunk$set(warning = F, 
+                      message = F)
+```
+
+## Check in 
+
+## Class announcements
+
+- See this week's schedule: [Week 12](https://sta210-sp21.netlify.app/schedule/week-12/)
+
+- HW 05 due Wed, Apr 7
+
+- Lab 08 due Sun, Apr 11
+
+- [Statistics experience](https://sta210-sp21.netlify.app/hw/stats-experience.html) due Sun, Apr 25 at 11:59p 
+
+- Tea with the Teaching Team
+  - Ezinne Nwankwo - Thu, Apr 15 at 12p EDT. [Click here](https://forms.gle/YrpF516DMT6iWWnXA) to sign up.
+
+## Questions from lab or HW? 
+
+## Questions from video? 
+
+## AE 22: Multinomial logistic regression
+
+Clone the **ae-22** repo and open a new project in RStudio.
+
+
+
