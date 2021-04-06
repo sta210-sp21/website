@@ -165,7 +165,7 @@ Be able to fly
 
 <!--https://me.me/i/on-a-scale-of-cat-how-are-you-feeling-today-b4227c3b307742b2bac06579ecc1a253-->
 
-```{r echo = F}
+```{r echo = F, out.width = "40%"}
 knitr::include_graphics("img/cat-checkin.png")
 ```
 
@@ -232,3 +232,12 @@ knitr::include_graphics("img/cat-checkin.png")
 .midi[**27)** Last!]
 ]
 
+
+---
+
+```{r echo = F, out.width = "100%"}
+knitr::include_graphics("img/scale-of-fauci.jpeg")
+```
+
+
+.small[[Image source](https://twitter.com/karenerrichetti/status/1322597290343804928/photo/1)]
