@@ -133,7 +133,7 @@ Each component will be graded as follows:
 
 The purpose of the draft and peer review is to give you an opportunity to get early feedback on your analysis. Therefore, the draft and peer review will focus primarily on the exploratory data analysis and modeling.  As you work on the draft, the focus should be on the analysis rather than crafting the final report.
 
-Below is a brief description of the sections to focus on in the draft: 
+Write the draft in the **written-report.Rmd** file in your project repo.  Below is a brief description of the sections to focus on in the draft: 
 
 ### Introduction and data
 

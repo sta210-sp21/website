@@ -1274,7 +1274,7 @@ final project.&lt;/em&gt;&lt;/p&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;draft-report&#34;&gt;Draft report&lt;/h2&gt;
 &lt;p&gt;The purpose of the draft and peer review is to give you an opportunity to get early feedback on your analysis. Therefore, the draft and peer review will focus primarily on the exploratory data analysis and modeling.  As you work on the draft, the focus should be on the analysis rather than crafting the final report.&lt;/p&gt;
-&lt;p&gt;Below is a brief description of the sections to focus on in the draft:&lt;/p&gt;
+&lt;p&gt;Write the draft in the &lt;strong&gt;written-report.Rmd&lt;/strong&gt; file in your project repo.  Below is a brief description of the sections to focus on in the draft:&lt;/p&gt;
 &lt;h3 id=&#34;introduction-and-data&#34;&gt;Introduction and data&lt;/h3&gt;
 &lt;p&gt;This section includes an introduction to the project motivation, data, and research question. Describe the data and definitions of key variables. It should also include some exploratory data analysis. All of the EDA won’t fit in the paper, so focus on the EDA for the response variable and a few other interesting variables and relationships.&lt;/p&gt;
 &lt;h3 id=&#34;methodology&#34;&gt;Methodology&lt;/h3&gt;
