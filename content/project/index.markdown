@@ -162,7 +162,8 @@ During the peer review process, you will be provided read-only access to your  p
 
 ## Written report
 
-Check back for more details.
+Details will be available when this portion of the project is assigned.
+
 <!--
 Your written report must be done using R Markdown. All team members must contribute to the GitHub repository, with regular meaningful commits. 
 
@@ -226,7 +227,8 @@ summary of what you have learned about your research question along with statist
 
 ## Video presentation + slides
 
-Check back for more details.
+Details will be available when this portion of the project is assigned.
+
 
 <!--
 In addition to the write-up, your team must also create presentation
@@ -280,7 +282,7 @@ You can see the Teaching team example in Sakai.
 
 ## Presentation comments 
 
-Check back for more details.
+Details will be available when this portion of the project is assigned.
 
 <!--
 Each student will be assigned 2 presentations to watch. [Click here](https://prodduke-my.sharepoint.com/:x:/g/personal/mt324_duke_edu/EfYgmTXEMs1ImpYXagtwYbQBbaUa9_bPI_2D7cTBSdhJ8w?e=O2eeUD) to see your viewing assignments. 

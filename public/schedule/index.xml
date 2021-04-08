@@ -904,7 +904,7 @@ font-size: 18px;
       <pubDate>12 Mar 17 10:00 +0000</pubDate>
       
       <guid>/schedule/week-12/</guid>
-      <description> table { font-size: 18px; }   table { font-size: 18px; }  Lectures     Slides Videos Application Exercises (AE)     Tuesday Multinomial logistic regression: Introduction Multinomial logistic regression: Introduction AE 22: Multinomial logistic regression   Thursday Multinomial logistic regression cont&amp;rsquo;d Multinomial logistic regression cont&amp;rsquo;d AE 23    Assignments          Lab 08: Reclining the seat on an airplane due Sun, Apr 11 at 11:59p   Statistics Experience due Sun, Apr 25 at 11:59p    </description>
+      <description> table { font-size: 18px; }   table { font-size: 18px; }  Lectures     Slides Videos Application Exercises (AE)     Tuesday Multinomial logistic regression: Introduction Multinomial logistic regression: Introduction AE 22: Multinomial logistic regression   Thursday Multinomial logistic regression cont&amp;rsquo;d Multinomial logistic regression cont&amp;rsquo;d AE 23: Mulitnomial logistic regression cont&amp;rsquo;d    Assignments          Lab 08: Reclining the seat on an airplane due Sun, Apr 11 at 11:59p   Statistics Experience due Sun, Apr 25 at 11:59p    </description>
       <content>&lt;style&gt;
 table {
 font-size: 18px;
@@ -938,7 +938,7 @@ font-size: 18px;
 &lt;td&gt;Thursday&lt;/td&gt;
 &lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/slides/24-multinom-logistic-pt2.html&#34;&gt;Multinomial logistic regression cont&amp;rsquo;d&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;&lt;a href=&#34;https://warpwire.duke.edu/w/_4wFAA/&#34;&gt;Multinomial logistic regression cont&amp;rsquo;d&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;AE 23&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/appex/ae-23-multinom-logistic-contd.html&#34;&gt;AE 23: Mulitnomial logistic regression cont&amp;rsquo;d&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -1144,20 +1144,20 @@ visit &lt;a href=&#34;https://studentaffairs.duke.edu/duwell/holistic-wellness&#
       <guid>/project/</guid>
       <description>Timeline Topic ideas due Sun,Mar 7 at 11:59p EST
 Proposal due Mon, Mar 29 at 11:59p EST
-Draft report due Sun, Apr 18 at 11:59p EST
-Peer review due Mon, Apr 19 at 11:59p EST
-Final report due Sun, Apr 25 at 11:59p EST
-Video presentation + slides due Wed, Apr 28 at 9a EST
-Presentation comments due Fri, Apr 30 at 11:59p EST
+Draft report due Sun, Apr 18 at 11:59p EDT
+Peer review due Mon, Apr 19 at 11:59p EDT
+Final report due Sun, Apr 25 at 11:59p EDT
+Video presentation + slides due Wed, Apr 28 at 9a EDT
+Presentation comments due Fri, Apr 30 at 11:59p EDT
 Introduction TL;DR: Pick a data set and do a regression analysis.</description>
       <content>&lt;h2 id=&#34;timeline&#34;&gt;Timeline&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&#34;#topic-ideas&#34;&gt;Topic ideas&lt;/a&gt; due &lt;strong&gt;Sun,Mar 7 at 11:59p EST&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;#project-proposal&#34;&gt;Proposal&lt;/a&gt; due &lt;strong&gt;Mon, Mar 29 at 11:59p EST&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;#peer-review&#34;&gt;Draft report&lt;/a&gt; due &lt;strong&gt;Sun, Apr 18 at 11:59p EST&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;#peer-review&#34;&gt;Peer review&lt;/a&gt; due &lt;strong&gt;Mon, Apr 19 at 11:59p EST&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;#written-report&#34;&gt;Final report&lt;/a&gt; due &lt;strong&gt;Sun, Apr 25 at 11:59p EST&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;#video-presentation--slides&#34;&gt;Video presentation + slides&lt;/a&gt; due &lt;strong&gt;Wed, Apr 28 at 9a EST&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;#presentation-comments&#34;&gt;Presentation comments&lt;/a&gt; due &lt;strong&gt;Fri, Apr 30 at 11:59p EST&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;#draft-report&#34;&gt;Draft report&lt;/a&gt; due &lt;strong&gt;Sun, Apr 18 at 11:59p EDT&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;#peer-review&#34;&gt;Peer review&lt;/a&gt; due &lt;strong&gt;Mon, Apr 19 at 11:59p EDT&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;#written-report&#34;&gt;Final report&lt;/a&gt; due &lt;strong&gt;Sun, Apr 25 at 11:59p EDT&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;#video-presentation--slides&#34;&gt;Video presentation + slides&lt;/a&gt; due &lt;strong&gt;Wed, Apr 28 at 9a EDT&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;#presentation-comments&#34;&gt;Presentation comments&lt;/a&gt; due &lt;strong&gt;Fri, Apr 30 at 11:59p EDT&lt;/strong&gt;&lt;/p&gt;
 &lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;TL;DR&lt;/strong&gt;: &lt;em&gt;Pick a data set and do a regression analysis. That is your
 final project.&lt;/em&gt;&lt;/p&gt;
@@ -1272,23 +1272,22 @@ final project.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Does not meet expectations (no credit)&lt;/strong&gt;: Major elements missing. Work is not neatly formatted and would not be presentable in a professional setting.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
+&lt;h2 id=&#34;draft-report&#34;&gt;Draft report&lt;/h2&gt;
+&lt;p&gt;The purpose of the draft and peer review is to give you an opportunity to get early feedback on your analysis. Therefore, the draft and peer review will focus primarily on the exploratory data analysis and modeling.  As you work on the draft, the focus should be on the analysis rather than crafting the final report.&lt;/p&gt;
+&lt;p&gt;Below is a brief description of the sections to focus on in the draft:&lt;/p&gt;
+&lt;h3 id=&#34;introduction-and-data&#34;&gt;Introduction and data&lt;/h3&gt;
+&lt;p&gt;This section includes an introduction to the project motivation, data, and research question. Describe the data and definitions of key variables. It should also include some exploratory data analysis. All of the EDA won’t fit in the paper, so focus on the EDA for the response variable and a few other interesting variables and relationships.&lt;/p&gt;
+&lt;h3 id=&#34;methodology&#34;&gt;Methodology&lt;/h3&gt;
+&lt;p&gt;This section includes a brief description of your modeling process. Explain the reasoning for the type of model you&amp;rsquo;re fitting, predictor variables considered for the model including any interactions. Additionally, show how you arrived at the final model by describing the model selection process, any variable transformations (if needed), and any other relevant considerations that were part of the model fitting process.&lt;/p&gt;
+&lt;p&gt;For the draft, you may show the results from a few models you&amp;rsquo;ve considered.&lt;/p&gt;
+&lt;h3 id=&#34;results&#34;&gt;Results&lt;/h3&gt;
+&lt;p&gt;This is also where you will output the final model and include a brief discussion of the model assumptions, diagnostics, and any relevant model fit statistics.&lt;/p&gt;
+&lt;p&gt;For the draft, if you do not have a final model, briefly describe your next steps and other models you&amp;rsquo;re considering.&lt;/p&gt;
 &lt;h2 id=&#34;peer-review&#34;&gt;Peer review&lt;/h2&gt;
-&lt;p&gt;Check back for more details.&lt;/p&gt;
-&lt;!--
-
-Critically reviewing others&#39; work is a crucial part of the scientific process, and STA 210 is no exception. You will be assigned a team to review. As part of the review process, you must provide your partner team a copy of your current report by **Wednesday, October 28**. After giving the report to your partner team, they will have until **Friday, November 5** to provide a detailed critique about the written report and data analysis. This feedback is intended to help you create a high quality final project, as well as give you experience 
-reading and constructively critiquing the work of others.
-
-During the peer review process, you will be provided read-only access to your  partner team&#39;s GitHub repo. Provide your review in the form of GitHub issues to your partner team&#39;s GitHub repo. 
-Peer review will be graded on the extent to which it comprehensively and constructively addresses the components of the partner team&#39;s report: the  research context and motivation, exploratory data analysis, and any inference, modeling, or conclusions. 
-
-As you work on the draft, the focus should be on the analysis and less on crafting the final report.  **Your draft must include a reasonable attempt at each analysis component - exploratory data analysis, modeling, and preliminary inferential conclusions.**
-
-
-The final report is due on **Tuesday, November 17.**
---&gt;
+&lt;p&gt;Critically reviewing others&amp;rsquo; work is a crucial part of the scientific process, and STA 210 is no exception. Each lab team will be assigned another team&amp;rsquo;s project to review. Each team should push their draft to their GitHub repo by &lt;strong&gt;Sunday, April 18&lt;/strong&gt;. The lab on April 19 will be dedicated to the peer review, and all reviews will be due by &lt;strong&gt;Monday, April 19&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;During the peer review process, you will be provided read-only access to your  partner team&amp;rsquo;s GitHub repo. Provide your review in the form of GitHub issues to your partner team&amp;rsquo;s GitHub repo. The peer review will be graded on the extent to which it comprehensively and constructively addresses the components of the partner team&amp;rsquo;s report: the  research context and motivation, exploratory data analysis, and any inference, modeling, or conclusions.&lt;/p&gt;
 &lt;h2 id=&#34;written-report&#34;&gt;Written report&lt;/h2&gt;
-&lt;p&gt;Check back for more details.&lt;/p&gt;
+&lt;p&gt;Details will be available when this portion of the project is assigned.&lt;/p&gt;
 &lt;!--
 Your written report must be done using R Markdown. All team members must contribute to the GitHub repository, with regular meaningful commits. 
 
@@ -1349,7 +1348,7 @@ summary of what you have learned about your research question along with statist
 
 --&gt;
 &lt;h2 id=&#34;video-presentation--slides&#34;&gt;Video presentation + slides&lt;/h2&gt;
-&lt;p&gt;Check back for more details.&lt;/p&gt;
+&lt;p&gt;Details will be available when this portion of the project is assigned.&lt;/p&gt;
 &lt;!--
 In addition to the write-up, your team must also create presentation
 slides that summarize and showcase your project. Introduce your research question and data set, showcase visualizations, and provide some conclusions. These slides should serve as a brief visual accompaniment to your write-up and will be graded for content and quality. For submission, convert these slides to a .pdf document to be submitted to Gradescope. The slides are due on **Friday, November 20**.
@@ -1400,7 +1399,7 @@ discussion forum.
 You can see the Teaching team example in Sakai. 
 --&gt;
 &lt;h2 id=&#34;presentation-comments&#34;&gt;Presentation comments&lt;/h2&gt;
-&lt;p&gt;Check back for more details.&lt;/p&gt;
+&lt;p&gt;Details will be available when this portion of the project is assigned.&lt;/p&gt;
 &lt;!--
 Each student will be assigned 2 presentations to watch. [Click here](https://prodduke-my.sharepoint.com/:x:/g/personal/mt324_duke_edu/EfYgmTXEMs1ImpYXagtwYbQBbaUa9_bPI_2D7cTBSdhJ8w?e=O2eeUD) to see your viewing assignments. 
 
