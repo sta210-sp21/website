@@ -970,13 +970,67 @@ font-size: 18px;
       <pubDate>12 Mar 17 10:00 +0000</pubDate>
       
       <guid>/schedule/week-13/</guid>
-      <description> table { font-size: 18px; }  </description>
+      <description> table { font-size: 18px; }  Lectures     Slides Videos Application Exercises (AE)     Tuesday No slides No video AE 24: Logistic regression review    Log-linear models (optional) Log-linear models (optional)    Thursday No slides No video Project work day    Assignments          Quiz 03 open Thu Apr 15 at 12p, due Fri Apr 26 at 11:59p   Project draft due Apr 18 at 11:59p EDT   Statistics Experience due Sun, Apr 25 at 11:59p    </description>
       <content>&lt;style&gt;
 table {
 font-size: 18px;
 }
 
 &lt;/style&gt;
+&lt;h2 id=&#34;lectures&#34;&gt;Lectures&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;Slides&lt;/th&gt;
+&lt;th&gt;Videos&lt;/th&gt;
+&lt;th&gt;Application Exercises (AE)&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Tuesday&lt;/td&gt;
+&lt;td&gt;No slides&lt;/td&gt;
+&lt;td&gt;No video&lt;/td&gt;
+&lt;td&gt;AE 24: Logistic regression review&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/slides/25-poisson.html&#34;&gt;Log-linear models&lt;/a&gt; (optional)&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://warpwire.duke.edu/w/y5oFAA/&#34;&gt;Log-linear models&lt;/a&gt; (optional)&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Thursday&lt;/td&gt;
+&lt;td&gt;No slides&lt;/td&gt;
+&lt;td&gt;No video&lt;/td&gt;
+&lt;td&gt;Project work day&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;assignments&#34;&gt;Assignments&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/quizzes/quiz-03.html&#34;&gt;Quiz 03&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;open Thu Apr 15 at 12p, due Fri Apr 26 at 11:59p&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/project/&#34;&gt;Project draft&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;due Apr 18 at 11:59p EDT&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/hw/stats-experience.html&#34;&gt;Statistics Experience&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;due Sun, Apr 25 at 11:59p&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 </content>
     </item>
     
