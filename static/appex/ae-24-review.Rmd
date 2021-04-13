@@ -19,7 +19,7 @@ knitr::opts_chunk$set(warning = F,
 
 - See this week's schedule: [Week 13](https://sta210-sp21.netlify.app/schedule/week-13/)
 
-- [Quiz 03](https://sta210-sp21.netlify.app/quizzes/quiz-03.html) - open Thu, Apr 15, closed Fri Apr 16
+- [Quiz 03](https://sta210-sp21.netlify.app/quiz/quiz-03.html) - open Thu, Apr 15, closed Fri Apr 16
 
 - [Project draft](https://sta210-sp21.netlify.app/project/) due Sun, Apr 18 
   - See Issues on GitHub for feedback from the project proposal
