@@ -27,7 +27,7 @@ You will see a **Quiz 03** assignment under the Tests & Quizzes tab on Sakai. Yo
 
 - Be sure to read all instructions and quiz questions carefully!
 
-- Piazza will be inactive during the duration of the quiz, so no one will be able to post questions on Piazza from Mar 25 at 12p to Mar 26 at 11:59p. If you have computing issues or trouble accessing the quiz on Sakai, please email Professor Tackett with **STA 210 Quiz** in the subject line. 
+- Piazza will be inactive during the duration of the quiz, so no one will be able to post questions on Piazza from Apr 15 at 12p to Apr 16 at 11:59p. If you have computing issues or trouble accessing the quiz on Sakai, please email Professor Tackett with **STA 210 Quiz** in the subject line. 
 
 - The teaching team will not be able to answer questions about while it is open. This is to ensure all students have the same information regardless of when they take the quiz. 
 
