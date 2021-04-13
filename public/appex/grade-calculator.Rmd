@@ -9,10 +9,10 @@ library(tidyverse)
 
 ## Input grades
 
-Input all of your grades below 
+Input all of your grades below: 
 
 ```{r}
-#read in HW grades (out of 50 points)
+#input HW grades (out of 50 points)
 hw01 <- 50
 hw02 <- 50
 hw03 <- 50
@@ -21,26 +21,26 @@ hw05 <- 10
 ```
 
 ```{r}
-#read in lab grades (out of 50 points)
+#input lab grades (out of 50 points)
 lab01 <- 50
 lab02 <- 50
 lab03 <- 50
 lab04 <- 50
-lab05 <- 10
-lab06 <- 10
-lab07 <- 10
-lab08 <- 10
+lab05 <- 50
+lab06 <- 50
+lab07 <- 50
+lab08 <- 50
 ```
 
 ```{r}
-# read in quiz grades
+# input  quiz grades
 quiz01 <- 50 # out of 50
 quiz02 <- 40 # out of 40
 quiz03 <- 40 # out of 40
 ```
 
 ```{r}
-#read in project grades
+#input project grades
 topic_ideas <- 5
 proposal <- 10
 peer_review <- 10
@@ -58,6 +58,7 @@ team_feedback01 <- 10 #out of 10
 team_feedback02 <- 10 # out of 10
 ```
 
+# DO NOT CHANGE ANY CODE BELOW THIS POINT! 
 
 ## Calculate averages
 
@@ -127,7 +128,8 @@ quiz_avg <- quizzes %>%
 
 ```{r}
 # calculate project points
-project_points <- sum(c(topic_ideas, proposal, peer_review, written_report, slides_video, reproducibility, video_comments, peer_teamwork))
+project_points <- sum(c(topic_ideas, proposal, peer_review, written_report, slides_video, 
+                        reproducibility, video_comments, peer_teamwork))
 
 project_grade <- project_points / 105 * 100
 ```
@@ -157,5 +159,13 @@ course_avg <- quiz_avg * 0.30 +
 
 **Course average**: `r round(course_avg,2)`
 
-  
+## Summary 
+
+- **HW average (weight: 30%):** `r round(hw_avg,3)`
+- **Lab average (weight: 15%):** `r round(lab_avg, 3)`
+- **Quiz average (weight: 30%):** `r round(quiz_avg, 3)`
+- **Project grade (weight: 20%) :** `r round(project_grade,3)`
+- **Participation (weight: 5%)**: `r round(participation_avg,3)`
+- **Course average**: `r round(course_avg,2)`
+
                
