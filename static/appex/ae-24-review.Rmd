@@ -1,0 +1,46 @@
+---
+title: "AE 24: review"
+date: "`r Sys.Date()`"
+output: 
+  html_document: 
+    fig_height: 8
+    fig_width: 8
+    theme: readable
+---
+
+```{r include = F}
+knitr::opts_chunk$set(warning = F, 
+                      message = F)
+```
+
+## Check in 
+
+## Upcoming assignments 
+
+- See this week's schedule: [Week 13](https://sta210-sp21.netlify.app/schedule/week-13/)
+
+- [Quiz 03](https://sta210-sp21.netlify.app/quizzes/quiz-03.html) - open Thu, Apr 15, closed Fri Apr 16
+
+- [Project draft](https://sta210-sp21.netlify.app/project/) due Sun, Apr 18 
+  - See Issues on GitHub for feedback from the project proposal
+
+- [Statistics experience](https://sta210-sp21.netlify.app/hw/stats-experience.html) due Sun, Apr 25 at 11:59p 
+
+
+## Other class announcements 
+
+- **No office hours Wed, 10a - 12p**
+
+- **Project meetings Thu Apr 15 & Apr 22**: [Click here](https://docs.google.com/spreadsheets/d/1cSiAUCwy0GNvP7uFZ_9uf9gnsspu3JCLJmLYOHKUlds/edit?usp=sharing) to sign up. These meetings are optional. (Only one per group).
+
+- **Tea with the Teaching Team**
+  - Ezinne Nwankwo - Thu, Apr 15 at 12p EDT. [Click here](https://forms.gle/7qUSZ9Mf5qT8FHar7) to sign up.
+
+- Grade calculator: [Click here](grade-calculator.Rmd) to download.
+
+## AE 24: Review
+
+Clone the **ae-24** repo and open a new project in RStudio.
+
+
+

@@ -970,7 +970,7 @@ font-size: 18px;
       <pubDate>12 Mar 17 10:00 +0000</pubDate>
       
       <guid>/schedule/week-13/</guid>
-      <description> table { font-size: 18px; }  Lectures     Slides Videos Application Exercises (AE)     Tuesday No slides No video AE 24: Logistic regression review    Log-linear models (optional) Log-linear models (optional)    Thursday No slides No video Project work day    Assignments          Quiz 03 open Thu Apr 15 at 12p, due Fri Apr 26 at 11:59p   Project draft due Apr 18 at 11:59p EDT   Statistics Experience due Sun, Apr 25 at 11:59p    </description>
+      <description> table { font-size: 18px; }  Lectures     Slides Videos Application Exercises (AE)     Tuesday No slides No video AE 24: Review    Log-linear models (optional) Log-linear models (optional)    Thursday No slides No video Project meetings    Assignments          Quiz 03 open Thu Apr 15 at 12p, due Fri Apr 26 at 11:59p   Project draft due Apr 18 at 11:59p EDT   Statistics Experience due Sun, Apr 25 at 11:59p    </description>
       <content>&lt;style&gt;
 table {
 font-size: 18px;
@@ -992,7 +992,7 @@ font-size: 18px;
 &lt;td&gt;Tuesday&lt;/td&gt;
 &lt;td&gt;No slides&lt;/td&gt;
 &lt;td&gt;No video&lt;/td&gt;
-&lt;td&gt;AE 24: Logistic regression review&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/appex/ae-24-review.html&#34;&gt;AE 24: Review&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;/td&gt;
@@ -1004,7 +1004,7 @@ font-size: 18px;
 &lt;td&gt;Thursday&lt;/td&gt;
 &lt;td&gt;No slides&lt;/td&gt;
 &lt;td&gt;No video&lt;/td&gt;
-&lt;td&gt;Project work day&lt;/td&gt;
+&lt;td&gt;Project meetings&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;

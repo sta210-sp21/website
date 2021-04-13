@@ -1,0 +1,161 @@
+---
+title: "Grade calculator"
+output: pdf_document
+---
+
+```{r warning = F, message = F}
+library(tidyverse)
+```
+
+## Input grades
+
+Input all of your grades below 
+
+```{r}
+#read in HW grades (out of 50 points)
+hw01 <- 50
+hw02 <- 50
+hw03 <- 50
+hw04 <- 50
+hw05 <- 10
+```
+
+```{r}
+#read in lab grades (out of 50 points)
+lab01 <- 50
+lab02 <- 50
+lab03 <- 50
+lab04 <- 50
+lab05 <- 10
+lab06 <- 10
+lab07 <- 10
+lab08 <- 10
+```
+
+```{r}
+# read in quiz grades
+quiz01 <- 50 # out of 50
+quiz02 <- 40 # out of 40
+quiz03 <- 40 # out of 40
+```
+
+```{r}
+#read in project grades
+topic_ideas <- 5
+proposal <- 10
+peer_review <- 10
+written_report <- 40
+slides_video <- 25
+reproducibility <- 5
+video_comments <- 5
+peer_teamwork <- 5
+```
+
+```{r}
+#participation + team feedback 
+ae_participation <- 100 #out of 100 
+team_feedback01 <- 10 #out of 10
+team_feedback02 <- 10 # out of 10
+```
+
+
+## Calculate averages
+
+### HW average
+
+```{r}
+#combine HW scores
+hw <- tibble(hw01, hw02, hw03 , hw04, hw05) %>%
+  pivot_longer(cols = everything(), 
+               names_to = "hw", 
+               values_to = "score")
+```
+
+```{r}
+# calculate HW average
+hw_avg <- hw %>%
+  arrange(score) %>%
+  slice(-1) %>% #drop lowest HW grade
+  summarise(mean = mean(score) * 2) %>% pull()
+```
+
+**HW average:** `r round(hw_avg,3)`
+
+### Lab average
+
+```{r}
+#combine lab scores
+labs <- tibble(lab01, lab02, lab03, lab04, lab05, lab06, lab07, lab08) %>%
+  pivot_longer(cols = everything(), 
+               names_to = "lab", 
+               values_to = "score")
+```
+
+```{r}
+# calculate lab average
+lab_avg <- labs %>%
+  arrange(score) %>%
+  slice(-1) %>% #drop lowest HW grade
+  summarise(mean = mean(score) * 2) %>% pull()
+```
+
+**Lab average:** `r round(lab_avg, 3)`
+
+
+### Quiz average
+
+```{r}
+# combine quiz scores
+quizzes <- tibble(quiz01/50, quiz02/40, quiz03/40) %>%
+  pivot_longer(cols = everything(), 
+               names_to = "quiz", 
+               values_to = "score")
+```
+
+```{r}
+# combine quiz averages
+quiz_avg <- quizzes %>%
+  arrange(score) %>%
+  mutate(weight = c(0.15, 0.35, 0.5), 
+         points = score * weight) %>%
+  summarise(quiz_avg = sum(points) * 100) %>% pull()
+```
+
+**Quiz average:** `r round(quiz_avg, 3)`
+
+### Project grade
+
+```{r}
+# calculate project points
+project_points <- sum(c(topic_ideas, proposal, peer_review, written_report, slides_video, reproducibility, video_comments, peer_teamwork))
+
+project_grade <- project_points / 105 * 100
+```
+
+**Project grade:** `r round(project_grade,3)`
+
+### Participation 
+
+```{r}
+# calculate team feedback points
+team_feedback_avg <- mean(c(team_feedback01, team_feedback02)) * 10
+
+participation_avg <- mean(c(ae_participation, team_feedback_avg)) 
+```
+
+**Participation**: `r round(participation_avg,3)`
+
+## Calculate overall course average
+
+```{r}
+course_avg <- quiz_avg * 0.30 + 
+  hw_avg * 0.3 + 
+  project_grade * 0.2 + 
+  lab_avg * 0.15 + 
+  participation_avg * 0.05
+```
+
+**Course average**: `r round(course_avg,2)`
+
+  
+               

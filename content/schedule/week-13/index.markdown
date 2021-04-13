@@ -15,9 +15,9 @@ font-size: 18px;
 
 |           | Slides                   | Videos | Application Exercises (AE) |
 |-----------|--------------------------|--------|--------|
-| Tuesday  | No slides | No video | AE 24: Logistic regression review|
+| Tuesday  | No slides | No video | [AE 24: Review](https://sta210-sp21.netlify.app/appex/ae-24-review.html)|
 |  | [Log-linear models](https://sta210-sp21.netlify.app/slides/25-poisson.html) (optional) | [Log-linear models](https://warpwire.duke.edu/w/y5oFAA/) (optional)| |
-| Thursday   | No slides | No video | Project work day|
+| Thursday   | No slides | No video | Project meetings|
 
 
 

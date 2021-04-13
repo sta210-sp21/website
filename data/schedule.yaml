@@ -181,7 +181,7 @@ lessons:
     slides: "25-poisson.html"
   - title: "Logistic regression review"
   - date: "Thu, Apr 15"
-    title: "Project work day"
+    title: "Project meetings"
   - title: "Quiz 03 assigned"
     quiz: "quiz-03.html"
   - date: "Sun, Apr 18"
@@ -196,7 +196,7 @@ lessons:
   - date: "Tue, Apr 20"
     title: "Communicating results"
   - date: "Thu, Apr 22"
-    title: "Communicating results"
+    title: "Project meetings"
 
   - week: "Exam period"
   - date: "Sun, Apr 25"
