@@ -191,7 +191,6 @@ lessons:
   - week: "Week 14"
     date: "Mon, Apr 19"
     title: "Project: Peer review"
-  - title: "Peer review due"
     project: "#peer-review"
     lab: "peer-review.html"
   - date: "Tue, Apr 20"
