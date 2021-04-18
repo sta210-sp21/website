@@ -12,11 +12,11 @@ title: "STA 210 Final Project"
 
 [Peer review](#peer-review) due **Mon, Apr 19 at 11:59p EDT**
 
-[Final report](#written-report) due **Sun, Apr 25 at 11:59p EDT** 
+[Final report](#written-report) due **Mon, Apr 26 at 11:59p EDT** 
 
-[Video presentation + slides](#video-presentation--slides) due **Wed, Apr 28 at 9a EDT**
+[Video presentation + slides](#video-presentation--slides) due **Thu, Apr 29 at 11:59p EDT**
 
-[Presentation comments](#presentation-comments) due **Fri, Apr 30 at 11:59p EDT**
+[Presentation comments](#presentation-comments) due **Sat, May 01 at 11:59p EDT**
 
 ## Introduction 
 

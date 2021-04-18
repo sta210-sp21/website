@@ -1,6 +1,6 @@
 ---
 title: "Project Peer Review"
-subtitle: "Initial feedback due Oct 30 at 11:59p; Final feedback due Nov 5 at 11:59p"
+subtitle: "due Mon, Apr 19 at 11:59p EDT"
 output: 
   tufte::tufte_html:
     highlight: pygments
@@ -20,74 +20,79 @@ options(
 knitr::opts_chunk$set(eval = FALSE)
 ```
 
-Critically reviewing others' work is a crucial part of the scientific process,
-and STA 210 is no exception. Each group has been given read access to another group's repo to review and provide feedback on their project draft. This review is intended to
-help you create a high quality final project, as well as give you experience  reading and constructively critiquing the work of others. 
+Critically reviewing others' work is a crucial part of the scientific process, and STA 210 is no exception. Each group has been given read access to another group's repo to review and provide feedback on their project draft. This review is intended to help you create a high quality final project, as well as give you experience  reading and constructively critiquing the work of others. 
 
-To ensure the group has enough time to start incorporating feedback ,you should work on the peer review during lab and submit comments by **Friday, Oct 30 at 11:59p**. If you do not finish during lab, you can submit additional comments until **Thu, Nov 5.** Note that you are expected to submit the majority of the comments on Oct 29
+To ensure the group has enough time to start incorporating feedback ,you should work on the peer review during lab and submit comments by **Mon, Apr 19 at 11:59p EDT**. 
 
 # Getting started 
 
-[Click here](https://prodduke-my.sharepoint.com/:x:/g/personal/mt324_duke_edu/EcSlmDUcXu1Kiia1XPTz42kBBsVazYZx7dOdMIbwqLlfyw?e=d7doGq) to see which project you're reviewing. 
+[Click here](https://prodduke-my.sharepoint.com/:x:/g/personal/mt324_duke_edu/EU-dNt2OTKJNsaQTINWQnFABQSp7ihfGdPZJo22FL3aKog?e=huCxFf) to see which project you're reviewing. 
 
 Then, search your GitHub repositories for `project` and you should see the repo for the project you're reviewing. 
-
-Open the repo and follow the usual steps to clone into RStudio. You have read access to this repository but will not be able to push any changes.
-
 
 # Reviewing the draft
 
 Carefully read the project draft, considering the questions below as you read it. 
 
-Once everyone in the group has read the draft, submit your responses to the peer review questions using "Issues" in the GitHub repo. 
+You will submit your review by creating new **Issues** in the team's GitHub repo. To do so, 
 
-Post a new issue for each section of the peer review. In the issue, copy the peer review questions, and then type your responses.  **Every team member should post at least one issue.**
-
-To post an issue, go to the project repo on GitHub and click "Issues". For each comment or
-critique on the written report and data analysis, click "New Issue". Provide 
-an informative issue title and then a description outlining your concerns, 
-comments, and any suggested changes. Click "Submit new issue". Do this
-for every major comment or critique (do not submit a single issue with all 
-of your feedback). 
+- Go to the team's repo and click **Issues**. 
+- Click **New issue**. 
+- You will see several options that begin with "Peer review". Click **Get started** and it will open a new issue. 
+- Type your response under each question header. 
 
 # Peer review questions
 
-For each question 
-- Copy the question in the GitHub issue and answer "Yes", "No" or "Somewhat". 
-- If you answer "No" or "Somewhat" provide an explanation addressing any problems, i.e. why you didn't respond "Yes".
+Your response to each question will have two parts: 
 
-[Click here](peer-review.md) for an .md file of the questions to make them easier to copy and paste in the GitHub Issue. 
+- Selection of one of the following: 
+  
+  - **Yes**: The item is clearly and accurately completed in the draft. 
+  - **Somewhat**: There is an attempt to complete the item in the draft; however, it is incomplete or there are some inaccuracies. 
+  - **No**: There is no attempt to complete the item in the draft, or there are major inaccuracies. 
+
+- Brief comment about your selection.
+  
+  - If you responded **Yes**, briefly summarize the answer from the draft. For example, if you answer **yes** that the draft includes citations for outside research, briefly summarize what that outside research is.
+  - If you responded **Somewhat** or **No**, briefly summarize what is incomplete or inaccurate. In other words, briefly summarize why you did not respond Yes to that item.
 
 ## Issue 1: Introduction + Data
 
 - Is the research question and goal of the report clearly stated? 
-- Does the introduction provide appropriate background context and motivation for a general reader?
-- Is the source of the data stated with an appropriate citation? 
+- Does the introduction provide appropriate background context and motivation for a general reader? This includes citations for any claims or previous research mentioned.
+- Is the original source of the data stated and cited?
 - Is it clear when and how the data was originally collected?
-- Are the observations and relevant variables described?
+- Are the observations and variables that are relevant to the analysis clearly described? At a minimum, the observations, response variable, and predictor variables in the final model should be clearly described.
 - Include any additional comments or suggestions on the introduction and data description. 
 
 ## Issue 2: Exploratory data analysis 
 
-- Is the data cleaning and data wrangling clearly described? This includes dealing with missing data, creating new variables, etc.
+- Is the data cleaning and data wrangling process clearly described? This includes how the group handled missing data, created new variables, reduced the number of levels for categorical variables, etc.
 - Do the visualizations follow the guidelines we've discussed in STA 210? This includes using plots that are appropriate for the data, having proper axis labels, titles, etc. 
-- Are any tables and figures clear, effective, and informative?  Should any be eliminated, or are any new tables or figures needed?
+- Are any tables and figures clear, effective, and informative? Are they neatly printed with a reasonable number of digits displayed? 
+- Should any visualizations, figures, or tables be eliminated, or are there any new visualizations, tables, or figures that should be added?
 - Include any additional comments or suggestions for the exploratory data analysis. 
 
 ## Issue 3: Methodology + Results
 
-- Do the regression methods match the research question(s) and available data? If not, point out areas for further work.
+- Do the regression methods (linear or logistic regression) match the research question(s) and available data? If not, point out areas for further work. 
 - Are the methods described in enough detail that the work could be replicated by someone else? Is it clear what approach and model were used to evaluate hypotheses of interest?  If not, point out areas for further work.
-- Is the analysis appropriately performed?  What type of diagnostic methods were used to check any modeling conditions, and are you satisfied the conditions of the model are valid? Should any additional analyses be performed?
+- Is the model selection accurately performed, if at all?  
+- What type of diagnostic methods were used to check any modeling conditions, and are you satisfied the conditions of the model are valid? Should any additional analyses be performed?
+- Did the group consider any interaction terms?
 - Does the report contain a correct and effective interpretation of the results provided? Is all information needed to substantiate the results and conclusions included?  If not, point out areas for further work.
 
-## Issue 4: Writing + Reproducibility
+## Issue 4: Presentation + general comments
 
-- Is the paper professionally presented and generally free of distracting errors or other issues, including (but not limited to) insufficient organization or formatting; poor grammar, spelling, or punctuation; or too-small font? Is the overall paper easily readable for someone with your expert level of knowledge? Note any concerns here.
-- Knit the .Rmd file. Are you able to reproduce all aspects of the report, including output, 
-visualizations, etc? This includes (1) being able to knit the document and (2) obtaining the same PDF as the original PDF. 
-- What questions and/or general feedback do you have for the authors?
-- After giving feedback to this group, what is one thing you want to change or continue working on for your report? 
+- Is the paper professionally presented and generally free of distracting errors or other issues, including (but not limited to) insufficient organization or formatting; poor grammar, spelling, or punctuation? Is the overall paper easily readable for someone with your expert level of knowledge? Note any concerns here.
+- What is one question you have about the data and/or analysis that isn't yet addressed in the report?
+
+
+### Applying to your project 
+
+**Discuss the following as a group. You do <u>not</u> need to submit a response to this question.**
+
+After giving feedback to this group, what is one thing you want to change or continue working on for your report? 
 
 # Submission
 
