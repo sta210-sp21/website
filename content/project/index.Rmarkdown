@@ -226,7 +226,7 @@ In this section you'll include a summary of what you have learned about your res
 
 **(5 pts)** Overall conclusions from analysis are clearly described. The group has thoughtfully considered potential limitations of their data and/or analysis and presented potential ideas to address these limitations and avenues to explore in future work. 
 
-## Organization + formatting 
+### Organization + formatting 
 
 This is an assessment of the overall presentation and formatting of the written report. 
 

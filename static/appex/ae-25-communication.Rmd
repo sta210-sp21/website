@@ -1,0 +1,49 @@
+---
+title: "AE 25: Communicating results"
+date: "`r Sys.Date()`"
+output: 
+  html_document: 
+    fig_height: 8
+    fig_width: 8
+    theme: readable
+---
+
+```{r include = F}
+knitr::opts_chunk$set(warning = F, 
+                      message = F)
+```
+
+## Check in 
+
+## Upcoming assignments 
+
+- See this week's schedule: [Week 14](https://sta210-sp21.netlify.app/schedule/week-14/)
+
+- Team Feedback #2 due Thu, Apr 22 at 11:59p. Check inbox for email from Teammates.
+
+- [Statistics experience](https://sta210-sp21.netlify.app/hw/stats-experience.html) due Sun, Apr 25 at 11:59p 
+
+
+## Other class announcements 
+
+- **Project meetings Apr 21 & Apr 22**: [Click here](https://docs.google.com/spreadsheets/d/1cSiAUCwy0GNvP7uFZ_9uf9gnsspu3JCLJmLYOHKUlds/edit?usp=sharing) to sign up at least an hour in advance. These meetings are optional. (Only one per group).
+
+- **Tea with the Teaching Team**
+  - Prof. Tackett - Fri, Apr 23 at 9a EDT [Click here](https://forms.gle/LHzVBH3dUkasfvT47) to sign up.
+
+- **Grade calculator**: [Click here](grade-calculator.Rmd) to download.
+  - Will need to open this in RStudio.
+
+## Project
+
+
+- [Written report](https://sta210-sp21.netlify.app/project/#written-report)
+  - What goes in the main report vs. appendix
+- [Video presentation](https://sta210-sp21.netlify.app/project/#video-presentation--slides) 
+
+## Communicating results 
+
+Clone the **ae-25** repo and open a new project in RStudio.
+
+
+

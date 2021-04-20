@@ -15,7 +15,7 @@ font-size: 18px;
 
 |           | Slides                   | Videos | Application Exercises (AE) |
 |-----------|--------------------------|--------|--------|
-| Tuesday  | No slides | No video | AE 25: Communicating results|
+| Tuesday  | No slides | No video | [AE 25: Communicating results](https://sta210-sp21.netlify.app/appex/ae-25-communication.html)|
 | Thursday   | No slides | No video | Project meetings|
 
 
