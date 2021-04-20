@@ -162,77 +162,86 @@ During the peer review process, you will be provided read-only access to your  p
 
 ## Written report
 
-Details will be available when this portion of the project is assigned.
-
-<!--
-Your written report must be done using R Markdown. All team members must contribute to the GitHub repository, with regular meaningful commits. 
+Your written report must be completed in the `written-report.Rmd` file and must be reproducible.  All team members should contribute to the GitHub repository, with regular meaningful commits. 
 
 Before you finalize your write up, make sure the printing of code chunks is off with the option `echo = FALSE`. 
 
-Your final report must match your GitHub repository *exactly*. The mandatory components of the report are below. You are free to add additional sections as necessary. The report, including visualizations, should be **no more than 15 pages long.** There is no minimum page requirement; however, you must comprehensively address all of the aspects mentioned below.
+**You will submit the PDF of your final report on Gradescope.**
 
-Please be judicious in what you include in your final write-up.
 
-The written report is worth 50 points, broken down as follows
+The PDF you submit must match the files in your GitHub repository *exactly*. The mandatory components of the report are below. You are free to add additional sections as necessary. The report, including visualizations, should be **no more than 10 pages long.** There is no minimum page requirement; however, you should comprehensively address all of the aspects mentioned below.
 
-Total                                                   | 50 pts
+Please be selective in what you include in your final write-up. The goal is to write a cohesive narrative rather than explain every step of the analysis.
+
+The written report is worth 40 points, broken down as follows
+
+Total                                                   | 40 pts
 --------------------------------------------------------|--------
 **Introduction/data**                                   | 8 pts
-**Methodology**                                         | 17 pts
-**Results**                                             | 17 pts
-**Discussion**                                          | 8 pts
+**Methodology**                                         | 9 pts
+**Results**                                             | 14 pts
+**Discussion + Conclusion**                             | 5 pts
+**Organization + formatting**                          | 4 pts
+
+Each item will be graded as one of the following: 
+
+- Full credit: The item is complete and accurate.
+- Half credit: The item is partially incomplete and/or there are minor inaccuracies.
+- No credit: The item is mostly incomplete and/or there are major inaccuracies.
 
 ### Introduction and data
 
-This section includes an introduction to the project motivation, data, and research question. Describe the data and definitions of key variables. It should also include some exploratory data analysis. All of the EDA won’t fit in the paper, so focus on the EDA for the response variable and a few other interesting variables and relationships.
+This section includes an introduction to the project motivation, data, and research question. The data and definitions of key variables are described. It should also include some exploratory data analysis (EDA) - visualizations and appropriate summary statistics. All of the EDA won’t fit in the paper, so focus on the EDA for the response variable and other key variables and multivariate relationships.
 
 #### Grading criteria
 
-**(8 pts)** The research question and motivation are clearly stated in the introduction. The data are clearly described, including a description about how the data were originally collected and a concise definition of the relevant variables for the analysis. The explanatory data analysis helps the reader better understand the observations in the data set and interesting relationships between the variables. 
+**(8 pts)** The research question and motivation are clearly stated in the introduction, including citations for any external research. The data are clearly described, including a description about how the data were originally collected and a concise definition of the relevant variables for the analysis. The explanatory data analysis helps the reader better understand the observations in the data set and interesting relationships between the variables. It incorporates appropriate visualizations and summary statistics.
 
 
 ### Methodology 
 
-This section includes a brief description of your modeling process. Explain the reasoning for the type of model you're fitting, predictor variables considered for the model including any interactions. Additionally, show how you arrived at the final model by describing the model selection process, any variable transformations (if needed), and any other relevant considerations that were part of the model fitting process. 
+This section includes a brief description of your modeling process. Explain the reasoning for the type of model you're fitting, predictor variables considered for the model and any interactions. Additionally, discuss how you arrived at the final model by describing the model selection process, any variable transformations (if needed), and any other relevant considerations that were part of the model fitting process. 
 
 
 #### Grading criteria
 
-**(17 pts)** The analysis steps are appropriate for the data and research question. The group used a thoughtful approach to select the final model that took into account potential interaction effects and addressed violations in model conditions. The model conditions and diagnostics are thoroughly and accurately assessed as appropriate for the model. If violations of model conditions still exist, there was a reasonable attempt to address them, i.e. based on what we’ve learned this semester.
+**(9 pts)** The analysis steps are appropriate for the data and research question. The group used a thoughtful approach to select the final model that took into account potential interaction effects and addressed violations in model conditions. The model conditions and diagnostics are thoroughly and accurately assessed as appropriate for the model. If violations of model conditions still exist, there was a reasonable attempt to address them, i.e. based on what we’ve learned this semester.
 
 
 ### Results 
 
-This is also where you will output the final model and include a brief discussion of the model assumptions, diagnostics, and any relevant model fit statistics. 
+This is where you will output the final model with any relevant model fit statistics. 
 
-Additionally, interpret the key results from the model. The goal is not to interpret every single variable in the model but rather to show that you are proficient in answering your research question using the results from the analysis. Focus on the variables that help you answer the research question and that provide relevant context for the reader. 
-
-#### Grading criteria 
-
-**(17 pts)** The model fit is clearly assessed, and interesting findings from the model are clearly described. Interpretations of model coefficients are used to support the key findings and conclusions, rather than merely listing the interpretation of every model coefficient. If the primary modeling objective is prediction, the model’s predictive power is assessed.
-
-### Discussion
-
-This section is a conclusion and discussion. This will require a 
-summary of what you have learned about your research question along with statistical arguments supporting your conclusions. Also, critique your own methods and provide suggestions for improving your analysis. Issues pertaining to the reliability and validity of your data and appropriateness of the statistical analysis should also be discussed here. Include 1 - 2 paragraphs on what you would do differently if you were able to start over with the project or what you would do next if you were going to continue work on the project should also be included.
+Describe the key results from the model. The goal is not to interpret every single variable in the model but rather to show that you are proficient in using the model output to address the research questions, using the interpretations to support your conclusions.  Focus on the variables that help you answer the research question and that provide relevant context for the reader. 
 
 #### Grading criteria 
 
-**(4 pts)** Overall conclusions from analysis are clearly described. The group has thoughtfully considered potential limitations of their data and/or analysis and presented potential ideas to address these limitations and avenues to explore in future work. 
+**(14 pts)** The model fit is clearly assessed, and interesting findings from the model are clearly described. Interpretations of model coefficients are used to support the key findings and conclusions, rather than merely listing the interpretation of every model coefficient. If the primary modeling objective is prediction, the model’s predictive power is assessed.
 
-**(4 pts)** The final write up is neatly organized with clear section headers and appropriately sized figures with informative labels. All code, warnings, and messages are suppressed. Overall, the document would be presentable in a business or research setting.
+### Discussion + Conclusion
 
--->
+In this section you'll include a summary of what you have learned about your research question along with statistical arguments supporting your conclusions. In addition, discuss the limitations of your analysis and provide suggestions on ways the analysis could be improved. Issues pertaining to the reliability and validity of your data and appropriateness of the statistical analysis should also be discussed here.
+
+#### Grading criteria 
+
+**(5 pts)** Overall conclusions from analysis are clearly described. The group has thoughtfully considered potential limitations of their data and/or analysis and presented potential ideas to address these limitations and avenues to explore in future work. 
+
+## Organization + formatting 
+
+This is an assessment of the overall presentation and formatting of the written report. 
+
+### Grading criteria 
+
+**(4 pts)** The written report is neatly organized with clear section headers and appropriately sized figures with informative labels. Numerical results are displayed with a reasonable number of digits, and all visualizations are neatly formatted. All code, warnings, and messages are suppressed. Overall, the document would be presentable in a business or research setting.
 
 
 ## Video presentation + slides
 
-Details will be available when this portion of the project is assigned.
+### Slides 
 
+In addition to the written report, your team will also create presentation slides that summarize and showcase your project. Introduce your research question and data set, showcase visualizations, and discuss the primary conclusions. These slides should serve as a brief visual addition to your written report and will be graded for content and quality.
 
-<!--
-In addition to the write-up, your team must also create presentation
-slides that summarize and showcase your project. Introduce your research question and data set, showcase visualizations, and provide some conclusions. These slides should serve as a brief visual accompaniment to your write-up and will be graded for content and quality. For submission, convert these slides to a .pdf document to be submitted to Gradescope. The slides are due on **Friday, November 20**.
+**For submission, convert these slides to a .pdf document, and submit the PDF of the slides on Gradescope.**
 
 The slide deck should have no more than 6 content slides + 1 title slide. Here is a *<u>suggested</u>* outline as you think through the slides; you do *<u>not</u>* have to use this exact format for the 6 slides.
 
@@ -246,18 +255,16 @@ The slide deck should have no more than 6 content slides + 1 title slide. Here i
 
 ## Video presentation
 
-By **Friday, November 20**, your group will upload a video presentation of your project to Warpwire. Note that all members must present, and that a ten-minute time limit is **strictly enforced**.
-
-For the presentation, you can speak over your slide deck, similar to the lecture content videos. I recommend using Zoom to record your presentation; however, you can use whatever platform works best for your group. Below are a few resources to help you record video presentations:
+For the video presentation, you can speak over your slide deck, similar to the lecture content videos. You may use can use any platform that works best for your group to record your presentation. Below are a few resources on recording videos:
 
 - [Recording presentations in Zoom](https://kb.siue.edu/61721)
 - [Apple Quicktime for screen recording]( https://support.apple.com/en-gb/guide/quicktime-player/qtp97b08e666/mac)
 - [Windows 10 built-in screen recording functionality](https://www.youtube.com/watch?v=OfPbr1mRDuo)
 - [Kap for screen recording](https://getkap.co/)
 
-You will post the presentation video in Warpwire, which is accessible from the the course Sakai site (bottom of the left-hand tool bar). 
+Once your video is ready, upload the video to Warpwire, then embed the video in a new discussion for the group.
 
-**To upload your video to Warpwire:**
+#### To upload your video to Warpwire:
 
 - Click the Warpwire tab in the course Sakai site.
 - Click the “+” and select “Upload files”.
@@ -266,7 +273,7 @@ You will post the presentation video in Warpwire, which is accessible from the t
 a copy of the video’s URL. You will need this when you post the video in the
 discussion forum.
 
-**To post the video to the discussion forum:**
+#### To post the video to the discussion forum
 
 - Click the Presentations tab in the course Sakai site. 
 - Click the Presentations topic. 
@@ -278,21 +285,17 @@ discussion forum.
 - You’re done! 
 
 You can see the Teaching team example in Sakai. 
--->
+
 
 ## Presentation comments 
 
-Details will be available when this portion of the project is assigned.
-
-<!--
-Each student will be assigned 2 presentations to watch. [Click here](https://prodduke-my.sharepoint.com/:x:/g/personal/mt324_duke_edu/EfYgmTXEMs1ImpYXagtwYbQBbaUa9_bPI_2D7cTBSdhJ8w?e=O2eeUD) to see your viewing assignments. 
+Each student will be assigned 2 presentations to watch. [Click here](https://prodduke-my.sharepoint.com/:x:/g/personal/mt324_duke_edu/EfDz1sQBQhRAtfHA9geukg0BNXsNvlZCr1LJRJu5xrx3ug?e=QxnaDM) to see your viewing assignments. 
 
 Watch the group's video, then click "Reply" to post a question for the group. You may not post a question that's already been asked on the discussion thread. Additionally, the question should be (i) substantive (i.e. it shouldn't be "Why did you use a bar plot instead of a pie chart"?), (ii) demonstrate your understanding of the content from the course, and (iii) relevant to that group's specific presentation, i.e demonstrating that you've watched the presentation. 
 
-You may start posting questions and comments on Sat, Nov 21 at 12 EST. **All questions must be posted by Sun, Nov 22 at 11:59p EST**. 
+You may start posting questions and comments on Fri, Apr 30 12a EDT. **All questions must be posted by Sat, May 01 at 11:59p ESDT**. 
 
 **<i>This portion of the project will be assessed individually.</i>**
---> 
 
 ## Reproducibilty +  organization
 
@@ -326,7 +329,7 @@ Total                                                   | 105 pts
 **Peer review**                                         | 10 pts
 **Written report**                                      | 40 pts
 **Slides + video presentation**                         | 25 pts
-**reproducibility + organization**                      | 5 pts
+**Reproducibility + organization**                      | 5 pts
 **Video comments**                                      | 5 pts
 **Peer teamwork evaluation**                                | 5 pts
 
