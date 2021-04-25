@@ -255,7 +255,7 @@ The slide deck should have no more than 6 content slides + 1 title slide. Here i
 
 ## Video presentation
 
-For the video presentation, you can speak over your slide deck, similar to the lecture content videos. You may use can use any platform that works best for your group to record your presentation. Below are a few resources on recording videos:
+For the video presentation, you can speak over your slide deck, similar to the lecture content videos. **The video presentation must be no longer than 10 minutes.** It is fine if the video is shorter than 10 minutes, but it cannot exceed 10 minutes. You may use can use any platform that works best for your group to record your presentation. Below are a few resources on recording videos:
 
 - [Recording presentations in Zoom](https://kb.siue.edu/61721)
 - [Apple Quicktime for screen recording]( https://support.apple.com/en-gb/guide/quicktime-player/qtp97b08e666/mac)
@@ -277,7 +277,7 @@ discussion forum.
 
 - Click the Presentations tab in the course Sakai site. 
 - Click the Presentations topic. 
-- Click "Start New Presentation". 
+- Click "Start a new conversation". 
 - Make the title "Your Team Name: Project Title". For example, "Teaching Team: Analysis of Cars in the US".
 - Click the Warpwire icon (between the flag and shopping cart icons).
 - Select your video, then click “Insert 1 item.” This will embed your video in the conversation.
