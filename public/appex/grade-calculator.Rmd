@@ -17,7 +17,8 @@ hw01 <- 50
 hw02 <- 50
 hw03 <- 50
 hw04 <- 50
-hw05 <- 10
+hw05 <- 50
+stat_exp <- 50
 ```
 
 ```{r}
@@ -66,7 +67,7 @@ team_feedback02 <- 10 # out of 10
 
 ```{r}
 #combine HW scores
-hw <- tibble(hw01, hw02, hw03 , hw04, hw05) %>%
+hw <- tibble(hw01, hw02, hw03 , hw04, hw05, stat_exp) %>%
   pivot_longer(cols = everything(), 
                names_to = "hw", 
                values_to = "score")
