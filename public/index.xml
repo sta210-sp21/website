@@ -1094,7 +1094,42 @@ font-size: 18px;
   <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
   
 <guid>/schedule/week-15/</guid>
-  <description></description>
+  <description>&lt;style&gt;
+table {
+font-size: 18px;
+}
+
+&lt;/style&gt;
+&lt;h2 id=&#34;lectures&#34;&gt;Lectures&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;No lectures: exam week&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;assignments&#34;&gt;Assignments&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/project/&#34;&gt;Project: Final report&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;due Mon, Apr 26 at 11:59p&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/project/&#34;&gt;Project: Video presentation&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;due Thu, Apr 29 at 11:59p&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/project/&#34;&gt;Project: Final repo organized&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;due Thu, Apr 29 at 11:59p&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://sta210-sp21.netlify.app/project/&#34;&gt;Project: Video presentation comments&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;due Sat, May 01 at 11:59p&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+</description>
   </item>
   
 <item>
