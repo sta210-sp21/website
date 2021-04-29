@@ -289,7 +289,7 @@ You can see the Teaching team example in Sakai.
 
 ## Presentation comments 
 
-Each student will be assigned 2 presentations to watch. [Click here](https://prodduke-my.sharepoint.com/:x:/g/personal/mt324_duke_edu/EfDz1sQBQhRAtfHA9geukg0BNXsNvlZCr1LJRJu5xrx3ug?e=QxnaDM) to see your viewing assignments. 
+Each student will be assigned 1 presentations to watch. [Click here](https://prodduke-my.sharepoint.com/:x:/g/personal/mt324_duke_edu/EfDz1sQBQhRAtfHA9geukg0BRJL3Un1D3dkSRSpaFSw6Yg?e=RnacXD) to see your viewing assignments. 
 
 Watch the group's video, then click "Reply" to post a question for the group. You may not post a question that's already been asked on the discussion thread. Additionally, the question should be (i) substantive (i.e. it shouldn't be "Why did you use a bar plot instead of a pie chart"?), (ii) demonstrate your understanding of the content from the course, and (iii) relevant to that group's specific presentation, i.e demonstrating that you've watched the presentation. 
 
